@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="/js/yolane/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/yolane/jquery.media.js"></script>
+    <title>Title</title>
+    <script type="text/javascript">
+        $(function() {
+            $('a.media').media({width:800, height:600});
+        });
+    </script>
+</head>
+<body>
+<center>
+    <div class="panel panel-primary">
+<!--        <div class="panel-heading" align="center">-->
+<!--            <h2>预览pdf文件</h2>-->
+<!--        </div>-->
+        <div class="panel-body">
+            <a class="media" th:href="${pdfUrl}"></a>
+        </div>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('系统设备列表')" />
+    <th:block th:include="include :: select2-css" />
+    <th:block th:include="include :: bootstrap-select-css" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+<!--                            <li>-->
+<!--                                <p>系统id：</p>-->
+<!--                                <input type="text" name="systemId"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>编号：</p>-->
+<!--                                <input type="text" name="num" required/>-->
+<!--                            </li>-->
+                            <li>
+                                <p>设备编号：</p>
+                                <input type="text" name="sbCode"/>
+                            </li>
+                            <li>
+                                <p>设备名称：</p>
+                                <input type="text" name="sbName" required/>
+                            </li>
+<!--                            <li>-->
+                                <!--<p>设备型号：</p>-->
+                                <!--<input type="text" name="sbModel"/>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<p>安装地点：</p>-->
+                                <!--<input type="text" name="azAddr"/>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<p>经销商：</p>-->
+<!--&lt;!&ndash;                                <input type="text" name="supplierId"/>&ndash;&gt;-->
+                                <!--<select class="form-control" name="supplierId" th:with="type=${@dict.supList()}">-->
+                                    <!--<option value="">所有</option>-->
+                                    <!--<option th:each="dict : ${type}" th:text="${dict.supplierName}" th:value="${dict.supplierId}"></option>-->
+                                <!--</select>-->
+                            <!--</li>-->
+                            <!--<li class="select-time">-->
+                                <!--<p>安装时间：</p>-->
+                                <!--<input type="text" class="time-input" placeholder="开始时间" name="beginAzTime"/>-->
+                                <!--<span>-</span>-->
+                                <!--<input type="text" class="time-input" placeholder="结束时间" name="endAzTime"/>-->
+                            <!--</li>-->
+                            <!--<li class="select-time">-->
+                                <!--<p>出厂日期：</p>-->
+                                <!--<input type="text" class="time-input" placeholder="开始时间" name="beginOutTime"/>-->
+                                <!--<span>-</span>-->
+                                <!--<input type="text" class="time-input" placeholder="结束时间" name="endOutTime"/>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<p>出厂编号：</p>-->
+                                <!--<input type="text" name="outNum"/>-->
+                            <!--</li>-->
+                            <li class="select-time">
+                                <p>进场日期：</p>
+                                <input type="text" class="time-input" placeholder="开始时间" name="beginInTime"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" placeholder="结束时间" name="endInTime"/>
+                            </li>
+                            <!--<li class="select-time">-->
+                                <!--<p>交接日期：</p>-->
+                                <!--<input type="text" class="time-input" placeholder="开始时间" name="beginJjYsTime"/>-->
+                                <!--<span>-</span>-->
+                                <!--<input type="text" class="time-input" placeholder="结束时间" name="endJjYsTime"/>-->
+                            <!--</li>-->
+                            <!--<li class="select-time">-->
+                                <!--<p>使用日期：</p>-->
+                                <!--<input type="text" class="time-input" placeholder="开始时间" name="beginSyTime"/>-->
+                                <!--<span>-</span>-->
+                                <!--<input type="text" class="time-input" placeholder="结束时间" name="endSyTime"/>-->
+                            <!--</li>-->
+                            <li>
+                                <p>安装人：</p>
+                                <input type="text" name="azName" required/>
+                            </li>
+<!--                            <li>-->
+<!--                                <p>设备规格：</p>-->
+<!--                                <input type="text" name="spId"/>-->
+<!--                            </li>-->
+                            <li>
+                                <p>设备状态</p>
+                                <select name="state" class="form-control">
+                                    <option value="">所有</option>
+                                    <option  th:value="0">使用</option>
+                                    <option  th:value="1">维修</option>
+                                    <option  th:value="2">报废</option>
+                                </select>
+                            </li>
+                            <!--<li class="select-time">-->
+                                <!--<p>登记日期：</p>-->
+                                <!--<input type="text" class="time-input" placeholder="开始时间" name="beginDjTime"/>-->
+                                <!--<span>-</span>-->
+                                <!--<input type="text" class="time-input" placeholder="结束时间" name="endDjTime"/>-->
+                            <!--</li>-->
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="equipment:equipment:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="equipment:equipment:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="equipment:equipment:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="equipment:equipment:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+     <th:block th:include="include :: select2-js" />
+     <th:block th:include="include :: bootstrap-select-js" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('equipment:equipment:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('equipment:equipment:remove')}]];
+        var dats = [[${@dict.getType('jz_equipment_state')}]];
+        var prefix = ctx + "equipment/equipment";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "系统设备",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'sbId', 
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'systemName',
+                    title : '所属系统'
+                },
+                {
+                    field : 'num', 
+                    title : '编号'
+                },
+                {
+                    field : 'sbName', 
+                    title : '设备名称'
+                },
+                {
+                    field : 'sbCode', 
+                    title : '设备编号'
+                },
+                {
+                    field : 'sbModel', 
+                    title : '设备型号'
+                },
+                {
+                    field : 'azAddr', 
+                    title : '安装地点'
+                },
+                {
+                    field : 'supplierName',
+                    title : '经销商名称'
+                },
+                {
+                    field : 'azTime', 
+                    title : '安装时间'
+                },
+                {
+                    field : 'outTime', 
+                    title : '出厂日期'
+                },
+                {
+                    field : 'outNum', 
+                    title : '出厂编号'
+                },
+                {
+                    field : 'inTime', 
+                    title : '进场日期'
+                },
+                {
+                    field : 'jjYsTime', 
+                    title : '交接日期'
+                },
+                {
+                    field : 'syTime', 
+                    title : '使用日期'
+                },
+                {
+                    field : 'azName', 
+                    title : '安装人'
+                },
+                {
+                    field : 'state', 
+                    title : '设备状态',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(dats, value);
+                    }
+                },
+                {
+                    field : 'djTime', 
+                    title : '登记日期'
+                },
+                {
+                    field : 'remark', 
+                    title : '备注'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.sbId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.sbId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-primary btn-xs " href="javascript:void(0)" onclick="detail(\'' + row.sbId + '\')"><i class="fa fa-list"></i>查看规格商品件</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+        function detail(sbId) {
+            // alert(sbId)
+            $.modal.open("查看规格商品件", prefix + "/specificationsRep/" + sbId, '', '', closemod);
+        }
+        function closemod() {
+            $.modal.closeAll();
+            window.location.reload();
+        }
+        // function detail(planId) {
+        //     var url = prefix + '/detail/' + sbId;
+        //     $.modal.openTab("查看规格商品件", url);
+        // }
+    </script>
+</body>
+</html>

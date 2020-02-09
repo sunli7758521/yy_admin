@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改风险')" />
+    <link href="/layui/css/layui.css" rel="stylesheet"/>
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-risk-edit" th:object="${jzRisk}">
+            <input name="riskId" th:field="*{riskId}" type="hidden">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">风险点：</label>
+                <div class="col-sm-8">
+                    <input name="fengXiandian" th:field="*{fengXiandian}" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">系统名称：</label>
+                <div class="col-sm-8">
+<!--                    <input name="systemId" th:field="*{systemId}" class="form-control" type="text">-->
+                    <select class="form-control" name="systemId" th:with="type=${@dict.getSystem(300)}" th:field="*{systemId}">
+                        <option value="" th:text="*{systemName}">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">类型名称：</label>
+                <div class="col-sm-8">
+<!--                    <input name="typeId" th:field="*{typeId}" class="form-control" type="text">-->
+<!--                    <select class="form-control" name="classificationState" th:with="type=${@dict.getType('classification_of_state')}">-->
+<!--                        <option value="" th:text="*{typeName}">所有</option>-->
+<!--                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictCode}"></option>-->
+<!--                    </select>-->
+                    <select id="typeId" class="form-control" name="typeId" th:with="type=${@dict.listType(0)}" th:field="*{typeName}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}" ></option>
+                    </select>
+                </div>
+            </div>
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">风险等级：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="riskLevel" th:field="*{riskLevel}" class="form-control" type="text">&ndash;&gt;-->
+<!--                    <select class="form-control" name="riskLevel" th:with="type=${@dict.getType('risk_level')}" th:field="*{riskLevel}">-->
+<!--                        <option value="">所有</option>-->
+<!--                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">文件上传</label>
+                <input id="lzqkUrl" name="fileUrl" class="form-control" type="hidden">
+                <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+                <div type="button" class="layui-btn" id="test4" onclick="addSystem()">预览</div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">风险活动及内容：</label>
+                <div class="col-sm-8">
+                    <input name="huodongNeirong" th:field="*{huodongNeirong}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">潜在风险及可能发生的事故：</label>
+                <div class="col-sm-8">
+                    <input name="weixianShigu" th:field="*{weixianShigu}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="title" th:field="*{title}" class="form-control" type="text">
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript">
+        var prefix = ctx + "sysusersystem/risk";
+        $("#form-risk-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-risk-edit').serialize());
+            }
+        }
+        /** 上传文件    */
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+            //指定允许上传的文件类型
+            upload.render({
+                elem: '#test3'
+                ,url: ctx+'common1/upload/'
+                ,accept: 'file' //普通文件
+                ,exts: 'doc|docx|zip|pdf'
+                ,done: function(res){
+                    if(res.code>0){
+                        return layer.msg('上传失败');
+                    }
+                    $("#lzqkUrl").val(res.msg);
+                    // console.log(res.msg)
+                    layer.msg("上传成功");
+                }
+            });
+        });
+        // 预览制度
+        function addSystem() {
+            var url = prefix +"/editWordToPdf/"+$("#riskId").val();
+            console.log(url)
+            $.modal.open("上传制度",url);
+        }
+    </script>
+</body>
+</html>

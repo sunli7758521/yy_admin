@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.JzInspectionLogMapper">
+    
+    <resultMap type="JzInspectionLog" id="JzInspectionLogResult">
+        <result property="id"    column="id"    />
+        <result property="equipmentId"    column="equipment_id"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="content"    column="content"    />
+        <result property="inspectionProject"    column="inspection_project"    />
+        <result property="inspectionAddr"    column="inspection_addr"    />
+        <result property="jcPeople"    column="jc_people"    />
+        <result property="jcDate"    column="jc_date"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="equipmentState"    column="equipment_state"    />
+        <result property="state"    column="state"    />
+        <result property="jzPlanId"    column="jz_plan_id"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <resultMap type="JzInspectionLogVO" id="JzInspectionLogResultMap">
+        <result property="content"    column="content"    />
+        <result property="inspectionProject"    column="inspection_project"    />
+        <result property="inspectionAddr"    column="inspection_addr"    />
+        <result property="jcDate"    column="jc_date"    />
+        <result property="equipmentState"    column="equipment_state"    />
+        <result property="state"    column="state"    />
+        <result property="remark"    column="remark"    />
+        <result property="userName"    column="user_name"    />
+    </resultMap>
+
+    <sql id="selectJzInspectionLogVo">
+        select id, equipment_id, system_id, content, inspection_project, inspection_addr, jc_people, jc_date, create_id, create_time, update_id, update_time, equipment_state, state, jz_plan_id, remark from jz_inspection_log
+    </sql>
+
+    <select id="selectJzInspectionLogList" parameterType="JzInspectionLog" resultMap="JzInspectionLogResult">
+        <include refid="selectJzInspectionLogVo"/>
+        <where>  
+            <if test="equipmentId != null "> and equipment_id = #{equipmentId}</if>
+            <if test="systemId != null "> and system_id = #{systemId}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="inspectionProject != null  and inspectionProject != ''"> and inspection_project = #{inspectionProject}</if>
+            <if test="inspectionAddr != null  and inspectionAddr != ''"> and inspection_addr = #{inspectionAddr}</if>
+            <if test="jcPeople != null  and jcPeople != ''"> and jc_people = #{jcPeople}</if>
+            <if test="jcDate != null "> and jc_date = #{jcDate}</if>
+            <if test="createId != null "> and create_id = #{createId}</if>
+            <if test="updateId != null "> and update_id = #{updateId}</if>
+            <if test="equipmentState != null  and equipmentState != ''"> and equipment_state = #{equipmentState}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="jzPlanId != null "> and jz_plan_id = #{jzPlanId}</if>
+            <if test="createTime != null  ">
+                AND date_format(create_time,'%y%m%d') &lt;= date_format(#{createTime},'%y%m%d')
+            </if>
+
+        </where>
+    </select>
+    
+    <select id="selectJzInspectionLogById" parameterType="Long" resultMap="JzInspectionLogResult">
+        <include refid="selectJzInspectionLogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJzInspectionLog" parameterType="JzInspectionLog" useGeneratedKeys="true" keyProperty="id">
+        insert into jz_inspection_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null ">id,</if>
+            <if test="equipmentId != null ">equipment_id,</if>
+            <if test="systemId != null ">system_id,</if>
+            <if test="content != null  and content != ''">content,</if>
+            <if test="inspectionProject != null  and inspectionProject != ''">inspection_project,</if>
+            <if test="inspectionAddr != null  and inspectionAddr != ''">inspection_addr,</if>
+            <if test="jcPeople != null  and jcPeople != ''">jc_people,</if>
+            <if test="jcDate != null ">jc_date,</if>
+            <if test="createId != null ">create_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateId != null ">update_id,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="equipmentState != null  and equipmentState != ''">equipment_state,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="jzPlanId != null ">jz_plan_id,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null ">#{id},</if>
+            <if test="equipmentId != null ">#{equipmentId},</if>
+            <if test="systemId != null ">#{systemId},</if>
+            <if test="content != null  and content != ''">#{content},</if>
+            <if test="inspectionProject != null  and inspectionProject != ''">#{inspectionProject},</if>
+            <if test="inspectionAddr != null  and inspectionAddr != ''">#{inspectionAddr},</if>
+            <if test="jcPeople != null  and jcPeople != ''">#{jcPeople},</if>
+            <if test="jcDate != null ">#{jcDate},</if>
+            <if test="createId != null ">#{createId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateId != null ">#{updateId},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="equipmentState != null  and equipmentState != ''">#{equipmentState},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="jzPlanId != null ">#{jzPlanId},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzInspectionLog" parameterType="JzInspectionLog">
+        update jz_inspection_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="equipmentId != null ">equipment_id = #{equipmentId},</if>
+            <if test="systemId != null ">system_id = #{systemId},</if>
+            <if test="content != null  and content != ''">content = #{content},</if>
+            <if test="inspectionProject != null  and inspectionProject != ''">inspection_project = #{inspectionProject},</if>
+            <if test="inspectionAddr != null  and inspectionAddr != ''">inspection_addr = #{inspectionAddr},</if>
+            <if test="jcPeople != null  and jcPeople != ''">jc_people = #{jcPeople},</if>
+            <if test="jcDate != null ">jc_date = #{jcDate},</if>
+            <if test="createId != null ">create_id = #{createId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateId != null ">update_id = #{updateId},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="equipmentState != null  and equipmentState != ''">equipment_state = #{equipmentState},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="jzPlanId != null ">jz_plan_id = #{jzPlanId},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzInspectionLogById" parameterType="Long">
+        delete from jz_inspection_log where id = #{id}
+    </delete>
+
+    <delete id="deleteJzInspectionLogByIds" parameterType="String">
+        delete from jz_inspection_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectLogList" parameterType="JzInspectionLog" resultMap="JzInspectionLogResultMap" >
+        SELECT
+        jz_inspection_log.content,
+        jz_inspection_log.inspection_project,
+        jz_inspection_log.inspection_addr,
+        jz_inspection_log.jc_date,
+        jz_inspection_log.equipment_state,
+        jz_inspection_log.state,
+        jz_inspection_log.remark,
+        jz_inspection_log.create_time
+
+        FROM
+        jz_inspection_log
+
+        where
+
+
+        <if test="jzPlanId != null ">  jz_inspection_log.jz_plan_id = #{jzPlanId}</if>
+        <if test="createTime != null  ">
+            AND date_format(jz_inspection_log.create_time,'%y%m%d') <![CDATA[ <= ]]> date_format(#{createTime},'%y%m%d')
+        </if>
+
+    </select>
+    <delete id="deleteJzInspectionLogByPlanIds" parameterType="String" >
+        delete from jz_inspection_log where jz_plan_id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <insert id="xunJian" parameterType="JzInspectionLog">
+        INSERT INTO jz_inspection_log
+        SELECT id, equipment_id, system_id, content, inspection_project,
+        inspection_addr, jc_people, jc_date, create_id, NOW() ,
+         update_id, update_time, equipment_state, state, jz_plan_id, remark FROM jz_inspection WHERE jz_plan_id IN
+        <foreach item="jzPlanId" collection="array" open="(" separator="," close=")">
+            #{jzPlanId}
+        </foreach>
+    </insert>
+</mapper>

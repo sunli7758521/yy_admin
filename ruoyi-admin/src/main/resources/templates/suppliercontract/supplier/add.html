@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增供应商')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-supplier-add">
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">所属系统：</label>
+<!--                <input id="treeId" name="parentId" type="hidden" th:value="${dept.deptId}"   />-->
+<!--                <input id="treeId" name="parentId" type="hidden" th:value="${dept.deptId}"   />-->
+<!--                <div class="col-sm-8">-->
+<!--                    <div class="input-group">-->
+<!--                      <input class="form-control" type="text" onclick="selectDeptTree()" id="treeName" readonly="true" th:value="${dept.deptName}">-->
+<!--                        <span class="input-group-addon"><i class="fa fa-search"></i></span>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="col-sm-8">
+                <select class="form-control" name="systemId" th:with="type=${@dict.DeptList()}" required>
+                    <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId} "></option>
+                </select>
+            </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供应商电话：</label>
+                <div class="col-sm-8">
+                    <input name="phone" class="form-control" type="isPhone" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供应商邮箱：</label>
+                <div class="col-sm-8">
+                    <input name="supplierEmail" class="form-control" type="email" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供应商名称：</label>
+                <div class="col-sm-8">
+                    <input name="supplierName" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">供应商地址：</label>
+                <div class="col-sm-8">
+                    <input name="supplierAddr" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">供应商传真：</label>
+                <div class="col-sm-8">
+                    <input id="supplierCz" name="supplierCz" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <input name="remark" class="form-control" type="text">
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态</label>
+                <div class="col-sm-8">
+              <!--      <input name="state" class="form-control" type="text">-->
+                    <select name="state" class="form-control" >
+                        <option  th:value="0">正常</option>
+                        <option  th:value="1">异常</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+
+    <script type="text/javascript">
+        var prefix = ctx + "suppliercontract/supplier"
+
+        $("#form-supplier-add").validate({
+            focusCleanup: true
+        });
+
+
+        function submitHandler() {
+            // if ($.validate.form()) {
+            //     $.operate.save(prefix + "/add", $('#form-supplier-add').serialize());
+            // }
+            if ($.validate.form()) {
+                //上面的if是validate对form的判断，如果用正则，可以在这里再加一层判断
+                var phone = document.getElementById('supplierCz').value;
+                if(!(/^(\d{3,4}-)?\d{7,8}$/.test(phone))){
+                    alert("传真格式有误，请重填");
+                    return false;
+                }else {
+                    $.operate.save(prefix + "/add", $('#form-supplier-add').serialize());
+                }
+            }
+        }
+
+
+        /*用户管理-新增-选择部门树*/
+       // function selectDeptTree() {
+            // var treeId = $("#treeId").val();
+            // var deptId = $.common.isEmpty(treeId) ? "100" : $("#treeId").val();
+        //     var url = prefix + "/selectDeptTree/"  + $("#treeId").val();
+        //     var options = {
+        //         title: '选择部门',
+        //         width: "380",
+        //         url: url,
+        //         callBack: doSubmit
+        //     };
+        //     $.modal.openOptions(options);
+        // }
+        //
+        // function doSubmit(index, layero){
+        //     var body = layer.getChildFrame('body', index);
+        //     $("#treeId").val(body.find('#treeId').val());
+        //     $("#treeName").val(body.find('#treeName').val());
+        //     layer.close(index);
+        //
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改系统设备')" />
+    <th:block th:include="include :: datetimepicker-css" />
+    <th:block th:include="include :: select2-css" />
+    <th:block th:include="include :: bootstrap-select-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-equipment-edit" th:object="${jzEquipment}">
+            <input name="sbId" th:field="*{sbId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">系统：</label>
+                <div class="col-sm-3">
+<!--                    <input name="systemId" th:field="*{systemId}" class="form-control" type="text">-->
+                        <select class="form-control" name="systemId" th:with="type=${@dict.DeptList()}" required>
+                            <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId} "th:field="*{systemId}" ></option>
+                        </select>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-3 control-label">设备规格：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="spId" th:field="*{spId}" class="form-control" type="text">-->
+<!--                </div>-->
+                <label class="col-sm-3 control-label">安装人姓名：</label>
+                <div class="col-sm-3">
+                    <input name="azName" th:field="*{azName}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">编号：</label>
+                <div class="col-sm-3">
+                    <input name="num" th:field="*{num}" class="form-control" type="text" required>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">设备名称：</label>
+                <div class="col-sm-3">
+                    <input name="sbName" th:field="*{sbName}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备编号：</label>
+                <div class="col-sm-3">
+                    <input name="sbCode" th:field="*{sbCode}" class="form-control" type="text" required>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">设备型号：</label>
+                <div class="col-sm-3">
+                    <input name="sbModel" th:field="*{sbModel}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">安装地点：</label>
+                <div class="col-sm-3">
+                    <input name="azAddr" th:field="*{azAddr}" class="form-control" type="text">
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">经销商：</label>
+                <div class="col-sm-3">
+<!--                    <input name="supplierId" th:field="*{supplierId}" class="form-control" type="text">-->
+                    <select class="form-control" name="supplierId" th:with="type=${@dict.supList()}" required>
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.supplierName}" th:value="${dict.supplierId}" th:field="*{supplierId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备安装时间：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="azTime" th:value="${#dates.format(jzEquipment.azTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">设备出厂日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="outTime" th:value="${#dates.format(jzEquipment.outTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出厂编号：</label>
+                <div class="col-sm-3">
+                    <input name="outNum" th:field="*{outNum}" class="form-control" type="text" required>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">设备进场日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="inTime" th:value="${#dates.format(jzEquipment.inTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">交接验收日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="jjYsTime" th:value="${#dates.format(jzEquipment.jjYsTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">使用日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="syTime" th:value="${#dates.format(jzEquipment.syTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="form-group">    -->
+<!--               -->
+<!--            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备状态：</label>
+                <div class="col-sm-3">
+<!--                    <input name="state" th:field="*{state}" class="form-control" type="text">-->
+<!--                    <select name="state" th:field="*{state}" class="form-control" required>-->
+<!--&lt;!&ndash;                        <option value="">所有</option>&ndash;&gt;-->
+<!--                        <option  th:value="0">使用</option>-->
+<!--                        <option  th:value="1">维修</option>-->
+<!--                        <option  th:value="2">报废</option>-->
+<!--                    </select>-->
+                    <select class="form-control" name="state" th:with="type=${@dict.getType('jz_equipment_state')}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">登记日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="djTime" th:value="${#dates.format(jzEquipment.djTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" >
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark"  th:field="*{remark}"  class="form-control" type="text" ></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <th:block th:include="include :: select2-js" />
+    <th:block th:include="include :: bootstrap-select-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "equipment/equipment";
+        $("#form-equipment-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-equipment-edit').serialize());
+            }
+        }
+
+        $("input[name='azTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='outTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='inTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='jjYsTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='syTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='djTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

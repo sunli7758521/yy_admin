@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.juser.mapper.JzUserMapper">
+
+    <resultMap type="JzUser" id="JzUserResult">
+        <result property="userId"    column="user_id"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="phone"    column="phone"    />
+        <result property="gender"    column="gender"    />
+        <result property="userType"    column="user_type"    />
+        <result property="state"    column="state"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="ministryId"    column="ministry_id"    />
+        <result property="families"    column="families"    />
+        <result property="teamId"    column="team_id"    />
+        <result property="adrress"    column="adrress"    />
+        <result property="emergencyCall"    column="emergency_call"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="userNum"    column="user_num"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+    <resultMap type="JzUser" id="JzUserResultMap">
+        <result property="userId"    column="user_id"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="phone"    column="phone"    />
+        <result property="gender"    column="gender"    />
+        <result property="userType"    column="user_type"    />
+        <result property="state"    column="state"    />
+        <result property="hospitalId"    column="hospital_id"    />
+        <result property="ministryId"    column="ministry_id"    />
+        <result property="families"    column="families"    />
+        <result property="teamId"    column="team_id"    />
+        <result property="adrress"    column="adrress"    />
+        <result property="emergencyCall"    column="emergency_call"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="userNum"    column="user_num"    />
+        <result property="remark"    column="remark"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="userTypeName"    column="name"    />
+
+    </resultMap>
+
+    <sql id="selectJzUserVo">
+        select user_id, system_id, dept_id, user_name, phone, gender, user_type, state, hospital_id, ministry_id, families, team_id, adrress, emergency_call, create_by, create_time, update_time, update_by, user_num, remark from jz_user
+    </sql>
+
+    <sql id="selectVoList" >
+
+    </sql>
+
+
+    <select id="selectJzUserList" parameterType="JzUser" resultMap="JzUserResultMap">
+
+        SELECT
+        jz_user.user_id,
+        jz_user.system_id,
+        jz_user.dept_id,
+        jz_user.user_name,
+        jz_user.phone,
+        jz_user.gender,
+        jz_user.user_type,
+        jz_user.state,
+        jz_user.hospital_id,
+        jz_user.ministry_id,
+        jz_user.families,
+        jz_user.team_id,
+        jz_user.adrress,
+        jz_user.emergency_call,
+        jz_user.create_by,
+        jz_user.create_time,
+        jz_user.update_time,
+        jz_user.update_by,
+        jz_user.user_num,
+        jz_user.remark,
+        sys_dept.dept_name,
+        jz_user_type.name
+        FROM
+        jz_user,
+        sys_dept,
+        jz_user_type
+        WHERE
+        jz_user.system_id = sys_dept.dept_id
+        AND jz_user_type.id =jz_user.user_type
+
+        <if test="userType != null ">
+         and  jz_user.user_type = #{userType}
+        </if>
+            <if test="systemId != null ">
+                and   jz_user.system_id = #{systemId}
+            </if>
+            <if test="deptId != null ">
+                and jz_user.dept_id = #{deptId}
+            </if>
+            <if test="userName != null  and userName != ''">
+                and jz_user.user_name like concat('%', #{userName}, '%')
+            </if>
+            <if test="phone != null  and phone != ''">
+             and jz_user.phone = #{phone}
+            </if>
+            <if test="gender != null  and gender != ''">
+             and jz_user.gender = #{gender}
+            </if>
+            <if test="userType != null ">
+             and jz_user.user_type = #{userType}
+            </if>
+            <if test="state != null ">
+             and jz_user.state = #{state}
+            </if>
+            <if test="hospitalId != null ">
+                and jz_user.hospital_id = #{hospitalId}
+            </if>
+            <if test="ministryId != null ">
+                and jz_user.ministry_id = #{ministryId}
+            </if>
+            <if test="families != null ">
+                and jz_user.families = #{families}
+            </if>
+            <if test="teamId != null ">
+             and jz_user.team_id = #{teamId}
+            </if>
+            <if test="adrress != null  and adrress != ''">
+                and jz_user.adrress = #{adrress}
+            </if>
+            <if test="emergencyCall != null  and emergencyCall != ''">
+                and jz_user.emergency_call = #{emergencyCall}
+            </if>
+            <if test="userNum != null  and userNum != ''">
+             and jz_user.user_num like concat('%',#{userNum},'%')
+            </if>
+
+         order by jz_user.create_time desc
+    </select>
+
+    <!--<select id="selectJzUserList" parameterType="JzUser" resultMap="JzUserResult">-->
+        <!--&lt;!&ndash;<include refid="selectJzUserVo"/>&ndash;&gt;-->
+        <!--<include refid="selectVoList"/>-->
+
+        <!--<where>-->
+            <!--<if test="systemId != null "> and system_id = #{systemId}</if>-->
+            <!--<if test="deptId != null "> and dept_id = #{deptId}</if>-->
+            <!--<if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>-->
+            <!--<if test="phone != null  and phone != ''"> and phone = #{phone}</if>-->
+            <!--<if test="gender != null  and gender != ''"> and gender = #{gender}</if>-->
+            <!--<if test="userType != null "> and user_type = #{userType}</if>-->
+            <!--<if test="state != null "> and state = #{state}</if>-->
+            <!--<if test="hospitalId != null "> and hospital_id = #{hospitalId}</if>-->
+            <!--<if test="ministryId != null "> and ministry_id = #{ministryId}</if>-->
+            <!--<if test="families != null "> and families = #{families}</if>-->
+            <!--<if test="teamId != null "> and team_id = #{teamId}</if>-->
+            <!--<if test="adrress != null  and adrress != ''"> and adrress = #{adrress}</if>-->
+            <!--<if test="emergencyCall != null  and emergencyCall != ''"> and emergency_call = #{emergencyCall}</if>-->
+            <!--<if test="userNum != null  and userNum != ''"> and user_num = #{userNum}</if>-->
+        <!--</where>-->
+        <!--order by create_time desc-->
+    <!--</select>-->
+
+
+    <select id="uList" parameterType="JzUser" resultMap="JzUserResult">
+  /* select * from jz_user*/
+        select user_id, system_id, dept_id, user_name, phone, gender, user_type, state, hospital_id, ministry_id, families, team_id, adrress, emergency_call, create_by, create_time, update_time, update_by, user_num, remark from jz_user
+    </select>
+    <select id="usList" parameterType="String" resultMap="JzUserResult">
+        SELECT	user_name   FROM jz_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </select>
+    <select id="selectJzUserById" parameterType="Long" resultMap="JzUserResult">
+        <include refid="selectJzUserVo"/>
+        where user_id = #{userId}
+    </select>
+        
+    <insert id="insertJzUser" parameterType="JzUser" useGeneratedKeys="true" keyProperty="userId">
+        insert into jz_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="systemId != null ">system_id,</if>
+            <if test="deptId != null ">dept_id,</if>
+            <if test="userName != null  and userName != ''">user_name,</if>
+            <if test="phone != null  and phone != ''">phone,</if>
+            <if test="gender != null  and gender != ''">gender,</if>
+            <if test="userType != null ">user_type,</if>
+            <if test="state != null ">state,</if>
+            <if test="hospitalId != null ">hospital_id,</if>
+            <if test="ministryId != null ">ministry_id,</if>
+            <if test="families != null ">families,</if>
+            <if test="teamId != null and gender != '' ">team_id,</if>
+            <if test="adrress != null  and adrress != ''">adrress,</if>
+            <if test="emergencyCall != null  and emergencyCall != ''">emergency_call,</if>
+            <if test="createBy != null  and createBy != ''">create_by,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateBy != null  and updateBy != ''">update_by,</if>
+            <if test="userNum != null  and userNum != ''">user_num,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="systemId != null ">#{systemId},</if>
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="userName != null  and userName != ''">#{userName},</if>
+            <if test="phone != null  and phone != ''">#{phone},</if>
+            <if test="gender != null  and gender != ''">#{gender},</if>
+            <if test="userType != null ">#{userType},</if>
+            <if test="state != null ">#{state},</if>
+            <if test="hospitalId != null ">#{hospitalId},</if>
+            <if test="ministryId != null ">#{ministryId},</if>
+            <if test="families != null ">#{families},</if>
+            <if test="teamId != null and gender != ''">#{teamId},</if>
+            <if test="adrress != null  and adrress != ''">#{adrress},</if>
+            <if test="emergencyCall != null  and emergencyCall != ''">#{emergencyCall},</if>
+            <if test="createBy != null  and createBy != ''">#{createBy},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
+            <if test="userNum != null  and userNum != ''">#{userNum},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzUser" parameterType="JzUser">
+        update jz_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="systemId != null ">system_id = #{systemId},</if>
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="userName != null  and userName != ''">user_name = #{userName},</if>
+            <if test="phone != null  and phone != ''">phone = #{phone},</if>
+            <if test="gender != null  and gender != ''">gender = #{gender},</if>
+            <if test="userType != null ">user_type = #{userType},</if>
+            <if test="state != null ">state = #{state},</if>
+            <if test="hospitalId != null ">hospital_id = #{hospitalId},</if>
+            <if test="ministryId != null ">ministry_id = #{ministryId},</if>
+            <if test="families != null ">families = #{families},</if>
+            <if test="teamId != null and gender != '' ">team_id = #{teamId},</if>
+            <if test="adrress != null  and adrress != ''">adrress = #{adrress},</if>
+            <if test="emergencyCall != null  and emergencyCall != ''">emergency_call = #{emergencyCall},</if>
+            <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="userNum != null  and userNum != ''">user_num = #{userNum},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteJzUserById" parameterType="Long">
+        delete from jz_user where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteJzUserByIds" parameterType="String">
+        delete from jz_user where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <select id="selectDbzUserList"  resultMap="JzUserResultMap" >
+        SELECT
+        jz_user.user_id,
+        jz_user.system_id,
+        jz_user.dept_id,
+        jz_user.user_name,
+        jz_user.phone,
+        jz_user.gender,
+        jz_user.user_type,
+        jz_user.state,
+        jz_user.hospital_id,
+        jz_user.ministry_id,
+        jz_user.families,
+        jz_user.team_id,
+        jz_user.adrress,
+        jz_user.emergency_call,
+        jz_user.create_by,
+        jz_user.create_time,
+        jz_user.update_time,
+        jz_user.update_by,
+        jz_user.user_num,
+        jz_user.remark,
+        sys_dept.dept_name,
+        jz_user_type.name
+        FROM
+        jz_user,
+        sys_dept,
+        jz_user_type
+        WHERE
+        jz_user.system_id = sys_dept.dept_id
+        AND jz_user_type.id =jz_user.user_type
+         <if test="array !=null" >
+              AND  jz_user.system_id  in
+        <foreach item="systemIds" collection="array" open="(" separator="," close=")">
+            #{systemIds}
+        </foreach>
+         </if>
+            <if test="userName != null  and userName != ''"> and jz_user.user_name like concat('%', #{userName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and jz_user.phone = #{phone}</if>
+            <if test="gender != null  and gender != ''"> and jz_user.gender = #{gender}</if>
+            <if test="userType != null "> and jz_user.user_type = #{userType}</if>
+            <if test="state != null "> and jz_user.state = #{state}</if>
+            <if test="teamId != null "> and jz_user.team_id = #{teamId}</if>
+            <if test="userNum != null  and userNum != ''"> and jz_user.user_num = #{userNum}</if>
+
+        order by create_time desc
+    </select>
+    
+</mapper>

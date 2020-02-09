@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.JzPlanLogMapper">
+    
+    <resultMap type="JzPlanLog" id="JzPlanLogResult">
+        <result property="planId"    column="plan_id"    />
+        <result property="title"    column="title"    />
+        <result property="time"    column="time"    />
+        <result property="longTime"    column="long_time"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="teamId"    column="team_id"    />
+        <result property="state"    column="state"    />
+        <result property="zbType"    column="zb_type"    />
+        <result property="planType"    column="plan_type"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="content"    column="content"    />
+    </resultMap>
+
+    <resultMap type="JzPlanLog" id="JzPlanLogResultMap">
+        <result property="planId"    column="plan_id"    />
+        <result property="title"    column="title"    />
+        <result property="time"    column="time"    />
+        <result property="longTime"    column="long_time"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="teamId"    column="team_id"    />
+        <result property="state"    column="state"    />
+        <result property="zbType"    column="zb_type"    />
+        <result property="planType"    column="plan_type"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="content"    column="content"    />
+        <result property="systemName"    column="dept_name"    />
+        <result property="successTime"    column="success_time"    />
+    </resultMap>
+
+    <sql id="selectJzPlanLogVo">
+--         select plan_id, title, time, type, system_id, team_id, state, zb_type, plan_type, create_id, create_time, update_id, update_time, remark, content from jz_plan_log
+        select plan_id, title, time, long_time,system_id, team_id, state, zb_type, plan_type, create_id, create_time, update_id, update_time, remark, content,success_time from jz_plan_log
+    </sql>
+
+    <select id="selectJzPlanLogList" parameterType="JzPlanLog" resultMap="JzPlanLogResult">
+        <include refid="selectJzPlanLogVo"/>
+        <where>
+            <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="longTime != null  and longTime != ''"> and long_time = #{longTime}</if>
+            <if test="systemId != null "> and system_id = #{systemId}</if>
+<!--            <if test="teamId != null "> and team_id = #{teamId}</if>-->
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="zbType != null  and zbType != ''"> and zb_type = #{zbType}</if>
+            <if test="planType != null  and planType != ''"> and plan_type = #{planType}</if>
+            <if test="createId != null "> and create_id = #{createId}</if>
+            <if test="updateId != null "> and update_id = #{updateId}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="successTime != null "> and success_time = #{successTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectJzPlanLogById" parameterType="Long" resultMap="JzPlanLogResult">
+        <include refid="selectJzPlanLogVo"/>
+        where plan_id = #{planId}
+    </select>
+        
+    <insert id="insertJzPlanLog" parameterType="JzPlanLog" useGeneratedKeys="true" keyProperty="planId">
+        insert into jz_plan_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="planId != null  and planId != ''">plan_id,</if>
+            <if test="title != null  and title != ''">title,</if>
+            <if test="time != null ">time,</if>
+            <if test="longTime != null  and longTime != ''">long_time,</if>
+            <if test="systemId != null ">system_id,</if>
+            <if test="teamId != null ">team_id,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="zbType != null  and zbType != ''">zb_type,</if>
+            <if test="planType != null  and planType != ''">plan_type,</if>
+            <if test="createId != null ">create_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateId != null ">update_id,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="content != null  and content != ''">content,</if>
+            <if test="successTime != null "> success_time,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="planId != null  and planId != ''">#{planId},</if>
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="time != null ">#{time},</if>
+            <if test="longTime != null  and longTime != ''">#{longTime},</if>
+            <if test="systemId != null ">#{systemId},</if>
+            <if test="teamId != null ">#{teamId},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="zbType != null  and zbType != ''">#{zbType},</if>
+            <if test="planType != null  and planType != ''">#{planType},</if>
+            <if test="createId != null ">#{createId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateId != null ">#{updateId},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="content != null  and content != ''">#{content},</if>
+            <if test="successTime != null ">  #{successTime},</if>
+
+        </trim>
+    </insert>
+
+    <update id="updateJzPlanLog" parameterType="JzPlanLog">
+        update jz_plan_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null  and title != ''">title = #{title},</if>
+            <if test="time != null ">time = #{time},</if>
+            <if test="longTime != null  and longTime != ''">long_time = #{longTime},</if>
+            <if test="systemId != null ">system_id = #{systemId},</if>
+            <if test="teamId != null ">team_id = #{teamId},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="zbType != null  and zbType != ''">zb_type = #{zbType},</if>
+            <if test="planType != null  and planType != ''">plan_type = #{planType},</if>
+            <if test="createId != null ">create_id = #{createId},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateId != null ">update_id = #{updateId},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="content != null  and content != ''">content = #{content},</if>
+            <if test="successTime != null ">  success_time = #{successTime},</if>
+
+        </trim>
+        where plan_id = #{planId}
+    </update>
+
+    <delete id="deleteJzPlanLogById" parameterType="Long">
+        delete from jz_plan_log where plan_id = #{planId}
+    </delete>
+
+    <delete id="deleteJzPlanLogByIds" parameterType="String">
+        delete from jz_plan_log where plan_id in 
+        <foreach item="planId" collection="array" open="(" separator="," close=")">
+            #{planId}
+        </foreach>
+    </delete>
+
+    <select id="selectDbzLogList" resultMap="JzPlanLogResultMap">
+        SELECT
+            jz_plan_log.plan_id,
+            jz_plan_log.title,
+            jz_plan_log.time,
+            jz_plan_log.long_time,
+            jz_plan_log.system_id,
+            jz_plan_log.team_id,
+            jz_plan_log.state,
+            jz_plan_log.zb_type,
+            jz_plan_log.plan_type,
+            jz_plan_log.create_id,
+            jz_plan_log.create_time,
+            jz_plan_log.update_id,
+            jz_plan_log.update_time,
+            jz_plan_log.remark,
+            jz_plan_log.content,
+            jz_plan_log.success_time,
+            sys_dept.dept_name
+        FROM
+            jz_plan_log,sys_dept
+            where jz_plan_log.system_id = sys_dept.dept_id
+        <if test="array !=null" >
+            AND  jz_plan_log.system_id  in
+            <foreach item="systemIds" collection="array" open="(" separator="," close=")">
+                #{systemIds}
+            </foreach>
+        </if>
+        <if test="state != null  and state != ''">jz_plan_log.state = #{state},</if>
+        <if test="longTime != null  and longTime != ''">jz_plan_log.long_time = #{longTime},</if>
+    </select>
+
+    <insert id="insertJzPlanLogList" parameterType="JzPlanLog"  >
+        insert into jz_plan_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="planId != null  ">plan_id,</if>
+            <if test="title != null  and title != ''">title,</if>
+            <if test="time != null ">time,</if>
+            <if test="longTime != null  and longTime != ''">long_time,</if>
+            <if test="systemId != null ">system_id,</if>
+            <if test="teamId != null ">team_id,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="zbType != null  and zbType != ''">zb_type,</if>
+            <if test="planType != null  and planType != ''">plan_type,</if>
+            <if test="createId != null ">create_id,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateId != null ">update_id,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="content != null  and content != ''">content,</if>
+            <if test="successTime != null "> success_time,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="planId != null  ">#{planId},</if>
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="time != null ">#{time},</if>
+            <if test="longTime != null  and longTime != ''">#{longTime},</if>
+            <if test="systemId != null ">#{systemId},</if>
+            <if test="teamId != null ">#{teamId},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="zbType != null  and zbType != ''">#{zbType},</if>
+            <if test="planType != null  and planType != ''">#{planType},</if>
+            <if test="createId != null ">#{createId},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateId != null ">#{updateId},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="content != null  and content != ''">#{content},</if>
+            <if test="successTime != null ">  #{successTime},</if>
+
+        </trim>
+    </insert>
+    <insert id="riZhiBanList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 0 AND long_time = 0
+    </insert>
+    <insert id="riXunJianList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 1 AND long_time = 0
+    </insert>
+    <insert id="riYinHuanList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 2 AND long_time = 0
+    </insert>
+    <insert id="zhouZhiBanList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 0 AND long_time = 1
+    </insert>
+    <insert id="zhouXunJianList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 1 AND long_time = 1
+    </insert>
+    <insert id="zhouYinHuanList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 2 AND long_time = 1
+    </insert>
+    <insert id="yueZhiBanList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 0 AND long_time = 2
+    </insert>
+    <insert id="yueXunJianList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 1 AND long_time = 2
+    </insert>
+    <insert id="yueYinHuanList" parameterType="JzPlanLog">
+    INSERT INTO jz_plan_log SELECT plan_id,
+	title,
+	TIME,
+	long_time,
+	system_id,
+	team_id,
+	state,
+	zb_type,
+	plan_type,
+	create_id,
+	NOW(),
+	update_id,
+	update_time,
+	remark,
+	content,
+	success_time FROM jz_plan WHERE plan_type = 2 AND long_time = 2
+    </insert>
+</mapper>

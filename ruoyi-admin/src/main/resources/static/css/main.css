@@ -1,0 +1,298 @@
+.mycorner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+}
+
+.mycorner::before,
+.mycorner::after {
+    content: "";
+    position: absolute;
+    background: #25D8ED;
+}
+
+.lefttop {
+    left: 0;
+    top: 0;
+}
+
+.lefttop::before {
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 10px;
+}
+
+.lefttop::after {
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 2px;
+}
+
+.leftbottom {
+    left: 0;
+    bottom: 0;
+}
+
+.leftbottom::before {
+    left: 0;
+    bottom: 0;
+    width: 2px;
+    height: 10px;
+}
+
+.leftbottom::after {
+    left: 0;
+    bottom: 0;
+    width: 10px;
+    height: 2px;
+}
+
+.righttop {
+    right: 0;
+    top: 0;
+}
+
+.righttop::before {
+    right: 0;
+    top: 0;
+    width: 2px;
+    height: 10px;
+}
+
+.righttop::after {
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 2px;
+}
+
+.rightbottom {
+    right: 0;
+    bottom: 0;
+}
+
+.rightbottom::before {
+    right: 0;
+    bottom: 0;
+    width: 2px;
+    height: 10px;
+}
+
+.rightbottom::after {
+    right: 0;
+    bottom: 0;
+    width: 10px;
+    height: 2px;
+}
+.container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+.container .topHead{
+    width: 100%;
+    height: 50px;
+    background: url("../../img/mainHead.png") no-repeat center;
+    background-size: 100% 100%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 50px;
+    color: #01FFFD;
+}
+.container .contentBlock{
+    width: 100%;
+    height: calc(100% - 50px);
+    background: url("../../img/mainBg.png") no-repeat center;
+    background-size: 100% 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.container .contentBlock .block {
+    width: 100%;
+    position: relative;
+    background: rgba(0,202,220,0.1);
+}
+.container .contentBlock .block .seTitle {
+    height: 26px;
+    line-height: 26px;
+    padding-left: 20px;
+    color: #C4F7F7;
+    font-size: 12px;
+    font-weight: bold;
+}
+.container .contentBlock .block .seCon {
+    height: calc(100% - 26px);
+}
+
+.container .contentBlock .block .seCon .chartBlock {
+    width: calc(100% - 130px);
+    height: 100%;
+    float: left;
+}.container .contentBlock .block .seCon .chartBlock2 {
+     width: 100%;
+     height: 100%;
+     float: left;
+ }
+.container .contentBlock .block .seCon .tableBlock {
+    width: 130px;
+    height: 100%;
+    float: left;
+}
+.container .contentBlock .block .seCon .tableBlock table {
+    width: 100%;
+    height: 100%;
+    background: #030C2B;
+    font-size:12px;
+    color: #eee;
+    text-align: center;
+
+}
+.container .contentBlock .block .seCon .tableBlock thead {
+    background: #031C5E;
+    color: #25D8ED;
+    height: 30px;
+    line-height:30px;
+}
+.container .contentBlock .block .seCon .top1{
+    height: 50%;
+}
+.container .contentBlock .block .seCon .top2{
+    height: 50%;
+}
+.container .contentBlock .block .seCon .top2 .chartBlock2{
+    width: 100%;
+    height: 100%;
+}
+.container .contentBlock .left {
+    width: 30%;
+    height: 100%;
+    margin-right: 10px;
+    float: left;
+}
+.container .contentBlock .left .block1 {
+    height: calc((100% - 20px) / 4);
+    margin-bottom: 10px;
+}
+.container .contentBlock .left .block2 {
+    height: calc((100% - 20px) / 4);
+    margin-bottom: 10px;
+}
+.container .contentBlock .left .block3 {
+    height: calc((100% - 20px) / 2);
+}
+.container .contentBlock .center {
+    width: calc(40% - 20px);
+    height: 100%;
+    float: left;
+}
+.container .contentBlock .center .block1 {
+    height: calc((100% - 20px) / 3);
+    margin-bottom: 10px;
+    color: #fff;
+}
+.container .contentBlock .center .block1 .msgBlock {
+    width: 100%;
+    height: 100%;
+}
+.container .contentBlock .center .block1 .msgBlock .centerLeft{
+    width: 50%;
+    height: 100%;
+    float: left;
+    text-align: center;
+}
+.container .contentBlock .center .block1 .msgBlock .centerLeft .time1 {
+    font-size: 36px;
+}
+.container .contentBlock .center .block1 .msgBlock .centerLeft .time2 {
+    font-size: 12px;
+}
+.container .contentBlock .center .block1 .msgBlock .centerLeft .season {
+    height: 50px;
+}
+.container .contentBlock .center .block1 .msgBlock .centerLeft .season #weather {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.container .contentBlock .center .block1 .msgBlock .centerLeft .season #weather #weather-float-he {
+    width: calc(100% - 16px);
+}
+.container .contentBlock .center .block1 .msgBlock .centerLeft .season #weather #weather-float-he div{
+    z-index:10;
+}
+.container .contentBlock .center .block1 .msgBlock .centerRight{
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.container .contentBlock .center .block1 .msgBlock .centerRight table {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(0,202,220,0.1);
+}
+.container .contentBlock .center .block1 .msgBlock .centerRight table thead {
+    height: 30px;
+    line-height: 30px;
+    background: rgba(0,202,220,0.1);
+}
+.container .contentBlock .center .block2 {
+    height: calc((100% - 20px) / 3 * 2 + 10px);
+    margin-bottom: 10px;
+}
+.container .contentBlock .center .block2 .seCon img {
+    width: 100%;
+    height: 100%;
+}
+.container .contentBlock .right {
+    width: 30%;
+    height: 100%;
+    margin-left: 10px;
+    float: left;
+}
+
+.container .contentBlock .right .block1 {
+    height: calc((100% - 20px) / 3);
+    margin-bottom: 10px;
+}
+.container .contentBlock .right .block1 .chartBlock{
+    width: 100%;
+}
+.container .contentBlock .right .block2 {
+    height: calc((100% - 20px) / 3);
+    margin-bottom: 10px;
+}
+.container .contentBlock .right .block3 {
+    height: calc((100% - 20px) / 3);
+}
+.container .contentBlock .right .block3 .tableBlock{
+    width: 100%;
+}
+.tableBlock {
+    overflow-y: auto;
+}
+/*滚动条样式*/
+.tableBlock::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 4px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 4px;
+}
+
+.tableBlock::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(134, 166, 226, 0.2);
+    background: rgba(134, 166, 226, 0.2);
+}
+
+.tableBlock::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(134, 166, 226, 0.2);
+    border-radius: 0;
+    background: rgba(134, 166, 226, 0.1);
+}

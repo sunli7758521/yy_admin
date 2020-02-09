@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('巡检列表')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <!--                                <p>系统id：</p>-->
+                            <input type="hidden" id="dictType" name="jzPlanId" th:value="${dictId}"/>
+                        </li>
+
+                        <li>
+                            <p>巡检计划：</p>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="content" th:with="type=${@dict.titleList()}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.title}"></option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <p>巡检项目：</p>
+                            <input type="text" name="inspectionProject"/>
+                        </li>
+<!--                        <li>-->
+<!--                            <p>巡检地址：</p>-->
+<!--                            <input type="text" name="inspectionAddr"/>-->
+<!--                        </li>-->
+                        <li>
+                            <p>检查人：</p>
+                            <select id="jcPeople" class="form-control" name="jcPeople" th:with="type=${@dict.uList()}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>
+                            </select>
+                        </li>
+                        <li class="select-time">
+                            <p>检查时间：</p>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="jcStartDate"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="jcEndDate"/>
+                        </li>
+                        <li>
+                            <p>状态：</p>
+                            <!--                                <input type="text" name="state"/>-->
+                            <div class="col-sm-8">
+                                <select class="form-control" name="state" th:with="type=${@dict.getType('patrol_check_status')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <p>设备状态：</p>
+                            <!--                                <input type="text" name="state"/>-->
+                            <div class="col-sm-8">
+                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_equipment_state')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+
+<!--        <div class="btn-group-sm" id="toolbar" role="group">-->
+<!--            <a class="btn btn-success" onclick="add()" shiro:hasPermission="sysusersystem:inspection:add">-->
+<!--                <i class="fa fa-plus"></i> 添加临时任务-->
+<!--            </a>-->
+            <!--<a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:inspection:edit">-->
+                <!--<i class="fa fa-edit"></i> 修改-->
+            <!--</a>-->
+<!--            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:inspection:remove">-->
+<!--                <i class="fa fa-remove"></i> 删除-->
+<!--            </a>-->
+<!--            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:inspection:export">-->
+<!--                <i class="fa fa-download"></i> 导出-->
+<!--            </a>-->
+<!--        </div>-->
+        <div class="col-sm-12 select-table table-striped">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var editFlag = [[${@permission.hasPermi('sysusersystem:inspection:edit')}]];
+    var removeFlag = [[${@permission.hasPermi('sysusersystem:inspection:remove')}]];
+    var jzEquipmentState = [[${@dict.getType('jz_equipment_state')}]];
+    var jzInspectionState = [[${@dict.getType('jz_inspection_state')}]];
+    // var prefix = ctx + "sysusersystem/inspection";
+    var datas = [[${@dict.getType('jz_plan_state')}]];
+    var banZu = [[${@dict.getType('ban_zu')}]];
+    var planTypeName = [[${@dict.getType('jz_plan_type')}]];
+    var longTime = [[${@dict.getType('patrol_cycle')}]];
+    var systemId = [[${@dict.getSystem(300)}]];
+
+    var prefix = ctx + "sysusersystem/plan";
+
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            exportUrl: prefix + "/export",
+            modalName: "制定计划",
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field : 'planId',
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'title',
+                    title : '计划标题'
+                },
+                {
+                    field : 'time',
+                    title : '计划时间'
+                },
+                {
+                    field : 'longTime',
+                    title : '巡查周期',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(longTime, value);
+                    }
+                },
+                // {
+                //     field : 'teamId',
+                //     title : '所属班组',
+                //     formatter: function(value, row, index) {
+                //         return $.table.selectDictLabel(teamId, value);
+                //     }
+                // },
+                {
+                    field : 'teamId',
+                    title : '所属班组',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(banZu, value);
+                    }
+                },
+                {
+                    field : 'state',
+                    title : '状态',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+                },
+                // {
+                //     field : 'zbType',
+                //     title : '值班类型',
+                //     formatter: function(value, row, index) {
+                //         return $.table.selectDictLabel(zbTypeName, value);
+                //     }
+                // },
+                {
+                    field : 'planType',
+                    title : '计划类型',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(planTypeName, value);
+                    }
+                },
+                {
+                    field : 'remark',
+                    title : '备注'
+                },
+                {
+                    field : 'content',
+                    title : '计划内容'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        // actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.planId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        // actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.planId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="yulan(\'' + row.planId + '\')"><i class="fa fa-list"></i>预览巡检任务</a>');
+                        return actions.join('');
+                    }
+                }]
+        };
+        $.table.init(options);
+    });
+    // 预览巡检任务
+    function yulan(id) {
+        var url =ctx+"sysusersystem/inspection/yulan/"+id;
+        $.modal.open("预览巡检任务" + table.options.modalName, url);
+    }
+
+    /*$(function() {
+        var options = {
+            url: prefix + "/list",
+            createUrl: prefix + "/add",
+            updateUrl: prefix + "/edit/{id}",
+            removeUrl: prefix + "/remove",
+            queryParams: queryParams,
+            exportUrl: prefix + "/export",
+            modalName: "巡检",
+
+            loadComplete: function (data) {
+                // console.log(data);
+            },
+            columns: [{
+                checkbox: true
+            },
+                {
+                    field : 'id',
+                    title : '主键',
+                    visible: false
+                },
+                // {
+                //     field : 'equipmentId',
+                //     title : '设备id'
+                // },
+                {
+                    field : 'systemName',
+                    title : '系统名称'
+                },
+                {
+                    field : 'content',
+                    title : '巡检计划'
+                },
+                {
+                    field : 'inspectionProject',
+                    title : '巡检项目'
+                },
+                {
+                    field : 'inspectionAddr',
+                    title : '巡检地址'
+                },
+                {
+                    field : 'jcName',
+                    title : '检查人'
+                },
+                {
+                    field : 'jcDate',
+                    title : '巡检时间'
+                },
+                {
+                    field : 'equipmentState',
+                    title : '设备状态',
+                    align:"left",
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(jzEquipmentState, value);
+                    }
+                },
+                {
+                    field : 'state',
+                    title : '状态',
+                    align: "left",
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(jzInspectionState, value);
+                    }
+                },
+                {
+                    field : 'remark',
+                    title : '备注'
+                }
+                ,
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>预览巡检任务</a> ');
+                        // actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }
+                ]
+        };
+        $.table.init(options);
+    });*/
+
+    function queryParams(params) {
+        var search = $.table.queryParams(params);
+        search.dictType = $("#dictType").val();
+        return search;
+    }
+    function add(){
+        var id = $("#dictType").val();
+        var url = prefix + '/add/' + id;
+        $.modal.open("添加巡检任务", url);
+    }
+</script>
+</body>
+</html>

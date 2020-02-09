@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.JzShiguyinhuandjMapper">
+    
+    <resultMap type="JzShiguyinhuandj" id="JzShiguyinhuandjResult">
+        <result property="id"    column="id"    />
+        <result property="bumenId"    column="buMen_id"    />
+        <result property="sgyhName"    column="sgyh_name"    />
+        <result property="phone"    column="phone"    />
+        <result property="formTime"    column="form_time"    />
+        <result property="czYinhuan"    column="cz_yinHuan"    />
+        <result property="zgCuoshi"    column="zg_cuoShi"    />
+        <result property="zgWancheng"    column="zg_wanCheng"    />
+        <result property="hiddenTroubleId"    column="hidden_trouble_id"    />
+        <result property="yhCreateTime"    column="yh_create_time"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectJzShiguyinhuandjVo">
+        select id, buMen_id, sgyh_name, phone, form_time, cz_yinHuan, zg_cuoShi, zg_wanCheng, hidden_trouble_id, yh_create_time, create_time, update_time, remark from jz_shiguyinhuandj
+    </sql>
+
+    <select id="selectJzShiguyinhuandjList" parameterType="JzShiguyinhuandj" resultMap="JzShiguyinhuandjResult">
+        <include refid="selectJzShiguyinhuandjVo"/>
+        <where>  
+            <if test="bumenId != null "> and buMen_id = #{bumenId}</if>
+            <if test="sgyhName != null "> and sgyh_name like concat('%', #{sgyhName}, '%')</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="formTime != null "> and form_time = #{formTime}</if>
+            <if test="czYinhuan != null  and czYinhuan != ''"> and cz_yinHuan = #{czYinhuan}</if>
+            <if test="zgCuoshi != null  and zgCuoshi != ''"> and zg_cuoShi = #{zgCuoshi}</if>
+            <if test="zgWancheng != null  and zgWancheng != ''"> and zg_wanCheng = #{zgWancheng}</if>
+            <if test="hiddenTroubleId != null "> and hidden_trouble_id = #{hiddenTroubleId}</if>
+            <if test="yhCreateTime != null "> and yh_create_time = #{yhCreateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectJzShiguyinhuandjById" parameterType="Long" resultMap="JzShiguyinhuandjResult">
+        <include refid="selectJzShiguyinhuandjVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJzShiguyinhuandj" parameterType="JzShiguyinhuandj" useGeneratedKeys="true" keyProperty="id">
+        insert into jz_shiguyinhuandj
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bumenId != null ">buMen_id,</if>
+            <if test="sgyhName != null ">sgyh_name,</if>
+            <if test="phone != null  and phone != ''">phone,</if>
+            <if test="formTime != null ">form_time,</if>
+            <if test="czYinhuan != null  and czYinhuan != ''">cz_yinHuan,</if>
+            <if test="zgCuoshi != null  and zgCuoshi != ''">zg_cuoShi,</if>
+            <if test="zgWancheng != null  and zgWancheng != ''">zg_wanCheng,</if>
+            <if test="hiddenTroubleId != null ">hidden_trouble_id,</if>
+            <if test="yhCreateTime != null ">yh_create_time,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bumenId != null ">#{bumenId},</if>
+            <if test="sgyhName != null ">#{sgyhName},</if>
+            <if test="phone != null  and phone != ''">#{phone},</if>
+            <if test="formTime != null ">#{formTime},</if>
+            <if test="czYinhuan != null  and czYinhuan != ''">#{czYinhuan},</if>
+            <if test="zgCuoshi != null  and zgCuoshi != ''">#{zgCuoshi},</if>
+            <if test="zgWancheng != null  and zgWancheng != ''">#{zgWancheng},</if>
+            <if test="hiddenTroubleId != null ">#{hiddenTroubleId},</if>
+            <if test="yhCreateTime != null ">#{yhCreateTime},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzShiguyinhuandj" parameterType="JzShiguyinhuandj">
+        update jz_shiguyinhuandj
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bumenId != null ">buMen_id = #{bumenId},</if>
+            <if test="sgyhName != null ">sgyh_name = #{sgyhName},</if>
+            <if test="phone != null  and phone != ''">phone = #{phone},</if>
+            <if test="formTime != null ">form_time = #{formTime},</if>
+            <if test="czYinhuan != null  and czYinhuan != ''">cz_yinHuan = #{czYinhuan},</if>
+            <if test="zgCuoshi != null  and zgCuoshi != ''">zg_cuoShi = #{zgCuoshi},</if>
+            <if test="zgWancheng != null  and zgWancheng != ''">zg_wanCheng = #{zgWancheng},</if>
+            <if test="hiddenTroubleId != null ">hidden_trouble_id = #{hiddenTroubleId},</if>
+            <if test="yhCreateTime != null ">yh_create_time = #{yhCreateTime},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzShiguyinhuandjById" parameterType="Long">
+        delete from jz_shiguyinhuandj where id = #{id}
+    </delete>
+
+    <delete id="deleteJzShiguyinhuandjByIds" parameterType="String">
+        delete from jz_shiguyinhuandj where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改巡检')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-inspection-edit" th:object="${jzInspection}">
+            <input name="id" th:field="*{id}" type="hidden">
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">设备id：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="equipmentId" th:field="*{equipmentId}" class="form-control" type="text">-->
+<!--                </div>-->
+<!--            </div>-->
+            <input type="hidden" id="dictType" name="jzPlanId" th:value="*{jzPlanId}"/>
+            <!--<div class="form-group">    -->
+                <!--<label class="col-sm-3 control-label">系统名称：</label>-->
+                <!--<div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="systemId" th:field="*{systemId}" class="form-control" type="text">&ndash;&gt;-->
+                    <!--<select id="systemId" class="form-control" name="systemId" th:with="type=${@dict.getSystem(300)}">-->
+                        <!--<option th:text="*{systemName}" th:value="*{systemId}">所有</option>-->
+                        <!--<option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId}"></option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-3 control-label">所属班组：</label>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<select class="form-control" name="equipmentState" th:with="type=${@dict.getType('ban_zu')}">-->
+                        <!--<option value="">所有</option>-->
+                        <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">巡检计划：</label>
+                <div class="col-sm-8">
+<!--                    <input name="content" th:field="*{content}" class="form-control" type="text">-->
+                    <select class="form-control" name="content" th:with="type=${@dict.titleList()}">
+                        <option value="" th:text="*{content}">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">巡检项目：</label>
+                <div class="col-sm-8">
+                    <input name="inspectionProject" th:field="*{inspectionProject}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">巡检地址：</label>
+                <div class="col-sm-8">
+                    <input name="inspectionAddr" th:field="*{inspectionAddr}" class="form-control" type="text">
+                </div>
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-3 control-label">检查人：</label>-->
+                <!--<div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="jcPeople" th:field="*{jcPeople}" class="form-control" type="text">&ndash;&gt;-->
+                    <!--<select id="jcPeople" th:field="*{jcPeople}" class="form-control" name="jcPeople" th:with="type=${@dict.systemList()}">-->
+                        <!--<option value="" >所有</option>-->
+                        <!--<option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">创建人id：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="createId" th:field="*{createId}" class="form-control" type="text">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">修改人id：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="updateId" th:field="*{updateId}" class="form-control" type="text">-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="state" th:field="*{state}" class="form-control" type="text">-->
+<!--                </div>-->
+                <div class="col-sm-8">
+                    <select class="form-control" th:field="*{state}" name="state" th:with="type=${@dict.getType('patrol_check_status')}">
+                        <option value="" >所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-3 control-label">设备状态：</label>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_equipment_state')}">-->
+                        <!--<option value="" th:text="*{equipmentState}">所有</option>-->
+                        <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-3 control-label">检查时间：</label>-->
+                <!--<div class="col-sm-8">-->
+                    <!--<div class="input-group date">-->
+                        <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+                        <!--<input name="jcDate" th:value="${#dates.format(jzInspection.jcDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" th:field="*{remark}" class="form-control" type="text"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+         var prefix = ctx + "sysusersystem/inspection";
+        $("#form-inspection-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                var planId = $('#dictType').val();
+                $.operate.save(prefix + "/edit/"+planId+"", $('#form-inspection-edit').serialize());
+            }
+        }
+
+        $("input[name='jcDate']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

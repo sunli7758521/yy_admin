@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.JzTypeMapper">
+    
+    <resultMap type="JzType" id="JzTypeResult">
+        <result property="id"    column="id"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="systemName" column="system_name" />
+        <result property="name"    column="name"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="ancestors"    column="ancestors"    />
+        <result property="classificationState"    column="classification_state"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createName"    column="create_name"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateName"    column="update_name"    />
+        <result property="parentName"    column="parent_name"    />
+        <result property="level"    column="level"    />
+        <result property="levelName"    column="level_name"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectJzTypeVo">
+            SELECT s.id,s.system_id,name,s.parent_id,ancestors,classification_state,(select dept_name from sys_dept where dept_id = s.system_id) system_name,(SELECT user_name FROM sys_user WHERE user_id = s.create_id) user_name, s.create_time,(SELECT user_name FROM sys_user WHERE user_id = s.update_id) update_name, s.update_time, s.remark FROM jz_type s
+      </sql>
+    <sql id="selectVO">
+SELECT s.id,s.system_id,s.name,s.parent_id,s.ancestors,classification_state,s.level,(select dict_label from sys_dict_data sdd where sdd.dict_type='risk_level' and s.level = sdd.dict_value) level_name,
+s.create_time,sd.dept_name system_name,su.user_name create_name,suu.user_name update_name,
+s.update_time, s.remark,(select name from jz_type jz where jz.id = s.parent_id) parent_name FROM jz_type s
+LEFT JOIN sys_dept sd ON sd.dept_id = s.system_id
+LEFT JOIN sys_user su ON su.user_id = s.create_id
+LEFT JOIN sys_user suu ON suu.user_id = s.create_id
+    </sql>
+    <select id="selectJzTypeList" parameterType="JzType" resultMap="JzTypeResult">
+        <include refid="selectVO"/>
+        <where>  
+<!--            <if test="systemId != null "> and system_id = #{systemId}</if>-->
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+<!--            <if test="parentId != null "> and parent_id = #{parentId}</if>-->
+<!--            <if test="ancestors != null  and ancestors != ''"> and ancestors = #{ancestors}</if>-->
+            <if test="classificationState != null  and classificationState != ''"> and classification_state = #{classificationState}</if>
+<!--            <if test="createId != null "> and create_id = #{createId}</if>-->
+<!--            <if test="updateId != null "> and update_id = #{updateId}</if>-->
+            <if test="level != null  and level != ''" > and level = #{level}</if>
+        </where>
+        and s.id!=100
+    </select>
+    
+    <select id="selectJzTypeById" parameterType="Long" resultMap="JzTypeResult">
+
+       SELECT s.id,s.system_id,s.name,s.parent_id,ancestors,classification_state, s.update_time, s.remark FROM jz_type s
+        where s.id = #{id}
+
+    </select>
+    <select id="wzList" parameterType="JzType" resultMap="JzTypeResult">
+        SELECT *  FROM jz_type where classification_state=1
+    </select>
+    <select id="selectSystemName" resultType="com.ruoyi.business.domain.JzType">
+        select dept_id as systemId,dept_name as systemName from sys_dept where parent_id=300
+    </select>
+    <select id="selectJzTypeByType" resultType="com.ruoyi.business.domain.JzType">
+       SELECT s.id,s.system_id,s.name,s.parent_id,s.ancestors,classification_state,(select dept_name from sys_dept where dept_id = s.system_id) system_name,(SELECT user_name FROM sys_user WHERE user_id = s.create_id) user_name, s.create_time,(SELECT user_name FROM sys_user WHERE user_id = s.update_id) update_name, s.update_time, s.remark FROM jz_type s,sys_dict_data d
+        where s.classification_state = '0' and d.dict_type ='classification_of_state' order by d.dict_sort asc
+    </select>
+
+    <select id="selectJzTypeByParentId" parameterType="Long" resultMap="JzTypeResult">
+        select d.id,d.system_id,name, d.parent_id,d.ancestors,d.classification_state,d.create_time,d.create_id,update_time,update_id,d.remark,d.level
+			,(select name from jz_type where id = d.parent_id) parent_name,
+        from jz_type d
+	<where>
+        <if test="id !=null">
+             d.id = #{id}
+        </if>
+    </where>
+
+	</select>
+    <select id="listType" parameterType="Integer" resultType="com.ruoyi.business.domain.JzType">
+        select id,system_id,name,parent_id,ancestors,classification_state,create_time,create_id,update_time,update_id,remark from jz_type
+        where classification_state = #{stateid} and id!=100
+    </select>
+    <select id="bswzList" resultType="com.ruoyi.business.domain.JzType">
+        select id,system_id,name,parent_id,ancestors,classification_state,create_time,create_id,update_time,update_id,remark from jz_type
+         where  classification_state=1 and parent_id=#{type}
+    </select>
+    <select id="smallTypeList" resultType="com.ruoyi.business.domain.JzType">
+         select id,system_id,name,parent_id,ancestors,classification_state,create_time,create_id,update_time,update_id,remark from jz_type
+          where  classification_state=1 and parent_id!=#{type}
+    </select>
+
+    <insert id="insertJzType" parameterType="JzType" useGeneratedKeys="true" keyProperty="id">
+        insert into jz_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="systemId != null ">system_id,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="parentId != null ">parent_id,</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors,</if>
+            <if test="classificationState != null  and classificationState != ''">classification_state,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createId != null ">create_id,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="updateId != null ">update_id,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="level != null  and level != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="systemId != null ">#{systemId},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="parentId != null ">#{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">#{ancestors},</if>
+            <if test="classificationState != null  and classificationState != ''">#{classificationState},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createId != null ">#{createId},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="updateId != null ">#{updateId},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="level != null  and level != ''">#{level},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzType" parameterType="JzType">
+        update jz_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="systemId != null ">system_id = #{systemId},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="parentId != null ">parent_id = #{parentId},</if>
+            <if test="ancestors != null  and ancestors != ''">ancestors = #{ancestors},</if>
+            <if test="classificationState != null  and classificationState != ''">classification_state = #{classificationState},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createId != null ">create_id = #{createId},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="updateId != null ">update_id = #{updateId},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzTypeById" parameterType="Long">
+        delete from jz_type where id = #{id}
+    </delete>
+
+    <delete id="deleteJzTypeByIds" parameterType="String">
+        delete from jz_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

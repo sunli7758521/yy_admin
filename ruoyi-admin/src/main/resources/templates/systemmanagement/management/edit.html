@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('修改制度管理')" />
+    <link href="/layui/css/layui.css" rel="stylesheet"/>\
+    <style>
+        textarea{
+            width:200px;
+            height:80px;
+            border-radius:10px;
+            resize:none;
+        }
+    </style>
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-management-edit" th:object="${jzSystemManagement}">
+            <input name="managementId" th:field="*{managementId}" type="hidden">
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">系统：</label>-->
+<!--                    <div class="col-sm-8">-->
+<!--                        <select id="systemId" class="form-control" name="systemId" th:with="type=${@dict.getSystem(300)}">-->
+<!--                            <option value="" th:text="*{systemName}">所有</option>-->
+<!--                            <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId}"></option>-->
+<!--                        </select>-->
+<!--                  </div>-->
+<!--            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">班组：</label>
+                        <div class="col-sm-8">
+                            <select id="teamId" class="form-control" name="teamId" th:with="type=${@dict.getType('ban_zu')}" th:field="*{teamId}">
+                                <option value="">所有</option>
+                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                            </select>
+                        </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">制度标题：</label>
+                <div class="col-sm-8">
+                    <input name="title" th:field="*{title}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" name="state" th:with="type=${@dict.getType('jz_systemmanagement_state')}" th:field="*{state}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                        </select>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">制度类别：</label>
+                <div class="col-sm-8">
+                    <select class="form-control" name="type" th:with="type=${@dict.getType('jz_systemmanagement_type')}" th:field="*{type}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">制度级别：</label>
+                <div class="col-sm-8">
+                    <select class="form-control" name="level" th:with="type=${@dict.getType('jz_systemmanagement_level')}" th:field="*{level}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">文件上传</label>
+                <div class="layui-upload">
+                    <input id="lzqkUrl" name="fileUrl" th:field="*{fileUrl}" class="form-control" type="hidden">
+                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
+                    <button type="button" class="layui-btn" id="test4" onclick="addSystem()"><i class="layui-icon" shiro:hasPermission="systemmanagement:management:search"></i>预览</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注</label>
+                <div class="col-sm-8">
+                        <textarea name="remark" maxlength="300" th:field="*{remark}"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript">
+        var prefix = ctx + "systemmanagement/management";
+        $("#form-management-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix +"/edit", $('#form-management-edit').serialize());
+            }
+        }
+        /** 上传文件   */
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+            //指定允许上传的文件类型
+            upload.render({
+                elem: '#test3'
+                ,url: ctx+'common1/upload/'
+                ,accept: 'file' //普通文件
+                ,exts: 'doc|docx' //只允许上传文本文件
+                ,done: function(res){
+                    if(res.code>0){
+                        return layer.msg('上传失败');
+                    }
+                    $("#lzqkUrl").val(res.msg);
+                    // console.log(res.msg)
+                    layer.msg("上传成功");
+                }
+            });
+        });
+        // 预览制度
+        function addSystem() {
+         var lzqkUrl =   $("#lzqkUrl").val()
+            if(lzqkUrl==""){
+                layer.alert("文件未上传，请先上传在预览！！！");
+                return ;
+            }
+            var url = prefix +"/editWordToPdf/"+$("#managementId").val();
+            $.modal.open("上传制度",url);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('应急方案关联物资列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <!--                                <p>系统id：</p>-->
+                                <input type="hidden" id="dictType" name="jzPlanId" th:value="${dictId}"/>
+                            </li>
+                            <li>
+                                <p>应急物资大类型：</p>
+<!--                                <input type="text" name="suppliseBigTypeId"/>-->
+                                <select class="form-control" name="suppliseBigTypeId" th:with="type=${@dict.wzList()}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id} "></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>应急物资小类型：</p>
+<!--                                <input type="text" name="suppliseSmTypeId"/>-->
+                                <select class="form-control" name="suppliseSmTypeId" th:with="type=${@dict.wzList()}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id} "></option>
+                                </select>
+                            </li>
+<!--                            <li>-->
+<!--                                <p>应急物资类型：</p>-->
+<!--                                <input type="text" name="typeId"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>应急物资名称：</p>-->
+<!--                                <input type="text" name="suppliseName"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>总数量：</p>-->
+<!--                                <input type="text" name="countNum"/>-->
+<!--                            </li>-->
+                            <li>
+                                <p>状态：</p>
+<!--                                <input type="text" name="state"/>-->
+<!--                                <select name="state" class="form-control">-->
+<!--                                    <option value="">所有</option>-->
+<!--                                    <option th:value="0">库存正常</option>-->
+<!--                                    <option th:value="1">应急物资不足</option>-->
+<!--                                </select>-->
+                                <select  class="form-control" name="state" th:with="type=${@dict.getType('jz_emergency_supplise_state')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+<!--                            <li>-->
+<!--                                <p>物资剩余提醒数量：</p>-->
+<!--                                <input type="text" name="remindNum"/>-->
+<!--                            </li>-->
+                            <li>
+                                <p>创建人：</p>
+                                <input type="text" name="createId"/>
+                            </li>
+<!--                            <li class="select-time">-->
+<!--                                <p>生产日期：</p>-->
+<!--                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginScDate]"/>-->
+<!--                                <span>-</span>-->
+<!--                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endScDate]"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>保质期：</p>-->
+<!--                                <input type="text" name="bzDate"/>-->
+<!--                            </li>-->
+                            <li>
+                                <p>批次：</p>
+                                <input type="text" name="piCi"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="add()" shiro:hasPermission="emergency:supplies:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="emergency:supplies:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="emergency:supplies:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="emergency:supplies:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('emergency:supplies:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('emergency:supplies:remove')}]];
+        var prefix = ctx + "emergency/supplies";
+        var datas = [[${@dict.getType('jz_emergency_supplise_state')}]];
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                queryParams: queryParams,
+                exportUrl: prefix + "/export",
+                modalName: "应急方案关联物资",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'suppliseId',
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'suppliseBigTypeName',
+                    title : '应急物资大类型'
+                },
+                {
+                    field : 'suppliseSmTypeName',
+                    title : '应急物资小类型'
+                },
+                // {
+                //     field : 'typeId',
+                //     title : '应急物资类型'
+                // },
+                // {
+                //     field : 'suppliseName',
+                //     title : '应急物资名称'
+                // },
+                {
+                    field : 'countNum',
+                    title : '总数量'
+                },
+                {
+                    field : 'state',
+                    title : '状态',
+                    formatter: function(value, row, index) {
+                    return $.table.selectDictLabel(datas, value);
+        }
+                },
+                {
+                    field : 'remindNum',
+                    title : '物资剩余提醒数量'
+                },
+                {
+                    field : 'createName',
+                    title : '创建人'
+                },
+                {
+                    field : 'remark',
+                    title : '备注'
+                },
+                // {
+                //     field : 'scDate',
+                //     title : '生产日期'
+                // },
+                // {
+                //     field : 'bzDate',
+                //     title : '保质期'
+                // },
+                {
+                    field : 'piCi',
+                    title : '批次'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.suppliseId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.suppliseId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+        function queryParams(params) {
+            var search = $.table.queryParams(params);
+            search.dictType = $("#dictType").val();
+            return search;
+        }
+        function add(){
+            var id = $("#dictType").val();
+            var url = prefix + '/add/' + id;
+            $.modal.open("添加应急任务", url);
+        }
+    </script>
+</body>
+</html>

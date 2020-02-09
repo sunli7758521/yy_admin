@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改风险评价')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-pingjiabiao-edit" th:object="${pingjiabiao}">
+            <input name="pingjiaId" th:field="*{pingjiaId}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">标准分：</label>
+                <div class="col-sm-8">
+                    <input name="biaozhunFen" th:field="*{biaozhunFen}" class="form-control" type="number">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">L：</label>
+                <div class="col-sm-8">
+                    <input name="lZhi" th:field="*{lZhi}" class="form-control" type="number">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">S：</label>
+                <div class="col-sm-8">
+                    <input name="sZhi" th:field="*{sZhi}" class="form-control" type="number">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">R：</label>
+                <div class="col-sm-8">
+                    <input name="rZhi" th:field="*{rZhi}" class="form-control" type="number">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">D：</label>
+                <div class="col-sm-8">
+                    <input name="dZhi" th:field="*{dZhi}" class="form-control" type="number">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">风险等级：</label>
+                <div class="col-sm-8">
+                    <!--                    <input name="riskLevel" th:field="*{riskLevel}" class="form-control" type="text">-->
+                    <select class="form-control" name="fengxianJibie" th:with="type=${@dict.getType('risk_level')}" th:field="*{fengxianJibie}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">风险级别：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="fengxianJibie" th:field="*{fengxianJibie}" class="form-control" type="text">-->
+<!--                </div>-->
+<!--            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "sysusersystem/pingjiabiao";
+        $("#form-pingjiabiao-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-pingjiabiao-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>

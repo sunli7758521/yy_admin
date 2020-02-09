@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>给排水系统</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://apip.weatherdt.com/float/static/css/tqw_widget_float.css?v=0101">
+</head>
+
+<body class="gray-bg">
+<div class="container">
+    <div class="topHead">
+        给排水系统
+    </div>
+    <div class="contentBlock">
+        <div class="left">
+            <div class="block block1">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="seTitle">巡检情况统计</div>
+                <div class="seCon">
+                    <div class="chartBlock2">
+                        <div id="echart5" style="width: 100%;height: 100%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="block block2">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="seTitle">风险情况统计</div>
+                <div class="seCon">
+                    <div class="chartBlock2">
+                        <div id="echart2" style="width: 100%;height: 100%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="block block3">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="seTitle">隐患情况统计</div>
+                <div class="seCon">
+                    <div class="top1">
+                        <div class="chartBlock">
+                            <div id="echart3" style="width: 100%;height: 100%"></div>
+                        </div>
+                        <div class="tableBlock">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td>系统隐患</td>
+                                    <td>数量</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="top2">
+                        <div class="chartBlock2">
+                            <div id="echart4" style="width: 100%;height: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="block block1">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="msgBlock">
+                    <div class="centerLeft">
+                        <div class="time1"></div>
+                        <div class="time2"></div>
+                        <div class="season">
+                            <div id="weather"></div>
+                        </div>
+                    </div>
+                    <div class="centerRight">
+                        <table>
+                            <thead>
+                            <tr>
+                                <td>值班人员</td>
+                                <td>职务</td>
+                                <td>联系方式</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="block block2">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="seTitle">监控视频</div>
+                <div class="seCon">
+                    <img alt="" src="../static/img/video.png" th:src="@{/img/video.png}">
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="block block1">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="seTitle">设备总览</div>
+                <div class="seCon">
+                    <div class="chartBlock2">
+                        <div id="echart1" style="width: 100%;height: 100%"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="block block2">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="seTitle">应急预案、人员、物资</div>
+                <div class="seCon">
+                    <div class="chartBlock2">
+                        <div id="echart6" style="width: 100%;height: 100%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="block block3">
+                <span class="mycorner lefttop"></span>
+                <span class="mycorner righttop"></span>
+                <span class="mycorner leftbottom"></span>
+                <span class="mycorner rightbottom"></span>
+                <div class="seTitle">物资数量</div>
+                <div class="seCon">
+                    <div class="chartBlock2">
+                        <div id="echart7" style="width: 100%;height: 100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script th:src="@{/dist/echarts.min.js}"></script>
+<!--<script src="https://apip.weatherdt.com/float/static/js/tqw_widget_float.js?v=0101"></script>-->
+<script type="text/javascript">
+    WIDGET = {FID: 'qhaGYeyTf0'}
+</script>
+<script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#weather-float-he').find('a').attr('href', 'javascript:void(0);');
+        var dom_tianqi = $('#weather-float-he').children('div');
+        var len = dom_tianqi.length;
+        if (len > 1) {
+            dom_tianqi.eq(1).children('div').eq(0).animate({ height: 400 }, 300);
+        }
+        //处理背景，消除水印，居中定位
+        $('.wf-vs-copyright').remove();
+        $('#weather-float-he').children('div').eq(0).css('background-image', '');
+        $('#weather-float-he').children('div').eq(0).css('box-shadow', '');
+        $('#weather-float-he').css({ width: 170, top: "50%", left: "50%", transform: "translate(-50%, -50%)" });
+        $('#weather').append($('#weather-float-he'));
+        var chartData1 = [
+            {name:"给水设备",value: 307},
+            {name:"升压设备",value: 578},
+            {name:"储水设备",value: 96},
+            {name:"受水设备",value: 987},
+            {name:"管道设备",value: 87},
+        ]
+        var chartData2 = [
+            {name:"A级风险",value: 285},
+            {name:"B级风险",value: 410},
+            {name:"C级风险",value: 274},
+            {name:"D级风险",value: 235},
+        ]
+        var chartData31 = [
+            {name:"A级隐患",value: 285},
+            {name:"B级隐患",value: 410},
+            {name:"C级隐患",value: 274},
+        ]
+        var chartData32 = [
+            {name:"给水系统隐患",value: 285},
+            {name:"排水系统隐患",value: 410},
+            {name:"水处理系统隐患",value: 274},
+        ]
+        var chartData33 = [
+            {name:"人员行为隐患",value: 11},
+            {name:"设备设施隐患",value: 9},
+            {name:"外部环境隐患",value: 7},
+            {name:"其它隐患",value: 5},
+        ]
+        var chartData4 =[
+            {name:"给水系统隐患",value: [3.6, 3.4, 3.2],color1:"#FFA17F",color2:"#00223E"},
+            {name:"排水系统隐患",value: [3.5, 3.3, 3.1],color1:"#0b8793",color2:"#0b8793"},
+            {name:"水处理系统隐患",value: [3.4, 3.2, 3.0],color1:"#948E99",color2:"#2E1437"},
+        ]
+        var chartData51 =[
+            {name:"管路破裂",value: 50},
+            {name:"水浸",value: 30},
+            {name:"中毒事故",value: 10},
+            {name:"水污染",value: 60},
+        ]
+        var chartData52 = [
+            {name:"人员",value: 40},
+            {name:"设备",value: 50},
+            {name:"物料",value: 60},
+            {name:"运输",value: 70},
+        ]
+        var chartData6 = [
+            {name:"给水设备",value: 40},
+            {name:"升压设备",value: 50},
+            {name:"储水设备",value: 60},
+            {name:"受水设备",value: 70},
+            {name:"管道设备",value: 98},
+        ]
+        var chartData7 = [
+            {name:"马宏宇",job:"值班员",phone:"15320202020"},
+            {name:"宗敬先",job:"值班领导",phone:"15320202020"}
+        ]
+        reTable1(chartData1)
+        reTable2(chartData2)
+        reTable3(chartData32)
+        reTable4(chartData52)
+        reTable5(chartData6)
+        reTable6(chartData7)
+        getTime()
+        chart1()
+        chart2()
+        chart3(chartData31)
+        chart4(chartData33)
+        chart5(chartData4)
+        chart6(chartData51)
+        chart7()
+    })
+    function reTable1(data){
+        var str="";
+        for(var i=0;i<data.length;i++) {
+            str+="<tr>";
+            str+="<td>"+data[i].name+"</td>";
+            str+="<td>"+data[i].value+"</td>";
+            str+="</tr>";
+        }
+        $(".left .block1 table tbody").html(str)
+    }
+    function reTable2(data){
+        var str="";
+        for(var i=0;i<data.length;i++) {
+            str+="<tr>";
+            str+="<td>"+data[i].name+"</td>";
+            str+="<td>"+data[i].value+"</td>";
+            str+="</tr>";
+        }
+        $(".left .block2 table tbody").html(str)
+    }
+    function reTable3(data){
+        var str="";
+        for(var i=0;i<data.length;i++) {
+            str+="<tr>";
+            str+="<td>"+data[i].name+"</td>";
+            str+="<td>"+data[i].value+"</td>";
+            str+="</tr>";
+        }
+        $(".left .block3 table tbody").html(str)
+    }
+    function reTable4(data){
+        var str="";
+        for(var i=0;i<data.length;i++) {
+            str+="<tr>";
+            str+="<td>"+data[i].name+"</td>";
+            str+="<td>"+data[i].value+"</td>";
+            str+="</tr>";
+        }
+        $(".right .block2 table tbody").html(str)
+    }
+    function reTable5(data){
+        var str="";
+        for(var i=0;i<data.length;i++) {
+            str+="<tr>";
+            str+="<td>"+data[i].name+"</td>";
+            str+="<td>"+data[i].value+"</td>";
+            str+="</tr>";
+        }
+        $(".right .block3 table tbody").html(str)
+    }
+    function reTable6(data){
+        var str="";
+        for(var i=0;i<data.length;i++) {
+            str+="<tr>";
+            str+="<td>"+data[i].name+"</td>";
+            str+="<td>"+data[i].job+"</td>";
+            str+="<td>"+data[i].phone+"</td>";
+            str+="</tr>";
+        }
+        $(".center .block1 table tbody").html(str)
+    }
+    function getTime(){
+        var str1="";
+        var str2="";
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth()+1;
+        var day = date.getDate();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        var week = date.getDay();
+        month = addTen(month)
+        day = addTen(day)
+        hour = addTen(hour)
+        minute = addTen(minute)
+        second = addTen(second)
+
+        switch(week){
+            case 1:
+                week = "一";
+                break;
+            case 2:
+                week = "二";
+                break;
+            case 3:
+                week = "三";
+                break;
+            case 4:
+                week = "四";
+                break;
+            case 5:
+                week = "五";
+                break;
+            case 6:
+                week = "六";
+                break;
+            case 7:
+                week = "日";
+                break;
+            default:
+                week = "日";
+                break;
+        }
+        var str1=hour+":"+minute+":"+second;
+        var str2=year+"年"+month+"月"+day+"日"+" 星期"+week;
+        $(".center .msgBlock .centerLeft .time1").html(str1)
+        $(".center .msgBlock .centerLeft .time2").html(str2)
+
+    }
+    function addTen(val){
+        var result = 0;
+        if(val < 10) {
+            result="0"+val;
+        }else {
+            result = val
+        }
+        return result;
+    }
+
+    function chart1(){
+        var scale = 1;
+        var echartData = [{
+            value: 307,
+            name: '给水设备'
+        }, {
+            value: 578,
+            name: '升压设备'
+        }, {
+            value: 96,
+            name: '储水设备'
+        }, {
+            value: 987,
+            name: '受水设备'
+        }, {
+            value: 87,
+            name: '管道设备'
+        }]
+        var rich = {
+            yellow: {
+                color: "#ffc72b",
+                fontSize: 12 * scale,
+                padding: [2, 0],
+                align: 'center'
+            },
+            total: {
+                color: "#ffc72b",
+                fontSize: 12 * scale,
+                align: 'center'
+            },
+            white: {
+                color: "#fff",
+                align: 'center',
+                fontSize: 12 * scale,
+                padding: [1, 0]
+            },
+            blue: {
+                color: '#49dff0',
+                fontSize: 12 * scale,
+                align: 'center'
+            },
+            hr: {
+                borderColor: '#0b5263',
+                width: '100%',
+                borderWidth: 2,
+                height: 2,
+            }
+        }
+        var myChart = echarts.init(document.getElementById('echart1'));
+        var option = {
+            title: {
+                text:'总设备数',
+                left:'center',
+                top:'53%',
+                padding:[0,0],
+                textStyle:{
+                    color:'#fff',
+                    fontSize:12*scale,
+                    align:'center'
+                }
+            },
+            legend: {
+                selectedMode:false,
+                formatter: function(name) {
+                    var total = 0; //各科正确率总和
+                    var averagePercent; //综合正确率
+                    echartData.forEach(function(value, index, array) {
+                        total += value.value;
+                    });
+                    return '{total|' + total + '}';
+                },
+                data: [echartData[0].name],
+                // data: ['高等教育学'],
+                // itemGap: 50,
+                left: 'center',
+                top: 'center',
+                icon: 'none',
+                align:'center',
+                textStyle: {
+                    color: "#fff",
+                    fontSize: 12 * scale,
+                    rich: rich
+                },
+            },
+            series: [{
+                name: '总考生数量',
+                type: 'pie',
+                radius: ['42%', '50%'],
+                hoverAnimation: false,
+                color: ['#c487ee', '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4'],
+                label: {
+                    normal: {
+                        formatter: function(params, ticket, callback) {
+                            var total = 0; //考生总数量
+                            var percent = 0; //考生占比
+                            echartData.forEach(function(value, index, array) {
+                                total += value.value;
+                            });
+                            percent = ((params.value / total) * 100).toFixed(1);
+                            return '{white|' + params.name + '}\n{hr|}\n{yellow|' + params.value + '}\n{blue|' + percent + '%}';
+                        },
+                        rich: rich
+                    },
+                },
+                labelLine: {
+                    normal: {
+                        length: 55 * scale,
+                        length2: 0,
+                        lineStyle: {
+                            color: '#0b5263'
+                        }
+                    }
+                },
+                data: echartData
+            }]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    function chart2(){
+        var dataStyle = {
+            normal: {
+                label: {
+                    show: false
+                },
+                labelLine: {
+                    show: false
+                },
+                shadowBlur: 0,
+                shadowColor: '#203665'
+            }
+        };
+        var myChart = echarts.init(document.getElementById('echart2'));
+        var option = {
+            series: [{
+                name: 'A级风险',
+                type: 'pie',
+                clockWise: false,
+                radius: [30, 40],
+                itemStyle: dataStyle,
+                hoverAnimation: false,
+                center: ['12%', '50%'],
+                data: [{
+                    value: 25,
+                    label: {
+                        normal: {
+                            rich: {
+                                a: {
+                                    color: '#3a7ad5',
+                                    align: 'center',
+                                    fontSize: 12,
+                                    fontWeight: "bold"
+                                },
+                                b: {
+                                    color: '#fff',
+                                    align: 'center',
+                                    fontSize: 12
+                                }
+                            },
+                            formatter: function(params){
+                                return "A级风险\n"+params.value;
+                            },
+                            position: 'center',
+                            show: true,
+                            textStyle: {
+                                fontSize: '14',
+                                fontWeight: 'normal',
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#FEAC5E',
+                            shadowColor: '#FEAC5E',
+                            shadowBlur: 0
+                        }
+                    }
+                }, {
+                    value: 75,
+                    name: 'invisible',
+                    itemStyle: {
+                        normal: {
+                            color: '#24375c'
+                        },
+                        emphasis: {
+                            color: '#24375c'
+                        }
+                    }
+                }]
+            }, {
+                name: 'B级风险',
+                type: 'pie',
+                clockWise: false,
+                radius: [30, 40],
+                itemStyle: dataStyle,
+                hoverAnimation: false,
+                center: ['37%', '50%'],
+                data: [{
+                    value: 50,
+                    label: {
+                        normal: {
+                            rich: {
+                                a: {
+                                    color: '#d03e93',
+                                    align: 'center',
+                                    fontSize: 20,
+                                    fontWeight: "bold"
+                                },
+                                b: {
+                                    color: '#fff',
+                                    align: 'center',
+                                    fontSize: 16
+                                }
+                            },
+                            formatter: function(params){
+                                return "B级风险\n"+params.value;
+                            },
+                            position: 'center',
+                            show: true,
+                            textStyle: {
+                                fontSize: '14',
+                                fontWeight: 'normal',
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#C779D0',
+                            shadowColor: '#C779D0',
+                            shadowBlur: 0
+                        }
+                    }
+                }, {
+                    value: 50,
+                    name: 'invisible',
+                    itemStyle: {
+                        normal: {
+                            color: '#24375c'
+                        },
+                        emphasis: {
+                            color: '#24375c'
+                        }
+                    }
+                }]
+            }, {
+                name: 'C级风险',
+                type: 'pie',
+                clockWise: false,
+                radius: [30, 40],
+                itemStyle: dataStyle,
+                hoverAnimation: false,
+                center: ['62%', '50%'],
+                data: [{
+                    value: 75,
+                    label: {
+                        normal: {
+                            rich: {
+                                a: {
+                                    color: '#603dd0',
+                                    align: 'center',
+                                    fontSize: 20,
+                                    fontWeight: "bold"
+                                },
+                                b: {
+                                    color: '#fff',
+                                    align: 'center',
+                                    fontSize: 16
+                                }
+                            },
+                            formatter: function(params){
+                                return "C级风险\n"+params.value;
+                            },
+                            position: 'center',
+                            show: true,
+                            textStyle: {
+                                fontSize: '14',
+                                fontWeight: 'normal',
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#4BC0C8',
+                            shadowColor: '#4BC0C8',
+                            shadowBlur: 0
+                        }
+                    }
+                }, {
+                    value: 25,
+                    name: 'invisible',
+                    itemStyle: {
+                        normal: {
+                            color: '#24375c'
+                        },
+                        emphasis: {
+                            color: '#24375c'
+                        }
+                    }
+                }]
+            },{
+                name: 'D级风险',
+                type: 'pie',
+                clockWise: false,
+                radius: [30, 40],
+                itemStyle: dataStyle,
+                hoverAnimation: false,
+                center: ['87%', '50%'],
+                data: [{
+                    value: 75,
+                    label: {
+                        normal: {
+                            rich: {
+                                a: {
+                                    color: '#603dd0',
+                                    align: 'center',
+                                    fontSize: 20,
+                                    fontWeight: "bold"
+                                },
+                                b: {
+                                    color: '#fff',
+                                    align: 'center',
+                                    fontSize: 16
+                                }
+                            },
+                            formatter: function(params){
+                                return "D级风险\n"+params.value;
+                            },
+                            position: 'center',
+                            show: true,
+                            textStyle: {
+                                fontSize: '14',
+                                fontWeight: 'normal',
+                                color: '#fff'
+                            }
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#185a9d',
+                            shadowColor: '#185a9d',
+                            shadowBlur: 0
+                        }
+                    }
+                }, {
+                    value: 25,
+                    name: 'invisible',
+                    itemStyle: {
+                        normal: {
+                            color: '#24375c'
+                        },
+                        emphasis: {
+                            color: '#24375c'
+                        }
+                    }
+                }]
+            }]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    function chart3(data){
+        var myChart = echarts.init(document.getElementById('echart3'));
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 500,
+                max: 600,
+                inRange: {
+                    //colorLightness: [0, 1]
+                }
+            },
+            series: [{
+                name: '隐患情况统计',
+                type: 'pie',
+                radius: '50%',
+                center: ['50%', '50%'],
+                color: ['#F1F2B5', '#135058', '#FFD194'],
+                data: data.sort(function(a, b) {
+                    return a.value - b.value
+                }),
+                roseType: 'radius',
+
+                label: {
+                    normal: {
+                        formatter: ['{c|{c}次}', '{b|{b}}'].join('\n'),
+                        rich: {
+                            c: {
+                                color: 'rgb(241,246,104)',
+                                fontSize: 12,
+                                fontWeight:'bold',
+                                lineHeight: 5
+                            },
+                            b: {
+                                color: 'rgb(98,137,169)',
+                                fontSize: 12,
+                                height: 20
+                            },
+                        },
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        lineStyle: {
+                            color: 'rgb(98,137,169)',
+                        },
+                        smooth: 0.2,
+                        length: 10,
+                        length2: 20,
+
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        shadowColor: 'rgba(0, 0, 0, 0.8)',
+                        shadowBlur: 50,
+                    }
+                }
+            }]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    function chart4(data){
+        var nameArr = [];
+        var valueArr = [];
+        for(var i=0;i<data.length;i++) {
+            nameArr.push(data[i].name);
+            valueArr.push(data[i].value);
+        }
+        var myChart = echarts.init(document.getElementById('echart4'));
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                show: false,
+                textStyle: {
+                    color: '#5E7DB4'
+                },
+                data: ['2019年']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                top: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01],
+                axisLine: {
+                    lineStyle: {
+                        color: '#5E7DB4'
+                    }
+                },
+            },
+            yAxis: {
+                type: 'category',
+                axisLine: {
+                    lineStyle: {
+                        color: '#5E7DB4'
+                    }
+                },
+                data: nameArr
+            },
+            series: [{
+                name: '2019年',
+                type: 'bar',
+                data: valueArr,
+                itemStyle: {
+                    normal: {
+                        color: '#8e9eab',
+                        barBorderRadius: [20, 20, 20, 20],
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'insideRight'
+                    }
+                },
+            }]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    function chart5(data){
+        var nameArr = []
+        var serverArr = []
+        for(var i=0;i<data.length;i++) {
+            nameArr.push(data[i].name);
+            serverArr.push(
+                {
+                    name: data[i].name,
+                    type: 'bar',
+                    barWidth: '15%',
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: data[i].color1
+                            }, {
+                                offset: 1,
+                                color: data[i].color2
+                            }]),
+                            barBorderRadius: 12,
+                        },
+                    },
+                    data: data[i].value
+                }
+            )
+        }
+
+
+        var myChart = echarts.init(document.getElementById('echart5'));
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            grid: {
+                left: '2%',
+                right: '4%',
+                bottom: '14%',
+                top: '16%',
+                containLabel: true
+            },
+            legend: {
+                data: nameArr,
+                right: 10,
+                top: 12,
+                textStyle: {
+                    color: "#5E7DB4"
+                },
+                itemWidth: 12,
+                itemHeight: 10,
+                // itemGap: 35
+            },
+            xAxis: {
+                type: 'category',
+                data: ['低', '中', '高'],
+                axisLine: {
+                    lineStyle: {
+                        color: 'white'
+
+                    }
+                },
+                axisLabel: {
+                    textStyle: {
+                        fontFamily: 'Microsoft YaHei'
+                    }
+                },
+            },
+
+            yAxis: {
+                type: 'value',
+                max: '4',
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: 'white'
+                    }
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'rgba(255,255,255,0.3)'
+                    }
+                },
+                axisLabel: {}
+            },
+            series: serverArr
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    function chart6(data){
+        var data = [{
+            "name": "水污染",
+            "value": 80
+        }, {
+            "name": "中毒事故",
+            "value": 87.8
+        }, {
+            "name": "水浸",
+            "value": 71
+        }, {
+            "name": "管路破裂",
+            "value": 80
+        }];
+        var xData = [],
+            yData = [];
+        var min = 50;
+        data.map(function(a, b) {
+            xData.push(a.name);
+            if (a.value === 0) {
+                yData.push(a.value + min);
+            } else {
+                yData.push(a.value);
+            }
+        });
+        var myChart = echarts.init(document.getElementById('echart6'));
+        var option = {
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'line',
+                    lineStyle: {
+                        opacity: 0
+                    }
+                },
+                formatter: function(prams) {
+                    if (prams[0].data === min) {
+                        return "数量："
+                    } else {
+                        return "数量：" + prams[0].data
+                    }
+                }
+            },
+            legend: {
+                data: ['直接访问', '背景'],
+                show: false
+            },
+            grid: {
+                left: '0%',
+                right: '0%',
+                bottom: '5%',
+                top: '7%',
+                height: '85%',
+                containLabel: true,
+                z: 22
+            },
+            xAxis: [{
+                type: 'category',
+                gridIndex: 0,
+                data: xData,
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#0c3b71'
+                    }
+                },
+                axisLabel: {
+                    show: true,
+                    color: 'rgb(170,170,170)',
+                    fontSize:12
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                gridIndex: 0,
+                splitLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                min: min,
+                max: 100,
+                axisLine: {
+                    lineStyle: {
+                        color: '#0c3b71'
+                    }
+                },
+                axisLabel: {
+                    color: 'rgb(170,170,170)',
+                    formatter: '{value} %'
+                }
+            },
+                {
+                    type: 'value',
+                    gridIndex: 0,
+                    min: min,
+                    max: 100,
+                    splitNumber: 12,
+                    splitLine: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    splitArea: {
+                        show: true,
+                        areaStyle: {
+                            color: ['rgba(250,250,250,0.0)', 'rgba(250,250,250,0.05)']
+                        }
+                    }
+                }
+            ],
+            series: [{
+                name: '合格率',
+                type: 'bar',
+                barWidth: '30%',
+                xAxisIndex: 0,
+                yAxisIndex: 0,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: 30,
+                        color: new echarts.graphic.LinearGradient(
+                            0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#00feff'
+                            },
+                                {
+                                    offset: 0.5,
+                                    color: '#027eff'
+                                },
+                                {
+                                    offset: 1,
+                                    color: '#0286ff'
+                                }
+                            ]
+                        )
+                    }
+                },
+                data: yData,
+                zlevel: 11
+
+            },
+                {
+                    name: '背景',
+                    type: 'bar',
+                    barWidth: '50%',
+                    xAxisIndex: 0,
+                    yAxisIndex: 1,
+                    barGap: '-135%',
+                    data: [100, 100, 100, 100, 100, 100, 100],
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(255,255,255,0.1)'
+                        }
+                    },
+                    zlevel: 9
+                },
+
+            ]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    function chart7(){
+        //数据
+        var XName= ["周一","周二","周三","周四","周五","周六","周日"]
+        var data1 = [
+            [123,154, 234, 321,120,390, 634],
+            [63,194, 234, 321,278,110, 534],
+            [53,254, 234, 321,118,240, 434],
+            [23,354, 334, 221,178,190, 234],
+        ]
+        var Line = ["人员","设备","物料","运输"];
+        var img = [
+            'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABRCAYAAABFTSEIAAAACXBIWXMAAAsSAAALEgHS3X78AAAEp0lEQVR42u3cz4sjRRTA8W9Vd3Vn8mMmjj9WQWSRZQ+CsH+B7MnDIgiCd0E8CYJ/gOAIelo8ehUP/gF6WLw5/gMueFP2sIcF0dHd2Z1kknR11fOQZJJJMtlZd03H7HtQpNOTnpn+8Lrm1etmjIig8e/DKoECKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIqoAJudKTr+osZMNPvBUQBHwHsPF9fB9R0DeHMOQ6T6WOrhEzXBM4swDOL0M6CrArRVoq3t2dGUIb9fTvatg8ZZup1PDBgzPmy98mey6qfzjLz2WaWjEUZKEvGyi9nWyneMOvGIyFQo2Sbg4MUSChpU9IeTTUpJdsEajPZOJeJG5uBZj7rLLduWS5dGm6XNLEELOFUFj54ACJCaychkpDSASK3bwsXL0YgVpWJKwM0iy9Zy8HdGru7jvt3Pbu7w0wES7drTwAbjTHMGCsQcIAnYTC1/wRx0wEnl27JNgZI8HQ6Kc1mQq83RNzaMjPzXqDbjTQaJRFLxIyyMSxAXEkWrhrQzAAmo5HOjCQf7jflILxOkohL+aUPgV4vEGNJo+E5PAy02+UIMEwBxo0CPDP7Dg5SnEtpt1PA0e87XO25FOoh8IYIH2Y5b45RzGAQBiIltZoHxqMcjbksXAVgdc2EQMYzzzdotyeZWKuleULXJtwT4SODfC2QCWR+IF9KnjuX1Xbo99Op7LVE8iXlz0YBTk5SyLEEjo5OLuccEoFUvHfO+reuUPx4zftXAIcx1hdcF+/TvFab4A0Bs0VwqyhpVnkJT89/Q4DDQ0e77YCMwIUsFMeFZD856699URRvX4nxE4A/jbnxXp7v4Zw3ReGNSDHI8wFQjIafuoyn58L/fB6sth/Ybg9fez2TRC6QZcZYvgHsazF+MP7YCyLXcM7gvSXLDGBqYDg+NhwdmSpPoTrAkub0W+f4FSB1fDucIunMHSLpO8WAH0rSy8u+19MBCHB4OHzd2pI+CEUhpigEiN+l6WcdY252jLn5s7Wf472ImPcN8pUl/tEHoV4XWq1Ke4KrLmPsTA3oODpytFoOyJKSyzHyMSIxteWngMW5cSEdDJQUhTdZVgxOz3/+jFJm4+bA2e5JpNU6WZ4Fw99JwnWMKccwpeddP+B7GZTNUPKqybJy0O+Hs1YfMz9swwvpB8fbGDG0GuGkkK7V0hxSmZQpABI8l2z0v3sJf50qpAMJCd2qCulql3LD1lRGQjm7lEsDz0rkxTQOfiPPxUBcuJTbbhss/Y1eyi3NwsmKInmkZsKk5gtPUzNhvp11507CSy/X6XYStpvFudpZw1ZWIOF4Cq6SdtbKbioJyAhRTu3u9yMJXerN+ugvaQQsjcZ8Q3VnZwxlSDhe1lB9GjrSw5b+1avT8+Jw+979nNaOI6U3KpTrWAosxVQmygK4ld8X0ZtK/7eViExD7O1NQPb3T7fsl4/4sBpwYzPwjFbTo95Yl9l9Vd1YN1X/147HebSjary1AHyc5qc+XLQEQx9ve8Kg6xr6hKoCKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIq4JrHP8fEWV8FMTmOAAAAAElFTkSuQmCC',
+            'image://data:image/png;base64,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',
+            'image://data:image/png;base64,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',
+            'image://data:image/png;base64,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',
+        ];
+        var color =['#00f8ff','#00f15a','#0696f9','#dcf776'];
+
+//数据处理
+        var datas = [];
+        Line.map((item,index)=>{
+            datas.push(
+            {
+                symbolSize: 150,
+                symbol: img[index],
+                name: item,
+                type: "line",
+                yAxisIndex: 1,
+                data: data1[index] ,
+                itemStyle: {
+                    normal: {
+                        borderWidth: 5,
+                        color: color[index],
+                    }
+                }
+            }
+        )
+    })
+        var myChart = echarts.init(document.getElementById('echart7'));
+        var option = {
+            grid: {
+                left: '15%',
+                top: '5%',
+                bottom: '5%',
+                right: '5%',
+            },
+            legend: {
+                type: "scroll",
+                data:Line,
+                itemWidth:18,
+                itemHeight:12,
+                textStyle: {
+                    color:"#00ffff",
+                    fontSize:14
+                },
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    position: 'right',
+                    splitLine: {
+                        show: false
+                    }
+                    ,
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    }
+                },
+                {
+                    type: 'value',
+                    position: 'left',
+                    nameTextStyle: {
+                        color: '#00FFFF'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed',
+                            color: 'rgba(135,140,147,0.8)'
+                        }
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        formatter: '{value}',
+                        color: '#fff',
+                        fontSize: 14
+                    }
+                },
+            ],
+            xAxis: [
+                {
+                    type: 'category',
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        show: false,
+                        lineStyle: {
+                            color: '#6A989E',
+                        }
+                    },
+                    axisLabel: {
+                        inside: false,
+                        textStyle: {
+                            color: '#fff',// x轴颜色
+                            fontWeight: 'normal',
+                            fontSize: '14',
+                            lineHeight: 22
+                        }
+
+                    },
+                    data: XName,
+                },
+                {
+                    type: 'category',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    //-----
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                },
+            ],
+            series: datas,
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+
+</script>
+</body>
+</html>

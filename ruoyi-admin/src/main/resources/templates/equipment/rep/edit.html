@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改设备备品件库')" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-rep-edit" th:object="${jzEquipmentRep}">
+            <input name="id" th:field="*{id}" type="hidden">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">规格：</label>
+                <div class="col-sm-8">
+<!--                    <input name="spId" th:field="*{spId}" class="form-control" type="text">-->
+                    <select class="form-control" name="spId" th:with="type=${@dict.esList()}">
+                        <option th:each="dict : ${type}" th:text="${dict.spName}" th:value="${dict.spId}" th:field="*{spId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">配件名称：</label>
+                <div class="col-sm-8">
+                    <input name="name" th:field="*{name}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">型号：</label>
+                <div class="col-sm-8">
+                    <input name="ggXh" th:field="*{ggXh}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">数量：</label>
+                <div class="col-sm-8">
+                    <input name="num" th:field="*{num}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">最高储存数量：</label>
+                <div class="col-sm-8">
+                    <input name="highestNum" th:field="*{highestNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">最低储存数量：</label>
+                <div class="col-sm-8">
+                    <input name="minimumNum" th:field="*{minimumNum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">类型：</label>
+                <div class="col-sm-8">
+<!--                    <select name="type" class="form-control m-b">-->
+<!--                        <option value="">所有</option>-->
+<!--                    </select>-->
+<!--                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i> 代码生成请选择字典属性</span>-->
+                    <select name="type" class="form-control m-b" th:with="type=${@dict.getType('leixing_ku')}">
+                        <!--                        <option value="">所有</option>-->
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{type}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+<!--                    <input name="state" th:field="*{state}" class="form-control" type="text">-->
+                    <select name="state" th:field="*{state}" class="form-control">
+                        <option  th:value="0">库存正常</option>
+                        <option  th:value="1">库存异常</option>
+
+                    </select>
+                </div>
+            </div>
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">创建人id：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="createId" th:field="*{createId}" class="form-control" type="text">-->
+<!--                </div>-->
+<!--            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script type="text/javascript">
+        var prefix = ctx + "equipment/rep";
+        $("#form-rep-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-rep-edit').serialize());
+            }
+        }
+    </script>
+</body>
+</html>
