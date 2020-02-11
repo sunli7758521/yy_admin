@@ -3,8 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.sysusersystem.mapper.JzHiddenTroubleLogMapper">
-    
+
     <resultMap type="JzHiddenTroubleLog" id="JzHiddenTroubleLogResult">
+        <result property="id"    column="id"    />
         <result property="hiddenTroubleId"    column="hidden_trouble_id"    />
         <result property="typeId"    column="type_id"    />
         <result property="planId"    column="plan_id"    />
@@ -20,10 +21,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="hiddenJb"    column="hidden_jb"    />
         <result property="updateTime"    column="update_time"    />
         <result property="successTime"    column="success_time"    />
-
+        <result property="picUrl"    column="pic_url"    />
     </resultMap>
 
     <resultMap type="JzHiddenTroubleVO" id="JzHiddenTroubleResultMap">
+
         <result property="typeName"    column="name"    />
         <result property="userName"    column="user_name"    />
         <result property="identifyPeople"    column="identify_people"    />
@@ -39,12 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJzHiddenTroubleLogVo">
-        select hidden_trouble_id, type_id, plan_id, system_id, identify_people, rectification_people, rectification_time, state, remark, create_time, hidden_content, hidden_wz, hidden_jb, update_time,success_time  from jz_hidden_trouble_log
+        select id, hidden_trouble_id, type_id, plan_id, system_id, identify_people, rectification_people, rectification_time, state, remark, create_time, hidden_content, hidden_wz, hidden_jb, update_time, success_time, pic_url from jz_hidden_trouble_log
     </sql>
+
 
     <select id="selectJzHiddenTroubleLogList" parameterType="JzHiddenTroubleLog" resultMap="JzHiddenTroubleLogResult">
         <include refid="selectJzHiddenTroubleLogVo"/>
-        <where>  
+        <where>
             <if test="hiddenTroubleId != null "> and hidden_trouble_id = #{hiddenTroubleId}</if>
             <if test="typeId != null "> and type_id = #{typeId}</if>
             <if test="planId != null "> and plan_id = #{planId}</if>
@@ -56,16 +59,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hiddenContent != null  and hiddenContent != ''"> and hidden_content = #{hiddenContent}</if>
             <if test="hiddenWz != null  and hiddenWz != ''"> and hidden_wz = #{hiddenWz}</if>
             <if test="hiddenJb != null  and hiddenJb != ''"> and hidden_jb = #{hiddenJb}</if>
-            <if test="successTime != null "> success_time = #{successTime}</if>
+            <if test="successTime != null "> and success_time = #{successTime}</if>
+            <if test="picUrl != null  and picUrl != ''"> and pic_url = #{picUrl}</if>
         </where>
     </select>
-    
+
     <select id="selectJzHiddenTroubleLogById" parameterType="Long" resultMap="JzHiddenTroubleLogResult">
         <include refid="selectJzHiddenTroubleLogVo"/>
-        where hidden_trouble_id = #{hiddenTroubleId}
+        where id = #{id}
     </select>
-        
-    <insert id="insertJzHiddenTroubleLog" parameterType="JzHiddenTroubleLog">
+
+    <insert id="insertJzHiddenTroubleLog" parameterType="JzHiddenTroubleLog" useGeneratedKeys="true" keyProperty="id">
         insert into jz_hidden_trouble_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="hiddenTroubleId != null ">hidden_trouble_id,</if>
@@ -83,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hiddenJb != null  and hiddenJb != ''">hidden_jb,</if>
             <if test="updateTime != null ">update_time,</if>
             <if test="successTime != null ">success_time,</if>
+            <if test="picUrl != null  and picUrl != ''">pic_url,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="hiddenTroubleId != null ">#{hiddenTroubleId},</if>
@@ -99,13 +104,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hiddenWz != null  and hiddenWz != ''">#{hiddenWz},</if>
             <if test="hiddenJb != null  and hiddenJb != ''">#{hiddenJb},</if>
             <if test="updateTime != null ">#{updateTime},</if>
-            <if test="successTime != null "> #{successTime},</if>
+            <if test="successTime != null ">#{successTime},</if>
+            <if test="picUrl != null  and picUrl != ''">#{picUrl},</if>
         </trim>
     </insert>
 
     <update id="updateJzHiddenTroubleLog" parameterType="JzHiddenTroubleLog">
         update jz_hidden_trouble_log
         <trim prefix="SET" suffixOverrides=",">
+            <if test="hiddenTroubleId != null ">hidden_trouble_id = #{hiddenTroubleId},</if>
             <if test="typeId != null ">type_id = #{typeId},</if>
             <if test="planId != null ">plan_id = #{planId},</if>
             <if test="systemId != null ">system_id = #{systemId},</if>
@@ -119,12 +126,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="hiddenWz != null  and hiddenWz != ''">hidden_wz = #{hiddenWz},</if>
             <if test="hiddenJb != null  and hiddenJb != ''">hidden_jb = #{hiddenJb},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="successTime != null ">success_time = #{successTime},</if>
+            <if test="picUrl != null  and picUrl != ''">pic_url = #{picUrl},</if>
         </trim>
-        where hidden_trouble_id = #{hiddenTroubleId}
+        where id = #{id}
     </update>
 
     <delete id="deleteJzHiddenTroubleLogById" parameterType="Long">
-        delete from jz_hidden_trouble_log where hidden_trouble_id = #{hiddenTroubleId}
+        delete from jz_hidden_trouble_log where id = #{id}
     </delete>
 
     <delete id="deleteJzHiddenTroubleLogByIds" parameterType="String">

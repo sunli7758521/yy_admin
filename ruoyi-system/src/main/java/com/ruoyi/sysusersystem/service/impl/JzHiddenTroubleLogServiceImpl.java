@@ -88,13 +88,13 @@ public class JzHiddenTroubleLogServiceImpl implements IJzHiddenTroubleLogService
     /**
      * 删除隐患日志信息
      * 
-     * @param hiddenTroubleId 隐患日志ID
+     * @param id 隐患日志ID
      * @return 结果
      */
     @Override
-    public int deleteJzHiddenTroubleLogById(Long hiddenTroubleId)
+    public int deleteJzHiddenTroubleLogById(Long id)
     {
-        return jzHiddenTroubleLogMapper.deleteJzHiddenTroubleLogById(hiddenTroubleId);
+        return jzHiddenTroubleLogMapper.deleteJzHiddenTroubleLogById(id);
     }
 
     /**

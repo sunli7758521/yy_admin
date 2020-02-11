@@ -15,8 +15,11 @@ import java.util.Date;
 public class JzPlanLog extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
-
     /** 主键 */
+    private Long id;
+
+    /** 计划id */
+    @Excel(name = "计划id")
     private Long planId;
 
     /** 计划标题 */
@@ -69,6 +72,38 @@ public class JzPlanLog extends BaseEntity
     @Excel(name = "限定时间")
     private String successTime;
 
+    /** 维修人id */
+    @Excel(name = "维修人id")
+    private Long wxId;
+
+    /** 维修时间 */
+    @Excel(name = "维修时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date wxTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getWxId() {
+        return wxId;
+    }
+
+    public void setWxId(Long wxId) {
+        this.wxId = wxId;
+    }
+
+    public Date getWxTime() {
+        return wxTime;
+    }
+
+    public void setWxTime(Date wxTime) {
+        this.wxTime = wxTime;
+    }
+
     public String getSuccessTime() {
         return successTime;
     }
@@ -90,106 +125,106 @@ public class JzPlanLog extends BaseEntity
         this.planId = planId;
     }
 
-    public Long getPlanId() 
+    public Long getPlanId()
     {
         return planId;
     }
-    public void setTitle(String title) 
+    public void setTitle(String title)
     {
         this.title = title;
     }
 
-    public String getTitle() 
+    public String getTitle()
     {
         return title;
     }
-    public void setTime(Date time) 
+    public void setTime(Date time)
     {
         this.time = time;
     }
 
-    public Date getTime() 
+    public Date getTime()
     {
         return time;
     }
-    public void setLongTime(String longTime) 
+    public void setLongTime(String longTime)
     {
         this.longTime = longTime;
     }
 
-    public String getLongTime() 
+    public String getLongTime()
     {
         return longTime;
     }
-    public void setSystemId(Long systemId) 
+    public void setSystemId(Long systemId)
     {
         this.systemId = systemId;
     }
 
-    public Long getSystemId() 
+    public Long getSystemId()
     {
         return systemId;
     }
-    public void setTeamId(Long teamId) 
+    public void setTeamId(Long teamId)
     {
         this.teamId = teamId;
     }
 
-    public Long getTeamId() 
+    public Long getTeamId()
     {
         return teamId;
     }
-    public void setState(String state) 
+    public void setState(String state)
     {
         this.state = state;
     }
 
-    public String getState() 
+    public String getState()
     {
         return state;
     }
-    public void setZbType(String zbType) 
+    public void setZbType(String zbType)
     {
         this.zbType = zbType;
     }
 
-    public String getZbType() 
+    public String getZbType()
     {
         return zbType;
     }
-    public void setPlanType(String planType) 
+    public void setPlanType(String planType)
     {
         this.planType = planType;
     }
 
-    public String getPlanType() 
+    public String getPlanType()
     {
         return planType;
     }
-    public void setCreateId(Long createId) 
+    public void setCreateId(Long createId)
     {
         this.createId = createId;
     }
 
-    public Long getCreateId() 
+    public Long getCreateId()
     {
         return createId;
     }
-    public void setUpdateId(Long updateId) 
+    public void setUpdateId(Long updateId)
     {
         this.updateId = updateId;
     }
 
-    public Long getUpdateId() 
+    public Long getUpdateId()
     {
         return updateId;
     }
-    public void setContent(String content) 
+    public void setContent(String content)
     {
         this.content = content;
     }
 
-    public String getContent() 
+    public String getContent()
     {
         return content;
     }
@@ -197,22 +232,25 @@ public class JzPlanLog extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("planId", getPlanId())
-            .append("title", getTitle())
-            .append("time", getTime())
-            .append("longTime", getLongTime())
-            .append("systemId", getSystemId())
-            .append("teamId", getTeamId())
-            .append("state", getState())
-            .append("zbType", getZbType())
-            .append("planType", getPlanType())
-            .append("createId", getCreateId())
-            .append("createTime", getCreateTime())
-            .append("updateId", getUpdateId())
-            .append("updateTime", getUpdateTime())
-            .append("remark", getRemark())
-            .append("content", getContent())
-            .append("successTime", getSuccessTime())
-            .toString();
+                .append("id", getId())
+                .append("planId", getPlanId())
+                .append("title", getTitle())
+                .append("time", getTime())
+                .append("longTime", getLongTime())
+                .append("systemId", getSystemId())
+                .append("teamId", getTeamId())
+                .append("state", getState())
+                .append("zbType", getZbType())
+                .append("planType", getPlanType())
+                .append("createId", getCreateId())
+                .append("createTime", getCreateTime())
+                .append("updateId", getUpdateId())
+                .append("updateTime", getUpdateTime())
+                .append("remark", getRemark())
+                .append("content", getContent())
+                .append("successTime", getSuccessTime())
+                .append("wxId", getWxId())
+                .append("wxTime", getWxTime())
+                .toString();
     }
 }

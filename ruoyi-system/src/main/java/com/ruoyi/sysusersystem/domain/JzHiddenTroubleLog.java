@@ -18,7 +18,10 @@ public class JzHiddenTroubleLog extends BaseEntity
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
-    @Excel(name = "主键")
+    private Long id;
+
+    /** 隐患项主键 */
+    @Excel(name = "隐患项主键")
     private Long hiddenTroubleId;
 
     /** 隐患类型id */
@@ -64,6 +67,26 @@ public class JzHiddenTroubleLog extends BaseEntity
     /** 完成时限 */
     @Excel(name = "完成时限")
     private Date successTime;
+
+    /** 图片地址 */
+    @Excel(name = "图片地址")
+    private String picUrl;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
 
     public Date getSuccessTime() {
         return successTime;
@@ -177,21 +200,23 @@ public class JzHiddenTroubleLog extends BaseEntity
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("hiddenTroubleId", getHiddenTroubleId())
-            .append("typeId", getTypeId())
-            .append("planId", getPlanId())
-            .append("systemId", getSystemId())
-            .append("identifyPeople", getIdentifyPeople())
-            .append("rectificationPeople", getRectificationPeople())
-            .append("rectificationTime", getRectificationTime())
-            .append("state", getState())
-            .append("remark", getRemark())
-            .append("createTime", getCreateTime())
-            .append("hiddenContent", getHiddenContent())
-            .append("hiddenWz", getHiddenWz())
-            .append("hiddenJb", getHiddenJb())
-            .append("updateTime", getUpdateTime())
-            .append("successTime", getSuccessTime())
-            .toString();
+                .append("id", getId())
+                .append("hiddenTroubleId", getHiddenTroubleId())
+                .append("typeId", getTypeId())
+                .append("planId", getPlanId())
+                .append("systemId", getSystemId())
+                .append("identifyPeople", getIdentifyPeople())
+                .append("rectificationPeople", getRectificationPeople())
+                .append("rectificationTime", getRectificationTime())
+                .append("state", getState())
+                .append("remark", getRemark())
+                .append("createTime", getCreateTime())
+                .append("hiddenContent", getHiddenContent())
+                .append("hiddenWz", getHiddenWz())
+                .append("hiddenJb", getHiddenJb())
+                .append("updateTime", getUpdateTime())
+                .append("successTime", getSuccessTime())
+                .append("picUrl", getPicUrl())
+                .toString();
     }
 }

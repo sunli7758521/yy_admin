@@ -14,40 +14,63 @@
 	<link rel="stylesheet" href="https://apip.weatherdt.com/float/static/css/tqw_widget_float.css?v=0101">
 </head>
 <style>
-	.container .contentBlock .left div.block {
-		height:calc((100% - 20px) / 3);
+	.container .contentBlock .block .seCon .chartBlock {
+		width: 100%;
 	}
-	.container .contentBlock .right div.block {
-		height:calc((100% - 20px) / 3);
-	}
-	.container .contentBlock .left div.block3,
-	.container .contentBlock .right div.block1,
-	.container .contentBlock .right div.block3
-	{
-		width:calc((100% - 10px) / 2);
-		margin-right:10px;
-		float:left;
-	}
-	.container .contentBlock .left .block3 .seCon .chartBlock,
-	.container .contentBlock .left .block4 .seCon .chartBlock,
-	.container .contentBlock .right .block1 .seCon .chartBlock,
-	.container .contentBlock .right .block2 .seCon .chartBlock,
-	.container .contentBlock .right .block3 .seCon .chartBlock,
-	.container .contentBlock .right .block4 .seCon .chartBlock,
-	.container .contentBlock .right .block5 .seCon .chartBlock{
-		width:100%;
-	}
-	.container .contentBlock .left div.block4,
-	.container .contentBlock .right div.block2,
-	.container .contentBlock .right div.block4{
-		width:calc((100% - 10px) / 2);
-		float:left;
-	}
-	.container .contentBlock .right div.block5 {
-		width:100%;
-		float:left;
-		margin-top: 10px;
-	}
+.container .left .mainblock1 {
+	width: 100%;
+	height:calc((100% - 20px) / 3);
+	margin-bottom: 10px;
+	float: left;
+}
+.container .left .mainblock2 {
+	width: calc((100% - 10px) / 2);
+	height:calc((100% - 20px) / 3);
+	margin-bottom: 10px;
+	margin-right: 10px;
+	float: left;
+}
+.container .left .mainblock3 {
+	width: calc((100% - 10px) / 2);
+	height:calc((100% - 20px) / 3);
+	margin-bottom: 10px;
+	float: left;
+}
+.container .left .mainblock4 {
+	width: 100%;
+	height:calc((100% - 20px) / 3);
+	float: left;
+}
+.container .right .mainblock1 {
+	width: 100%;
+	height:calc((100% - 20px) / 3);
+	margin-bottom: 10px;
+	float: left;
+}
+.container .right .mainblock2 {
+	width: calc((100% - 10px) / 2);
+	height:calc((100% - 20px) / 3);
+	margin-bottom: 10px;
+	margin-right: 10px;
+	float: left;
+}
+.container .right .mainblock3 {
+	width: calc((100% - 10px) / 2);
+	height:calc((100% - 20px) / 3);
+	margin-bottom: 10px;
+	float: left;
+}
+.container .right .mainblock4 {
+	width: calc((100% - 10px) / 2);
+	height:calc((100% - 20px) / 3);
+	margin-right: 10px;
+	float: left;
+}
+.container .right .mainblock5 {
+	width: calc((100% - 10px) / 2);
+	height:calc((100% - 20px) / 3);
+	float: left;
+}
 </style>
 <body class="gray-bg">
 <div class="container">
@@ -56,64 +79,52 @@
 	</div>
 	<div class="contentBlock">
 		<div class="left">
-			<div class="block block1">
+			<div class="block mainblock1">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">电力-用电情况</div>
+				<div class="seTitle">电力-部门用电情况</div>
 				<div class="seCon">
-					<div class="chartBlock2">
-						<div id="echart8" style="width: 100%;height: 100%"></div>
+					<div class="chartBlock">
+						<div id="echart1" style="width: 100%;height: 100%"></div>
 					</div>
 				</div>
 
 			</div>
-			<div class="block block2">
+			<div class="block mainblock2">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">热源-风险情况统计</div>
+				<div class="seTitle">热源-报警情况</div>
 				<div class="seCon">
 					<div class="chartBlock">
 						<div id="echart2" style="width: 100%;height: 100%"></div>
 					</div>
-					<div class="tableBlock">
-						<table>
-							<thead>
-							<tr>
-								<td>风险等级</td>
-								<td>数量</td>
-							</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
 				</div>
 			</div>
-			<div class="block block3">
+			<div class="block mainblock3">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">燃气-隐患情况统计</div>
+				<div class="seTitle">燃气-科室用气对比</div>
 				<div class="seCon">
 					<div class="chartBlock">
 						<div id="echart3" style="width: 100%;height: 100%"></div>
 					</div>
 				</div>
 			</div>
-			<div class="block block4">
+			<div class="block mainblock4">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">制冷及空调-巡检情况统计</div>
+				<div class="seTitle">制冷及空调-制冷情况对比</div>
 				<div class="seCon">
 					<div class="chartBlock">
-						<div id="echart5" style="width: 100%;height: 100%"></div>
+						<div id="echart4" style="width: 100%;height: 100%"></div>
 					</div>
 				</div>
 			</div>
@@ -160,72 +171,63 @@
 			</div>
 		</div>
 		<div class="right">
-			<div class="block block1">
+			<div class="block mainblock1">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">电梯-应急预案</div>
+				<div class="seTitle">给排水-本周用水情况</div>
+				<div class="seCon">
+					<div class="chartBlock">
+						<div id="echart5" style="width: 100%;height: 100%"></div>
+					</div>
+				</div>
+			</div>
+			<div class="block mainblock2">
+				<span class="mycorner lefttop"></span>
+				<span class="mycorner righttop"></span>
+				<span class="mycorner leftbottom"></span>
+				<span class="mycorner rightbottom"></span>
+				<div class="seTitle">电梯-电梯里程数</div>
 				<div class="seCon">
 					<div class="chartBlock">
 						<div id="echart6" style="width: 100%;height: 100%"></div>
 					</div>
 				</div>
 			</div>
-			<div class="block block2">
+			<div class="block mainblock3">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">给排水-未巡检</div>
-				<div class="seCon">
-					<div class="tableBlock" style="width:100%;">
-						<table>
-							<thead>
-							<tr>
-								<td>设备类型</td>
-								<td>数量</td>
-							</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<div class="block block3">
-				<span class="mycorner lefttop"></span>
-				<span class="mycorner righttop"></span>
-				<span class="mycorner leftbottom"></span>
-				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">医用气体-设备总览</div>
+				<div class="seTitle">医用气体-用量对比</div>
 				<div class="seCon">
 					<div class="chartBlock">
 						<div id="echart7" style="width: 100%;height: 100%"></div>
 					</div>
 				</div>
 			</div>
-			<div class="block block4">
+			<div class="block mainblock4">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">电力-设备总览</div>
+				<div class="seTitle">食堂</div>
 				<div class="seCon">
-					<div class="chartBlock2">
-						<div id="echart1" style="width: 100%;height: 100%"></div>
+					<div class="chartBlock">
+						<!--<div id="echart1" style="width: 100%;height: 100%"></div>-->
 					</div>
 				</div>
 			</div>
-			<div class="block block5">
+			<div class="block mainblock5">
 				<span class="mycorner lefttop"></span>
 				<span class="mycorner righttop"></span>
 				<span class="mycorner leftbottom"></span>
 				<span class="mycorner rightbottom"></span>
-				<div class="seTitle">工地安全-隐患情况统计</div>
+				<div class="seTitle">工地</div>
 				<div class="seCon">
 					<div class="chartBlock">
-						<div id="echart4" style="width: 100%;height: 100%"></div>
+						<!--<div id="echart4" style="width: 100%;height: 100%"></div>-->
 					</div>
 				</div>
 			</div>
@@ -258,138 +260,18 @@
         $('#weather-float-he').children('div').eq(0).css('box-shadow', '');
         $('#weather-float-he').css({ width: 170, top: "50%", left: "50%", transform: "translate(-50%, -50%)" });
         $('#weather').append($('#weather-float-he'));
-        var chartData1 = [
-            {name:"发电设备",value: 307},
-            {name:"变电设备",value: 578},
-            {name:"输电设备",value: 96},
-            {name:"配电设备",value: 987},
-        ]
-        var chartData2 = [
-            {name:"A级风险",value: 285},
-            {name:"B级风险",value: 410},
-            {name:"C级风险",value: 274},
-            {name:"D级风险",value: 235},
-        ]
-        var chartData31 = [
-            {name:"A级隐患",value: 285},
-            {name:"B级隐患",value: 410},
-            {name:"C级隐患",value: 274},
-        ]
-        var chartData32 = [
-            {name:"高压配电室",value: 285},
-            {name:"低压配电室",value: 410},
-            {name:"供电线路",value: 274},
-        ]
-        var chartData33 = [
-            {name:"配电设备",value: 11},
-            {name:"输电设备",value: 9},
-            {name:"变电设备",value: 7},
-            {name:"发电设备",value: 5},
-        ]
-        var chartData4 =[
-            {name:"供电场所",value: [3.6, 3.4, 3.2],color1:"#fccb05",color2:"#f5804d"},
-            {name:"高低压配电站",value: [3.5, 3.3, 3.1],color1:"#8bd46e",color2:"#09bcb7"},
-            {name:"供电线路",value: [3.4, 3.2, 3.0],color1:"#248ff7",color2:"#6851f1"},
-        ]
-        var chartData51 =[
-            {name:"触电事故",value: 50},
-            {name:"停电事故",value: 30},
-            {name:"火灾事故",value: 10},
-            {name:"天气环境",value: 60},
-        ]
-        var chartData52 = [
-            {name:"人员",value: 40},
-            {name:"设备",value: 50},
-            {name:"物料",value: 60},
-            {name:"运输",value: 70},
-        ]
-        var chartData6 = [
-            {name:"配电设备",value: 40},
-            {name:"输电设备",value: 50},
-            {name:"变电设备",value: 60},
-            {name:"发电设备",value: 70},
-        ]
-        var chartData7 = [
-            {name:"马宏宇",job:"值班员",phone:"15320202020"},
-            {name:"宗敬先",job:"值班领导",phone:"15320202020"}
-        ]
-        reTable1(chartData1)
-        reTable2(chartData2)
-        reTable3(chartData32)
-        reTable4(chartData52)
-        reTable5(chartData6)
-        reTable6(chartData7)
+
         getTime()
-        chart1(chartData1)
-        chart2(chartData2)
-        chart3(chartData31)
-        chart4(chartData33)
-        chart5(chartData4)
-        chart6(chartData51)
-        chart7(chartData1)
-        chart8(chartData2)
+        chart1()
+        chart2()
+        chart3()
+        chart4()
+        chart5()
+        chart6()
+        chart7()
+
     })
-    function reTable1(data){
-        var str="";
-        for(var i=0;i<data.length;i++) {
-            str+="<tr>";
-            str+="<td>"+data[i].name+"</td>";
-            str+="<td>"+data[i].value+"</td>";
-            str+="</tr>";
-        }
-        $(".left .block1 table tbody").html(str)
-    }
-    function reTable2(data){
-        var str="";
-        for(var i=0;i<data.length;i++) {
-            str+="<tr>";
-            str+="<td>"+data[i].name+"</td>";
-            str+="<td>"+data[i].value+"</td>";
-            str+="</tr>";
-        }
-        $(".left .block2 table tbody").html(str)
-    }
-    function reTable3(data){
-        var str="";
-        for(var i=0;i<data.length;i++) {
-            str+="<tr>";
-            str+="<td>"+data[i].name+"</td>";
-            str+="<td>"+data[i].value+"</td>";
-            str+="</tr>";
-        }
-        $(".left .block3 table tbody").html(str)
-    }
-    function reTable4(data){
-        var str="";
-        for(var i=0;i<data.length;i++) {
-            str+="<tr>";
-            str+="<td>"+data[i].name+"</td>";
-            str+="<td>"+data[i].value+"</td>";
-            str+="</tr>";
-        }
-        $(".right .block2 table tbody").html(str)
-    }
-    function reTable5(data){
-        var str="";
-        for(var i=0;i<data.length;i++) {
-            str+="<tr>";
-            str+="<td>"+data[i].name+"</td>";
-            str+="<td>"+data[i].value+"</td>";
-            str+="</tr>";
-        }
-        $(".right .block3 table tbody").html(str)
-    }
-    function reTable6(data){
-        var str="";
-        for(var i=0;i<data.length;i++) {
-            str+="<tr>";
-            str+="<td>"+data[i].name+"</td>";
-            str+="<td>"+data[i].job+"</td>";
-            str+="<td>"+data[i].phone+"</td>";
-            str+="</tr>";
-        }
-        $(".center .block1 table tbody").html(str)
-    }
+
     function getTime(){
         var str1="";
         var str2="";
@@ -448,484 +330,10 @@
         }
         return result;
     }
-
-    function chart1(data){
+    //电力-各个部门用电对比，月度，柱
+    function chart1(){
 
         var myChart = echarts.init(document.getElementById('echart1'));
-        var option = {
-            color: ['#3D91F7', '#61BE67'],
-            tooltip: {},
-            legend: {
-                show: true,
-                icon: "circle",
-                bottom: 30,
-                center: 0,
-                itemWidth: 14,
-                itemHeight: 14,
-                itemGap: 21,
-                orient: "horizontal",
-                data: ['a', 'b'],
-                textStyle: {
-                    fontSize: '70%',
-                    color: '#8C8C8C'
-                },
-            },
-
-            radar: {
-                // shape: 'circle',
-                radius:'80%',
-                triggerEvent: true,
-                name: {
-                    textStyle: {
-                        color: '#fff',
-                        fontSize:'12',
-                        borderRadius: 3,
-                        padding: [3, 5]
-                    }
-                },
-                nameGap:'2',
-                indicator: [
-                    {name: '发电设备', max: 1000},
-                    {name: '变电设备',max: 1000},
-                    {name: '输电设备', max: 1000},
-                    {name: '配电设备', max: 1000}
-                ],
-                splitArea: {
-                    areaStyle: {
-                        color: [
-                            'rgba(222,134,85, 0.1)', 'rgba(222,134,85, 0.2)',
-                            'rgba(222,134,85, 0.4)', 'rgba(222,134,85, 0.6)',
-                            'rgba(222,134,85, 0.8)', 'rgba(222,134,85, 1)'
-                        ].reverse()
-                    }
-                },
-                // axisLabel:{//展示刻度
-                //     show: true
-                // },
-                axisLine: { //指向外圈文本的分隔线样式
-                    lineStyle: {
-                        color: 'rgba(0,0,0,0)'
-                    }
-                },
-                splitLine: {
-                    lineStyle: {
-                        width:2,
-                        color: [
-                            'rgba(224,134,82, 0.1)', 'rgba(224,134,82, 0.2)',
-                            'rgba(224,134,82, 0.4)', 'rgba(224,134,82, 0.6)',
-                            'rgba(224,134,82, 0.8)', 'rgba(224,134,82, 1)'
-                        ].reverse()
-                    }
-                },
-
-            },
-
-            series: [{
-                name: '一级权重分析',
-                type: 'radar',
-                //areaStyle: {normal: {}},
-                areaStyle: {
-                    normal: {
-                        color: 'rgba(252,211,3, 0.3)'
-                    }
-                },
-                symbolSize: 0,
-                lineStyle: {
-                    normal: {
-                        color: 'rgba(252,211,3, 1)',
-                        width: 1
-                    }
-                },
-                data: [{
-                    value: [307, 578, 96, 987],
-                    name: '因素',
-                }
-                ]
-            }]
-        }
-        myChart.setOption(option);
-        window.addEventListener("resize", function() {
-            myChart.resize();
-        });
-    }
-    function chart2(data){
-        var myChart = echarts.init(document.getElementById('echart2'));
-        var option = {
-            tooltip: {
-                trigger: 'item',
-                formatter: "{b} : {c} ({d}%)"
-            },
-
-            visualMap: {
-                show: false,
-                min: 500,
-                max: 600,
-                inRange: {
-                    //colorLightness: [0, 1]
-                }
-            },
-            series: [{
-                name: '风险情况统计',
-                type: 'pie',
-                radius: '50%',
-                center: ['50%', '50%'],
-                color: ['#003973', '#E5E5BE', '#CC95C0', '#7AA1D2'],
-                data: data.sort(function(a, b) {
-                    return a.value - b.value
-                }),
-                roseType: 'radius',
-
-                label: {
-                    normal: {
-                        formatter: ['{c|{c}次}', '{b|{b}}'].join('\n'),
-                        rich: {
-                            c: {
-                                color: 'rgb(241,246,104)',
-                                fontSize: 12,
-                                fontWeight:'bold',
-                                lineHeight: 5
-                            },
-                            b: {
-                                color: 'rgb(98,137,169)',
-                                fontSize: 12,
-                                height: 20
-                            },
-                        },
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        lineStyle: {
-                            color: 'rgb(98,137,169)',
-                        },
-                        smooth: 0.2,
-                        length: 10,
-                        length2: 20,
-
-                    }
-                },
-                itemStyle: {
-                    normal: {
-                        shadowColor: 'rgba(0, 0, 0, 0.8)',
-                        shadowBlur: 50,
-                    }
-                }
-            }]
-        }
-        myChart.setOption(option);
-        window.addEventListener("resize", function() {
-            myChart.resize();
-        });
-    }
-    function chart3(data){
-        var myChart = echarts.init(document.getElementById('echart3'));
-        var option = {
-            series: [
-                {
-                    name: 'A级隐患',
-                    type: 'pie',
-                    radius: ['25%', '30%'],
-                    center: ['50%', '25%'],
-                    startAngle: 225,
-                    color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#FDFF5C'
-                    }, {
-                        offset: 1,
-                        color: '#FFDB5C'
-                    }]), "transparent"],
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    label: {
-                        normal: {
-                            position: 'center'
-                        }
-                    },
-                    data: [{
-                        value: 75,
-                        name: 'A级隐患',
-                        label: {
-                            normal: {
-                                formatter: 'A级隐患',
-                                textStyle: {
-                                    color: '#fff',
-                                    fontSize: 12
-
-                                }
-                            }
-                        }
-                    }, {
-                        value: 25,
-                        name: '%',
-                        label: {
-                            normal: {
-                                formatter: '\n\n35',
-                                textStyle: {
-                                    color: '#007ac6',
-                                    fontSize: 12
-
-                                }
-                            }
-                        }
-                    },
-                        {
-                            value: 0,
-                            name: '%',
-                            label: {
-                                normal: {
-                                    formatter: '',
-                                    textStyle: {
-                                        color: '#fff',
-                                        fontSize: 12
-
-                                    }
-                                }
-                            }
-                        }]
-                },
-                {
-                    name: 'B级隐患',
-                    type: 'pie',
-                    radius: ['25%', '30%'],
-                    center: ['25%', '75%'],
-                    startAngle: 225,
-                    color: [new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#9FE6B8'
-                    }, {
-                        offset: 1,
-                        color: '#32C5E9'
-                    }]), "transparent"],
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    label: {
-                        normal: {
-                            position: 'center'
-                        }
-                    },
-                    data: [{
-                        value: 75,
-                        name: 'B级隐患',
-                        label: {
-                            normal: {
-                                formatter: 'B级隐患',
-                                textStyle: {
-                                    color: '#fff',
-                                    fontSize: 12
-
-                                }
-                            }
-                        }
-                    }, {
-                        value: 25,
-                        name: '%',
-                        label: {
-                            normal: {
-                                formatter: '\n\n3534',
-                                textStyle: {
-                                    color: '#007ac6',
-                                    fontSize: 12
-
-                                }
-                            }
-                        }
-                    },
-                        {
-                            value: 0,
-                            name: '%',
-                            label: {
-                                normal: {
-                                    formatter: '',
-                                    textStyle: {
-                                        color: '#fff',
-                                        fontSize: 12
-
-                                    }
-                                }
-                            }
-                        }]
-                },
-                {
-                    name: 'C级隐患',
-                    type: 'pie',
-                    radius: ['25%', '30%'],
-                    center: ['75%', '75%'],
-                    startAngle: 225,
-                    labelLine: {
-                        normal: {
-                            show: false
-                        }
-                    },
-                    label: {
-                        normal: {
-                            position: 'center'
-                        }
-                    },
-                    data: [{
-                        value: 75,
-                        "itemStyle": {
-                            "normal": {
-                                "color": new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                    "offset": 0,
-                                    "color": '#FF9F7F'
-                                }, {
-                                    "offset": 1,
-                                    "color": '#FB7293'
-                                }]),
-                            }
-                        },
-                        name: 'C级隐患',
-                        label: {
-                            normal: {
-                                formatter: 'C级隐患',
-                                textStyle: {
-                                    color: '#fff',
-                                    fontSize: 12
-
-                                }
-                            }
-                        }
-                    }, {
-                        value: 25,
-                        name: '%',
-                        label: {
-                            normal: {
-                                formatter: '\n\n3534',
-                                textStyle: {
-                                    color: '#f125ff',
-                                    fontSize: 12
-
-                                }
-                            }
-                        }
-                    },
-                        {
-                            value: 0,
-                            name: '%',
-                            label: {
-                                normal: {
-                                    formatter: '',
-                                    textStyle: {
-                                        color: '#fff',
-                                        fontSize: 12
-
-                                    }
-                                }
-                            }
-                        }]
-                }
-            ]
-        }
-        myChart.setOption(option);
-        window.addEventListener("resize", function() {
-            myChart.resize();
-        });
-    }
-    function chart4(data){
-        var nameArr = [];
-        var valueArr = [];
-        for(var i=0;i<data.length;i++) {
-            nameArr.push(data[i].name);
-            valueArr.push(data[i].value);
-        }
-        var myChart = echarts.init(document.getElementById('echart4'));
-        var option = {
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
-            },
-            legend: {
-                show: false,
-                textStyle: {
-                    color: '#5E7DB4'
-                },
-                data: ['2019年']
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                top: '3%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'value',
-                boundaryGap: [0, 0.01],
-                axisLine: {
-                    lineStyle: {
-                        color: '#5E7DB4'
-                    }
-                },
-            },
-            yAxis: {
-                type: 'category',
-                axisLine: {
-                    lineStyle: {
-                        color: '#5E7DB4'
-                    }
-                },
-                data: nameArr
-            },
-            series: [{
-                name: '2019年',
-                type: 'bar',
-                data: valueArr,
-                itemStyle: {
-                    normal: {
-                        color: '#E7E9BB',
-
-                    }
-                },
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'insideRight'
-                    }
-                },
-            }]
-        }
-        myChart.setOption(option);
-        window.addEventListener("resize", function() {
-            myChart.resize();
-        });
-    }
-    function chart5(data){
-        var nameArr = []
-        var serverArr = []
-        for(var i=0;i<data.length;i++) {
-            nameArr.push(data[i].name);
-            serverArr.push(
-                {
-                    name: data[i].name,
-                    type: 'bar',
-                    barWidth: '15%',
-                    itemStyle: {
-                        normal: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                                offset: 0,
-                                color: data[i].color1
-                            }, {
-                                offset: 1,
-                                color: data[i].color2
-                            }]),
-                            barBorderRadius: 12,
-                        },
-                    },
-                    data: data[i].value
-                }
-            )
-        }
-
-
-        var myChart = echarts.init(document.getElementById('echart5'));
         var option = {
             tooltip: {
                 trigger: 'axis',
@@ -936,16 +344,16 @@
             grid: {
                 left: '2%',
                 right: '4%',
-                bottom: '14%',
+                bottom: '4%',
                 top: '16%',
                 containLabel: true
             },
             legend: {
-                data: nameArr,
+                data: ['行政部门', '临床门诊部门', '住院部门','药剂部门','医技科部门'],
                 right: 10,
                 top: 12,
                 textStyle: {
-                    color: "#5E7DB4"
+                    color: "#fff"
                 },
                 itemWidth: 12,
                 itemHeight: 10,
@@ -953,7 +361,7 @@
             },
             xAxis: {
                 type: 'category',
-                data: ['低', '中', '高'],
+                data: ['上旬', '中旬', '下旬'],
                 axisLine: {
                     lineStyle: {
                         color: 'white'
@@ -969,7 +377,7 @@
 
             yAxis: {
                 type: 'value',
-                max: '4',
+                max: '1200',
                 axisLine: {
                     show: false,
                     lineStyle: {
@@ -984,88 +392,235 @@
                 },
                 axisLabel: {}
             },
-            series: serverArr
-        }
-        myChart.setOption(option);
-        window.addEventListener("resize", function() {
-            myChart.resize();
-        });
-    }
-    function chart6(data){
-        var myChart = echarts.init(document.getElementById('echart6'));
-        var option = {
-            tooltip: {
-                trigger: 'item',
-                formatter: "{a} <br/>{b} : {c} ({d}%)"
-            },
+
             series: [{
-                name: '库存情况',
-                type: 'pie',
-                radius: '68%',
-                center: ['50%', '50%'],
-                clockwise: false,
-                data: [{
-                    value: 45,
-                    name: '天气环境'
-                }, {
-                    value: 25,
-                    name: '火灾事故'
-                }, {
-                    value: 15,
-                    name: '停电事故'
-                }, {
-                    value: 8,
-                    name: '触电事故'
-                }],
-                label: {
-                    normal: {
-                        textStyle: {
-                            color: '#fff',
-                            fontSize: 12,
-                        }
-                    }
-                },
-                labelLine: {
-                    normal: {
-                        show: false
-                    }
-                },
+                name: '行政部门',
+                type: 'bar',
+                barWidth: '8%',
                 itemStyle: {
                     normal: {
-                        borderWidth: 4,
-                        borderColor: '#042844',
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#9D50BB'
+                        }, {
+                            offset: 1,
+                            color: '#f5804d'
+                        }]),
+                        barBorderRadius: 12,
                     },
-                    emphasis: {
-                        borderWidth: 0,
-                        shadowBlur: 10,
-                        shadowOffsetX: 0,
-                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                    }
+                },
+                data: [400, 400, 300]
+            },
+                {
+                    name: '临床门诊部门',
+                    type: 'bar',
+                    barWidth: '8%',
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#B3FFAB'
+                            }, {
+                                offset: 1,
+                                color: '#09bcb7'
+                            }]),
+                            barBorderRadius: 11,
+                        }
+
+                    },
+                    data: [400, 500, 500]
+                },
+                {
+                    name: '住院部门',
+                    type: 'bar',
+                    barWidth: '8%',
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#F0C27B'
+                            }, {
+                                offset: 1,
+                                color: '#4B1248'
+                            }]),
+                            barBorderRadius: 11,
+                        }
+                    },
+                    data: [400, 600, 700]
+                },
+                ,
+                {
+                    name: '药剂部门',
+                    type: 'bar',
+                    barWidth: '8%',
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#df16d0'
+                            }, {
+                                offset: 1,
+                                color: '#df16d0'
+                            }]),
+                            barBorderRadius: 11,
+                        }
+                    },
+                    data: [400, 600, 700]
+                },
+                ,
+                {
+                    name: '医技科部门',
+                    type: 'bar',
+                    barWidth: '8%',
+                    itemStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#0c3ceb'
+                            }, {
+                                offset: 1,
+                                color: '#0c3ceb'
+                            }]),
+                            barBorderRadius: 11,
+                        }
+                    },
+                    data: [400, 600, 700]
                 }
-            }],
-            color: [
-                '#00acee',
-                '#52cdd5',
-                '#79d9f1',
-                '#a7e7ff',
-                '#c8efff'
-            ],
+            ]
         }
         myChart.setOption(option);
         window.addEventListener("resize", function() {
             myChart.resize();
         });
     }
-    function chart7(data){
-        var nameArr = [];
-        for(var i=0;i<data.length;i++) {
-            nameArr.push(data[i].name)
+    //热源-锅炉异常报警情况，环
+    function chart2(){
+        var scaleData = [{
+            'name': '超压',
+            'value': 10
+        },
+            {
+                'name': '报警次数',
+                'value': 20
+            },
+            {
+                'name': '温度不温',
+                'value': 20
+            },
+            {
+                'name': '泄漏',
+                'value': 27
+            },
+            {
+                'name': '其他',
+                'value': 23
+            }
+        ];
+        var rich = {
+            white: {
+                color: '#ddd',
+                align: 'center',
+                padding: [2, 0]
+            }
+        };
+        var placeHolderStyle = {
+            normal: {
+                label: {
+                    show: false
+                },
+                labelLine: {
+                    show: false
+                },
+                color: 'rgba(0, 0, 0, 0)',
+                borderColor: 'rgba(0, 0, 0, 0)',
+                borderWidth: 0
+            }
+        };
+        var data = [];
+        for (var i = 0; i < scaleData.length; i++) {
+            data.push({
+                value: scaleData[i].value,
+                name: scaleData[i].name,
+                itemStyle: {
+                    normal: {
+                        borderWidth: 5,
+                        shadowBlur: 20,
+                        borderColor: new echarts.graphic.LinearGradient(0, 0, 1, 1, [{
+                            offset: 0,
+                            color: '#7777eb'
+                        }, {
+                            offset: 1,
+                            color: '#70ffac'
+                        }]),
+                        shadowColor: 'rgba(142, 152, 241, 0.6)'
+                    }
+                }
+            }, {
+                value: 4,
+                name: '',
+                itemStyle: placeHolderStyle
+            });
         }
-        var myChart = echarts.init(document.getElementById('echart7'));
+        var seriesObj = [{
+            name: '',
+            type: 'pie',
+            clockWise: false,
+            radius: [35, 40],
+            hoverAnimation: false,
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true,
+                        position: 'outside',
+                        color: '#fff',
+                        formatter: function(params) {
+                            var percent = 0;
+                            var total = 0;
+                            for (var i = 0; i < scaleData.length; i++) {
+                                total += scaleData[i].value;
+                            }
+                            percent = ((params.value / total) * 100).toFixed(0);
+                            if(params.name !== '') {
+                                return params.name + '\n{white|' + '占比' + percent + '%}';
+                            }else {
+                                return '';
+                            }
+                        },
+                        rich: rich
+                    },
+                    labelLine: {
+                        show: false
+                    }
+                }
+            },
+            data: data
+        }];
+        var myChart = echarts.init(document.getElementById('echart2'));
         var option = {
-            color: ["#CC95C0", "#DBD4B4", "#7AA1D2", "#B5AC49"],
+            tooltip: {
+                show: false
+            },
+            legend: {
+                show: false
+            },
+            toolbox: {
+                show: false
+            },
+            series: seriesObj
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    //燃气-每个科室燃气情况对比，饼
+    function chart3(){
+        var colorArr=["#218de0", "#01cbb3", "#85e647", "#5d5cda", "#05c5b0", "#c29927"];
+        var colorAlpha=['rgba(60,170,211,0.05)','rgba(1,203,179,0.05)','rgba(133,230,71,0.05)','rgba(93,92,218,0.05)','rgba(5,197,176,0.05)','rgba(194,153,39,0.05)']
+        var myChart = echarts.init(document.getElementById('echart3'));
+        var option = {
             grid: {
-                left: -100,
+                left: 10,
                 top: 50,
                 bottom: 10,
                 right: 10,
@@ -1075,24 +630,11 @@
                 trigger: 'item',
                 formatter: "{b} : {c} ({d}%)"
             },
-            polar:{},
             legend: {
-                type: "scroll",
-                orient: "vartical",
-                // x: "right",
-                top: "top",
-                left: "right",
-                // bottom: "0%",
-                itemWidth: 6,
-                itemHeight: 6,
-                itemGap: 2,
-                textStyle: {
-                    color: '#A3E2F4',
-                    fontSize: 12,
-                    fontWeight: 0
-                },
-                data: nameArr
+                show:false
             },
+
+            polar: {},
             angleAxis: {
                 interval: 1,
                 type: 'category',
@@ -1110,12 +652,12 @@
                     interval: 0,
                     show: true,
                     color: "#0B4A6B",
-                    margin: 8,
+                    margin: 3,
                     fontSize: 12
                 },
             },
             radiusAxis: {
-                min: 40,
+                min: 20,
                 max: 120,
                 interval: 20,
                 axisLine: {
@@ -1135,90 +677,130 @@
                 },
                 splitLine: {
                     lineStyle: {
-                        color: "#0B3E5E",
+                        color: "#07385e",
                         width: 2,
-                        type: "solid"
+                        type: "dashed"
                     }
                 }
             },
             calculable: true,
-            series: [{
-                type: 'pie',
-                radius: ["5%", "10%"],
-                hoverAnimation: false,
-                labelLine: {
-                    normal: {
-                        show: false,
-                        length: 20,
-                        length2: 45
-                    },
-                    emphasis: {
-                        show: false
-                    }
-                },
-                data: [{
-                    name: '',
-                    value: 0,
-                    itemStyle: {
-                        normal: {
-                            color: "#0B4A6B"
-                        }
-                    }
-                }]
-            }, {
-                type: 'pie',
-                radius: ["90%", "95%"],
-                hoverAnimation: false,
-                labelLine: {
-                    normal: {
-                        show: false,
-                        length: 20,
-                        length2: 45
-                    },
-                    emphasis: {
-                        show: false
-                    }
-                },
-                name: "",
-                data: [{
-                    name: '',
-                    value: 0,
-                    itemStyle: {
-                        normal: {
-                            color: "#0B4A6B"
-                        }
-                    }
-                }]
-            },{
+            series: [ {
                 stack: 'a',
                 type: 'pie',
-                radius: ['20%', '80%'],
-                roseType: 'area',
+                radius: '60%',
+                roseType: 'radius',
                 zlevel:10,
+                startAngle: 100,
                 label: {
                     normal: {
-                        show: true,
-                        formatter: "{c}",
-                        textStyle: {
-                            fontSize: 12,
+                        formatter: [ '{b|{b}}','{d|{d}%}'].join('\n'),
+                        rich: {
+                            b: {
+                                color: '#3bd2fe',
+                                fontSize: 12,
+                                lineHeight: 16
+                            },
+                            d: {
+                                color: '#d0fffc',
+                                fontSize: 12,
+                                height: 16
+                            },
                         },
-                        position: 'outside'
-                    },
-                    emphasis: {
-                        show: true
                     }
                 },
                 labelLine: {
                     normal: {
                         show: true,
-                        length: 10,
-                        length2: 45
+                        length: 5,
+                        length2: 9,
+                        lineStyle: {
+                            color: '#0096b1'
+
+                        }
                     },
                     emphasis: {
                         show: false
                     }
                 },
-                data: data
+                data: [{
+                    value: 50,
+                    name: '外科',
+                    itemStyle: {
+                        borderColor: colorArr[0],
+                        borderWidth:2,
+                        shadowBlur: 20,
+                        shadowColor: "#41a8f8",
+                        shadowOffsetx: 25,
+                        shadowOffsety: 20,
+                        color:colorAlpha[0]
+                    }
+                },
+                    {
+                        value: 27,
+                        name: '内科',
+                        itemStyle: {
+                            borderColor: colorArr[1],
+                            borderWidth:2,
+                            shadowBlur: 20,
+                            shadowColor: colorArr[1],
+                            shadowOffsetx: 25,
+                            shadowOffsety: 20,
+                            color:colorAlpha[1]
+                        }
+                    },
+                    {
+                        value: 7,
+                        name: '耳鼻喉科',
+                        itemStyle: {
+                            borderColor: colorArr[2],
+                            borderWidth:2,
+                            shadowBlur: 20,
+                            shadowColor: colorArr[2],
+                            shadowOffsetx: 25,
+                            shadowOffsety: 20,
+                            color:colorAlpha[2]
+                        }
+                    },
+                    {
+                        value: 13,
+                        name: '传染科',
+                        itemStyle: {
+                            borderColor: colorArr[3],
+                            borderWidth:2,
+                            shadowBlur: 20,
+                            shadowColor: colorArr[3],
+                            shadowOffsetx: 25,
+                            shadowOffsety: 20,
+                            color:colorAlpha[3]
+                        }
+                    },
+                    {
+                        value: 10,
+                        name: '医学影像科',
+                        itemStyle: {
+                            borderColor: colorArr[4],
+                            borderWidth:2,
+                            shadowBlur: 20,
+                            shadowColor: colorArr[4],
+                            shadowOffsetx: 25,
+                            shadowOffsety: 20,
+                            color:colorAlpha[4]
+                        }
+                    },
+                    {
+                        value: 6,
+                        name: '其他',
+                        itemStyle: {
+                            borderColor: colorArr[5],
+                            borderWidth:2,
+                            shadowBlur: 20,
+                            shadowColor: colorArr[5],
+                            shadowOffsetx: 25,
+                            shadowOffsety: 20,
+                            color:colorAlpha[5]
+                        }
+                    }
+                ]
             }, ]
         }
         myChart.setOption(option);
@@ -1226,115 +808,510 @@
             myChart.resize();
         });
     }
+    //制冷情况统计，折线
+    function chart4(){
+        //数据
+        var XName = ["1-5号", "6-10号", "11-15号", "16-20号", "21-25号", "26-30号"]
+        var data1 = [
+            [123, 154, 234, 321, 120, 390],
+            [63, 194, 234, 321, 278, 110],
+            [53, 254, 234, 321, 118, 240],
+            [23, 354, 334, 221, 178, 190],
+        ]
+        var Line = ["冷冻水", "温度", "压力", "回水"];
+        var img = [
+            'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABRCAYAAABFTSEIAAAACXBIWXMAAAsSAAALEgHS3X78AAAEp0lEQVR42u3cz4sjRRTA8W9Vd3Vn8mMmjj9WQWSRZQ+CsH+B7MnDIgiCd0E8CYJ/gOAIelo8ehUP/gF6WLw5/gMueFP2sIcF0dHd2Z1kknR11fOQZJJJMtlZd03H7HtQpNOTnpn+8Lrm1etmjIig8e/DKoECKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIqoAJudKTr+osZMNPvBUQBHwHsPF9fB9R0DeHMOQ6T6WOrhEzXBM4swDOL0M6CrArRVoq3t2dGUIb9fTvatg8ZZup1PDBgzPmy98mey6qfzjLz2WaWjEUZKEvGyi9nWyneMOvGIyFQo2Sbg4MUSChpU9IeTTUpJdsEajPZOJeJG5uBZj7rLLduWS5dGm6XNLEELOFUFj54ACJCaychkpDSASK3bwsXL0YgVpWJKwM0iy9Zy8HdGru7jvt3Pbu7w0wES7drTwAbjTHMGCsQcIAnYTC1/wRx0wEnl27JNgZI8HQ6Kc1mQq83RNzaMjPzXqDbjTQaJRFLxIyyMSxAXEkWrhrQzAAmo5HOjCQf7jflILxOkohL+aUPgV4vEGNJo+E5PAy02+UIMEwBxo0CPDP7Dg5SnEtpt1PA0e87XO25FOoh8IYIH2Y5b45RzGAQBiIltZoHxqMcjbksXAVgdc2EQMYzzzdotyeZWKuleULXJtwT4SODfC2QCWR+IF9KnjuX1Xbo99Op7LVE8iXlz0YBTk5SyLEEjo5OLuccEoFUvHfO+reuUPx4zftXAIcx1hdcF+/TvFab4A0Bs0VwqyhpVnkJT89/Q4DDQ0e77YCMwIUsFMeFZD856699URRvX4nxE4A/jbnxXp7v4Zw3ReGNSDHI8wFQjIafuoyn58L/fB6sth/Ybg9fez2TRC6QZcZYvgHsazF+MP7YCyLXcM7gvSXLDGBqYDg+NhwdmSpPoTrAkub0W+f4FSB1fDucIunMHSLpO8WAH0rSy8u+19MBCHB4OHzd2pI+CEUhpigEiN+l6WcdY252jLn5s7Wf472ImPcN8pUl/tEHoV4XWq1Ke4KrLmPsTA3oODpytFoOyJKSyzHyMSIxteWngMW5cSEdDJQUhTdZVgxOz3/+jFJm4+bA2e5JpNU6WZ4Fw99JwnWMKccwpeddP+B7GZTNUPKqybJy0O+Hs1YfMz9swwvpB8fbGDG0GuGkkK7V0hxSmZQpABI8l2z0v3sJf50qpAMJCd2qCulql3LD1lRGQjm7lEsDz0rkxTQOfiPPxUBcuJTbbhss/Y1eyi3NwsmKInmkZsKk5gtPUzNhvp11507CSy/X6XYStpvFudpZw1ZWIOF4Cq6SdtbKbioJyAhRTu3u9yMJXerN+ugvaQQsjcZ8Q3VnZwxlSDhe1lB9GjrSw5b+1avT8+Jw+979nNaOI6U3KpTrWAosxVQmygK4ld8X0ZtK/7eViExD7O1NQPb3T7fsl4/4sBpwYzPwjFbTo95Yl9l9Vd1YN1X/147HebSjary1AHyc5qc+XLQEQx9ve8Kg6xr6hKoCKqACKqCGAiqgAiqghgIqoAIqoIYCKqACKqCGAiqgAiqghgIq4JrHP8fEWV8FMTmOAAAAAElFTkSuQmCC',
+            'image://data:image/png;base64,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',
+            'image://data:image/png;base64,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',
+            'image://data:image/png;base64,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',
+        ];
+        var color = ['#00f8ff', '#00f15a', '#0696f9', '#dcf776'];
+
+//数据处理
+        var datas = [];
+        Line.map((item, index) => {
+            datas.push({
+                symbolSize: 150,
+                symbol: img[index],
+                name: item,
+                type: "line",
+                yAxisIndex: 1,
+                data: data1[index],
+                itemStyle: {
+                    normal: {
+                        borderWidth: 5,
+                        color: color[index],
+                    }
+                }
+            })
+        })
+        var myChart = echarts.init(document.getElementById('echart4'));
+        var option = {
+            grid: {
+                left: '10%',
+                top: '10%',
+                bottom: '15%',
+                right: '10%',
+            },
+            legend: {
+                type: "scroll",
+                data: Line,
+                itemWidth: 18,
+                itemHeight: 12,
+                textStyle: {
+                    color: "#00ffff",
+                    fontSize: 14
+                },
+            },
+            yAxis: [{
+                type: 'value',
+                position: 'right',
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    show: false
+                },
+                axisTick: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                }
+            },
+                {
+                    type: 'value',
+                    position: 'left',
+                    nameTextStyle: {
+                        color: '#00FFFF'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed',
+                            color: 'rgba(135,140,147,0.8)'
+                        }
+                    },
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        formatter: '{value}',
+                        color: '#fff',
+                        fontSize: 14
+                    }
+                },
+            ],
+            xAxis: [{
+                type: 'category',
+                axisTick: {
+                    show: false
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: '#6A989E',
+                    }
+                },
+                axisLabel: {
+                    inside: false,
+                    textStyle: {
+                        color: '#fff', // x轴颜色
+                        fontWeight: 'normal',
+                        fontSize: '14',
+                        lineHeight: 22
+                    }
+
+                },
+                data: XName,
+            },
+                {
+                    type: 'category',
+                    axisLine: {
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    splitLine: {
+                        show: false
+                    },
+                    //-----
+                    data: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                },
+            ],
+            series: datas,
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    //生活用水和污水处理对比
+    function chart5(){
+        var myChart = echarts.init(document.getElementById('echart5'));
+        var option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    lineStyle: {
+                        color: {
+                            type: 'linear',
+                            x: 0,
+                            y: 0,
+                            x2: 0,
+                            y2: 1,
+                            colorStops: [{
+                                offset: 0,
+                                color: 'rgba(0, 255, 233,0)'
+                            }, {
+                                offset: 0.5,
+                                color: 'rgba(255, 255, 255,1)',
+                            }, {
+                                offset: 1,
+                                color: 'rgba(0, 255, 233,0)'
+                            }],
+                            global: false
+                        }
+                    },
+                },
+            },
+            grid: {
+                top: '15%',
+                left: '5%',
+                right: '5%',
+                bottom: '15%',
+                // containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                axisLine: {
+                    show: true
+                },
+                splitArea: {
+                    // show: true,
+                    color: '#f00',
+                    lineStyle: {
+                        color: '#f00'
+                    },
+                },
+                axisLabel: {
+                    color: '#fff'
+                },
+                splitLine: {
+                    show: false
+                },
+                boundaryGap: false,
+                data: ['周一', '周二', '周三', '周四', '周五', '周六','周日'],
+
+            }],
+
+            yAxis: [{
+                type: 'value',
+                min: 0,
+                // max: 140,
+                splitNumber: 4,
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'rgba(255,255,255,0.1)'
+                    }
+                },
+                axisLine: {
+                    show: false,
+                },
+                axisLabel: {
+                    show: false,
+                    margin: 20,
+                    textStyle: {
+                        color: '#d1e6eb',
+
+                    },
+                },
+                axisTick: {
+                    show: false,
+                },
+            }],
+            series: [{
+                name: '生活用水',
+                type: 'line',
+                // smooth: true, //是否平滑
+                showAllSymbol: true,
+                // symbol: 'image://./static/images/guang-circle.png',
+                symbol: 'circle',
+                symbolSize: 15,
+                lineStyle: {
+                    normal: {
+                        color: "#6c50f3",
+                        shadowColor: 'rgba(0, 0, 0, .3)',
+                        shadowBlur: 0,
+                        shadowOffsetY: 5,
+                        shadowOffsetX: 5,
+                    },
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                        color: '#6c50f3',
+                    }
+                },
+                itemStyle: {
+                    color: "#6c50f3",
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                    shadowColor: 'rgba(0, 0, 0, .3)',
+                    shadowBlur: 0,
+                    shadowOffsetY: 2,
+                    shadowOffsetX: 2,
+                },
+                tooltip: {
+                    show: true
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(108,80,243,0.3)'
+                        },
+                            {
+                                offset: 1,
+                                color: 'rgba(108,80,243,0)'
+                            }
+                        ], false),
+                        shadowColor: 'rgba(108,80,243, 0.9)',
+                        shadowBlur: 20
+                    }
+                },
+                data: [502.84, 205.97, 332.79, 281.55, 398.35, 314.02,214.02, ]
+            },
+                {
+                    name: '污水处理',
+                    type: 'line',
+                    // smooth: true, //是否平滑
+                    showAllSymbol: true,
+                    // symbol: 'image://./static/images/guang-circle.png',
+                    symbol: 'circle',
+                    symbolSize: 15,
+                    lineStyle: {
+                        normal: {
+                            color: "#00ca95",
+                            shadowColor: 'rgba(0, 0, 0, .3)',
+                            shadowBlur: 0,
+                            shadowOffsetY: 5,
+                            shadowOffsetX: 5,
+                        },
+                    },
+                    label: {
+                        show: true,
+                        position: 'top',
+                        textStyle: {
+                            color: '#00ca95',
+                        }
+                    },
+
+                    itemStyle: {
+                        color: "#00ca95",
+                        borderColor: "#fff",
+                        borderWidth: 3,
+                        shadowColor: 'rgba(0, 0, 0, .3)',
+                        shadowBlur: 0,
+                        shadowOffsetY: 2,
+                        shadowOffsetX: 2,
+                    },
+                    tooltip: {
+                        show: true
+                    },
+                    areaStyle: {
+                        normal: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: 'rgba(0,202,149,0.3)'
+                            },
+                                {
+                                    offset: 1,
+                                    color: 'rgba(0,202,149,0)'
+                                }
+                            ], false),
+                            shadowColor: 'rgba(0,202,149, 0.9)',
+                            shadowBlur: 20
+                        }
+                    },
+                    data: [281.55, 198.35, 214.02, 179.55, 289.57, 256.14,356.14, ],
+                },
+            ]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    //电梯里程数
+    function chart6(){
+        var myChart = echarts.init(document.getElementById('echart6'));
+        var option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            grid: {
+                top: '15%',
+                left: '15%',
+                right: '5%',
+                bottom: '15%',
+                // containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ['1月','2月','3月','4月','5月','6月'],
+                axisLine: {
+                    lineStyle: {
+                        color: "#fff"
+                    }
+                }
+            }],
+            yAxis: [{
+                type: 'value',
+                splitNumber: 4,
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: '#fff'
+                    }
+                },
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "#fff"
+                    },
+                },
+                nameTextStyle: {
+                    color: "#fff"
+                },
+                splitArea: {
+                    show: false
+                }
+            }],
+            series: [{
+                name: '电梯总里程数',
+                type: 'line',
+                data: [23,60,20,36,23,85],
+                lineStyle: {
+                    normal: {
+                        width: 4,
+                        color: {
+                            type: 'linear',
+
+                            colorStops: [{
+                                offset: 0,
+                                color: '#A9F387' // 0% 处的颜色
+                            }, {
+                                offset: 1,
+                                color: '#48D8BF' // 100% 处的颜色
+                            }],
+                            globalCoord: false // 缺省为 false
+                        },
+                        shadowColor: 'rgba(72,216,191, 0.3)',
+                        shadowBlur: 10,
+                        shadowOffsetY: 20
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#fff',
+                        borderWidth: 10,
+                        /*shadowColor: 'rgba(72,216,191, 0.3)',
+                        shadowBlur: 100,*/
+                        borderColor: "#A9F387"
+                    }
+                },
+                smooth: true
+            }]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
+    //每个部门使用气体
+    function chart7(){
+        var m2R2Data= [
+            {value:335, legendname:'氧气',name:"氧气  335",itemStyle:{color:"#8d7fec"}},
+            {value:310, legendname:'氧化二氮',name:"氧化二氮  310",itemStyle:{color:"#5085f2"}},
+            {value:234, legendname:'氩气',name:"氩气  234",itemStyle:{color:"#e75fc3"}},
+            {value:154, legendname:'氦气',name:"氦气  154",itemStyle:{color:"#f87be2"}},
+            {value:335, legendname:'氮气',name:"氮气  335",itemStyle:{color:"#f2719a"}},
+            {value:335, legendname:'二氧化碳',name:"二氧化碳  335",itemStyle:{color:"#fca4bb"}},
+            {value:335, legendname:'压缩空气',name:"压缩空气  335",itemStyle:{color:"#f59a8f"}},
+        ];
+        var myChart = echarts.init(document.getElementById('echart7'));
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter:function (parms){
+                    var str=  parms.seriesName+"</br>"+
+                        parms.marker+""+parms.data.legendname+"</br>"+
+                        "数量："+ parms.data.value+"</br>"+
+                        "占比："+ parms.percent+"%";
+                    return  str ;
+                }
+            },
+            legend: {
+                show:false,
+                type:"scroll",
+                orient: 'vertical',
+                left:'70%',
+                align:'left',
+                top:'middle',
+                textStyle: {
+                    color:'#fff'
+                },
+                height:250
+            },
+            series: [
+                {
+                    name:'标题',
+                    type:'pie',
+                    center: ['50%', '50%'],
+                    radius: ['40%', '55%'],
+                    clockwise: false, //饼图的扇区是否是顺时针排布
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'outter',
+                            formatter:function (parms){
+                                return parms.data.legendname
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            length:5,
+                            length2:3,
+                            smooth:true,
+                        }
+                    },
+                    data:m2R2Data
+                }
+            ]
+        }
+        myChart.setOption(option);
+        window.addEventListener("resize", function() {
+            myChart.resize();
+        });
+    }
     function chart8(data){
-		var charts = {
-			unit: 'Kbps',
-			names: ['用电量'],
-			lineX: ['01.01', '01.02', '01.03', '01.04', '01.05', '01.06', '01.07', '01.08', '01.09', '01.10', '01.11', '01.12', '01.13', '01.14', '01.15', '01.16', '01.17', '01.18', '01.19', '01.20'],
-			value: [
-				[451, 352, 303, 534, 95, 236, 217, 328, 159, 151, 231, 192, 453, 524, 165, 236, 527, 328, 129, 530]
-			]
-
-		}
-		var color = ['rgba(23, 255, 243', 'rgba(255,100,97']
-		var lineY = []
-		for (var i = 0; i < charts.names.length; i++) {
-			var x = i
-			if (x > color.length - 1) {
-				x = color.length - 1
-			}
-			var data = {
-				name: charts.names[i],
-				type: 'line',
-				color: color[x] + ')',
-				smooth: true,
-				areaStyle: {
-					normal: {
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-							offset: 0,
-							color: color[x] + ', 0.3)'
-						}, {
-							offset: 0.8,
-							color: color[x] + ', 0)'
-						}], false),
-						shadowColor: 'rgba(0, 0, 0, 0.1)',
-						shadowBlur: 10
-					}
-				},
-				symbol: 'circle',
-				symbolSize: 5,
-				data: charts.value[i]
-			}
-			lineY.push(data)
-		}
-
-		lineY[0].markLine = {
-			silent: true,
-			data: [{
-				yAxis: 5
-			}, {
-				yAxis: 100
-			}, {
-				yAxis: 200
-			}, {
-				yAxis: 300
-			}, {
-				yAxis: 400
-			}]
-		}
         var myChart = echarts.init(document.getElementById('echart8'));
         var option = {
-			tooltip: {
-				trigger: 'axis'
-			},
-			legend: {
-				data: charts.names,
-				textStyle: {
-					fontSize: 12,
-					color: 'rgb(0,253,255,0.6)'
-				},
-				right: '4%'
-			},
-			grid: {
-				top: '14%',
-				left: '4%',
-				right: '4%',
-				bottom: '12%',
-				containLabel: true
-			},
-			xAxis: {
-				type: 'category',
-				boundaryGap: false,
-				data: charts.lineX,
-				axisLabel: {
-					textStyle: {
-						color: 'rgb(0,253,255,0.6)'
-					},
-					formatter: function(params) {
-						return params
-					}
-				}
-			},
-			yAxis: {
-				type: 'value',
-				axisLabel: {
-					formatter: '{value}',
-					textStyle: {
-						color: 'rgb(0,253,255,0.6)'
-					}
-				},
-				splitLine: {
-					lineStyle: {
-						color: 'rgb(23,255,243,0.3)'
-					}
-				},
-				axisLine: {
-					lineStyle: {
-						color: 'rgb(0,253,255,0.6)'
-					}
-				}
-			},
-			series: lineY
+
         }
         myChart.setOption(option);
         window.addEventListener("resize", function() {

@@ -3,8 +3,9 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.sysusersystem.mapper.JzInspectionLogMapper">
-    
+
     <resultMap type="JzInspectionLog" id="JzInspectionLogResult">
+        <result property="zId"    column="z_id"    />
         <result property="id"    column="id"    />
         <result property="equipmentId"    column="equipment_id"    />
         <result property="systemId"    column="system_id"    />
@@ -21,6 +22,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="state"    column="state"    />
         <result property="jzPlanId"    column="jz_plan_id"    />
         <result property="remark"    column="remark"    />
+        <result property="picUrl"    column="pic_url"    />
+        <result property="shState"    column="sh_state"    />
     </resultMap>
 
     <resultMap type="JzInspectionLogVO" id="JzInspectionLogResultMap">
@@ -32,15 +35,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="state"    column="state"    />
         <result property="remark"    column="remark"    />
         <result property="userName"    column="user_name"    />
+        <result property="shState"    column="sh_state"    />
     </resultMap>
 
     <sql id="selectJzInspectionLogVo">
-        select id, equipment_id, system_id, content, inspection_project, inspection_addr, jc_people, jc_date, create_id, create_time, update_id, update_time, equipment_state, state, jz_plan_id, remark from jz_inspection_log
+        select z_id, id, equipment_id, system_id, content, inspection_project, inspection_addr, jc_people, jc_date, create_id, create_time, update_id, update_time, equipment_state, state, jz_plan_id, remark, pic_url, sh_state from jz_inspection_log
     </sql>
 
     <select id="selectJzInspectionLogList" parameterType="JzInspectionLog" resultMap="JzInspectionLogResult">
         <include refid="selectJzInspectionLogVo"/>
-        <where>  
+        <where>
             <if test="equipmentId != null "> and equipment_id = #{equipmentId}</if>
             <if test="systemId != null "> and system_id = #{systemId}</if>
             <if test="content != null  and content != ''"> and content = #{content}</if>
@@ -53,6 +57,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="equipmentState != null  and equipmentState != ''"> and equipment_state = #{equipmentState}</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
             <if test="jzPlanId != null "> and jz_plan_id = #{jzPlanId}</if>
+            <if test="picUrl != null  and picUrl != ''"> and pic_url = #{picUrl}</if>
+            <if test="shState != null  and shState != ''"> and sh_state = #{shState}</if>
             <if test="createTime != null  ">
                 AND date_format(create_time,'%y%m%d') &lt;= date_format(#{createTime},'%y%m%d')
             </if>
@@ -84,7 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="state != null  and state != ''">state,</if>
             <if test="jzPlanId != null ">jz_plan_id,</if>
             <if test="remark != null  and remark != ''">remark,</if>
-         </trim>
+            <if test="picUrl != null  and picUrl != ''">pic_url,</if>
+            <if test="shState != null  and shState != ''">sh_state,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null ">#{id},</if>
             <if test="equipmentId != null ">#{equipmentId},</if>
@@ -102,12 +110,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="state != null  and state != ''">#{state},</if>
             <if test="jzPlanId != null ">#{jzPlanId},</if>
             <if test="remark != null  and remark != ''">#{remark},</if>
-         </trim>
+            <if test="picUrl != null  and picUrl != ''">#{picUrl},</if>
+            <if test="shState != null  and shState != ''">#{shState},</if>
+        </trim>
     </insert>
 
     <update id="updateJzInspectionLog" parameterType="JzInspectionLog">
         update jz_inspection_log
         <trim prefix="SET" suffixOverrides=",">
+            <if test="id != null ">id = #{id},</if>
             <if test="equipmentId != null ">equipment_id = #{equipmentId},</if>
             <if test="systemId != null ">system_id = #{systemId},</if>
             <if test="content != null  and content != ''">content = #{content},</if>
@@ -123,8 +134,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="state != null  and state != ''">state = #{state},</if>
             <if test="jzPlanId != null ">jz_plan_id = #{jzPlanId},</if>
             <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="picUrl != null  and picUrl != ''">pic_url = #{picUrl},</if>
+            <if test="shState != null  and shState != ''">sh_state = #{shState},</if>
         </trim>
-        where id = #{id}
+        where z_id = #{zId}
     </update>
 
     <delete id="deleteJzInspectionLogById" parameterType="Long">
@@ -147,8 +160,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         jz_inspection_log.equipment_state,
         jz_inspection_log.state,
         jz_inspection_log.remark,
-        jz_inspection_log.create_time
-
+        jz_inspection_log.create_time,
+        jz_inspection_log.sh_state
         FROM
         jz_inspection_log
 

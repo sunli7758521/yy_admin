@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.util.Date;
+
 /**
  * 报修对象 jz_warranty
  * 
@@ -45,13 +47,77 @@ public class JzWarranty extends BaseEntity
     /** 创建人 */
     @Excel(name = "创建人")
     private String createName;
-
     /** 创建人id */
     @Excel(name = "创建人id")
     private Long createId;
     /** 修改人id */
     @Excel(name = "修改人id")
     private Long updateId;
+
+    /** 最后修改人 */
+    @Excel(name = "最后修改人")
+    private String updateName;
+
+    /** 状态 (0维修中 1已修. 2.超期 3.巡检产生的维修) */
+    @Excel(name = "状态 (0维修中 1已修. 2.超期 3.巡检产生的维修)")
+    private String state;
+
+    /** 系统id */
+    @Excel(name = "系统id")
+    private Long systemId;
+
+    /** 所属系统 */
+    @Excel(name = "所属系统")
+    private String systemName;
+
+
+    /** 维修人维修完成时间 */
+    @Excel(name = "维修人维修完成时间", width = 30, dateFormat = "yyyy-MM-dd")
+    private Date wxTime;
+
+    /** 审核状态 0未审核 1.审核通过  2.审核不通过 */
+    @Excel(name = "审核状态 0未审核 1.审核通过  2.审核不通过")
+    private String shState;
+
+    /** 图片地址 */
+    @Excel(name = "图片地址")
+    private String picUrl;
+
+    /** 维修地址 */
+    @Excel(name = "维修地址")
+    private String wxAddr;
+
+    public Date getWxTime() {
+        return wxTime;
+    }
+
+    public void setWxTime(Date wxTime) {
+        this.wxTime = wxTime;
+    }
+
+    public String getShState() {
+        return shState;
+    }
+
+    public void setShState(String shState) {
+        this.shState = shState;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
+    }
+
+    public String getWxAddr() {
+        return wxAddr;
+    }
+
+    public void setWxAddr(String wxAddr) {
+        this.wxAddr = wxAddr;
+    }
 
     public Long getCreateId() {
         return createId;
@@ -68,11 +134,6 @@ public class JzWarranty extends BaseEntity
     public void setUpdateId(Long updateId) {
         this.updateId = updateId;
     }
-
-    /** 最后修改人 */
-    @Excel(name = "最后修改人")
-    private String updateName;
-
     public String getCreateName() {
         return createName;
     }
@@ -88,10 +149,6 @@ public class JzWarranty extends BaseEntity
     public void setUpdateName(String updateName) {
         this.updateName = updateName;
     }
-
-    /** 状态 (0已修 1.维修 2.超期) */
-    @Excel(name = "状态 (0已修 1.维修 2.超期)")
-    private String state;
 
     public String getMaintenancePeopleName() {
         return maintenancePeopleName;
@@ -109,83 +166,77 @@ public class JzWarranty extends BaseEntity
         this.systemName = systemName;
     }
 
-    /** 系统id */
-    @Excel(name = "系统id")
-    private Long systemId;
 
-    /** 所属系统 */
-    @Excel(name = "所属系统")
-    private String systemName;
 
-    public void setWarrantyId(Long warrantyId) 
+    public void setWarrantyId(Long warrantyId)
     {
         this.warrantyId = warrantyId;
     }
 
-    public Long getWarrantyId() 
+    public Long getWarrantyId()
     {
         return warrantyId;
     }
-    public void setContent(String content) 
+    public void setContent(String content)
     {
         this.content = content;
     }
 
-    public String getContent() 
+    public String getContent()
     {
         return content;
     }
-    public void setEquipmentId(Long equipmentId) 
+    public void setEquipmentId(Long equipmentId)
     {
         this.equipmentId = equipmentId;
     }
 
-    public Long getEquipmentId() 
+    public Long getEquipmentId()
     {
         return equipmentId;
     }
-    public void setEquipmentName(String equipmentName) 
+    public void setEquipmentName(String equipmentName)
     {
         this.equipmentName = equipmentName;
     }
 
-    public String getEquipmentName() 
+    public String getEquipmentName()
     {
         return equipmentName;
     }
-    public void setEquipmentDepartmentId(String equipmentDepartmentId) 
+    public void setEquipmentDepartmentId(String equipmentDepartmentId)
     {
         this.equipmentDepartmentId = equipmentDepartmentId;
     }
 
-    public String getEquipmentDepartmentId() 
+    public String getEquipmentDepartmentId()
     {
         return equipmentDepartmentId;
     }
-    public void setMaintenancePeopleId(Long maintenancePeopleId) 
+    public void setMaintenancePeopleId(Long maintenancePeopleId)
     {
         this.maintenancePeopleId = maintenancePeopleId;
     }
 
-    public Long getMaintenancePeopleId() 
+    public Long getMaintenancePeopleId()
     {
         return maintenancePeopleId;
     }
-    public void setState(String state) 
+    public void setState(String state)
     {
         this.state = state;
     }
 
-    public String getState() 
+    public String getState()
     {
         return state;
     }
-    public void setSystemId(Long systemId) 
+    public void setSystemId(Long systemId)
     {
         this.systemId = systemId;
     }
 
-    public Long getSystemId() 
+    public Long getSystemId()
     {
         return systemId;
     }

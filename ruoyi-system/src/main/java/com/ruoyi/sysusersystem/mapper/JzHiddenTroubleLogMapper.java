@@ -49,10 +49,10 @@ public interface JzHiddenTroubleLogMapper
     /**
      * 删除隐患日志
      * 
-     * @param hiddenTroubleId 隐患日志ID
+     * @param id 隐患日志ID
      * @return 结果
      */
-    public int deleteJzHiddenTroubleLogById(Long hiddenTroubleId);
+    public int deleteJzHiddenTroubleLogById(Long id);
 
     /**
      * 批量删除隐患日志

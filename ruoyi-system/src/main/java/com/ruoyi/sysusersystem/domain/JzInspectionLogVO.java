@@ -44,6 +44,16 @@ public class JzInspectionLogVO
 
     /** 备注 */
     private String remark;
+    /** 审核状态 */
+    private String shState;
+
+    public String getShState() {
+        return shState;
+    }
+
+    public void setShState(String shState) {
+        this.shState = shState;
+    }
 
     public String getRemark() {
         return remark;

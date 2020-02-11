@@ -4,20 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.warranty.mapper.JzWarrantyMapper">
 
+
+        <!--<resultMap type="JzWarranty" id="JzWarrantyResult">-->
+            <!--<result property="warrantyId"    column="warranty_id"    />-->
+            <!--<result property="content"    column="content"    />-->
+            <!--<result property="equipmentId"    column="equipment_id"    />-->
+            <!--<result property="equipmentName"    column="equipment_name"    />-->
+            <!--<result property="equipmentDepartmentId"    column="equipment_department_id"    />-->
+            <!--<result property="item"    column="item"    />-->
+            <!--<result property="maintenancePeopleId"    column="maintenance_people_id"    />-->
+            <!--<result property="state"    column="state"    />-->
+            <!--<result property="createTime"    column="create_time"    />-->
+            <!--<result property="updateTime"    column="update_time"    />-->
+            <!--<result property="systemId"    column="system_id"    />-->
+            <!--<result property="remark"    column="remark"    />-->
+            <!--<result property="createId"    column="create_id"    />-->
+            <!--<result property="updateId"    column="update_id"    />-->
+            <!--<result property="wxTime"    column="wx_time"    />-->
+            <!--<result property="shState"    column="sh_state"    />-->
+            <!--<result property="picUrl"    column="pic_url"    />-->
+            <!--<result property="wxAddr"    column="wx_addr"    />-->
+        <!--</resultMap>-->
+
     <resultMap type="JzWarranty" id="JzWarrantyResult">
-<!--        <result property="warrantyId"    column="warranty_id"    />-->
-<!--        <result property="content"    column="content"    />-->
-<!--        <result property="equipmentId"    column="equipment_id"    />-->
-<!--        <result property="equipmentName"    column="equipment_name"    />-->
-<!--        <result property="equipmentDepartmentId"    column="equipment_department_id"    />-->
-<!--        <result property="maintenancePeopleId"    column="maintenance_people_id"    />-->
-<!--        <result property="state"    column="state"    />-->
-<!--        <result property="createTime"    column="create_time"    />-->
-<!--        <result property="updateTime"    column="update_time"    />-->
-<!--        <result property="systemId"    column="system_id"    />-->
-<!--        <result property="remark"    column="remark"    />-->
-<!--        <result property="createId"    column="create_id"    />-->
-<!--        <result property="updateId"    column="update_id"    />-->
         <result property="warrantyId"    column="warranty_id"    />
         <result property="content"    column="content"    />
         <result property="equipmentId"    column="equipment_id"    />
@@ -35,7 +44,35 @@
         <result property="createName"    column="create_name"    />
         <result property="updateId"    column="update_id"    />
         <result property="updateName"    column="update_name"    />
+        <result property="wxTime"    column="wx_time"    />
+        <result property="shState"    column="sh_state"    />
+        <result property="picUrl"    column="pic_url"    />
+        <result property="wxAddr"    column="wx_addr"    />
     </resultMap>
+
+   <sql id="selectJzWarrantyVo1">
+        select warranty_id, content, equipment_id, equipment_name, equipment_department_id, item, maintenance_people_id, state, create_time, update_time, system_id, remark, create_id, update_id, wx_time, sh_state, pic_url, wx_addr from jz_warranty
+    </sql>
+    <!--<select id="selectJzWarrantyList" parameterType="JzWarranty" resultMap="JzWarrantyResult">-->
+        <!--<include refid="selectJzWarrantyVo1"/>-->
+        <!--<where>-->
+            <!--<if test="content != null  and content != ''"> and content = #{content}</if>-->
+            <!--<if test="equipmentId != null "> and equipment_id = #{equipmentId}</if>-->
+            <!--<if test="equipmentName != null  and equipmentName != ''"> and equipment_name like concat('%', #{equipmentName}, '%')</if>-->
+            <!--<if test="equipmentDepartmentId != null  and equipmentDepartmentId != ''"> and equipment_department_id = #{equipmentDepartmentId}</if>-->
+            <!--<if test="item != null  and item != ''"> and item = #{item}</if>-->
+            <!--<if test="maintenancePeopleId != null "> and maintenance_people_id = #{maintenancePeopleId}</if>-->
+            <!--<if test="state != null  and state != ''"> and state = #{state}</if>-->
+            <!--<if test="systemId != null "> and system_id = #{systemId}</if>-->
+            <!--<if test="createId != null "> and create_id = #{createId}</if>-->
+            <!--<if test="updateId != null "> and update_id = #{updateId}</if>-->
+            <!--<if test="wxTime != null "> and wx_time = #{wxTime}</if>-->
+            <!--<if test="shState != null  and shState != ''"> and sh_state = #{shState}</if>-->
+            <!--<if test="picUrl != null  and picUrl != ''"> and pic_url = #{picUrl}</if>-->
+            <!--<if test="wxAddr != null  and wxAddr != ''"> and wx_addr = #{wxAddr}</if>-->
+        <!--</where>-->
+    <!--</select>-->
+
 
     <sql id="selectJzWarrantyVo">
 --         select warranty_id, content, equipment_id, equipment_name, equipment_department_id, maintenance_people_id, state, create_time, update_time, system_id, remark, create_id, update_id from jz_warranty
@@ -44,7 +81,7 @@
         (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,maintenance_people_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
-        w.create_time, w.update_time, w.system_id, w.remark FROM jz_warranty w
+        w.create_time, w.update_time, w.system_id, w.remark,w.wx_time,w.pic_url,w.wx_addr  FROM jz_warranty w
     </sql>
 
     <select id="selectJzWarrantyList" parameterType="JzWarranty" resultMap="JzWarrantyResult">
@@ -53,7 +90,7 @@
         (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
-        w.create_time, w.update_time, w.system_id, w.remark FROM jz_warranty w LEFT JOIN jz_user ON maintenance_people_id=user_id
+        w.create_time, w.update_time, w.system_id, w.remark ,w.wx_time,w.pic_url,w.wx_addr   FROM jz_warranty w LEFT JOIN jz_user ON maintenance_people_id=user_id
         <where>
             <if test="equipmentName != null  and equipmentName != ''"> and equipment_name like concat('%', #{equipmentName}, '%')</if>
             <if test="maintenancePeopleName != null  and maintenancePeopleName != ''"> and user_name like concat('%', #{maintenancePeopleName}, '%')</if>
@@ -66,6 +103,8 @@
         where warranty_id = #{warrantyId}
     </select>
 
+
+
     <insert id="insertJzWarranty" parameterType="JzWarranty" useGeneratedKeys="true" keyProperty="warrantyId">
         insert into jz_warranty
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,6 +112,7 @@
             <if test="equipmentId != null ">equipment_id,</if>
             <if test="equipmentName != null  and equipmentName != ''">equipment_name,</if>
             <if test="equipmentDepartmentId != null  and equipmentDepartmentId != ''">equipment_department_id,</if>
+            <if test="item != null  and item != ''">item,</if>
             <if test="maintenancePeopleId != null ">maintenance_people_id,</if>
             <if test="state != null  and state != ''">state,</if>
             <if test="createTime != null ">create_time,</if>
@@ -81,12 +121,17 @@
             <if test="remark != null  and remark != ''">remark,</if>
             <if test="createId != null ">create_id,</if>
             <if test="updateId != null ">update_id,</if>
+            <if test="wxTime != null ">wx_time,</if>
+            <if test="shState != null  and shState != ''">sh_state,</if>
+            <if test="picUrl != null  and picUrl != ''">pic_url,</if>
+            <if test="wxAddr != null  and wxAddr != ''">wx_addr,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="content != null  and content != ''">#{content},</if>
             <if test="equipmentId != null ">#{equipmentId},</if>
             <if test="equipmentName != null  and equipmentName != ''">#{equipmentName},</if>
             <if test="equipmentDepartmentId != null  and equipmentDepartmentId != ''">#{equipmentDepartmentId},</if>
+            <if test="item != null  and item != ''">#{item},</if>
             <if test="maintenancePeopleId != null ">#{maintenancePeopleId},</if>
             <if test="state != null  and state != ''">#{state},</if>
             <if test="createTime != null ">#{createTime},</if>
@@ -95,6 +140,10 @@
             <if test="remark != null  and remark != ''">#{remark},</if>
             <if test="createId != null ">#{createId},</if>
             <if test="updateId != null ">#{updateId},</if>
+            <if test="wxTime != null ">#{wxTime},</if>
+            <if test="shState != null  and shState != ''">#{shState},</if>
+            <if test="picUrl != null  and picUrl != ''">#{picUrl},</if>
+            <if test="wxAddr != null  and wxAddr != ''">#{wxAddr},</if>
         </trim>
     </insert>
 
@@ -105,6 +154,7 @@
             <if test="equipmentId != null ">equipment_id = #{equipmentId},</if>
             <if test="equipmentName != null  and equipmentName != ''">equipment_name = #{equipmentName},</if>
             <if test="equipmentDepartmentId != null  and equipmentDepartmentId != ''">equipment_department_id = #{equipmentDepartmentId},</if>
+            <if test="item != null  and item != ''">item = #{item},</if>
             <if test="maintenancePeopleId != null ">maintenance_people_id = #{maintenancePeopleId},</if>
             <if test="state != null  and state != ''">state = #{state},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
@@ -113,6 +163,10 @@
             <if test="remark != null  and remark != ''">remark = #{remark},</if>
             <if test="createId != null ">create_id = #{createId},</if>
             <if test="updateId != null ">update_id = #{updateId},</if>
+            <if test="wxTime != null ">wx_time = #{wxTime},</if>
+            <if test="shState != null  and shState != ''">sh_state = #{shState},</if>
+            <if test="picUrl != null  and picUrl != ''">pic_url = #{picUrl},</if>
+            <if test="wxAddr != null  and wxAddr != ''">wx_addr = #{wxAddr},</if>
         </trim>
         where warranty_id = #{warrantyId}
     </update>
