@@ -27,7 +27,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 制定巡检计划Controller
+ * 制定巡检模板Controller
  * 
  * @author sunli
  * @date 2019-12-31
@@ -66,7 +66,7 @@ public class JzPlanController extends BaseController
      * 导出制定计划列表
      */
     @RequiresPermissions("sysusersystem:plan:export")
-    @Log(title = "制定计划", businessType = BusinessType.EXPORT)
+    @Log(title = "巡检模板", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(JzPlan jzPlan)
@@ -77,7 +77,7 @@ public class JzPlanController extends BaseController
     }
 
     /**
-     * 新增制定计划
+     * 新增巡检模板
      */
     @GetMapping("/add")
     public String add()
@@ -86,10 +86,10 @@ public class JzPlanController extends BaseController
     }
 
     /**
-     * 新增保存制定计划
+     * 新增保存巡检模板
      */
     @RequiresPermissions("sysusersystem:plan:add")
-    @Log(title = "制定计划", businessType = BusinessType.INSERT)
+    @Log(title = "巡检模板", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(JzPlan jzPlan)
@@ -101,7 +101,7 @@ public class JzPlanController extends BaseController
     }
 
     /**
-     * 修改制定计划
+     * 修改巡检模板
      */
     @GetMapping("/edit/{planId}")
     public String edit(@PathVariable("planId") Long planId, ModelMap mmap)
@@ -112,10 +112,10 @@ public class JzPlanController extends BaseController
     }
 
     /**
-     * 修改保存制定计划
+     * 修改保存巡检模板
      */
     @RequiresPermissions("sysusersystem:plan:edit")
-    @Log(title = "制定计划", businessType = BusinessType.UPDATE)
+    @Log(title = "巡检模板", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(JzPlan jzPlan)
@@ -127,10 +127,10 @@ public class JzPlanController extends BaseController
     }
 
     /**
-     * 删除制定计划
+     * 删除巡检模板
      */
     @RequiresPermissions("sysusersystem:plan:remove")
-    @Log(title = "制定计划", businessType = BusinessType.DELETE)
+    @Log(title = "巡检模板", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

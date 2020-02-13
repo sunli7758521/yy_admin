@@ -13,51 +13,41 @@
                         <li>
                             <input type="hidden" id="dictType" name="planId" th:value="${dictId}"/>
                         </li>
+                        <!--<li>-->
+                            <!--<p>巡检项目：</p>-->
+                            <!--<input type="text" name="inspectionProject"/>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<p>巡检地址：</p>-->
+                            <!--<input type="text" name="inspectionAddr"/>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<p>检查人：</p>-->
+                            <!--<select id="jcPeople" class="form-control" name="jcPeople" th:with="type=${@dict.uList()}">-->
+                                <!--<option value="">所有</option>-->
+                                <!--<option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
+                            <!--</select>-->
+                        <!--</li>-->
+                        <!--<li class="select-time">-->
+                            <!--<p>检查时间：</p>-->
+                            <!--<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcDate]"/>-->
+                            <!--<span>-</span>-->
+                            <!--<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcDate]"/>-->
+                        <!--</li>-->
                         <li>
-                            <p>巡检计划：</p>
+                            <p>隐患类型：</p>
+                            <!--                                <input type="text" name="state"/>-->
                             <div class="col-sm-8">
-                                <select class="form-control" name="content" th:with="type=${@dict.titleList()}">
+                                <select class="form-control" name="typeId" th:with="type=${@dict.listType(2)}" required>
                                     <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>
+                                    <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
                                 </select>
                             </div>
                         </li>
                         <li>
-                            <p>巡检项目：</p>
-                            <input type="text" name="inspectionProject"/>
-                        </li>
-                        <li>
-                            <p>巡检地址：</p>
-                            <input type="text" name="inspectionAddr"/>
-                        </li>
-                        <li>
-                            <p>检查人：</p>
-                            <select id="jcPeople" class="form-control" name="jcPeople" th:with="type=${@dict.uList()}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>
-                            </select>
-                        </li>
-                        <li class="select-time">
-                            <p>检查时间：</p>
-                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcDate]"/>
-                            <span>-</span>
-                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcDate]"/>
-                        </li>
-                        <li>
-                            <p>状态：</p>
-                            <!--                                <input type="text" name="state"/>-->
+                            <p>隐患级别：</p>
                             <div class="col-sm-8">
-                                <select class="form-control" name="state" th:with="type=${@dict.getType('patrol_check_status')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </div>
-                        </li>
-                        <li>
-                            <p>设备状态：</p>
-                            <!--                                <input type="text" name="state"/>-->
-                            <div class="col-sm-8">
-                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">
+                                <select class="form-control" name="hiddenJb" th:with="type=${@dict.getType('risk_level')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
@@ -83,9 +73,9 @@
             <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:trouble:remove">
                 <i class="fa fa-remove"></i> 删除
             </a>
-            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:trouble:export">
-                <i class="fa fa-download"></i> 导出
-            </a>
+            <!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:trouble:export">-->
+                <!--<i class="fa fa-download"></i> 导出-->
+            <!--</a>-->
         </div>
         <div class="col-sm-12 select-table table-striped">
             <table id="bootstrap-table"></table>
@@ -97,6 +87,7 @@
     var editFlag = [[${@permission.hasPermi('sysusersystem:trouble:edit')}]];
     var removeFlag = [[${@permission.hasPermi('sysusersystem:trouble:remove')}]];
     var datas = [[${@dict.getType('jz_hidden_trouble_state')}]];
+    var yh_jb = [[${@dict.getType('risk_level')}]];
     var prefix = ctx + "sysusersystem/hiddentrouble";
 
     $(function() {
@@ -133,10 +124,10 @@
                 //     field : 'systemId',
                 //     title : '系统id'
                 // },
-                {
-                    field : 'identifyPeople',
-                    title : '盘查人'
-                },
+                // {
+                //     field : 'identifyPeople',
+                //     title : '盘查人'
+                // },
                 // {
                 //     field : 'rectificationPeople',
                 //     title : '整改人'
@@ -154,16 +145,15 @@
                 },
                 {
                     field : 'hiddenJb',
-                    title : '隐患级别'
+                    title : '隐患级别',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(yh_jb, value);
+                    }
                 },
-                {
-                    field : 'rectificationTime',
-                    title : '整改时间'
-                },
-                {
-                    field : 'remark',
-                    title : '备注'
-                },
+                // {
+                //     field : 'rectificationTime',
+                //     title : '整改时间'
+                // },
                 {
                     field : 'hiddenContent',
                     title : '隐患内容'
@@ -171,6 +161,10 @@
                 {
                     field : 'createTime',
                     title : '创建时间'
+                },
+                {
+                    field : 'remark',
+                    title : '备注'
                 },
                 {
                     title: '操作',
@@ -203,6 +197,7 @@
     //      alert("时间"+createTime);
     //      $.modal.openTab("事故隐患排查", url);
     // }
+
 </script>
 </body>
 </html>

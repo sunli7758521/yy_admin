@@ -70,10 +70,10 @@ public class JzTroublePlanController extends BaseController
     }
 
     /**
-     * 导出制定计划列表
+     * 导出隐患计划列表
      */
     @RequiresPermissions("sysusersystem:troubleplan:export")
-    @Log(title = "制定计划", businessType = BusinessType.EXPORT)
+    @Log(title = "隐患计划", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(JzPlan jzPlan)
@@ -84,7 +84,7 @@ public class JzTroublePlanController extends BaseController
     }
 
     /**
-     * 新增制定计划
+     * 新增隐患计划
      */
     @GetMapping("/add")
     public String add()
@@ -93,10 +93,10 @@ public class JzTroublePlanController extends BaseController
     }
 
     /**
-     * 新增保存制定计划
+     * 新增保存隐患计划
      */
     @RequiresPermissions("sysusersystem:troubleplan:add")
-    @Log(title = "制定计划", businessType = BusinessType.INSERT)
+    @Log(title = "隐患计划", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(JzPlan jzPlan)
@@ -108,7 +108,7 @@ public class JzTroublePlanController extends BaseController
     }
 
     /**
-     * 修改制定计划
+     * 修改隐患计划
      */
     @GetMapping("/edit/{planId}")
     public String edit(@PathVariable("planId") Long planId, ModelMap mmap)
@@ -119,10 +119,10 @@ public class JzTroublePlanController extends BaseController
     }
 
     /**
-     * 修改保存制定计划
+     * 修改保存隐患计划
      */
     @RequiresPermissions("sysusersystem:troubleplan:edit")
-    @Log(title = "制定计划", businessType = BusinessType.UPDATE)
+    @Log(title = "隐患计划", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(JzPlan jzPlan)
@@ -133,10 +133,10 @@ public class JzTroublePlanController extends BaseController
     }
 
     /**
-     * 删除制定计划
+     * 删除隐患计划
      */
     @RequiresPermissions("sysusersystem:troubleplan:remove")
-    @Log(title = "制定计划", businessType = BusinessType.DELETE)
+    @Log(title = "隐患计划", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -145,7 +145,7 @@ public class JzTroublePlanController extends BaseController
     }
 
     /**
-     * 查询字典详细
+     *  跳转到制定隐患项页面
      */
     @GetMapping("/detail/{dictId}")
     public String detail(@PathVariable("dictId") Long dictId, ModelMap mmap)

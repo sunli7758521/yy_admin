@@ -112,7 +112,8 @@ public class JzPlanServiceImpl implements IJzPlanService
 
     // 添加任务模板
     private int addJzPlanLog(JzPlan plan) {
-          JzPlanLog planLog = new JzPlanLog();
+
+        JzPlanLog planLog = new JzPlanLog();
             planLog.setPlanId(plan.getPlanId());
             planLog.setCreateTime(plan.getCreateTime());
             planLog.setContent(plan.getContent());
@@ -127,7 +128,6 @@ public class JzPlanServiceImpl implements IJzPlanService
             planLog.setLongTime(plan.getLongTime());
             planLog.setUpdateId(plan.getUpdateId());
             planLog.setUpdateTime(plan.getUpdateTime());
-            planLog.setCreateTime(plan.getCreateTime());
             planLog.setRemark(plan.getRemark());
             planLog.setSuccessTime(plan.getSuccessTime());
         return  jzPlanLogService.insertJzPlanLogList(planLog);
@@ -144,7 +144,9 @@ public class JzPlanServiceImpl implements IJzPlanService
     public int updateJzPlan(JzPlan jzPlan)
     {
         int i =0;
+        JzPlan jz = jzPlanMapper.selectJzPlanById(jzPlan.getPlanId());
         jzPlan.setUpdateTime(DateUtils.getNowDate());
+        jzPlan.setCreateTime(jz.getCreateTime());
         if(jzPlan.getPlanType()=="0"){
 
         }else if(jzPlan.getPlanType()=="1"){
@@ -154,7 +156,12 @@ public class JzPlanServiceImpl implements IJzPlanService
             addJzPlanLog(jzPlan);
         }else{
             i = jzPlanMapper.updateJzPlan(jzPlan);
-            updateJzPlanLog(jzPlan);
+//            todo
+//            updateJzPlanLog(jzPlan);
+
+            i =  jzPlanLogService.deleteJzPlanLogById(jzPlan.getPlanId());
+            // 添加
+            addJzPlanLog(jzPlan);
         }
         return i;
 
@@ -273,6 +280,7 @@ public class JzPlanServiceImpl implements IJzPlanService
         pl.setUpdateTime(jzPlan.getUpdateTime());
         pl.setRemark(jzPlan.getRemark());
         pl.setContent(jzPlan.getContent());
+        pl.setSuccessTime(jzPlan.getSuccessTime());
         jzPlanLogMapper.updateJzPlanLog(pl);
 
 

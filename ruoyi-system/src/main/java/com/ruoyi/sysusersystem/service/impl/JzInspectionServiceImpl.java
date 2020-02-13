@@ -83,11 +83,11 @@ public class JzInspectionServiceImpl implements IJzInspectionService
         }
         i = jzInspectionMapper.insertJzInspection(jzInspection);
     //  添加巡检项日志
-        i= addInspectionLog(jzInspection);
+        i= addInspectionLog(jzInspection,jzPlan);
         return i;
     }
     //        添加巡检项日志
-    private int addInspectionLog(JzInspection jzInspection) {
+    private int addInspectionLog(JzInspection jzInspection,JzPlan jzPlan) {
         JzInspectionLog log = new JzInspectionLog();
         log.setId(jzInspection.getId());
         log.setJzPlanId(jzInspection.getJzPlanId());
@@ -102,7 +102,7 @@ public class JzInspectionServiceImpl implements IJzInspectionService
         log.setState(jzInspection.getState());
         log.setSystemId(jzInspection.getSystemId());
         log.setUpdateId(jzInspection.getUpdateId());
-        log.setCreateTime(jzInspection.getCreateTime());
+        log.setCreateTime(jzPlan.getCreateTime());
         log.setUpdateTime(jzInspection.getUpdateTime());
         log.setRemark(jzInspection.getRemark());
       return   jzInspectionLogMapper.insertJzInspectionLog(log);
@@ -125,7 +125,7 @@ public class JzInspectionServiceImpl implements IJzInspectionService
      //        删除log
         jzInspectionLogMapper.deleteJzInspectionLogById(jzInspection.getId());
     //  添加巡检项日志
-        i= addInspectionLog(jzInspection);
+        i= addInspectionLog(jzInspection,jzPlan);
         return jzInspectionMapper.updateJzInspection(jzInspection);
     }
 

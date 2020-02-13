@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('制定计划列表')" />
+    <th:block th:include="include :: header('制定巡检模板列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,7 +11,7 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>计划标题：</p>
+                                <p>巡检标题：</p>
                                 <input type="text" name="title"/>
                             </li>
                             <!--<li class="select-time">-->
@@ -73,9 +73,9 @@
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:plan:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:plan:export">
-                    <i class="fa fa-download"></i> 导出
-                 </a>
+                <!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:plan:export">-->
+                    <!--<i class="fa fa-download"></i> 导出-->
+                 <!--</a>-->
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -114,7 +114,7 @@
                 },
                 {
                     field : 'title', 
-                    title : '计划标题'
+                    title : '巡检标题'
                 },
                 {
                     field : 'systemName',
@@ -136,7 +136,7 @@
                 // },
                 {
                     field : 'teamId',
-                    title : '所属班组',
+                    title : '巡检班组',
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(banZu, value);
                     }
@@ -161,7 +161,7 @@
                 },
                 {
                     field : 'content', 
-                    title : '计划内容'
+                    title : '巡检内容'
                 },
                 {
                     field : 'remark',

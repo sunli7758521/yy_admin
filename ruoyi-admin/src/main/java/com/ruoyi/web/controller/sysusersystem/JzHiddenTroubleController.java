@@ -61,7 +61,7 @@ public class JzHiddenTroubleController extends BaseController
     }
 
     /**
-     * 查询隐患列表
+     * 查询隐患项列表
      */
     @RequiresPermissions("sysusersystem:hiddentrouble:list")
     @PostMapping("/list")
@@ -72,6 +72,8 @@ public class JzHiddenTroubleController extends BaseController
         List<JzHiddenTrouble> list = jzHiddenTroubleService.selectJzHiddenTroubleList(jzHiddenTrouble);
         return getDataTable(list);
     }
+
+
 
 //    /**
 //     * 查询制定计划列表

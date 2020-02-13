@@ -41,28 +41,7 @@ public class JzWarrantyController extends BaseController
 
     @Autowired
     private ISysDeptService deptService;
-//    /**
-//     * 选择部门树
-//     */
-//    @GetMapping("/selectDeptTree/{deptId}")
-//    public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap)
-//    {
-//        mmap.put("dept", deptService.selectDeptById(deptId));
-//        return prefix + "/deptTree";
-//    }
-//    /**
-//     * 加载部门列表树
-//     */
-//    @GetMapping("/deptTreeData")
-//    @ResponseBody
-//
-//    public List<Ztree> deptTreeData()
-//    {
-//        SysDept dept =   new SysDept();
-//        dept.setSystemType("1");
-//        List<Ztree> ztrees = deptService.selectDeptTree(dept);
-//        return ztrees;
-//    }
+
 
     @RequiresPermissions("warranty:warranty:view")
     @GetMapping()
@@ -104,12 +83,6 @@ public class JzWarrantyController extends BaseController
     @GetMapping("/add")
     public String add()
     {
-//        SysDept dept =  deptService.selectDeptById(300L);
-//
-//        if(dept !=null){
-//            mmap.put("dept", dept);
-//        }
-
         return prefix + "/add";
     }
 

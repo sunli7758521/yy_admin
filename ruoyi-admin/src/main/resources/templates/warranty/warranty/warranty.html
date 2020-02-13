@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('报修列表')" />
+    <th:block th:include="include :: header('报修维修列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -10,42 +10,38 @@
                 <form id="formId">
                     <div class="select-list">
                         <ul>
-<!--                            <li>-->
-<!--                                <p>保修内容：</p>-->
-<!--                                <input type="text" name="content"/>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <p>设备</p>-->
-<!--                                <input type="text" name="equipmentId"/>-->
-<!--                            </li>-->
                             <li>
-                                <p>报修人</p>
-                                <input type="text" name="equipmentName"/>
+                                <p>报维内容：</p>
+                                <input type="text" name="content" autocomplete="off"/>
                             </li>
-<!--                            <li>-->
-<!--                                <p>保修科室</p>-->
-<!--                                <input type="text" name="equipmentDepartmentId"/>-->
-<!--                            </li>-->
-                            <li>
-                                <p>维修人</p>
-                                <input type="text" name="maintenancePeopleName"/>
-                            </li>
-                            <li>
-                                <p>状态 </p>
-<!--                                (0已修 1.维修 2.超期)：-->
-<!--                                <input type="text" name="state"/>-->
 
-                                <select name="state" class="form-control">
+                            <li>
+                                <p>状态:：</p>
+                                <select name="state" th:with="type=${@dict.getType('wx_state')}">
                                     <option value="">所有</option>
-                                    <option  th:value="0">已修</option>
-                                    <option  th:value="1">维修</option>
-                                    <option  th:value="2">超期</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-<!--                            <li>-->
-<!--                                <p>系统</p>-->
-<!--                                <input type="text" name="systemId"/>-->
-<!--                            </li>-->
+                            <li>
+                                <p>维修组：</p>
+                                <select name="item" th:with="type=${@dict.getType('ban_zu')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <p>审核状态：</p>
+                                <select name="state" th:with="type=${@dict.getType('wx_sh_state')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li class="select-time">
+                                <label>维修时间： </label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+                            </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -65,9 +61,9 @@
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="warranty:warranty:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="warranty:warranty:export">
-                    <i class="fa fa-download"></i> 导出
-                 </a>
+                <!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="warranty:warranty:export">-->
+                    <!--<i class="fa fa-download"></i> 导出-->
+                 <!--</a>-->
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -78,7 +74,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('warranty:warranty:edit')}]];
         var removeFlag = [[${@permission.hasPermi('warranty:warranty:remove')}]];
-        var datas = [[${@dict.getType('jz_equipment_state')}]];
+        var datas = [[${@dict.getType('wx_state')}]];
+        var wxShState = [[${@dict.getType('wx_sh_state')}]];
         var prefix = ctx + "warranty/warranty";
 
         $(function() {
@@ -102,63 +99,48 @@
                     title : '系统名称'
                 },
 
-                // {
-                //     field : 'equipmentId',
-                //     title : '设备id'
-                // },
+                {
+                    field : 'content',
+                    title : '维修内容'
+                },
                 {
                     field : 'equipmentName', 
                     title : '报修人员姓名'
                 },
-                // {
-                //     field : 'equipmentDepartmentId',
-                //     title : '保修科室'
-                // },
                 {
                     field : 'maintenancePeopleName',
                     title : '维修人'
                 },
                 {
-                    field : 'createName',
-                    title : '创建人'
-                },
-                {
                     field : 'createTime',
                     title : '创建时间'
                 },
-                // {
-                //     field : 'updateName',
-                //     title : '最后修改人'
-                // },
+                {
+                    field : 'state', 
+                    title : '状态',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+                },
+                {
+                    field : 'shState',
+                    title : '审核状态',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(wxShState, value);
+                    }
+                },
+                {
+                    field : 'wxTime',
+                    title : '维修时间'
+                },
                 {
                     field : 'updateTime',
                     title : '最后修改时间'
                 },
                 {
-                    field : 'content',
-                    title : '报修内容'
+                    field : 'remark',
+                    title : '备注'
                 },
-                {
-                    field : 'state', 
-                    title : '状态',
-                    // formatter: function (value, row, index) {
-                    //     if(row.state == 0){
-                    //         return "已修";
-                    //     }else if(row.state == 1){
-                    //         return "维修";
-                    //     }else{
-                    //         return "超期";
-                    //     }
-                    // }
-                    formatter: function(value, row, index) {
-                        return $.table.selectDictLabel(datas, value);
-                    }
-                },
-
-                // {
-                //     field : 'remark',
-                //     title : '备注'
-                // },
                 {
                     title: '操作',
                     align: 'center',

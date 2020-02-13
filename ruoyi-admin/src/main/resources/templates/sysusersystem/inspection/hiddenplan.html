@@ -10,63 +10,13 @@
             <form id="formId">
                 <div class="select-list">
                     <ul>
-                        <!--<li>-->
-                            <!--                                <p>系统id：</p>-->
-<!--                            <input type="hidden" id="riskType" name="riskId" th:value="${riskId}"/>-->
                             <input type="hidden" id="riskId" name="riskId" th:value="${dictId}"/>
-                        <!--</li>-->
+
 
                         <li>
-                            <p>巡检计划：</p>
-                            <div class="col-sm-8">
-                                <select class="form-control" name="content" th:with="type=${@dict.titleList()}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>
-                                </select>
-                            </div>
+                            <p>巡检项：</p>
+                            <input type="text" name="content" autocomplete="off"/>
                         </li>
-                        <li>
-                            <p>巡检项目：</p>
-                            <input type="text" name="inspectionProject"/>
-                        </li>
-                        <!--<li>-->
-                            <!--<p>巡检地址：</p>-->
-                            <!--<input type="text" name="inspectionAddr"/>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<p>检查人：</p>-->
-                            <!--<select id="jcPeople" class="form-control" name="jcPeople" th:with="type=${@dict.uList()}">-->
-                                <!--<option value="">所有</option>-->
-                                <!--<option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
-                            <!--</select>-->
-                        <!--</li>-->
-                        <!--<li class="select-time">-->
-                            <!--<p>检查时间：</p>-->
-                            <!--<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcDate]"/>-->
-                            <!--<span>-</span>-->
-                            <!--<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcDate]"/>-->
-                        <!--</li>-->
-                        <li>
-                            <p>状态：</p>
-                            <!--                                <input type="text" name="state"/>-->
-                            <div class="col-sm-8">
-                                <select class="form-control" name="state" th:with="type=${@dict.getType('patrol_check_status')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </div>
-                        </li>
-                        <li>
-                            <p>设备状态：</p>
-                            <!--                                <input type="text" name="state"/>-->
-                            <div class="col-sm-8">
-                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_equipment_state')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </div>
-                        </li>
-
                         <li>
                             <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                             <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -124,17 +74,9 @@
                     title : '主键',
                     visible: false
                 },
-                // {
-                //     field : 'equipmentId',
-                //     title : '设备id'
-                // },
-                // {
-                //     field : 'systemName',
-                //     title : '系统名称'
-                // },
                 {
                     field : 'content',
-                    title : '巡检计划'
+                    title : '巡检项名称'
                 },
                 {
                     field : 'inspectionProject',

@@ -70,7 +70,7 @@ public class JzHiddenPlanController extends BaseController
         return prefix + "/hiddenPlan";
     }
     /**
-     * 查询制定计划列表
+     * 查询隐患任务                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       列表
      */
     @RequiresPermissions("sysusersystem:hiddenPlan:list")
     @PostMapping("/list")
@@ -109,10 +109,10 @@ public class JzHiddenPlanController extends BaseController
     }
 
     /**
-     * 导出制定计划列表
+     * 导出隐患任务列表
      */
     @RequiresPermissions("sysusersystem:hiddenPlan:export")
-    @Log(title = "制定计划", businessType = BusinessType.EXPORT)
+    @Log(title = "隐患任务", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(JzPlan jzPlan)
@@ -123,7 +123,7 @@ public class JzHiddenPlanController extends BaseController
     }
 
     /**
-     * 新增制定计划
+     * 新增隐患任务
      */
     @GetMapping("/add")
     public String add()
@@ -132,10 +132,10 @@ public class JzHiddenPlanController extends BaseController
     }
 
     /**
-     * 新增保存制定计划
+     * 新增保存隐患任务
      */
     @RequiresPermissions("sysusersystem:hiddenPlan:add")
-    @Log(title = "制定计划", businessType = BusinessType.INSERT)
+    @Log(title = "隐患任务", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
     public AjaxResult addSave(JzPlan jzPlan)
@@ -147,7 +147,7 @@ public class JzHiddenPlanController extends BaseController
     }
 
     /**
-     * 修改制定计划
+     * 修改隐患任务
      */
     @GetMapping("/edit/{planId}")
     public String edit(@PathVariable("planId") Long planId, ModelMap mmap)
@@ -158,10 +158,10 @@ public class JzHiddenPlanController extends BaseController
     }
 
     /**
-     * 修改保存制定计划
+     * 修改保存隐患任务
      */
     @RequiresPermissions("sysusersystem:hiddenPlan:edit")
-    @Log(title = "制定计划", businessType = BusinessType.UPDATE)
+    @Log(title = "隐患任务", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
     public AjaxResult editSave(JzPlan jzPlan)
@@ -173,10 +173,10 @@ public class JzHiddenPlanController extends BaseController
     }
 
     /**
-     * 删除制定计划
+     * 删除隐患任务
      */
     @RequiresPermissions("sysusersystem:hiddenPlan:remove")
-    @Log(title = "制定计划", businessType = BusinessType.DELETE)
+    @Log(title = "隐患任务", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)

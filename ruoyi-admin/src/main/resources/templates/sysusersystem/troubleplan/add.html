@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('新增制定计划')" />
+    <th:block th:include="include :: header('新增隐患计划')" />
     <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">计划标题：</label>
+                <label class="col-sm-3 control-label">隐患标题：</label>
                 <div class="col-sm-8">
                     <input name="title" class="form-control" type="text" required autocomplete="off">
                 </div>
@@ -102,7 +102,7 @@
                 </div>-->
             <!--</div>-->
             <div class="form-group">
-                <label class="col-sm-3 control-label">计划内容：</label>
+                <label class="col-sm-3 control-label">隐患内容：</label>
                 <div class="col-sm-8">
                     <textarea name="content" class="form-control" type="text"></textarea>
                 </div>

@@ -68,7 +68,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <where>
             <if test="equipmentId != null "> and equipment_id = #{equipmentId}</if>
             <if test="systemId != null "> and system_id = #{systemId}</if>
-            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="content != null  and content != ''">
+                and content like concat('%', #{content}, '%')
+            </if>
 
             <if test="inspectionAddr != null  and inspectionAddr != ''"> and inspection_addr = #{inspectionAddr}</if>
 

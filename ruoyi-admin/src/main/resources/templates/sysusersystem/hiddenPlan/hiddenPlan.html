@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <th:block th:include="include :: header('制定计划列表')" />
+    <th:block th:include="include :: header('隐患任务列表')" />
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -11,7 +11,7 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>计划标题：</p>
+                                <p>隐患名称：</p>
                                 <input type="text" name="title"/>
                             </li>
                             <!--<li class="select-time">-->
@@ -50,10 +50,12 @@
 <!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
 <!--                                </select>-->
 <!--                            </li>-->
-                            <!--<li>-->
-                                <!--<p>计划内容：</p>-->
-                                <!--<input type="text" name="content"/>-->
-                            <!--</li>-->
+                            <li class="select-time">
+                            <label>创建时间： </label>
+                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+                        </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -77,6 +79,11 @@
                     <!--<i class="fa fa-download"></i> 导出-->
                  <!--</a>-->
             <!--</div>-->
+
+
+            <div class="col-sm-12 search-collapse"  style="width: 100%;height: 40%">
+                <!-- todo -->
+            </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
             </div>
@@ -102,7 +109,7 @@
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
-                modalName: "制定计划",
+                modalName: "隐患任务",
                 columns: [{
                     checkbox: true
                 },
@@ -113,7 +120,7 @@
                 },
                 {
                     field : 'title', 
-                    title : '计划标题'
+                    title : '隐患标题'
                 },
                 {
                     field : 'systemName',
@@ -121,7 +128,7 @@
                 },
                 {
                     field : 'longTime', 
-                    title : '巡查周期',
+                    title : '排查周期',
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(dats, value);
                     }
@@ -135,7 +142,7 @@
                 // },
                 {
                     field : 'teamId',
-                    title : '所属班组',
+                    title : '排查班组',
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(banZu, value);
                     }

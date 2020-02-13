@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
-    <th:block th:include="include :: header('修改制定计划')" />
+    <th:block th:include="include :: header('修改隐患计划')" />
     <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
@@ -17,7 +17,9 @@
                 </div>
             </div>
             <input name="planId" th:field="*{planId}" type="hidden">
-            <div class="form-group">    
+            <!--<input name="createTime" th:field="*{createTime}" type="text">-->
+
+            <div class="form-group">
                 <label class="col-sm-3 control-label">计划标题：</label>
                 <div class="col-sm-8">
                     <input name="title" th:field="*{title}" class="form-control" type="text">
@@ -51,21 +53,21 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">状态：</label>
-                <div class="col-sm-8">
-<!--                    <input name="state" th:field="*{state}" class="form-control" type="text" required>-->
-                    <select name="state" th:field="*{state}" class="form-control" th:with="type=${@dict.getType('jz_plan_state')}">
-                        <option value="" >所有</option>
-                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictCode}"></option>
-                    </select>
-                    <!--<select name="state" th:field="*{state}" class="form-control">-->
-                        <!--&lt;!&ndash;                        <option value="">所有</option>&ndash;&gt;-->
-                        <!--<option  th:value="0">正常</option>-->
-                        <!--<option  th:value="1">已过期</option>-->
+            <!--<div class="form-group">-->
+                <!--<label class="col-sm-3 control-label">状态：</label>-->
+                <!--<div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="state" th:field="*{state}" class="form-control" type="text" required>&ndash;&gt;-->
+                    <!--<select name="state" th:field="*{state}" class="form-control" th:with="type=${@dict.getType('jz_plan_state')}">-->
+                        <!--<option value="" >所有</option>-->
+                        <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictCode}"></option>-->
                     <!--</select>-->
-                </div>
-            </div>
+                    <!--&lt;!&ndash;<select name="state" th:field="*{state}" class="form-control">&ndash;&gt;-->
+                        <!--&lt;!&ndash;&lt;!&ndash;                        <option value="">所有</option>&ndash;&gt;&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option  th:value="0">正常</option>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<option  th:value="1">已过期</option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</select>&ndash;&gt;-->
+                <!--</div>-->
+            <!--</div>-->
 <!--            <div class="form-group">    -->
 <!--                <label class="col-sm-3 control-label">值班类型：</label>-->
 <!--                <div class="col-sm-8">-->
@@ -100,10 +102,13 @@
 <!--            </div>-->
             <div class="form-group">
                 <label class="col-sm-3 control-label">完成时限：</label>
-                <div class="col-sm-8">
-                    <input name="successTime" th:field="*{successTime}" class="form-control" type="date" required>
+                <div class="col-sm-8">    <!--  th:value="${#dates.format(jzPlan.successTime,'yyyy/MM/dd')}""-->
+                    <!--<input name="successTime" th:field="*{successTime}"   class="form-control" placeholder="yyyy-MM-dd" >-->
+                    <input type="text" class="form-control"  th:field="*{successTime}"  id="successTime"   placeholder="yyyy-MM-dd" autocomplete="off">
                 </div>
             </div>
+
+
             <div class="form-group">    
                 <label class="col-sm-3 control-label">计划内容：</label>
                 <div class="col-sm-8">
@@ -138,6 +143,25 @@
             minView: "month",
             autoclose: true
         });
+        //
+
+            layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#successTime'
+                ,type: 'datetime'
+            });
+                // //日期时间选择器
+                // laydate.render({
+                //     elem: '#test5'
+                //     ,type: 'datetime'
+                // });
+        })
+
+
+
+
     </script>
 </body>
 </html>

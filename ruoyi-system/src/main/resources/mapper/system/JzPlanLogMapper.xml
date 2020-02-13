@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="time != null "> and time = #{time}</if>
             <if test="longTime != null  and longTime != ''"> and long_time = #{longTime}</if>
             <if test="systemId != null "> and system_id = #{systemId}</if>
-                <if test="teamId != null "> and team_id = #{teamId}</if>
+             <if test="teamId != null "> and team_id = #{teamId}</if>
             <if test="state != null  and state != ''"> and state = #{state}</if>
             <if test="zbType != null  and zbType != ''"> and zb_type = #{zbType}</if>
             <if test="planType != null  and planType != ''"> and plan_type = #{planType}</if>
@@ -73,6 +73,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="successTime != null "> and success_time = #{successTime}</if>
             <if test="wxId != null "> and wx_id = #{wxId}</if>
             <if test="wxTime != null "> and wx_time = #{wxTime}</if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                AND date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                AND date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+
         </where>
     </select>
 
@@ -148,12 +155,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="wxId != null ">wx_id = #{wxId},</if>
             <if test="wxTime != null ">wx_time = #{wxTime},</if>
         </trim>
-        where id = #{id}
+    where id = #{id}
+
     </update>
 
 
     <delete id="deleteJzPlanLogById" parameterType="Long">
-        delete from jz_plan_log where id = #{planId}
+        delete from jz_plan_log where plan_id = #{planId}
     </delete>
 
     <delete id="deleteJzPlanLogByIds" parameterType="String">

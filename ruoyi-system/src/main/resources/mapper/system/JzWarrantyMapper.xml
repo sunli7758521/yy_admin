@@ -81,7 +81,7 @@
         (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,maintenance_people_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
-        w.create_time, w.update_time, w.system_id, w.remark,w.wx_time,w.pic_url,w.wx_addr  FROM jz_warranty w
+        w.create_time, w.update_time, w.system_id, w.remark,w.wx_time,w.pic_url,w.wx_addr, w.sh_state  FROM jz_warranty w
     </sql>
 
     <select id="selectJzWarrantyList" parameterType="JzWarranty" resultMap="JzWarrantyResult">
@@ -90,20 +90,26 @@
         (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
         (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
-        w.create_time, w.update_time, w.system_id, w.remark ,w.wx_time,w.pic_url,w.wx_addr   FROM jz_warranty w LEFT JOIN jz_user ON maintenance_people_id=user_id
+        w.create_time, w.update_time, w.system_id, w.remark ,w.wx_time,w.pic_url,w.wx_addr,w.sh_state   FROM jz_warranty w LEFT JOIN jz_user ON maintenance_people_id=user_id
         <where>
             <if test="equipmentName != null  and equipmentName != ''"> and equipment_name like concat('%', #{equipmentName}, '%')</if>
+            <if test="content != null  and content != ''"> and content like concat('%', #{content}, '%')</if>
             <if test="maintenancePeopleName != null  and maintenancePeopleName != ''"> and user_name like concat('%', #{maintenancePeopleName}, '%')</if>
             <if test="state != null  and state != ''"> and w.state = #{state}</if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                AND date_format(w.wx_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                AND date_format(w.wx_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
         </where>
+        order by  w.create_time desc
     </select>
 
     <select id="selectJzWarrantyById" parameterType="Long" resultMap="JzWarrantyResult">
         <include refid="selectJzWarrantyVo"/>
         where warranty_id = #{warrantyId}
     </select>
-
-
 
     <insert id="insertJzWarranty" parameterType="JzWarranty" useGeneratedKeys="true" keyProperty="warrantyId">
         insert into jz_warranty

@@ -33,7 +33,7 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 巡检Controller
+ * 模板巡检项Controller
  * 
  * @author ljc
  * @date 2019-12-30
@@ -69,10 +69,10 @@ public class JzInspectionController extends BaseController
     @GetMapping()
     public String inspection()
     {
-        return prefix + "/inspection";
+        return prefix + "/hiddenplan";
     }
     /**
-     * 查询巡检列表
+     * 查询模板巡检项列表
      */
     @RequiresPermissions("sysusersystem:inspection:list")
     @PostMapping("/list")
@@ -118,10 +118,10 @@ public class JzInspectionController extends BaseController
     }
 
     /**
-     * 导出巡检列表
+     * 导出模板巡检项列表
      */
     @RequiresPermissions("sysusersystem:inspection:export")
-    @Log(title = "巡检", businessType = BusinessType.EXPORT)
+    @Log(title = "模板巡检项", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
     public AjaxResult export(JzInspection jzInspection)
@@ -132,7 +132,7 @@ public class JzInspectionController extends BaseController
     }
 
     /**
-     * 新增巡检
+     * 新增模板巡检项
      */
     @GetMapping("/add/{id}")
     public String add(@PathVariable("id") long Id,ModelMap mmap)
@@ -143,10 +143,10 @@ public class JzInspectionController extends BaseController
     }
 
     /**
-     * 新增保存巡检
+     * 新增保存模板巡检项
      */
     @RequiresPermissions("sysusersystem:inspection:add")
-    @Log(title = "巡检", businessType = BusinessType.INSERT)
+    @Log(title = "模板巡检项", businessType = BusinessType.INSERT)
     @PostMapping("/add/{planId}")
     @ResponseBody
     public AjaxResult addSave(@PathVariable Long planId,JzInspection jzInspection)
@@ -157,19 +157,8 @@ public class JzInspectionController extends BaseController
         return toAjax(jzInspectionService.insertJzInspection(jzInspection));
     }
 
-//    /**
-//     * 修改巡检
-//     */
-//    @GetMapping("/edit/{id}")
-//    public String edit(@PathVariable("id") Long id, ModelMap mmap)
-//    {
-//        JzInspection jzInspection = jzInspectionService.selectJzInspectionById(id);
-//        mmap.put("jzInspection", jzInspection);
-//        return prefix + "/edit";
-//    }
-
     /**
-     * 预览巡检任务
+     * 预览模板巡检项
      */
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
@@ -180,10 +169,10 @@ public class JzInspectionController extends BaseController
     }
 
     /**
-     * 修改保存巡检
+     * 修改保存模板巡检项
      */
     @RequiresPermissions("sysusersystem:inspection:edit")
-    @Log(title = "巡检", businessType = BusinessType.UPDATE)
+    @Log(title = "模板巡检项", businessType = BusinessType.UPDATE)
     @PostMapping("/edit/{planId}")
     @ResponseBody
     public AjaxResult editSave(@PathVariable Long planId,JzInspection jzInspection)
@@ -195,10 +184,10 @@ public class JzInspectionController extends BaseController
     }
 
     /**
-     * 删除巡检
+     * 删除模板巡检项
      */
     @RequiresPermissions("sysusersystem:inspection:remove")
-    @Log(title = "巡检", businessType = BusinessType.DELETE)
+    @Log(title = "模板巡检项", businessType = BusinessType.DELETE)
     @PostMapping( "/remove")
     @ResponseBody
     public AjaxResult remove(String ids)
@@ -207,7 +196,7 @@ public class JzInspectionController extends BaseController
     }
 
     /**
-     * 预览巡检任务
+     * 预览模板巡检项
      */
     @GetMapping("/yulan/{id}")
     public String yulan(@PathVariable("id") Long id, ModelMap mmap)

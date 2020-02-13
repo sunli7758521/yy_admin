@@ -11,7 +11,7 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>计划标题：</p>
+                                <p>隐患名称：</p>
                                 <input type="text" name="title"/>
                             </li>
                             <!--<li class="select-time">-->
@@ -29,13 +29,13 @@
                                     </select>
                                 </div>
                             </li>
-                            <li>
-                                <p>状态：</p>
-                                <select name="state" th:with="type=${@dict.getType('jz_plan_state')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </li>
+                            <!--<li>-->
+                                <!--<p>状态：</p>-->
+                                <!--<select name="state" th:with="type=${@dict.getType('jz_plan_state')}">-->
+                                    <!--<option value="">所有</option>-->
+                                    <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                                <!--</select>-->
+                            <!--</li>-->
                             <li>
                                 <p>所属班组：</p>
                                 <select name="teamId" th:with="type=${@dict.getType('ban_zu')}">
@@ -50,10 +50,10 @@
 <!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
 <!--                                </select>-->
 <!--                            </li>-->
-                            <li>
-                                <p>计划内容：</p>
-                                <input type="text" name="content"/>
-                            </li>
+                            <!--<li>-->
+                                <!--<p>计划内容：</p>-->
+                                <!--<input type="text" name="content"/>-->
+                            <!--</li>-->
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -73,9 +73,9 @@
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:plan:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:plan:export">
-                    <i class="fa fa-download"></i> 导出
-                 </a>
+                <!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:plan:export">-->
+                    <!--<i class="fa fa-download"></i> 导出-->
+                 <!--</a>-->
             </div>
             <div class="col-sm-12 select-table table-striped">
                 <table id="bootstrap-table"></table>
@@ -112,7 +112,7 @@
                 },
                 {
                     field : 'title', 
-                    title : '计划标题'
+                    title : '隐患名称'
                 },
                 {
                     field : 'systemName',
@@ -134,7 +134,7 @@
                 // },
                 {
                     field : 'teamId',
-                    title : '所属班组',
+                    title : '排查班组',
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(banZu, value);
                     }
@@ -190,7 +190,7 @@
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.planId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.planId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="detail(\'' + row.planId + '\')"><i class="fa fa-list"></i>制定隐患巡查项</a>');
+                        actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="detail(\'' + row.planId + '\')"><i class="fa fa-list"></i>制定隐患巡项</a>');
                         return actions.join('');
                     }
                 }]
@@ -199,7 +199,7 @@
         });
         function detail(planId) {
             var url = prefix + '/detail/' + planId;
-            $.modal.openTab("巡查任务", url);
+            $.modal.openTab("制定隐患排查项", url);
         }
     </script>
 </body>

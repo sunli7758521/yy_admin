@@ -87,6 +87,18 @@ public class JzWarranty extends BaseEntity
     @Excel(name = "维修地址")
     private String wxAddr;
 
+    /** 维修组 */
+    @Excel(name = "维修组")
+    private String item;
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
     public Date getWxTime() {
         return wxTime;
     }
