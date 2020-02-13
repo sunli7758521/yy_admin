@@ -56,6 +56,24 @@ public class JzUserController extends BaseController
         return prefix + "/user";
     }
 
+    @GetMapping("/rand/{systemId}")
+    @ResponseBody
+    public String RandomNumber(@PathVariable int systemId){
+        String str ="";
+        switch(systemId){
+            case 301:str="dlxt";break;//电力系统
+            case 302:str="ryxt";break;//热源系统
+            case 200:str="rqxt";break;//燃气系统
+            case 201:str="zljktxt";break;//制冷及空调系统
+            case 202:str="jpsxt";break;//给排水系统
+            case 203:str="dtxt";break;//电梯系统
+            case 204:str="yyqtxt";break;//医用气体系统
+            case 205:str="staqxt";break;//食堂安全管理
+            case 206:str="adaqxt";break;//工地安全管理
+        }
+        Integer i = (int)(Math.random()*90000+10000);
+        return str + i.toString();
+    }
     /**
      * 查询用户列表
      */

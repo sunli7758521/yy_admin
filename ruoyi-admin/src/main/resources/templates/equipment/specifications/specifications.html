@@ -12,7 +12,7 @@
                         <ul>
                             <li>
                                 <p>规格名称：</p>
-                                <input type="text" name="spName"/>
+                                <input type="text" name="spName" autocomplete="off"/>
                             </li>
 <!--                            <li>-->
 <!--                                <p>系统id：</p>-->
@@ -29,18 +29,18 @@
                             </li>
                             <li>
                                 <p>配件名称：</p>
-                                <input type="text" name="erName"/>
+                                <input type="text" name="erName" autocomplete="off"/>
                             </li>
                             <li>
                                 <p>型号：</p>
-                                <input type="text" name="ggXh"/>
+                                <input type="text" name="ggXh" autocomplete="off"/>
                             </li>
                             <li>
                                 <p>数量：</p>
-                                <input type="text" name="num"/>
+                                <input type="text" name="num" autocomplete="off"/>
                             </li>
                             <li>
-                                <p>类型</p>
+                                <p>类型:</p>
                                 <select name="erType" th:with="type=${@dict.getType('leixing_ku')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>

@@ -141,7 +141,7 @@ public class JzSupplierController extends BaseController
     {
        // jzSupplier.setSystemId(deptService.selectDeptIdByDeptName(treeName));
         jzSupplier.setCreateId(ShiroUtils.getUserId());
-
+        jzSupplier.setState("0");
         return toAjax(jzSupplierService.insertJzSupplier(jzSupplier));
     }
 

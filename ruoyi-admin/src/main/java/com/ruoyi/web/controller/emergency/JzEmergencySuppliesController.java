@@ -47,6 +47,13 @@ public class JzEmergencySuppliesController extends BaseController
         return prefix + "/supplies";
     }
 
+
+    @RequiresPermissions("emergency:supplies:hiddenview")
+    @GetMapping("/view")
+    public String hiddensupplies()
+    {
+        return prefix + "/hidden/hiddensupplies";
+    }
     /**
      * 查询应急方案关联物资列表
      */
@@ -88,6 +95,13 @@ public class JzEmergencySuppliesController extends BaseController
         JzEmergencyPlan jzEmergencyPlan = jzEmergencyPlanService.selectJzEmergencyPlanById(planId);
         mmap.put("jzEmergencyPlan",jzEmergencyPlan);
         return prefix + "/add";
+    }
+    @GetMapping("/hidden/add")
+    public String addhidden(@PathVariable Long planId, ModelMap mmap)
+    {
+        JzEmergencyPlan jzEmergencyPlan = jzEmergencyPlanService.selectJzEmergencyPlanById(planId);
+        mmap.put("jzEmergencyPlan",jzEmergencyPlan);
+        return prefix + "hidden//add";
     }
     /**
      * 新增保存应急方案关联物资

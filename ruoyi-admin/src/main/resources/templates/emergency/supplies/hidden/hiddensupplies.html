@@ -9,11 +9,6 @@
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
                     <div class="select-list">
-                        <ul>                            <li>
-                            <!--                                <p>系统id：</p>-->
-                            <input type="hidden" id="dictType" name="jzPlanId" th:value="${dictId}"/>
-                        </li>
-
                             <li>
                                 <p>应急物资大类型：</p>
 <!--                                <input type="text" name="suppliseBigTypeId"/>-->
@@ -87,7 +82,7 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="add()" shiro:hasPermission="emergency:supplies:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="emergency:supplies:add">
                     <i class="fa fa-plus"></i> 添加
                 </a>
                 <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="emergency:supplies:edit">
@@ -114,10 +109,9 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
-                createUrl: prefix + "/add",
+                createUrl: prefix + "/hidden/add",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
-                queryParams: queryParams,
                 exportUrl: prefix + "/export",
                 modalName: "应急方案关联物资",
                 columns: [{
@@ -192,16 +186,7 @@
             };
             $.table.init(options);
         });
-        function queryParams(params) {
-            var search = $.table.queryParams(params);
-            search.dictType = $("#dictType").val();
-            return search;
-        }
-        function add(){
-            var id = $("#dictType").val();
-            var url = prefix + '/add/' + id;
-            $.modal.open("添加应急任务", url);
-        }
+
     </script>
 </body>
 </html>

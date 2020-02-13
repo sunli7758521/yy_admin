@@ -12,7 +12,7 @@
 				<label class="col-sm-3 control-label ">上级系统：</label>
 				<div class="col-sm-8">
 				    <div class="input-group">
-						<input class="form-control" type="text" id="treeName" onclick="selectDeptTree()" readonly="true" th:field="*{parentName}">
+						<input class="form-control" type="text" id="treeName" onclick="selectDeptTree()" readonly="true" th:field="*{parentName}" autocomplete="off">
 					    <span class="input-group-addon"><i class="fa fa-search"></i></span>
 				    </div>
 				</div>
@@ -20,39 +20,39 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label">系统名称：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="deptName" th:field="*{deptName}" id="deptName" required>
+					<input class="form-control" type="text" name="deptName" th:field="*{deptName}" id="deptName" autocomplete="off" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">显示排序：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="orderNum" th:field="*{orderNum}" required>
+					<input class="form-control" type="text" name="orderNum" th:field="*{orderNum}" autocomplete="off" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">负责人：</label>
 				<div class="col-sm-8">
 					<input class="form-control" type="hidden" name="leaderId" id="leaderId"  th:field="*{leaderId}" >
-					<input class="form-control" type="text" name="leader" id="leader" th:field="*{leader}" onclick="selectUserList()">
+					<input class="form-control" type="text" name="leader" id="leader" th:field="*{leader}" autocomplete="off" required onclick="selectUserList()">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">联系电话：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" id="phone" name="phone" th:field="*{phone}">
+					<input class="form-control" type="text" id="phone" name="phone" th:field="*{phone}" autocomplete="off" required>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">邮箱：</label>
 				<div class="col-sm-8">
-					<input class="form-control" type="text" name="email" th:field="*{email}">
+					<input class="form-control" type="text" name="email" th:field="*{email}" autocomplete="off">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label">系统状态：</label>
 				<div class="col-sm-8">
 					<div class="radio-box" th:each="dict : ${@dict.getType('sys_normal_disable')}">
-						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:field="*{status}">
+						<input type="radio" th:id="${dict.dictCode}" name="status" th:value="${dict.dictValue}" th:field="*{status}" autocomplete="off">
 						<label th:for="${dict.dictCode}" th:text="${dict.dictLabel}"></label>
 					</div>
 				</div>

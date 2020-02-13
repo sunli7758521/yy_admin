@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">所属系统：</label>
                     <div class="col-sm-8">
-                        <select class="form-control" name="systemId" th:with="type=${@dict.getSystem(300)}">
+                        <select class="form-control" id="systemId" name="systemId" th:with="type=${@dict.getSystem(300)}" required="required">
                             <option value="" >所有</option>
                             <option th:each="dict : ${type}" th:text="${dict.deptName}"
                                     th:value="${dict.deptId} "></option>
@@ -195,7 +195,7 @@
         <div class="form-group">
             <label class="col-sm-4 control-label">工号：</label>
             <div class="col-sm-8">
-                <input name="userNum" class="form-control" type="text" required>
+                <input id="userNum" name="userNum" class="form-control" type="text" readonly="true">
             </div>
         </div>
             </div>
@@ -248,6 +248,19 @@
     //         return false;
     //     }
     // }
+    $(document).ready(function(){
+        $("#systemId").on("change",function(){
+            // $("#systemId").change(function(){
+            var systemId = $("#systemId").val();
+            $.ajax({
+                type:"GET",
+                url:prefix + "/rand/" + systemId,
+                success:function(con){
+                    $("#userNum").val(con)
+                }
+            })
+        })
+    })
 </script>
 </body>
 </html>

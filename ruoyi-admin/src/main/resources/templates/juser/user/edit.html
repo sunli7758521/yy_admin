@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">所属系统：</label>
                     <div class="col-sm-8">
-                        <select class="form-control" th:field="*{systemId}" name="systemId" th:with="type=${@dict.DeptList()}">
+                        <select class="form-control" th:field="*{systemId}" name="systemId" th:with="type=${@dict.DeptList()}" required="required">
                             <option value="" >所有</option>
                             <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId} "
                                     th:field="*{systemId}"></option>
@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">人员类型：</label>
                     <div class="col-sm-8">
-                        <select name="userType" th:field="*{userType}" class="form-control" th:with="type=${@dict.utList()}">
+                        <select name="userType" th:field="*{userType}" class="form-control" th:with="type=${@dict.utList()}" required="required">
                             <option value="" >所有</option>
                             <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"
                                     th:field="*{userType}"></option>
@@ -52,7 +52,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label">用户名称：</label>
+                    <label class="col-sm-4 control-label">员工姓名：</label>
                     <div class="col-sm-8">
                         <input name="userName" th:field="*{userName}" class="form-control" type="text">
                     </div>
@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label">手机号：</label>
                     <div class="col-sm-8">
-                        <input name="phone" th:field="*{phone}" class="form-control" type="isPhone">
+                        <input name="phone" th:field="*{phone}" th:value="*{phone}" class="form-control" type="isPhone" required>
                     </div>
                 </div>
             </div>
@@ -190,7 +190,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">紧急电话：</label>
                         <div class="col-sm-8">
-                            <input name="emergencyCall" th:field="*{emergencyCall}" class="form-control" type="isPhone">
+                            <input name="emergencyCall" th:field="*{emergencyCall}" th:value="*{emergencyCall}" class="form-control" type="isPhone" required>
                         </div>
                     </div>
                 </div>
@@ -201,7 +201,7 @@
                     <div class="form-group">
                         <label class="col-sm-4 control-label">工号：</label>
                         <div class="col-sm-8">
-                            <input name="userNum"  th:field="*{userNum}" class="form-control" type="text">
+                            <input name="userNum"  th:field="*{userNum}" class="form-control" type="text" readonly="true">
                         </div>
                     </div>
                 </div>

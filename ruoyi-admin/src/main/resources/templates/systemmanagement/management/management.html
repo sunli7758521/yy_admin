@@ -23,24 +23,24 @@
                             </li>
                             <li>
                                 <p>制度标题：</p>
-                                <input type="text" name="title"/>
+                                <input type="text" name="title"  autocomplete="off" />
                             </li>
                             <li>
-                                <p>状态</p>
+                                <p>状态：</p>
                                 <select class="form-control" name="state" th:with="type=${@dict.getType('jz_systemmanagement_state')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
                             <li>
-                                <p>制度类别</p>
+                                <p>制度类别：</p>
                                 <select class="form-control" name="type" th:with="type=${@dict.getType('jz_systemmanagement_type')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
                             <li>
-                                <p>制度级别</p>
+                                <p>制度级别：</p>
                                 <select class="form-control" name="level" th:with="type=${@dict.getType('jz_systemmanagement_level')}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>

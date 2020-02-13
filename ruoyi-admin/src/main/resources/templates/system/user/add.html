@@ -99,8 +99,8 @@
                         <label class="col-sm-4 control-label">用户状态：</label>
                         <div class="col-sm-8">
                             <label class="toggle-switch switch-solid">
-	                            <input type="checkbox" id="status" checked>
-	                            <span></span>
+	                            <input type="checkbox" id="status" checked
+                                <span></span>>
 	                        </label>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                         <label class="col-xs-2 control-label">角色：</label>
                         <div class="col-xs-10">
                             <label th:each="role:${roles}" class="check-box">
-								<input name="role" type="radio" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}" >
+								<input name="role" type="radio" th:value="${role.roleId}" th:text="${role.roleName}" th:disabled="${role.status == '1'}" autocomplete="off">
 							</label>
                         </div>
                     </div>

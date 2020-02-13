@@ -11,8 +11,8 @@
                     <div class="select-list">
                         <ul>
                             <li>
-                                <p>标题</p>
-                                <input type="text" name="title" required/>
+                                <p>标题:</p>
+                                <input type="text" name="title" required  autocomplete="off"/>
                             </li>
 <!--                            <li>-->
 <!--                                <p>供应商名称</p>-->
@@ -43,7 +43,7 @@
 <!--                                </select>-->
 <!--                            </li>-->
                             <li>
-                                <p>部门：</p>
+                                <p>部门:</p>
 <!--                                <input type="text" name="deptId"/>-->
                                 <select  class="form-control" name="deptId" th:with="type=${@dict.getSystem(100)}" required>
                                     <option value="">所有</option>
@@ -51,7 +51,7 @@
                                 </select>
                             </li>
                             <li>
-                                <p>状态</p>
+                                <p>状态:</p>
 <!--                                <input type="text" name="state"/>-->
                                 <select  class="form-control" name="state" th:with="type=${@dict.getType('jz_emergency_plan_state')}">
                                     <option value="">所有</option>
@@ -111,7 +111,7 @@
                 },
                     {
                         field : 'title',
-                        title : '计划名称'
+                        title : '方案名称 '
                     },
                 {
                     field : 'supplierName',
