@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.guanlisystem.mapper.JzSysUserSystemMapper">
+    
+    <resultMap type="JzSysUserSystem" id="JzSysUserSystemResult">
+        <result property="id"    column="id"    />
+        <result property="sysUserId"    column="sys_user_id"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectJzSysUserSystemVo">
+        select id, sys_user_id, system_id, remark, create_time, update_time from jz_sys_user_system
+    </sql>
+
+    <select id="selectJzSysUserSystemList" parameterType="JzSysUserSystem" resultMap="JzSysUserSystemResult">
+        <include refid="selectJzSysUserSystemVo"/>
+        <where>  
+            <if test="sysUserId != null "> and sys_user_id = #{sysUserId}</if>
+            <if test="systemId != null "> and system_id = #{systemId}</if>
+        </where>
+    </select>
+    
+    <select id="selectJzSysUserSystemById" parameterType="Long" resultMap="JzSysUserSystemResult">
+        <include refid="selectJzSysUserSystemVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJzSysUserSystem" parameterType="JzSysUserSystem" useGeneratedKeys="true" keyProperty="id">
+        insert into jz_sys_user_system
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysUserId != null ">sys_user_id,</if>
+            <if test="systemId != null ">system_id,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysUserId != null ">#{sysUserId},</if>
+            <if test="systemId != null ">#{systemId},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzSysUserSystem" parameterType="JzSysUserSystem">
+        update jz_sys_user_system
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sysUserId != null ">sys_user_id = #{sysUserId},</if>
+            <if test="systemId != null ">system_id = #{systemId},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzSysUserSystemById" parameterType="Long">
+        delete from jz_sys_user_system where id = #{id}
+    </delete>
+
+    <delete id="deleteJzSysUserSystemByIds" parameterType="String">
+        delete from jz_sys_user_system where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <select id="selectUserSystemList" resultMap="JzSysUserSystemResult">
+        <include refid="selectJzSysUserSystemVo"/>
+        <where>
+            <if test="userId != null "> and sys_user_id = #{userId}</if>
+        </where>
+    </select>
+
+    <delete id="deleteJzSysUserSystemByUserId" parameterType="Long" >
+         delete from jz_sys_user_system where sys_user_id = #{userId}
+    </delete>
+
+    <select id="selectByUserId" resultMap="JzSysUserSystemResult">
+        select system_id from jz_sys_user_system WHERE sys_user_id =#{userId}
+    </select>
+</mapper>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增应急方案关联演练')" />
+    <th:block th:include="include :: select2-css" />
+    <th:block th:include="include :: bootstrap-select-css" />
+
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-rehearse-add">
+            <input name="PlanId" id="planId" type="hidden">
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">关联应急预案：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="emergencyPlanId" class="form-control" type="text">&ndash;&gt;-->
+<!--                    <select class="form-control" name="emergencyPlanId" th:with="type=${@dict.emergencySuppliesList()}" >-->
+<!--                        <option value="">所有</option>-->
+<!--                        <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">应急物资大类型</label>
+                <div class="col-sm-8">
+                    <select class="form-control" name="suppliseBigTypeId" th:with="type=${@dict.bswzList()}" required>
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id} "></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">应急物资小类型</label>
+                <div class="col-sm-8">
+                    <select id="suppliseSmTypeId" class="form-control" name="suppliseSmTypeId"  th:with="type=${@dict.smallTypeList()}" required>
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id} "></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">剩余数量：</label>
+                <div class="col-sm-8">
+                    <input id="shengYu" name="shengYu" class="form-control" type="text" readonly>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">应急演练备注：</label>
+                <div class="col-sm-8">
+                    <input name="rehearseRemark" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">应急演练时间：</label>
+                <div class="col-sm-8">
+<!--                    <input name="rehearseTime" class="form-control" type="text">-->
+                    <input type="text" name="rehearseTime" class="layui-timeline form-control"   id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">应急物资使用数量</label>
+                <div class="col-sm-8">
+                    <div id="conuntNumMsg" style="display: none;color:red">使用数量不能大于剩余数量！</div>
+                    <input id="countNum" name="countNum" class="form-control" type="text" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">状态：</label>
+                <div class="col-sm-8">
+<!--                    <input name="state" class="form-control" type="text">-->
+                    <select  class="form-control" name="state" th:with="type=${@dict.getType('sys_common_status')}" >
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">应急演练图片(一张或者多张)：</label>
+                <div class="col-sm-8">
+<!--                    <input name="rehearsePic" class="form-control" type="text">-->
+                    <textarea name="rehearsePic" id="editor"  class="form-control" type="text" style="border-style:none;height:500px;width:100%"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: select2-js" />
+    <th:block th:include="include :: bootstrap-select-js" />
+    <script th:src="@{/ajax/libs/ueditor1_4_3_3-utf8-jsp/ueditor.config.js}"></script>
+    <script th:src="@{/ajax/libs/ueditor1_4_3_3-utf8-jsp/ueditor.all.js}"></script>
+    <script th:src="@{/layui/layui.js}"></script>
+
+    <script>
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //日期时间选择器
+            laydate.render({
+                elem: '#test5'
+                ,type: 'datetime'
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+        var editor =UE.getEditor('editor',{
+            //是否保持toolbar位置不懂，默认为true
+            elementPathEnabled: false,
+            toolbars: [
+                ['simpleupload', 'insertimage']
+            ]
+
+
+        });
+        var prefix = ctx + "emergency/rehearse"
+        $("#form-rehearse-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add/"+$('#planId').val(), $('#form-rehearse-add').serialize());
+            }
+        }
+
+        $(document).ready(function(){
+            $("#suppliseSmTypeId").on("change",function(){
+                var sbtid=$(this).val();
+                // console.log($(this).val())
+                $.ajax({
+                    type: "GET",
+                    url: prefix+"/shengYu/"+sbtid,
+                    success: function(con){
+                        $('#shengYu').val(con);
+                    }
+                });
+            })
+
+            $("#countNum").on("blur",function(){
+                var coun1=$(this).val();
+                var coun2=$('#shengYu').val();
+
+                if(Number(coun1)>Number(coun2)){
+                    $("#conuntNumMsg").show();
+                }else{
+                    $("#conuntNumMsg").hide();
+                }
+            })
+        })
+
+        // $(function() {
+        //
+        //     $.ajax({
+        //         type: "POST",
+        //         url: prefix+"/newsLookc",
+        //         success: function(con){
+        //             if (con>0){
+        //                 $('#shengYu').append("<i>您有"+con+"未读消息</i>");
+        //             }else {
+        //                 $('#shengYu').append("<i>您没有未读消息</i>");
+        //
+        //             }
+        //         }
+        //     });
+        // })
+    </script>
+</body>
+</html>

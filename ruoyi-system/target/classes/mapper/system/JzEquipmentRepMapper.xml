@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.equipment.mapper.JzEquipmentRepMapper">
+    
+    <resultMap type="JzEquipmentRep" id="JzEquipmentRepResult">
+        <result property="id"    column="id"    />
+        <result property="spId"    column="sp_id"    />
+        <result property="spName"    column="sp_Name"    />
+        <result property="name"    column="name"    />
+        <result property="ggXh"    column="gg_xh"    />
+        <result property="num"    column="num"    />
+        <result property="highestNum"    column="highest_num"    />
+        <result property="minimumNum"    column="minimum_num"    />
+        <result property="type"    column="type"    />
+        <result property="ertype"    column="ertype"    />
+        <result property="state"    column="state"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createName"    column="create_name"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectJzEquipmentRepVo">
+--         select id, sp_id, name, gg_xh, num, highest_num, minimum_num, type, state, create_time, create_id, update_time, remark from jz_equipment_rep
+    SELECT er.*,su.user_name create_name,es.sp_name sp_name,s.dict_label ertype FROM jz_equipment_rep er
+LEFT JOIN sys_user su ON su.user_id=er.create_id
+LEFT JOIN jz_equipment_specifications es ON es.sp_id=er.sp_id
+LEFT JOIN sys_dict_data s ON s.dict_value=er.type AND s.dict_type = 'leixing_ku'
+    </sql>
+
+    <select id="selectJzEquipmentRepList" parameterType="JzEquipmentRep" resultMap="JzEquipmentRepResult">
+        <include refid="selectJzEquipmentRepVo"/>
+        <where>  
+            <if test="er.spId != null "> and er.sp_id = #{spId}</if>
+            <if test="er.name != null  and er.name != ''"> and er.name like concat('%', #{name}, '%')</if>
+            <if test="er.ggXh != null  and ggXh != ''"> and er.gg_xh = #{ggXh}</if>
+            <if test="er.num != null "> and er.num = #{num}</if>
+            <if test="er.highestNum != null "> and er.highest_num = #{highestNum}</if>
+            <if test="er.minimumNum != null "> and er.minimum_num = #{minimumNum}</if>
+            <if test="er.er.type != null  and type != ''"> and er.type = #{type}</if>
+            <if test="er.state != null  and state != ''"> and er.state = #{state}</if>
+            <if test="er.createId != null "> and er.create_id = #{createId}</if>
+        </where>
+    </select>
+    
+    <select id="selectJzEquipmentRepById" parameterType="Long" resultMap="JzEquipmentRepResult">
+        <include refid="selectJzEquipmentRepVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJzEquipmentRep" parameterType="JzEquipmentRep" useGeneratedKeys="true" keyProperty="id">
+        insert into jz_equipment_rep
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="spId != null ">sp_id,</if>
+            <if test="name != null  and name != ''">name,</if>
+            <if test="ggXh != null  and ggXh != ''">gg_xh,</if>
+            <if test="num != null ">num,</if>
+            <if test="highestNum != null ">highest_num,</if>
+            <if test="minimumNum != null ">minimum_num,</if>
+            <if test="type != null  and type != ''">type,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="createId != null ">create_id,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="spId != null ">#{spId},</if>
+            <if test="name != null  and name != ''">#{name},</if>
+            <if test="ggXh != null  and ggXh != ''">#{ggXh},</if>
+            <if test="num != null ">#{num},</if>
+            <if test="highestNum != null ">#{highestNum},</if>
+            <if test="minimumNum != null ">#{minimumNum},</if>
+            <if test="type != null  and type != ''">#{type},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="createId != null ">#{createId},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzEquipmentRep" parameterType="JzEquipmentRep">
+        update jz_equipment_rep
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="spId != null ">sp_id = #{spId},</if>
+            <if test="name != null  and name != ''">name = #{name},</if>
+            <if test="ggXh != null  and ggXh != ''">gg_xh = #{ggXh},</if>
+            <if test="num != null ">num = #{num},</if>
+            <if test="highestNum != null ">highest_num = #{highestNum},</if>
+            <if test="minimumNum != null ">minimum_num = #{minimumNum},</if>
+            <if test="type != null  and type != ''">type = #{type},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="createId != null ">create_id = #{createId},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzEquipmentRepById" parameterType="Long">
+        delete from jz_equipment_rep where id = #{id}
+    </delete>
+
+    <delete id="deleteJzEquipmentRepByIds" parameterType="String">
+        delete from jz_equipment_rep where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

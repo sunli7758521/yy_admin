@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增用户证件照')" />
+    <th:block th:include="include :: datetimepicker-css" />
+    <th:block th:include="include :: select2-css" />
+    <th:block th:include="include :: bootstrap-select-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-license-add">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">证件名称：</label>
+                <div class="col-sm-3">
+                    <input name="licenseName" class="form-control" type="text" required autocomplete="off">
+                </div>
+                <label class="col-sm-3 control-label">证件编号：</label>
+                <div class="col-sm-3">
+                    <input name="licenseNum" class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">所属系统：</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="systemId" th:with="type=${@dict.getSystem(300)}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId} "></option>
+                    </select>
+                </div>
+                <label class="col-sm-3 control-label">人员姓名：</label>
+                <div class="col-sm-3">
+<!--                    <input name="userId" class="form-control" type="text">-->
+                    <select class="form-control" name="userId" th:with="type=${@dict.uList()}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId} "></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">证照类型：</label>
+                <div class="col-sm-3">
+                    <select name="licenseType" class="form-control m-b" th:with="type=${@dict.getType('business_type')}" >
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+                <label class="col-sm-3 control-label">初领时间：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+<!--                        <input name="clTime" class="form-control" placeholder="yyyy-MM-dd" type="text">-->
+                        <input name="firstTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">证照有效开始时间：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="startTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+                <label class="col-sm-3 control-label">证照有效结束时间：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="endTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">作业类别：</label>
+                <div class="col-sm-3">
+<!--                    <input name="homeworkTypeId" class="form-control" type="text">-->
+                    <select class="form-control" name="homeworkTypeId" th:with="type=${@dict.zuoYeList()}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId} "></option>
+                    </select>
+
+                </div>
+                <label class="col-sm-3 control-label">准操项目：</label>
+                <div class="col-sm-3">
+<!--                    <input name="mustHoldProjectTypeId" class="form-control" type="text">-->
+                    <select name="mustHoldProjectTypeId" class="form-control m-b" th:with="type=${@dict.caoZuoList()}" >
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">复审时间：</label>
+                <div class="col-sm-3">
+                    <select name="appType" class="form-control m-b" th:with="type=${@dict.getType('review_type')}" >
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+                <!--<label class="col-sm-3 control-label">证照的复审时间：</label>-->
+                <!--<div class="col-sm-3">-->
+                    <!--<div class="input-group date">-->
+                        <!--<span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+                        <!--<input name="reviewTime" class="form-control" placeholder="yyyy-MM-dd" type="text">-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">发证单位：</label>
+                <div class="col-sm-9">
+                    <input name="unit" class="form-control" type="text">
+                </div>
+
+            </div>
+
+            <div class="form-group" style="height:370px;">
+                <label class="col-sm-3 control-label">证件照前面照片：</label>
+                <div class="col-sm-8" >
+<!--                    <input name="beforeImg" class="form-control" type="text">-->
+                    <textarea name="beforeImg" id="editor1"  class="form-control" type="text" style="border-style:none;height:300px;width:100%"></textarea>
+                </div>
+            </div>
+            <div class="form-group" style="height:370px;">
+                <label class="col-sm-3 control-label">证件照后面图片：</label>
+                <div class="col-sm-8">
+<!--                    <input name="afterImg" class="form-control" type="text">-->
+                    <textarea name="afterImg" id="editor2"  class="form-control" type="text" style="border-style:none;height:300px;width:100%"></textarea>
+                </div>
+            </div>
+            <div class="form-group" >
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" id="remark"  class="form-control" type="text" ></textarea>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script th:src="@{/ajax/libs/ueditor1_4_3_3-utf8-jsp/ueditor.config.js}"></script>
+    <script th:src="@{/ajax/libs/ueditor1_4_3_3-utf8-jsp/ueditor.all.js}"></script>
+    <script type="text/javascript">
+        var editor1 =UE.getEditor('editor1',{
+            //是否保持toolbar位置不懂，默认为true
+            elementPathEnabled: false,
+            toolbars: [
+                ['simpleupload']
+            ]
+
+
+        });
+        var editor2 =UE.getEditor('editor2',{
+            //是否保持toolbar位置不懂，默认为true
+            elementPathEnabled: false,
+            toolbars: [
+                ['simpleupload']
+            ]
+
+
+        });
+        var prefix = ctx + "business/license"
+        $("#form-license-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-license-add').serialize());
+            }
+        }
+
+        $("input[name='firstTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='startTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='endTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='reviewTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        $("input[name='twoReviewTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+</body>
+</html>

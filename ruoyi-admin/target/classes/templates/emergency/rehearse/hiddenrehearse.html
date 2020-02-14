@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('应急方案关联演练列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <!--                                <p>系统id：</p>-->
+                                <input type="hidden" id="dictType" name="jzPlanId" th:value="${dictId}"/>
+                            </li>
+<!--                            <li>-->
+<!--                                <p>关联应急预案：</p>-->
+<!--&lt;!&ndash;                                <input type="text" name="emergencyPlanId"/>&ndash;&gt;-->
+<!--                                <select class="form-control" name="content" th:with="type=${@dict.emergencySuppliesList()}">-->
+<!--                                    <option value="">所有</option>-->
+<!--                                    <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>-->
+<!--                                </select>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>应急演练图片(一张或者多张)：</p>-->
+<!--                                <input type="text" name="rehearsePic"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>应急演练备注：</p>-->
+<!--                                <input type="text" name="rehearseRemark"/>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>-->
+<!--                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>-->
+<!--                            </li>-->
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="add()" shiro:hasPermission="emergency:rehearse:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="emergency:rehearse:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="emergency:rehearse:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="emergency:rehearse:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('emergency:rehearse:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('emergency:rehearse:remove')}]];
+        var prefix = ctx + "emergency/rehearse";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "应急方案关联演练",
+                queryParams: queryParams,
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'rehearseId', 
+                    title : '主键',
+                    visible: false
+                },
+                {
+                    field : 'emergencyPlanName',
+                    title : '关联应急预案'
+                },
+                {
+                    field : 'suppliseBigTypeName',
+                    title : '应急物资大类型'
+                },
+                {
+                    field : 'suppliseSmTypeName',
+                    title : '应急物资小类型'
+                },
+                {
+                    field : 'countNum',
+                    title : '使用数量'
+                },
+                {
+                    field : 'rehearseTime',
+                    title : '演练时间 '
+                },
+                // {
+                //     field : 'rehearsePic',
+                //     title : '应急演练图片(一张或者多张)'
+                // },
+                {
+                    field : 'rehearseRemark', 
+                    title : '应急演练备注'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.rehearseId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.rehearseId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }],
+                onDblClickRow(row){
+                    showStart(row.rehearseId);
+                }
+            };
+            $.table.init(options);
+        });
+        function queryParams(params) {
+            var search = $.table.queryParams(params);
+            search.dictType = $("#dictType").val();
+            return search;
+        }
+        function add(){
+            var id = $("#dictType").val();
+            var url = prefix + '/add/' + id;
+            // var url = prefix + '/add';
+            $.modal.open("添加应急任务", url);
+        }
+        /*查看详细信息*/
+        function showStart(id) {
+
+            $.modal.open("详细信息", prefix + "/listById/"+id , '' , '' , closemod);
+
+            /*$.news.open("详细信息", prefix + "/listById/"+id , '' , '' , closemod);*/
+        }
+        function closemod() {
+            $.modal.closeAll();
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

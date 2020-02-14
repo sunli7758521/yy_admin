@@ -59,7 +59,18 @@ public class JzEmergencyUserServiceImpl implements IJzEmergencyUserService
                   }
               }
               user.setGroupUserName(userName);
-
+          }
+          for (JzEmergencyUser userOne : list) {
+              String[] split = userOne.getViceGroupLeaderId().split(",");
+              String userNameOne = "";
+              for (String s : split) {
+//                  JzUser jzUser = jzUserMapper.selectJzUserById(Long.parseLong(s));
+                  JzUser jzUser = jzUserMapper.selectJzUserById(Long.parseLong(s));
+                  if(jzUser !=null){
+                      userNameOne+=jzUser.getUserName()+",";
+                  }
+              }
+              userOne.setViceGroupLeaderName(userNameOne);
           }
       }
         return list;

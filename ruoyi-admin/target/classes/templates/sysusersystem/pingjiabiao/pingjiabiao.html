@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('风险评价列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+
+                    <div class="select-list">
+                        <ul>
+                            <input type="hidden" id="dictType" name="riskId" th:value="${riskId}"/>
+                            <li>
+                                <p>风险级别：</p>
+                                <input type="text" name="fengxianJibie"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="add()" shiro:hasPermission="sysusersystem:pingjiabiao:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:pingjiabiao:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:pingjiabiao:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+<!--                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:pingjiabiao:export">-->
+<!--                    <i class="fa fa-download"></i> 导出-->
+<!--                 </a>-->
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('sysusersystem:pingjiabiao:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('sysusersystem:pingjiabiao:remove')}]];
+        var dengJi = [[${@dict.getType('risk_level')}]];
+        var prefix = ctx + "sysusersystem/pingjiabiao";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                queryParams: queryParams,
+                modalName: "风险评价",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'pingjiaId', 
+                    title : '评价id',
+                    visible: false
+                },
+                {
+                    field : 'riskId',
+                    title : '风险id',
+                    visible: false
+                },
+                {
+                    field : 'biaozhunFen', 
+                    title : '标准分'
+                },
+                {
+                    field : 'lZhi', 
+                    title : 'L'
+                },
+                {
+                    field : 'sZhi', 
+                    title : 'S'
+                },
+                {
+                    field : 'rZhi', 
+                    title : 'R'
+                },
+                {
+                    field : 'dZhi', 
+                    title : 'D'
+                },
+                {
+                    field : 'fengxianJibie', 
+                    title : '风险级别',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(dengJi, value);
+                    }
+                },
+
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.pingjiaId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.pingjiaId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+        function queryParams(params) {
+            var search = $.table.queryParams(params);
+            search.dictType = $("#dictType").val();
+            return search;
+        }
+        function add(){
+            console.log(1)
+            var riskId = $("#dictType").val();
+            var url = prefix + '/add/' + riskId;
+            // console.log(url+"riskId"+riskId)
+            $.modal.open("添加", url);
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改应急方案')" />
+    <link href="/layui/css/layui.css" rel="stylesheet"/>
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-plan-edit" th:object="${jzEmergencyPlan}">
+            <input name="planId" th:field="*{planId}" type="hidden">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">计划名称</label>
+                <div class="col-sm-8">
+                    <input name="title" th:field="*{title}" class="form-control" type="text" required  autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">供应商名称</label>
+                <div class="col-sm-8">
+<!--                    <input name="suppliesId" th:field="*{suppliesId}" class="form-control" type="text">-->
+                    <select  class="form-control" name="suppliesId" th:with="type=${@dict.supList()}" required>
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.supplierName}" th:value="${dict.supplierId}" th:field="*{suppliesId}"></option>
+                    </select>
+                </div>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-3 control-label">应急物资大类型</label>-->
+<!--                <div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="suppliesBigTypeId" th:field="*{suppliesBigTypeId}" class="form-control" type="text">&ndash;&gt;-->
+<!--                    <select class="form-control" name="suppliesBigTypeId" th:with="type=${@dict.bswzList()}" required th:field="*{suppliesBigTypeId}">-->
+<!--                        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id} "></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-3 control-label">应急物资小类型</label>-->
+<!--                <div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="suppliesSmTypeId" th:field="*{suppliesSmTypeId}" class="form-control" type="text">&ndash;&gt;-->
+<!--                    <select class="form-control" name="suppliseSmTypeId" th:with="type=${@dict.smallTypeList()}" required th:field="*{suppliesSmTypeId}">-->
+<!--                        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id} "></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">应急物资类型</label>-->
+<!--                <div class="col-sm-8">-->
+<!--&lt;!&ndash;                    <input name="typeId" th:field="*{typeId}" class="form-control" type="text">&ndash;&gt;-->
+<!--                    <select  class="form-control" name="typeId" th:with="type=${@dict.wzList()}" required>-->
+<!--                        <option value="">所有</option>-->
+<!--                        <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}" th:field="*{typeId}"></option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">应急物资使用数量：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="countNum" th:field="*{countNum}" class="form-control" type="text" required>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">文件上传</label>
+                <div class="layui-upload">
+                    <input id="lzqkUrl" name="planUrl" th:field="*{planUrl}" class="form-control" type="hidden">
+                    <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传新文件</button>
+                    <button type="button" class="layui-btn" id="test4" onclick="addSystem()"><i class="layui-icon"></i>预览</button>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">系统</label>
+                <div class="col-sm-8">
+<!--                    <input name="systemId" th:field="*{systemId}" class="form-control" type="text">-->
+                    <select  class="form-control" name="systemId" th:with="type=${@dict.getSystem(300)}" required th:field="*{systemId}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId}" th:field="*{systemId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">部门</label>
+                <div class="col-sm-8">
+<!--                    <input name="deptId" th:field="*{deptId}" class="form-control" type="text">-->
+                    <select  class="form-control" name="systemId" th:with="type=${@dict.getSystem(100)}" required>
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId}" th:field="*{deptId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态</label>
+                <div class="col-sm-8">
+<!--                    <input name="state" th:field="*{state}" class="form-control" type="text" required>-->
+                    <select  class="form-control" name="state" th:with="type=${@dict.getType('jz_emergency_plan_state')}" required>
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"th:field="*{state}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" class="form-control" th:text="*{remark}" wrap="off" style="overflow:scroll;" maxlength="200"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script src="/layui/layui.js"></script>
+    <script type="text/javascript">
+        var prefix = ctx + "emergency/plan";
+        $("#form-plan-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/edit", $('#form-plan-edit').serialize());
+            }
+        }
+        /** 上传文件    */
+        layui.use('upload', function(){
+            var $ = layui.jquery
+                ,upload = layui.upload;
+
+            //指定允许上传的文件类型
+            upload.render({
+                elem: '#test3'
+                ,url: ctx+'common1/upload/'
+                ,accept: 'file' //普通文件
+                ,exts: 'doc|docx' //只允许上传文本文件
+                ,done: function(res){
+                    if(res.code>0){
+                        return layer.msg('上传失败');
+                    }
+                    $("#lzqkUrl").val(res.msg);
+                    // console.log(res.msg)
+                    layer.msg("上传成功");
+                }
+            });
+        });
+        // 预览制度
+        function addSystem() {
+            if($("#lzqkUrl").val()==""){
+                //console.log(lzqkUrl+"111")
+                layer.alert("文件未上传，请先上传在预览！！！");
+                return ;
+            }
+            // var length = $("#lzqkUrl").val().length;
+            // var url = prefix +"/editWordToPdf/"+$("#lzqkUrl").val().substring(27,length);
+            var url = prefix +"/editWordToPdf/"+$("#planId").val();
+            $.modal.open("上传制度",url);
+        }
+    </script>
+</body>
+</html>

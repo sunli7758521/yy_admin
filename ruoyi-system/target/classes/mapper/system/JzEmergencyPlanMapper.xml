@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.emergency.mapper.JzEmergencyPlanMapper">
+
+    <resultMap type="JzEmergencyPlan" id="JzEmergencyPlanResult">
+        <result property="planId"    column="plan_id"    />
+        <result property="suppliesId"    column="supplies_id"    />
+        <result property="suppliesBigTypeId"    column="supplies_big_type_id"    />
+<!--        <result property="suppliesBigTypeName"    column="supplies_big_type_Name"    />-->
+        <result property="suppliesSmTypeId"    column="supplies_sm_type_id"    />
+<!--        <result property="suppliesSmTypeName"    column="supplies_sm_type_Name"    />-->
+        <result property="typeId"    column="type_id"    />
+        <result property="countNum"    column="count_num"    />
+        <result property="planUrl"    column="plan_url"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="state"    column="state"    />
+        <result property="title"    column="title"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="supplierName"    column="supplier_name"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="systemName"    column="system_name"    />
+    </resultMap>
+
+    <sql id="selectJzEmergencyPlanVo">
+        select plan_id, supplies_id, supplise_big_type_id, supplise_sm_type_id, type_id, count_num, plan_url, system_id, dept_id, state, title, create_time, update_time, remark from jz_emergency_plan
+    </sql>
+    <sql id="selectVO">
+        select e.plan_id, e.supplies_id,js.supplier_name supplier_name, e.supplise_big_type_id, e.supplise_sm_type_id, e.type_id,jt.`name` type_name,s.dept_name, e.count_num, e.plan_url, e.system_id,ss.dept_name system_name, e.dept_id, e.state, e.title, e.create_time, e.update_time, e.remark from jz_emergency_plan e
+LEFT JOIN sys_dept s ON s.dept_id = e.dept_id
+LEFT JOIN sys_dept ss ON ss.dept_id = e.system_id
+LEFT JOIN jz_type jt ON jt.id = e.type_id
+LEFT JOIN jz_supplier js ON js.supplier_id = e.supplies_id
+    </sql>
+
+    <select id="selectJzEmergencyPlanList" parameterType="JzEmergencyPlan" resultMap="JzEmergencyPlanResult">
+        <include refid="selectVO"/>
+        <where>
+<!--            <if test="suppliesId != null "> and e.supplies_id = #{suppliesId}</if>-->
+<!--            <if test="suppliesBigTypeId != null "> and e.supplies_big_type_id = #{suppliesBigTypeId}</if>-->
+<!--            <if test="suppliesSmTypeId != null "> and e.supplies_sm_type_id = #{suppliesSmTypeId}</if>-->
+            <if test="typeId != null "> and e.type_id = #{typeId}</if>
+<!--            <if test="countNum != null "> and e.count_num = #{countNum}</if>-->
+<!--            <if test="planUrl != null  and planUrl != ''"> and e.plan_url = #{planUrl}</if>-->
+<!--            <if test="systemId != null "> and e.system_id = #{systemId}</if>-->
+             <if test="deptId != null "> and e.dept_id = #{deptId}</if>
+            <if test="state != null  and state != ''"> and e.state = #{state}</if>
+            <if test="title != null  and title != ''"> and e.title like concat('%', #{title}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectJzEmergencyPlanById" parameterType="Long" resultMap="JzEmergencyPlanResult">
+        <include refid="selectVO"/>
+        where plan_id = #{planId}
+    </select>
+    <select id="selectFileUrlByPlanId" resultType="java.lang.String">
+        select plan_url from jz_emergency_plan where plan_id=#{managementId}
+    </select>
+    <select id="emergencySuppliesList" resultType="com.ruoyi.emergency.domain.JzEmergencyPlan">
+        select plan_id, supplies_id, supplise_big_type_id, supplise_sm_type_id, type_id, count_num, plan_url, system_id, dept_id, state, title, create_time, update_time, remark from jz_emergency_plan
+    </select>
+    <select id="selectDbzList" parameterType="JzEmergencyPlan" resultMap="JzEmergencyPlanResult">
+        <include refid="selectVO"/>
+        <where>
+            <if test="array !=null" >
+                AND  e.system_id  in
+                <foreach item="systemIds" collection="array" open="(" separator="," close=")">
+                    #{systemIds}
+                </foreach>
+            </if>
+            <if test="typeId != null"> and e.type_id = #{typeId}</if>
+            <if test="state != null  and state != ''"> and e.state = #{state}</if>
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+        </where>
+        order by  create_time desc
+    </select>
+
+    <insert id="insertJzEmergencyPlan" parameterType="JzEmergencyPlan" useGeneratedKeys="true" keyProperty="planId">
+        insert into jz_emergency_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suppliesId != null ">supplies_id,</if>
+            <if test="suppliesBigTypeId != null ">supplies_big_type_id,</if>
+            <if test="suppliesSmTypeId != null ">supplies_sm_type_id,</if>
+            <if test="typeId != null ">type_id,</if>
+            <if test="countNum != null ">count_num,</if>
+            <if test="planUrl != null  and planUrl != ''">plan_url,</if>
+            <if test="systemId != null ">system_id,</if>
+            <if test="deptId != null ">dept_id,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="title != null  and title != ''">title,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="suppliesId != null ">#{suppliesId},</if>
+            <if test="suppliesBigTypeId != null ">#{suppliesBigTypeId},</if>
+            <if test="suppliesSmTypeId != null ">#{suppliesSmTypeId},</if>
+            <if test="typeId != null ">#{typeId},</if>
+            <if test="countNum != null ">#{countNum},</if>
+            <if test="planUrl != null  and planUrl != ''">#{planUrl},</if>
+            <if test="systemId != null ">#{systemId},</if>
+            <if test="deptId != null ">#{deptId},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzEmergencyPlan" parameterType="JzEmergencyPlan">
+        update jz_emergency_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="suppliesId != null ">supplies_id = #{suppliesId},</if>
+            <if test="suppliesBigTypeId != null ">supplies_big_type_id = #{suppliesBigTypeId},</if>
+            <if test="suppliesSmTypeId != null ">supplies_sm_type_id = #{suppliesSmTypeId},</if>
+            <if test="typeId != null ">type_id = #{typeId},</if>
+            <if test="countNum != null ">count_num = #{countNum},</if>
+            <if test="planUrl != null  and planUrl != ''">plan_url = #{planUrl},</if>
+            <if test="systemId != null ">system_id = #{systemId},</if>
+            <if test="deptId != null ">dept_id = #{deptId},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="title != null  and title != ''">title = #{title},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where plan_id = #{planId}
+    </update>
+
+    <delete id="deleteJzEmergencyPlanById" parameterType="Long">
+        delete from jz_emergency_plan where plan_id = #{planId}
+    </delete>
+
+    <delete id="deleteJzEmergencyPlanByIds" parameterType="String">
+        delete from jz_emergency_plan where plan_id in
+        <foreach item="planId" collection="array" open="(" separator="," close=")">
+            #{planId}
+        </foreach>
+    </delete>
+
+</mapper>

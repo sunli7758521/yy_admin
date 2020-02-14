@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('修改制定计划日志')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<style>
+    html {
+        font-size: 14px;
+        height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+
+    @media screen and (max-width: 800px) {
+        html {
+            font-size: 12px;
+        }
+    }
+
+    body {
+        padding: 2rem;
+        box-sizing: border-box;
+    }
+
+    div {
+        box-sizing: border-box;
+    }
+
+
+    .clearfix:after {
+        /*伪元素是行内元素 正常浏览器清除浮动方法*/
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+
+    .container {
+        width: 100%;
+        height: 100%;
+    }
+
+    .container .head {
+        text-align: center;
+        line-height: 3rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .container .subHead {
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+    .container .content {
+        border: 1px solid #333;
+        /* height: calc(100% - 5rem); */
+    }
+
+    .container .content table {
+        width: 100%;
+        height: 100%;
+        line-height: 2rem;
+    }
+
+    .container .content table thead {
+        border-bottom: 1px solid #333;
+    }
+
+    .container .content table td {
+        border-right: 1px solid #333;
+        border-bottom: 1px solid #333;
+        padding: 1rem;
+        text-align: center;
+    }
+
+
+    .container .content table tr td:last-child {
+        border-right: 0px solid #333;
+    }
+
+    .container .content table tbody tr:last-child td {
+        border-bottom: 0px solid #333;
+
+    }
+
+    .container .content table tr td:nth-last-child(1) {
+        width: 10rem;
+    }
+
+    .container .content table tr td:nth-last-child(2) {
+        width: 10rem;
+    }
+
+    .container .content table tbody tr td:nth-last-child(3) {
+        text-align: left;
+    }
+
+    .container .content table tr td:nth-last-child(4) {
+        width: 4rem;
+
+    }
+
+    .container .content table tr td:nth-last-child(5) {
+        width: 4rem;
+    }
+
+    .container .content table tr td:nth-last-child(6) {
+        width: 4rem;
+    }
+
+    .container .foot {
+        padding-top: 0.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .container .foot div {
+        float: left;
+        width: 15rem;
+    }
+    .container .foot div:nth-child(2) {
+        float: right;
+        width: 10rem;
+    }
+    .container .foot div:nth-child(3) {
+        float: right;
+        width: 15rem;
+    }
+    .dataBlock {
+        display: none;
+    }
+</style>
+<body class="white-bg">
+<div class="container">
+    <div class="head">特种设备使用单位现场安全监督检查项目表</div>
+    <div class="subHead">(表<span class="deviceIndex"></span>--<span class="deviceName"></span>使用情况检查项目表)</div>
+    <div class="content">
+        <table cellspacing="0">
+            <thead>
+            <tr>
+                <td>类别</td>
+                <td>检查项目</td>
+                <td>检查项目编号</td>
+                <td>检查内容</td>
+                <td>检查地址</td>
+                <td>备注</td>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="foot clearfix">
+        <div>
+            被检查单位(公章)：
+        </div>
+        <div>
+            日期：<span class="time"></span>
+        </div>
+        <div>
+            检查人：<span class="userNames"></span>
+        </div>
+
+    </div>
+
+    <div class="dataBlock">
+        <div class="list" th:each="list1 : ${list}">
+            <!-- 巡检内容-->
+            <span  class="content" th:text="${list1.content}"></span>
+            <!-- 巡检项目-->
+            <span  class="inspectionProject" th:text="${list1.inspectionProject}"></span>
+            <!-- 巡检地址-->
+            <span  class="inspectionAddr" th:text="${list1.inspectionAddr}"></span>
+            <!-- 检查时间-->
+            <span  class="jcDate" th:text="${list1.jcDate}"></span>
+            <!-- 设备状态-->
+            <span  class="equipmentState" th:text="${list1.equipmentState}"></span>
+            <!-- 巡检状态-->
+            <span  class="state" th:text="${list1.state}"></span>
+            <!-- 检查人姓名-->
+            <span  class="userName" th:text="${list1.userName}"></span>
+        </div>
+        <input id="title" th:value="${title}"/>
+        <input id="remark" th:value="${remark}"/>
+    </div>
+</div>
+
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // 获取table内容
+            var data = [];
+            $(".list").each(function(){
+                var content = $(this).find(".content").html();
+                var inspectionProject = $(this).find(".inspectionProject").html();
+                var inspectionAddr = $(this).find(".inspectionAddr").html();
+                var jcDateStr = $(this).find(".jcDate").html();
+                var equipmentStateStr = $(this).find(".equipmentState").html();
+                var stateStr = $(this).find(".state").html();
+                var userName = $(this).find(".userName").html();
+                var equipmentState=""
+                var state=""
+                var jcDate=""
+                if(stateStr==0) {
+                    state = "未完成"
+                }else if(stateStr==1) {
+                    state = "已完成"
+                }
+                if(equipmentStateStr==0) {
+                    equipmentState = "使用中"
+                }else if(equipmentStateStr==1) {
+                    equipmentState = "维修中"
+                }else if(equipmentStateStr==2) {
+                    equipmentState = "报废"
+                }
+                jcDate = getTime(jcDateStr)
+                data.push({
+                    content:content,
+                    inspectionProject:inspectionProject,
+                    inspectionAddr:inspectionAddr,
+                    jcDate:jcDate,
+                    equipmentState:equipmentState,
+                    state:state,
+                    userName:userName,
+                })
+                $("table").attr("userName",userName)
+                $("table").attr("jcDate",jcDate)
+            })
+            // 渲染table
+            var str="";
+            var arr = [];
+
+            for(var i=0;i<data.length;i++) {
+                str+="<tr>";
+                if(i==0) {
+                    str+="<td class='leftTitle' rowspan='"+data.length+"'>"+$("#title").val()+"</td>"
+                }else {
+                    str+=""
+                }
+                str+="<td class='checkItem'>"+data[i].inspectionProject+"</td>"
+                str+="<td>"+(i+1)+"</td>"
+                str+="<td>"+data[i].content+"</td>"
+                str+="<td>"+data[i].inspectionAddr+"</td>"
+                str+="<td></td>"
+                str+="</tr>";
+                arr.push({
+                    name:data[i].inspectionProject,
+                    value:i
+                })
+
+            }
+            $("table tbody").html(str)
+            reFoot()
+            // 跨行跨列更改
+            /*var map = {},dest = [];
+            for(var i = 0; i < arr.length; i++){
+                var ai = arr[i];
+                if(!map[ai.name]){
+                    dest.push({
+                        name: ai.name,
+                        value: ai.value
+                    });
+                    map[ai.name] = ai;
+                }else{
+                    for(var j = 0; j < dest.length; j++){
+                        var dj = dest[j];
+                        if(dj.name == ai.name){
+                            dj.sub=parseFloat(ai.value) - parseFloat(dj.value) + 1;
+                            break;
+                        }
+                    }
+                }
+            };
+            for(var i=0;i<dest.length;i++) {
+                $("table tbody tr").eq(dest[i].value).find("td.checkItem").attr("rowspan",dest[i].sub);
+                for(var j=1;j<dest[i].sub;j++) {
+                    $("table tbody tr").eq(dest[i].value+j).find("td.checkItem").remove();
+                }
+            }*/
+
+            // 边框修改调整
+            $("table tbody tr").each(function () {
+                var len = $("table tbody tr").length
+                var index = $(this).index();
+                var rowSpan = $(this).find("td").eq(0).attr("rowspan");
+                if (rowSpan) {
+                    if (Number(rowSpan) + index == len) {
+                        $(this).find("td").eq(0).css("border-bottom", "none")
+                    }
+                }
+            })
+
+        })
+        // 时间戳和时间字符串的转换
+        function getTime(num){
+            var str="";
+            if(num!="") {
+                var result = new Date(num);
+                var year = result.getFullYear();
+                var month = result.getMonth()+1;
+                month = reTen(month)
+                var day = result.getDate();
+                day = reTen(day)
+                var hour = result.getHours();
+                hour = reTen(hour)
+                var minute = result.getMinutes();
+                minute = reTen(minute)
+                var second = result.getSeconds();
+                second = reTen(second)
+                str = year+"-"+month+"-"+day;
+
+            }
+            return str;
+        }
+
+
+        // 时间字符串的补零操作
+        function reTen(str) {
+            var result="";
+            if(str<10){
+                result = "0"+str;
+            }else {
+                result = str;
+            }
+            return result
+        }
+        function reFoot() {
+            // 渲染检查人和日期
+            $(".foot .userNames").html($("table").attr("username"))
+            $(".foot .time").html($("table").attr("jcdate"))
+            /*var deviceName = $("#deviceName").val()
+            $("span.deviceName").html(deviceName);
+            switch (deviceName) {
+                case "锅炉":
+                    $("span.deviceIndex").html("2");
+                    break;
+                case "压力容器":
+                    $("span.deviceIndex").html("3");
+                    break;
+                case "压力管道":
+                    $("span.deviceIndex").html("4");
+                    break;
+                case "电梯":
+                    $("span.deviceIndex").html("5");
+                    break;
+                case "起重机械":
+                    $("span.deviceIndex").html("6");
+                    break;
+                case "客运索道":
+                    $("span.deviceIndex").html("7");
+                    break;
+                case "游乐设施":
+                    $("span.deviceIndex").html("8");
+                    break;
+                case "场内车辆":
+                    $("span.deviceIndex").html("9");
+                    break;
+                case "车用气瓶":
+                    $("span.deviceIndex").html("10");
+                    break;
+            }*/
+        }
+    </script>
+</body>
+</html>

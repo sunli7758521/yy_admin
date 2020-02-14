@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.PingjiabiaoMapper">
+
+    <resultMap type="Pingjiabiao" id="PingjiabiaoResult">
+        <result property="pingjiaId"    column="pingJia_id"    />
+        <result property="biaozhunFen"    column="biaoZhun_fen"    />
+        <result property="lZhi"    column="l_zhi"    />
+        <result property="sZhi"    column="s_zhi"    />
+        <result property="rZhi"    column="r_zhi"    />
+        <result property="dZhi"    column="d_zhi"    />
+        <result property="fengxianJibie"    column="fengXian_jiBie"    />
+        <result property="riskId"    column="risk_id"    />
+    </resultMap>
+
+    <sql id="selectPingjiabiaoVo">
+        select pingJia_id, biaoZhun_fen, l_zhi, s_zhi, r_zhi, d_zhi, fengXian_jiBie, risk_id from pingjiabiao
+    </sql>
+
+    <select id="selectPingjiabiaoList" parameterType="Pingjiabiao" resultMap="PingjiabiaoResult">
+        <include refid="selectPingjiabiaoVo"/>
+        <where>
+            <if test="biaozhunFen != null "> and biaoZhun_fen = #{biaozhunFen}</if>
+            <if test="lZhi != null "> and l_zhi = #{lZhi}</if>
+            <if test="sZhi != null "> and s_zhi = #{sZhi}</if>
+            <if test="rZhi != null "> and r_zhi = #{rZhi}</if>
+            <if test="dZhi != null "> and d_zhi = #{dZhi}</if>
+            <if test="fengxianJibie != null  and fengxianJibie != ''"> and fengXian_jiBie = #{fengxianJibie}</if>
+            <if test="riskId != null "> and risk_id = #{riskId}</if>
+        </where>
+    </select>
+
+    <select id="selectPingjiabiaoById" parameterType="Long" resultMap="PingjiabiaoResult">
+        <include refid="selectPingjiabiaoVo"/>
+        where pingJia_id = #{pingjiaId}
+    </select>
+
+    <insert id="insertPingjiabiao" parameterType="Pingjiabiao">
+        insert into pingjiabiao
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pingjiaId != null ">pingJia_id,</if>
+            <if test="biaozhunFen != null ">biaoZhun_fen,</if>
+            <if test="lZhi != null ">l_zhi,</if>
+            <if test="sZhi != null ">s_zhi,</if>
+            <if test="rZhi != null ">r_zhi,</if>
+            <if test="dZhi != null ">d_zhi,</if>
+            <if test="fengxianJibie != null  and fengxianJibie != ''">fengXian_jiBie,</if>
+            <if test="riskId != null ">risk_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pingjiaId != null ">#{pingjiaId},</if>
+            <if test="biaozhunFen != null ">#{biaozhunFen},</if>
+            <if test="lZhi != null ">#{lZhi},</if>
+            <if test="sZhi != null ">#{sZhi},</if>
+            <if test="rZhi != null ">#{rZhi},</if>
+            <if test="dZhi != null ">#{dZhi},</if>
+            <if test="fengxianJibie != null  and fengxianJibie != ''">#{fengxianJibie},</if>
+            <if test="riskId != null ">#{riskId},</if>
+        </trim>
+    </insert>
+
+    <update id="updatePingjiabiao" parameterType="Pingjiabiao">
+        update pingjiabiao
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="biaozhunFen != null ">biaoZhun_fen = #{biaozhunFen},</if>
+            <if test="lZhi != null ">l_zhi = #{lZhi},</if>
+            <if test="sZhi != null ">s_zhi = #{sZhi},</if>
+            <if test="rZhi != null ">r_zhi = #{rZhi},</if>
+            <if test="dZhi != null ">d_zhi = #{dZhi},</if>
+            <if test="fengxianJibie != null  and fengxianJibie != ''">fengXian_jiBie = #{fengxianJibie},</if>
+            <if test="riskId != null ">risk_id = #{riskId},</if>
+        </trim>
+        where pingJia_id = #{pingjiaId}
+    </update>
+
+    <delete id="deletePingjiabiaoById" parameterType="Long">
+        delete from pingjiabiao where pingJia_id = #{pingjiaId}
+    </delete>
+
+    <delete id="deletePingjiabiaoByIds" parameterType="String">
+        delete from pingjiabiao where pingJia_id in
+        <foreach item="pingjiaId" collection="array" open="(" separator="," close=")">
+            #{pingjiaId}
+        </foreach>
+    </delete>
+
+</mapper>

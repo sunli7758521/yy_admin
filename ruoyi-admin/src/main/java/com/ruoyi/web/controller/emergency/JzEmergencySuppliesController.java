@@ -96,12 +96,13 @@ public class JzEmergencySuppliesController extends BaseController
         mmap.put("jzEmergencyPlan",jzEmergencyPlan);
         return prefix + "/add";
     }
-    @GetMapping("/hidden/add")
-    public String addhidden(@PathVariable Long planId, ModelMap mmap)
+    @RequiresPermissions("emergency:supplies:hidden")
+    @GetMapping("/hidden")
+    public String addhidden(ModelMap mmap)
     {
-        JzEmergencyPlan jzEmergencyPlan = jzEmergencyPlanService.selectJzEmergencyPlanById(planId);
+        JzEmergencyPlan jzEmergencyPlan = new JzEmergencyPlan();
         mmap.put("jzEmergencyPlan",jzEmergencyPlan);
-        return prefix + "hidden//add";
+        return prefix + "/hidden/add";
     }
     /**
      * 新增保存应急方案关联物资

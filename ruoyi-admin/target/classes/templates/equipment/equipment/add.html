@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增系统设备')" />
+    <th:block th:include="include :: datetimepicker-css" />
+    <th:block th:include="include :: select2-css" />
+    <th:block th:include="include :: bootstrap-select-css" />
+    <link res="stylesheet" href="">
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-equipment-add">
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">所属系统：</label>
+                <div class="col-sm-3">
+<!--                    <input name="systemId" class="form-control" type="text">-->
+                    <select class="form-control" id="systemId" name="systemId" th:with="type=${@dict.getSystem(300)}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.deptName}" th:value="${dict.deptId} "></option>
+                    </select>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-3 control-label">设备规格：</label>-->
+<!--                <div class="col-sm-3">-->
+<!--                    <input name="spId" class="form-control" type="text">-->
+<!--                </div>-->
+                <label class="col-sm-3 control-label">安装人姓名：</label>
+                <div class="col-sm-3">
+                    <input name="azName" class="form-control" type="text" autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">编号：</label>
+                <div class="col-sm-3">
+                    <input id="num" name="num" class="form-control" type="text" required readonly="true" autocomplete="off">
+                </div>
+<!--            </div>-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">设备名称：</label>
+                <div class="col-sm-3">
+                    <input name="sbName" class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备编号：</label>
+                <div class="col-sm-3">
+                    <input name="sbCode" class="form-control" type="text" required autocomplete="off">
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">设备型号：</label>
+                <div class="col-sm-3">
+                    <input name="sbModel" class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">安装地点：</label>
+                <div class="col-sm-3">
+                    <input name="azAddr" class="form-control" type="text" autocomplete="off">
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">经销商：</label>
+                <div class="col-sm-3">
+<!--                    <input name="supplierId" class="form-control" type="text">-->
+                    <select class="form-control" name="supplierId" th:with="type=${@dict.supList()}" required>
+                        <option th:each="dict : ${type}" th:text="${dict.supplierName}" th:value="${dict.supplierId}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备安装时间：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="azTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
+                    </div>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">设备出厂日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="outTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">出厂编号：</label>
+                <div class="col-sm-3">
+                    <input name="outNum" class="form-control" type="text" required autocomplete="off">
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">设备进场日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="inTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">交接验收日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="jjYsTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
+                    </div>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">使用日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="syTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">设备状态：</label>
+                <div class="col-sm-3">
+<!--                    <input name="state" class="form-control" type="text">-->
+<!--                    <select name="state" class="form-control" required>-->
+<!--                        <option  th:value="0">使用</option>-->
+<!--                        <option  th:value="1">维修</option>-->
+<!--                        <option  th:value="2">报废</option>-->
+<!--                        <option th:value="3">未使用</option>-->
+<!--                    </select>-->
+                    <select id="state" class="form-control" name="state" th:with="type=${@dict.getType('jz_equipment_state')}">
+                        <option value="" th:text="*{systemName}">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+<!--            </div>-->
+<!--            <div class="form-group">    -->
+                <label class="col-sm-3 control-label">登记日期：</label>
+                <div class="col-sm-3">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="djTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
+                    </div>
+                </div>
+            </div>
+                <div class="form-group" >
+                    <label class="col-sm-3 control-label">设备类型：</label>
+                    <div class="col-sm-7">
+<!--                        <input name="equipment_state" class="form-control" type="text" required>-->
+                        <select id="equipment_state" class="form-control" name="equipment_state" th:with="type=${@dict.getType('jz_equipment_type_state')}">
+                            <option value="">所有</option>
+                            <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="layui-btn-group">
+                            <button id="equipment_state_add" type="button" class="layui-btn">添加</button>
+                        </div>
+                    </div>
+                </div>
+            <div class="form-group" >
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" class="form-control" type="text" ></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <th:block th:include="include :: select2-js" />
+    <th:block th:include="include :: bootstrap-select-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "equipment/equipment"
+        $("#form-equipment-add").validate({
+            focusCleanup: true
+        });
+        // $(document).ready(function(){
+        //     $.ajax({
+        //         dataType: "json",
+        //         type:"GET",
+        //         url:prefix +"/selectSysDictData",
+        //         success:function(con){
+        //             var bb = $("#equipment_state");
+        //             var str="<option value='' >---请选择---</option>";
+        //             //在for里遍历累加
+        //             for ( var i = 0; i < con.length; i++) {
+        //                 str+="<option value='"+con[i].dictValue+"'>"+ con[i].dictLabel+ "</option>";
+        //             }
+        //             bb.html(str);
+        //             //append是追加，不会覆盖之前的内容
+        //         }
+        //     })
+        // })
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-equipment-add').serialize());
+            }
+        }
+
+        $("input[name='azTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='outTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='inTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='jjYsTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='syTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='djTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        //option没有值，所以change没用
+        /*$("#equipment_state").on("change",function () {
+            $.ajax({
+                dataType: "json",
+                type:"GET",
+                url:prefix +"/selectSysDictData",
+                success:function(con){
+                    var bb = $("#equipment_state");
+                    alert(con)
+                    for ( var i = 0; i < con.length; i++) {
+                        bb.append("<option value='"+con[i].DictValue+"'>"+ con[i].DictLabel+ "</option>");
+                    }
+                }
+            })
+        })*/
+
+        $("#equipment_state_add").on("click",function () {
+                layer.prompt({title: '请输入设备类型', formType: 0}, function(input, index){
+                $.ajax({
+                    type:"GET",
+                    url:prefix + "/addEquipMentState/" + input,
+                    success:function(con){
+                        //如果value值之后改变，通过这个接口回传过来
+
+                        layer.msg("添加成功")
+                        layer.close(index);
+                        var str = '<option value="1">'+input+'</option>';
+                        $("#equipment_state").append(str)
+                    }
+                })
+
+                });
+        })
+        $(document).ready(function(){
+            $("#systemId").on("change",function(){
+            // $("#systemId").change(function(){
+                var systemId = $("#systemId").val();
+               $.ajax({
+                   type:"GET",
+                   url:prefix + "/rand/" + systemId,
+                   success:function(con){
+                       $("#num").val(con)
+                   }
+               })
+            })
+        })
+    </script>
+</body>
+</html>
