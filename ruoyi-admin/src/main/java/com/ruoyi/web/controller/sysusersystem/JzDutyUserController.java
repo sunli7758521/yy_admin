@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.sysusersystem;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.util.ShiroUtils;
@@ -48,18 +50,32 @@ public class JzDutyUserController extends BaseController
     {
         return prefix + "/user";
     }
-
     /**
      * 查询值班关联用户列表
      */
     @RequiresPermissions("sysusersystem:user:list")
-    @PostMapping("/list")
+    @GetMapping("/list")
     @ResponseBody
     public TableDataInfo list(JzDutyUser jzDutyUser)
     {
         startPage();
         List<JzDutyUser> list = jzDutyUserService.selectJzDutyUserList(jzDutyUser);
         return getDataTable(list);
+    }
+    @RequiresPermissions("sysusersystem:show:view")
+    @PostMapping("/show")
+    @ResponseBody
+    public  List<JzDutyUser> show(ModelMap mmp,JzDutyUser jzDutyUser){
+        Map<String,String> map = new HashMap<>();
+        List<JzDutyUser> list = jzDutyUserService.selectJzDutyUserList(jzDutyUser);
+        map.put("code","0");
+        map.put("msg","成功");
+//        map.put("list",list);
+//        AjaxResult json = new AjaxResult();
+//        json.put("msg", "msg");
+//        json.put("code", 0);
+        mmp.put("map",map);
+        return  list;
     }
     /**
      * 导出值班关联用户列表

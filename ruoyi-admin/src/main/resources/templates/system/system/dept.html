@@ -11,7 +11,7 @@
 					<div class="select-list">
 						<ul>
 							<li>
-								系统名称：<input type="text" name="deptName"/>
+								系统名称：<input type="text" name="deptName" autocomplete="off" re/>
 							</li>
 							<li>
 								系统状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">

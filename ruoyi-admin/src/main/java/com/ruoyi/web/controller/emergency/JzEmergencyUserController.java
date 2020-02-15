@@ -55,7 +55,7 @@ public class JzEmergencyUserController extends BaseController
     }
 
     /**
-     * 查询应急方案关联人员列表
+     * 查询应急方案关联组员列表
      */
     @RequiresPermissions("emergency:user:list")
     @PostMapping("/list")

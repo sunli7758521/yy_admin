@@ -35,10 +35,10 @@
 						<div class="select-list">
 							<ul>
 								<li>
-									登录名称：<input type="text" name="loginName"/>
+									登录名称：<input type="text" name="loginName" autocomplete="off"/>
 								</li>
 								<li>
-									手机号码：<input type="text" name="phonenumber"/>
+									手机号码：<input type="text" name="phonenumber" autocomplete="off"/>
 								</li>
 								<li>
 									用户状态：<select name="status" th:with="type=${@dict.getType('sys_normal_disable')}">
@@ -48,9 +48,9 @@
 								</li>
 								<li class="select-time">
 									<label>创建时间： </label>
-									<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>
+									<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]" autocomplete="off"/>
 									<span>-</span>
-									<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>
+									<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]" autocomplete="off"/>
 								</li>
 								<li>
 									<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
@@ -74,9 +74,9 @@
 		            <a class="btn btn-info" onclick="$.table.importExcel()" shiro:hasPermission="system:user:import">
 			            <i class="fa fa-upload"></i> 导入
 			        </a>
-		            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:user:export">
-			            <i class="fa fa-download"></i> 导出
-			        </a>
+<!--		            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="system:user:export">-->
+<!--			            <i class="fa fa-download"></i> 导出-->
+<!--			        </a>-->
 		        </div>
 		        
 		        <div class="col-sm-12 select-table table-striped">

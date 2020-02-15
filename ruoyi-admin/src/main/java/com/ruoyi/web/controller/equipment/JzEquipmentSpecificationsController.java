@@ -91,6 +91,7 @@ public class JzEquipmentSpecificationsController extends BaseController
     {
 
         jzEquipmentSpecifications.setCreateId(ShiroUtils.getUserId());
+        jzEquipmentSpecifications.setState("0");
         return toAjax(jzEquipmentSpecificationsService.insertJzEquipmentSpecifications(jzEquipmentSpecifications));
     }
 

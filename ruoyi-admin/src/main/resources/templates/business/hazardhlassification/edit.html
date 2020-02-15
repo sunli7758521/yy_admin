@@ -22,7 +22,7 @@
                 <label class="col-sm-3 control-label ">上级隐患：</label>
                 <div class="col-sm-8">
                     <div class="input-group">
-                        <input class="form-control" type="text" id="name" readonly="true" th:field="*{parentName}">
+                        <input class="form-control" type="text" id="parentName" readonly="true" th:value="*{parentName}" th:field="*{parentName}">
                         <span class="input-group-addon"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
@@ -74,6 +74,12 @@
                 $.operate.save(prefix + "/edit", $('#form-type-edit').serialize());
             }
         }
+        $(document).ready(function(){
+            //todo
+            if($("#parentName").val()==""){
+                $("#parentName").val("无");
+            }
+        })
     </script>
 </body>
 </html>

@@ -67,7 +67,9 @@ public class SysDeptController extends BaseController
     @GetMapping("/add/{parentId}")
     public String add(@PathVariable("parentId") Long parentId, ModelMap mmap)
     {
-        mmap.put("dept", deptService.selectDeptById(parentId));
+        SysDept sysDept = deptService.selectDeptById(parentId);
+        mmap.put("dept",sysDept );
+//        mmap.put("dept", parentId);
         return prefix + "/add";
     }
 
@@ -161,9 +163,9 @@ public class SysDeptController extends BaseController
     @GetMapping("/selectDeptTree/{deptId}")
     public String selectDeptTree(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
-      SysDept dept=  deptService.selectDeptById(deptId);
+       SysDept dept=  deptService.selectDeptById(deptId);
         mmap.put("dept",dept);
-        return prefix + "/systemTree";
+        return prefix + "/deptTree";
     }
     /**
      * 选择部门树
@@ -171,6 +173,9 @@ public class SysDeptController extends BaseController
     @GetMapping("/selectDeptTree1/{deptId}")
     public String selectDeptTree1(@PathVariable("deptId") Long deptId, ModelMap mmap)
     {
+        if(deptId==0){
+            deptId=100L;
+        }
         SysDept dept=  deptService.selectDeptById(deptId);
         mmap.put("dept",dept);
         return prefix + "/deptTree";

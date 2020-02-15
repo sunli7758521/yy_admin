@@ -35,29 +35,29 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">规格名称：</label>
                 <div class="col-sm-8">
-                    <input name="spName" th:field="*{spName}" class="form-control" type="text">
+                    <input name="spName" th:field="*{spName}" class="form-control" type="text" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">配件名称：</label>
                 <div class="col-sm-8">
-                    <input name="erName" th:field="*{erName}" class="form-control" type="text">
+                    <input name="erName" th:field="*{erName}" class="form-control" type="text" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">型号：</label>
+                <label class="col-sm-3 control-label">设备型号：</label>
                 <div class="col-sm-8">
-                    <input name="ggXh" th:field="*{ggXh}" class="form-control" type="text">
+                    <input name="ggXh" th:field="*{ggXh}" class="form-control" type="text" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">数量：</label>
+                <label class="col-sm-3 control-label">设备数量：</label>
                 <div class="col-sm-8">
-                    <input name="num" th:field="*{num}" class="form-control" type="text">
+                    <input name="num" th:field="*{num}" class="form-control" type="text" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label">类型：</label>
+                <label class="col-sm-3 control-label">设备类型：</label>
                 <div class="col-sm-8">
                     <select name="type" class="form-control m-b" th:with="type=${@dict.getType('leixing_ku')}">
                         <!--                        <option value="">所有</option>-->
@@ -65,17 +65,17 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">状态：</label>
-                <div class="col-sm-8">
-                    <!--                    <input name="state" th:field="*{state}" class="form-control" type="text">-->
-                    <select name="state" th:field="*{state}" class="form-control">
-                        <option  th:value="0">库存正常</option>
-                        <option  th:value="1">库存异常</option>
+<!--            <div class="form-group">-->
+<!--                <label class="col-sm-3 control-label">状态：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    &lt;!&ndash;                    <input name="state" th:field="*{state}" class="form-control" type="text">&ndash;&gt;-->
+<!--                    <select name="state" th:field="*{state}" class="form-control">-->
+<!--                        <option  th:value="0">库存正常</option>-->
+<!--                        <option  th:value="1">库存异常</option>-->
 
-                    </select>
-                </div>
-            </div>
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
             <div class="form-group">    
                 <label class="col-sm-3 control-label">设备重量：</label>
                 <div class="col-sm-8">

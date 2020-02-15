@@ -16,16 +16,20 @@
 <!--                                <input type="text" name="systemId"/>-->
 <!--                            </li>-->
                             <li>
-                                <p>工号：</p>
+                                <p>员工工号：</p>
                                 <input type="text" name="userNum" required/>
                             </li>
                             <li>
-                                <p>名称：</p>
+                                <p>员工名称：</p>
                                 <input type="text" name="userName"/>
                             </li>
                             <li>
                                 <p>手机号：</p>
                                 <input type="tel" name="phone"/>
+                            </li>
+                            <li class="select-time">-->
+                                <p>入职时间：</p>
+                                <input type="text" name="createTime" class="time-input" id="createTime" placeholder="开始时间"/>
                             </li>
 <!--                            <li>-->
 <!--                                <p>部门id：</p>-->
@@ -228,6 +232,10 @@
                     field : 'adrress', 
                     title : '住址'
                 },
+                    {
+                        field: 'createTime',
+                        title: '入职时间    '
+                    },
                 {
                     field : 'emergencyCall', 
                     title : '紧急电话'

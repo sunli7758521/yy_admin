@@ -9,7 +9,6 @@ import java.util.Set;
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.equipment.domain.JzEquipment;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.guanlisystem.domain.JzSysUserSystem;
 import com.ruoyi.guanlisystem.service.IJzSysUserSystemService;

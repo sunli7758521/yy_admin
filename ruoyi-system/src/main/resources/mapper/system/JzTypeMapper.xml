@@ -51,8 +51,8 @@ LEFT JOIN sys_user suu ON suu.user_id = s.create_id
     </select>
     
     <select id="selectJzTypeById" parameterType="Long" resultMap="JzTypeResult">
-
-       SELECT s.id,s.system_id,s.name,s.parent_id,ancestors,classification_state, s.update_time, s.remark FROM jz_type s
+        <include refid="selectVO"/>
+--        SELECT s.id,s.system_id,s.name,s.parent_id,ancestors,classification_state, s.update_time, s.remark FROM jz_type s
         where s.id = #{id}
 
     </select>

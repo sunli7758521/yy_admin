@@ -20,7 +20,7 @@ public interface IJzEmergencyUserService
     public JzEmergencyUser selectJzEmergencyUserById(Long userId);
 
     /**
-     * 查询应急方案关联人员列表
+     * 查询应急方案关联组员列表
      * 
      * @param jzEmergencyUser 应急方案关联人员
      * @return 应急方案关联人员集合

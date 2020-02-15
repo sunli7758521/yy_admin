@@ -13,7 +13,7 @@
                         <label class="col-sm-3 control-label ">上级物资：</label>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input class="form-control" type="text" id="name"  onclick="selectdept()" readonly="true" th:value="${dept.name}">
+                                <input class="form-control" type="text" id="name"  onclick="selectdept()" readonly="true" th:value="${dept.name}" autocomplete="off">
                                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                             </div>
                         </div>
@@ -28,9 +28,9 @@
                 </div>
             </div>
             <div class="form-group">    
-                <label class="col-sm-3 control-label">分类名称：</label>
+                <label class="col-sm-3 control-label">物资分类名称：</label>
                 <div class="col-sm-8">
-                    <input name="name" class="form-control" type="text" required>
+                    <input name="name" class="form-control" type="text" required  autocomplete="off">
                 </div>
             </div>
             <div class="form-group">

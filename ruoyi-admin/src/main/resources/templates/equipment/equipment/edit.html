@@ -26,37 +26,37 @@
 <!--                </div>-->
                 <label class="col-sm-3 control-label">安装人姓名：</label>
                 <div class="col-sm-3">
-                    <input name="azName" th:field="*{azName}" class="form-control" type="text">
+                    <input name="azName" th:field="*{azName}" class="form-control" type="text" autocomplete="off">
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">编号：</label>
                 <div class="col-sm-3">
-                    <input name="num" th:field="*{num}" class="form-control" type="text" required>
+                    <input name="num" th:field="*{num}" class="form-control" type="text" required autocomplete="off">
                 </div>
 <!--            </div>-->
 <!--            <div class="form-group">    -->
                 <label class="col-sm-3 control-label">设备名称：</label>
                 <div class="col-sm-3">
-                    <input name="sbName" th:field="*{sbName}" class="form-control" type="text" required>
+                    <input name="sbName" th:field="*{sbName}" class="form-control" type="text" required autocomplete="off">
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">设备编号：</label>
                 <div class="col-sm-3">
-                    <input name="sbCode" th:field="*{sbCode}" class="form-control" type="text" required>
+                    <input name="sbCode" th:field="*{sbCode}" class="form-control" type="text" required autocomplete="off">
                 </div>
 <!--            </div>-->
 <!--            <div class="form-group">    -->
                 <label class="col-sm-3 control-label">设备型号：</label>
                 <div class="col-sm-3">
-                    <input name="sbModel" th:field="*{sbModel}" class="form-control" type="text" required>
+                    <input name="sbModel" th:field="*{sbModel}" class="form-control" type="text" required autocomplete="off">
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">安装地点：</label>
                 <div class="col-sm-3">
-                    <input name="azAddr" th:field="*{azAddr}" class="form-control" type="text">
+                    <input name="azAddr" th:field="*{azAddr}" class="form-control" type="text" autocomplete="off">
                 </div>
 <!--            </div>-->
 <!--            <div class="form-group">    -->
@@ -74,7 +74,7 @@
                 <div class="col-sm-3">
                     <div class="input-group date">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input name="azTime" th:value="${#dates.format(jzEquipment.azTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                        <input name="azTime" th:value="${#dates.format(jzEquipment.azTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
                     </div>
                 </div>
 <!--            </div>-->
@@ -83,14 +83,14 @@
                 <div class="col-sm-3">
                     <div class="input-group date">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input name="outTime" th:value="${#dates.format(jzEquipment.outTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                        <input name="outTime" th:value="${#dates.format(jzEquipment.outTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
                     </div>
                 </div>
             </div>
             <div class="form-group">    
                 <label class="col-sm-3 control-label">出厂编号：</label>
                 <div class="col-sm-3">
-                    <input name="outNum" th:field="*{outNum}" class="form-control" type="text" required>
+                    <input name="outNum" th:field="*{outNum}" class="form-control" type="text" required autocomplete="off">
                 </div>
 <!--            </div>-->
 <!--            <div class="form-group">    -->
@@ -107,7 +107,7 @@
                 <div class="col-sm-3">
                     <div class="input-group date">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input name="jjYsTime" th:value="${#dates.format(jzEquipment.jjYsTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                        <input name="jjYsTime" th:value="${#dates.format(jzEquipment.jjYsTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
                     </div>
                 </div>
 <!--            </div>-->
@@ -116,7 +116,7 @@
                 <div class="col-sm-3">
                     <div class="input-group date">
                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                        <input name="syTime" th:value="${#dates.format(jzEquipment.syTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required>
+                        <input name="syTime" th:value="${#dates.format(jzEquipment.syTime, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
 <!--                        <option  th:value="1">维修</option>-->
 <!--                        <option  th:value="2">报废</option>-->
 <!--                    </select>-->
-                    <select class="form-control" name="state" th:with="type=${@dict.getType('jz_equipment_state')}">
+                    <select class="form-control" name="state" th:with="type=${@dict.getType('jz_equipment_state')}" th:field="*{state}">
                         <option value="">所有</option>
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                     </select>

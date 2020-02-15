@@ -37,7 +37,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">制度标题：</label>
                 <div class="col-sm-8">
-                    <input name="title" th:field="*{title}" class="form-control" type="text">
+                    <input name="title" th:field="*{title}" class="form-control" type="text"  autocomplete="off" >
                 </div>
             </div>
             <div class="form-group">    
@@ -78,7 +78,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">备注</label>
                 <div class="col-sm-8">
-                        <textarea name="remark" maxlength="300" th:field="*{remark}"></textarea>
+                        <textarea class="form-control" name="remark" maxlength="300" th:field="*{remark}"></textarea>
                 </div>
             </div>
         </form>
