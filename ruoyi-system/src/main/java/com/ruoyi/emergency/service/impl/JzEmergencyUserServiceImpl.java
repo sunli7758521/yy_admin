@@ -25,7 +25,6 @@ public class JzEmergencyUserServiceImpl implements IJzEmergencyUserService
 
     @Autowired
     private JzUserMapper jzUserMapper;
-
     /**
      * 查询应急方案关联人员
      * 

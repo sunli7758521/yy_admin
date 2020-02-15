@@ -136,7 +136,7 @@ public class JzEmergencyUserController extends BaseController
         jzEmergencyUser.setGroupUserName(sb);
         jzEmergencyUser.setViceGroupLeaderName(sb2);
         mmap.put("jzEmergencyUser", jzEmergencyUser);
-        return prefix + "/edit";
+         return prefix + "/edit";
     }
 
     /**

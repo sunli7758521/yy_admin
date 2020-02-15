@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.Ztree;
 import com.ruoyi.system.domain.SysDept;
-import com.ruoyi.system.service.ISysDeptService;
+import com.ruoyi.system.service.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +26,6 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.framework.shiro.service.SysPasswordService;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysUser;
-import com.ruoyi.system.service.ISysPostService;
-import com.ruoyi.system.service.ISysRoleService;
-import com.ruoyi.system.service.ISysUserService;
 
 /**
  * 用户信息
@@ -153,6 +150,7 @@ public class SysUserController extends BaseController
         mmap.put("user", userService.selectUserById(userId));
         mmap.put("roles", roleService.selectRolesByUserId(userId));
         mmap.put("posts", postService.selectPostsByUserId(userId));
+        mmap.put("systemList",deptService.selectDeptByParentId(300L));
         return prefix + "/edit";
     }
 

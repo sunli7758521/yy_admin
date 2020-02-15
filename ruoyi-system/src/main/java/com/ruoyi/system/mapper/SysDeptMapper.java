@@ -144,4 +144,6 @@ public interface SysDeptMapper
     List<SysDept> systemList(@Param("userId") Long userId);
 
     SysDept selectById(@Param("deptId") Long deptId);
+
+    List<SysDept> selectDeptByParentId(@Param("parentId") Long parentId);
 }

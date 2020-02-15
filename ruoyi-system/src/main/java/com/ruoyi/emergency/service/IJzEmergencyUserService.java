@@ -1,5 +1,6 @@
 package com.ruoyi.emergency.service;
 
+import com.ruoyi.emergency.domain.JzEmergencyPlan;
 import com.ruoyi.emergency.domain.JzEmergencyUser;
 import java.util.List;
 

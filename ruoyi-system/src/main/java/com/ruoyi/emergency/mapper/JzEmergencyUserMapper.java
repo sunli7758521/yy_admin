@@ -58,4 +58,5 @@ public interface JzEmergencyUserMapper
      * @return 结果
      */
     public int deleteJzEmergencyUserByIds(String[] userIds);
+
 }

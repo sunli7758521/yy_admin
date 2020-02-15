@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.emergency.mapper.JzEmergencyUserMapper">
-    
+
     <resultMap type="JzEmergencyUser" id="JzEmergencyUserResult">
         <result property="userId"    column="user_id"    />
         <result property="emergencyPlanId"    column="emergency_plan_id"    />
@@ -11,7 +11,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="groupLeaderId"    column="group_leader_id"    />
         <result property="groupLeaderName"    column="group_leader_name"    />
         <result property="viceGroupLeaderId"    column="vice_group_leader_id"    />
+        <result property="viceGroupLeaderName"    column="vice_group_leader_name"    />
         <result property="groupUserId"    column="group_user_id"    />
+        <result property="groupUserName"    column="group_user_name"    />
     </resultMap>
 
     <sql id="selectJzEmergencyUserVo">
