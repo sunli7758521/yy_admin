@@ -250,6 +250,16 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
+
+        filterChainDefinitionMap.put("/system/**", "anon");
+
+
+
+
+
+
+
+
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
         filterChainDefinitionMap.put("/layui/**", "anon");
         // 退出 logout地址，shiro去清除session

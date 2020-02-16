@@ -84,14 +84,14 @@ public class SysIndexController extends BaseController
     }
 
     // 系统介绍
-    @GetMapping("/system/main")
+    @GetMapping("system/main")
     public String main(ModelMap mmap)
     {
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.INDEX_STATE);
         sysUserService.updateUserSystemId(user);
         mmap.put("version", Global.getVersion());
-        return "/main";
+        return "main";
     }
     // 电力系统
     @GetMapping("/system/electric")
@@ -100,7 +100,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.DIAN_LI_STATE);
         sysUserService.updateUserSystemId(user);
-        return  "/electric";
+        return  "system9/electric";
     }
 
     // 热源系统
@@ -110,7 +110,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.RE_YUAN_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/heatSource";
+        return "heatSource";
     }
     // 燃气系统
     @GetMapping("/system/gas")
@@ -119,7 +119,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.RAN_QI_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/gas";
+        return "gas";
     }
     // 制冷及空调系统
     @GetMapping("/system/zlkt")
@@ -128,7 +128,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.ZHI_LENG_KONG_TIAO_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/zlkt";
+        return "zlkt";
     }
     // 给排水系统
     @GetMapping("/system/drain")
@@ -137,7 +137,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.JI_PAI_SHUI_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/drain";
+        return "drain";
     }
     // 电梯系统
     @GetMapping("/system/elevator")
@@ -146,7 +146,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.DIAN_TI_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/elevator";
+        return "elevator";
     }
     // 医用气体系统
     @GetMapping("/system/medicalGas")
@@ -155,7 +155,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.YI_YONG_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/medicalGas";
+        return "medicalGas";
     }
     // 食堂安全管理
     @GetMapping("/system/cafeteriaSafety")
@@ -164,7 +164,7 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.SHI_TANG_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/cafeteriaSafety";
+        return "cafeteriaSafety";
     }
     // 工地安全管理
     @GetMapping("/system/constructionSite")
@@ -173,6 +173,6 @@ public class SysIndexController extends BaseController
         SysUser user =  ShiroUtils.getSysUser();
         user.setSearchSystemId(SystemConstants.GONG_DI_AN_QUAN_STATE);
         sysUserService.updateUserSystemId(user);
-        return "/constructionSite";
+        return "constructionSite";
     }
 }

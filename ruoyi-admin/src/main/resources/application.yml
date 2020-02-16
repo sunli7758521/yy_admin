@@ -16,7 +16,7 @@ ruoyi:
 # 开发环境配置
 server:
   # 服务器的HTTP端口，默认为80
-  port: 1001
+  port: 8848
   servlet:
     # 应用的访问路径
     context-path: /
@@ -69,6 +69,9 @@ spring:
     restart:
       # 热部署开关
       enabled: true
+  #多个spring boot
+  jmx:
+      enabled: false
 
 # MyBatis
 mybatis:
