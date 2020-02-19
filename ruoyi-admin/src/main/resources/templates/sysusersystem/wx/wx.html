@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('维修记录列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <input id="planId" type="hidden" th:value="${planId}"/>
+                        <ul>
+<!--                            <li>-->
+<!--                                <p>报修id：</p>-->
+<!--                                <input type="text" name="warrantyId"/>-->
+<!--                            </li>-->
+                            <li>
+                                <p>维修人:</p>
+                                <input type="text" name="wxUserId"/>
+                            </li>
+                            <li class="select-time">
+                                <p>维修时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginWxTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endWxTime]"/>
+                            </li>
+                            <li>
+                                <p>状态</p>
+                                <input type="text" name="state"/>
+                            </li>
+<!--                            <li>-->
+<!--                                <p>未完成原因：</p>-->
+<!--                                <input type="text" name="wWCYY"/>-->
+<!--                            </li>-->
+                            <li class="select-time">
+                                <p>创建时间：</p>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginCteateTime]"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endCteateTime]"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+<!--                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="sysusersystem:wx:add">-->
+                <a class="btn btn-success" onclick="add()" shiro:hasPermission="sysusersystem:wx:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:wx:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:wx:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:wx:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('sysusersystem:wx:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('sysusersystem:wx:remove')}]];
+        var state =  [[${@dict.getType('wx_record_state')}]];
+        var prefix = ctx + "sysusersystem/wx";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "维修记录",
+                queryParams: queryParams,
+                columns: [{
+                    checkbox: true
+                },
+                    {
+                        field: 'wxId',
+                        title: '主键',
+                        visible: false
+                    },
+                    {
+                        field: 'warrantyName',
+                        title: '报修'
+                    },
+                    {
+                        field: 'wxUserName',
+                        title: '维修人'
+                    },
+                    {
+                        field: 'wxTime',
+                        title: '维修时间'
+                    },
+                    {
+                        field: 'state',
+                        title: '状态',
+                        formatter: function(value, row, index) {
+                            return $.table.selectDictLabel(state, value);
+                        }
+                    },
+                    {
+                        field: 'wWCYY',
+                        title: '未完成原因'
+                    },
+                    {
+                        field: 'cteateTime',
+                        title: '创建时间'
+                    },
+                    {
+                        field: 'remark',
+                        title: '备注'
+                    },
+                    {
+                        title: '操作',
+                        align: 'center',
+                        formatter: function (value, row, index) {
+                            var actions = [];
+                            actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.wxId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                            actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.wxId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                            return actions.join('');
+                        }
+                    }]
+            };
+            $.table.init(options);
+        });
+
+        function queryParams(params) {
+            var search = $.table.queryParams(params);
+            search.dictType = $("#planId").val();
+            // alert(search.dictType)
+            return search;
+        }
+
+        function add(){
+            var id = $("#planId").val();
+            var url = prefix + '/add/' + id;
+            $.modal.open("查看维修记录", url);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.JzWarrantyWxMapper">
+    
+    <resultMap type="JzWarrantyWx" id="JzWarrantyWxResult">
+        <result property="wxId"    column="wx_id"    />
+        <result property="warrantyId"    column="warranty_id"    />
+        <result property="wxUserId"    column="wx_user_id"    />
+        <result property="wxTime"    column="wx_time"    />
+        <result property="state"    column="state"    />
+        <result property="wWCYY"    column="w_w_c_y_y"    />
+        <result property="cteateTime"    column="cteate_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="wxUserName"    column="wx_user_name"    />
+        <result property="warrantyName"    column="warranty_name"    />
+    </resultMap>
+
+    <sql id="selectJzWarrantyWxVo">
+        select wx_id, warranty_id, wx_user_id, wx_time, state, w_w_c_y_y, cteate_time, update_time, remark from jz_warranty_wx
+    </sql>
+    <sql id="selectVo">
+         select ju.user_name wx_user_name, jw.content warranty_name, jww.wx_id, jww.warranty_id, jww.wx_user_id, jww.wx_time, jww.state, jww.w_w_c_y_y, jww.cteate_time, jww.update_time, jww.remark from jz_warranty_wx jww
+ LEFT JOIN jz_warranty jw ON jww.warranty_id = jw.warranty_id
+ LEFT JOIN jz_user ju ON jww.wx_user_id = ju.user_id
+    </sql>
+
+    <select id="selectJzWarrantyWxList" parameterType="JzWarrantyWx" resultMap="JzWarrantyWxResult">
+        <include refid="selectVo"/>
+        <where>  
+            <if test="warrantyId != null "> and warranty_id = #{warrantyId}</if>
+            <if test="wxUserId != null "> and wx_user_id = #{wxUserId}</if>
+            <if test="wxTime != null "> and wx_time = #{wxTime}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="wWCYY != null  and wWCYY != ''"> and w_w_c_y_y = #{wWCYY}</if>
+            <if test="cteateTime != null "> and cteate_time = #{cteateTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectJzWarrantyWxById" parameterType="Long" resultMap="JzWarrantyWxResult">
+        <include refid="selectVo"/>
+        where wx_id = #{wxId}
+    </select>
+        
+    <insert id="insertJzWarrantyWx" parameterType="JzWarrantyWx" useGeneratedKeys="true" keyProperty="wxId">
+        insert into jz_warranty_wx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="warrantyId != null ">warranty_id,</if>
+            <if test="wxUserId != null ">wx_user_id,</if>
+            <if test="wxTime != null ">wx_time,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="wWCYY != null  and wWCYY != ''">w_w_c_y_y,</if>
+            <if test="cteateTime != null ">cteate_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="warrantyId != null ">#{warrantyId},</if>
+            <if test="wxUserId != null ">#{wxUserId},</if>
+            <if test="wxTime != null ">#{wxTime},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="wWCYY != null  and wWCYY != ''">#{wWCYY},</if>
+            <if test="cteateTime != null ">#{cteateTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzWarrantyWx" parameterType="JzWarrantyWx">
+        update jz_warranty_wx
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="warrantyId != null ">warranty_id = #{warrantyId},</if>
+            <if test="wxUserId != null ">wx_user_id = #{wxUserId},</if>
+            <if test="wxTime != null ">wx_time = #{wxTime},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="wWCYY != null  and wWCYY != ''">w_w_c_y_y = #{wWCYY},</if>
+            <if test="cteateTime != null ">cteate_time = #{cteateTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where wx_id = #{wxId}
+    </update>
+
+    <delete id="deleteJzWarrantyWxById" parameterType="Long">
+        delete from jz_warranty_wx where wx_id = #{wxId}
+    </delete>
+
+    <delete id="deleteJzWarrantyWxByIds" parameterType="String">
+        delete from jz_warranty_wx where wx_id in 
+        <foreach item="wxId" collection="array" open="(" separator="," close=")">
+            #{wxId}
+        </foreach>
+    </delete>
+    
+</mapper>

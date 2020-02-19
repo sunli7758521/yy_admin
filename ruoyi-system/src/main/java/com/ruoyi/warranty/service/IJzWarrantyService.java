@@ -12,6 +12,11 @@ import java.util.List;
 public interface IJzWarrantyService 
 {
     /**
+     * 查询手机号
+     * @return
+     */
+    public String selectPhone(long Id);
+    /**
      * 查询报修
      * 
      * @param warrantyId 报修ID
