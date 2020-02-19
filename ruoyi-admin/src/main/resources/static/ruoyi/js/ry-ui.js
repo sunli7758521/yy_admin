@@ -1033,7 +1033,7 @@ var table = {
         	        	    callback(result);
         	        	}
         	        	$.operate.successCallback(result);
-        	        }
+        	        },
         	    };
         	    $.ajax(config)
             },
