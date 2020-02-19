@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -75,6 +76,13 @@ public class JzUser extends BaseEntity
     /** 工号 */
     @Excel(name = "工号")
     private String userNum;
+
+    /** 员工入职时间一 */
+    private Date beginOutTime;
+
+    /** 入职时间二 */
+    private Date endOutTime;
+
     //  系统ids
     private String[] systemIds;
     //  部门名称
@@ -82,6 +90,9 @@ public class JzUser extends BaseEntity
 
     //  用户类型
     private String userTypeName;
+
+    public JzUser() {
+    }
 
     public String getUserTypeName() {
         return userTypeName;
@@ -243,6 +254,8 @@ public class JzUser extends BaseEntity
         return userNum;
     }
 
+
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -266,6 +279,24 @@ public class JzUser extends BaseEntity
                 .append("updateBy", getUpdateBy())
                 .append("userNum", getUserNum())
                 .append("remark", getRemark())
+                .append("beginOutTime", getBeginOutTime())
+                .append("endOutTime", getEndOutTime())
                 .toString();
+    }
+
+    public Date getBeginOutTime() {
+        return beginOutTime;
+    }
+
+    public void setBeginOutTime(Date beginOutTime) {
+        this.beginOutTime = beginOutTime;
+    }
+
+    public Date getEndOutTime() {
+        return endOutTime;
+    }
+
+    public void setEndOutTime(Date endOutTime) {
+        this.endOutTime = endOutTime;
     }
 }

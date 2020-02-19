@@ -4,7 +4,7 @@
     <th:block th:include="include :: header('修改应急方案关联人员')" />
     <th:block th:include="include :: select2-css" />
     <th:block th:include="include :: bootstrap-select-css" />
-</head>
+</head>uk
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
         <form class="form-horizontal m" id="form-user-edit" th:object="${jzEmergencyUser}">
@@ -13,7 +13,7 @@
                 <label class="col-sm-3 control-label">关联应急预案：</label>
                 <div class="col-sm-8">
 <!--                    <input name="emergencyPlanId" th:field="*{emergencyPlanId}" class="form-control" type="text">-->
-                    <select class="form-control" name="content" th:with="type=${@dict.emergencySuppliesList()}" required>
+                    <select class="form-control" name="content" th:with="type=${@dict.emergencySuppliesList()}">
                         <option value="">所有</option>
                         <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>
                     </select>
@@ -23,7 +23,7 @@
                 <label class="col-sm-3 control-label">组长：</label>
                 <div class="col-sm-8">
 <!--                    <input name="groupLeaderId" th:field="*{groupLeaderId}" class="form-control" type="text">-->
-                    <select name="groupLeaderId" class="form-control m-b" th:with="type=${@dict.uList()}"  th:field="*{groupLeaderName}" required>
+                    <select name="groupLeaderId" class="form-control m-b" th:with="type=${@dict.uList()}"  th:field="*{groupLeaderName}"    >
                         <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId} "></option>
                     </select>
                 </div>
@@ -32,12 +32,13 @@
                 <label class="col-sm-3 control-label">副组长：</label>
                 <div class="col-sm-8">
 <!--                    <input name="viceGroupLeaderId" th:field="*{viceGroupLeaderName}" class="form-control" type="text">-->
-<!--                    <select name="viceGroupLeaderId" class="form-control select2-multiple" multiple th:with="type=${@dict.uList()}" th:field="*{viceGroupLeaderName}" required >-->
-<!--                        <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId} " ></option>-->
-<!--                    </select>-->
-                    <select id="viceGroupLeaderId" name="viceGroupLeaderId" class="form-control select2-multiple" multiple>
-                        <option th:each="post:${jzEmergencyUser}" th:value="${post.userId}" th:text="${post.viceGroupLeaderName}" th:selected="${post.viceGroupLeaderId}"></option>
+                    <select name="viceGroupLeaderId" class="form-control select2-multiple" multiple th:with="type=${@dict.uList()}">
+                        <option th:value="*{viceGroupLeaderId}" th:text="*{viceGroupLeaderName}"></option>
+                        <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId} " ></option>
                     </select>
+<!--                    <select id="viceGroupLeaderId" name="viceGroupLeaderId" class="form-control select2-multiple" multiple>-->
+<!--                        <option th:each="post:${jzEmergencyUser}" th:value="${post.groupUserId}" th:text="${post.viceGroupLeaderName}" th:selected="${post.viceGroupLeaderId}"></option>-->
+<!--                    </select>-->
                 </div>
             </div>
 
@@ -45,19 +46,14 @@
                 <label class="col-sm-3 control-label">组员：</label>
                 <div class="col-sm-8">
 <!--                    <input name="groupUserId" th:field="*{groupUserName}" class="form-control" type="text">-->
-<!--                    <select name="groupUserId" class="form-control select2-multiple" multiple th:with="type=${@dict.uList()}" th:field="*{groupUserName}" required >-->
-<!--                        <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId} "></option>-->
-<!--                    </select>-->
-<!--                    <input name="emergencyPlanId" th:field="*{groupUserName}" class="form-control" type="text">-->
-                    <select id="groupUserId" name="groupUserId" class="form-control select2-multiple" multiple>
-                        <option th:each="post:${jzEmergencyUser}" th:value="${post.userId}" th:text="${post.groupUserName}" th:selected="${post.groupUserId}"></option>
+                    <select name="groupUserId" class="form-control select2-multiple" multiple th:with="type=${@dict.uList()}">
+                        <option th:value="${jzEmergencyUser.groupUserId}" th:text="${jzEmergencyUser.groupUserName}"></option>
+                        <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId} "></option>
                     </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">备注</label>
-                <div class="col-sm-8">
-                    <textarea name="remark" class="form-control" th:text="*{remark}" wrap="off" style="overflow:scroll;" maxlength="200"></textarea>
+<!--                    <input name="emergencyPlanId" th:field="*{groupUserName}" class="form-control" type="text">-->
+<!--                    <select id="groupUserId" name="groupUserId" class="form-control select2-multiple" multiple>-->
+<!--                        <option th:each="post:${jzEmergencyUser}" th:value="${post.groupUserId}" th:text="${post.groupUserName}" th:selected="${post.groupUserId}"></option>-->
+<!--                    </select>-->
                 </div>
             </div>
         </form>
@@ -72,9 +68,14 @@
         });
 
         function submitHandler() {
+            console.log("saveffront")
+            console.log($("select").val())
+            //這裏，是表單的驗證，你的select加了required，就表示value不能是空，所以沒進這個if判斷，後面就都沒執行
             if ($.validate.form()) {
-                $.operate.save(prefix + "/edit/"+$('#userId').val(), $('#form-user-edit').serialize());
-                // $.operate.save(prefix + "/edit", $('#form-user-edit').serialize());
+                // alert("1111");
+                 // $.operate.save(prefix + "/edit/"+$('#userId').val(), $('#form-user-edit').serialize());
+                console.log("save")
+                $.operate.save(prefix + "/edit", $('#form-user-edit').serialize());
             }
         }
     </script>

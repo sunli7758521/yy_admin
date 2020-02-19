@@ -58,16 +58,16 @@ public class SysPostServiceImpl implements ISysPostService
     @Override
     public List<SysPost> selectPostsByUserId(Long userId)
     {
-        List<SysPost> userPosts = postMapper.selectPostsByUserId(userId);
-        List<SysPost> posts = postMapper.selectPostAll();
-        for (SysPost post : posts)
+        List<SysPost> userPosts = postMapper.selectPostsByUserId(userId);//当前用户的岗位列表
+        List<SysPost> posts = postMapper.selectPostAll();//所有岗位信息
+        for (SysPost post : posts)//循环遍历所有岗位信息
         {
-            for (SysPost userRole : userPosts)
+            for (SysPost userRole : userPosts)//循环遍历当前用户的岗位信息
             {
-                if (post.getPostId().longValue() == userRole.getPostId().longValue())
+                if (post.getPostId().longValue() == userRole.getPostId().longValue())//当前用户的岗位位信息是否存在
                 {
-                    post.setFlag(true);
-                    break;
+                    post.setFlag(true);//用户是否存在此岗位标识 默认不存在
+                    break;//结束当前循环
                 }
             }
         }

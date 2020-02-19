@@ -12,6 +12,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -136,18 +137,30 @@ public class JzEmergencyUserController extends BaseController
         jzEmergencyUser.setGroupUserName(sb);
         jzEmergencyUser.setViceGroupLeaderName(sb2);
         mmap.put("jzEmergencyUser", jzEmergencyUser);
+//         return prefix + "/edit";
          return prefix + "/edit";
     }
 
     /**
      * 修改保存应急方案关联人员
      */
+//    @RequiresPermissions("emergency:user:edit")
+//    @Log(title = "应急方案关联人员", businessType = BusinessType.UPDATE)
+//    @PostMapping("/edit/{planId}")
+//    @ResponseBody
+//    public AjaxResult editSave(@PathVariable Long planId, JzEmergencyUser jzEmergencyUser)
+//    {
+//        JzEmergencyUser jzEmergencyUser1 = jzEmergencyUserService.selectJzEmergencyUserById(planId);
+//        return toAjax(jzEmergencyUserService.updateJzEmergencyUser(jzEmergencyUser));
+//    }
+
     @RequiresPermissions("emergency:user:edit")
     @Log(title = "应急方案关联人员", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(JzEmergencyUser jzEmergencyUser)
+    public AjaxResult editSave(@Validated JzEmergencyUser jzEmergencyUser)
     {
+       // JzEmergencyUser jzEmergencyUser1 = jzEmergencyUserService.selectJzEmergencyUserById(planId);
         return toAjax(jzEmergencyUserService.updateJzEmergencyUser(jzEmergencyUser));
     }
 

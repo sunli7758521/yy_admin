@@ -49,6 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="remark"    column="remark"    />
         <result property="deptName"    column="dept_name"    />
         <result property="userTypeName"    column="name"    />
+        <result property="beginOutTime"    column="create_time"    />
+        <result property="endOutTime"    column="create_time"    />
 
     </resultMap>
 
@@ -139,6 +141,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="userNum != null  and userNum != ''">
              and jz_user.user_num like concat('%',#{userNum},'%')
             </if>
+            <if test="beginOutTime != null "> and jz_user.create_time <![CDATA[ >= ]]> #{beginOutTime}</if>
+            <if test="endOutTime != null "> and jz_user.create_time  <![CDATA[ <= ]]> #{endOutTime}</if>
 
          order by jz_user.create_time desc
     </select>
