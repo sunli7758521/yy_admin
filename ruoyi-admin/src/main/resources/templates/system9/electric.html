@@ -82,7 +82,7 @@
                 <span class="mycorner righttop"></span>
                 <span class="mycorner leftbottom"></span>
                 <span class="mycorner rightbottom"></span>
-                <div class="seTitle">隐患情况统计与风险情况统计</div>
+                <div class="seTitle">风险等级统计与隐患情况统计</div>
                 <div class="seCon">
                     <div class="top1">
                         <div class="chartBlock" style="width: 50%;">
@@ -92,7 +92,7 @@
                             <table>
                                 <thead>
                                 <tr>
-                                    <td>系统隐患</td>
+                                    <td>风险等级</td>
                                     <td>数量</td>
                                 </tr>
                                 </thead>
@@ -248,15 +248,16 @@
             {name:"D级风险",value: 235},
         ]
         var chartData31 = [
-            {name:"A级隐患",value: 285},
-            {name:"B级隐患",value: 410},
-            {name:"C级隐患",value: 274},
-            {name:"D级隐患",value: 274},
+            {name:"A级风险",value: 285},
+            {name:"B级风险",value: 410},
+            {name:"C级风险",value: 274},
+            {name:"D级风险",value: 274},
         ]
         var chartData32 = [
-            {name:"高压配电室",value: 285},
-            {name:"低压配电室",value: 410},
-            {name:"供电线路",value: 274},
+            {name:"A级风险",value: 285},
+            {name:"B级风险",value: 410},
+            {name:"C级风险",value: 274},
+            {name:"D级风险",value: 274},
         ]
         var chartData33 = [
             {name:"配电设备",value: 11},
@@ -658,11 +659,11 @@
                 }
             },
             series: [{
-                name: '隐患情况统计',
+                name: '风险等级',
                 type: 'pie',
                 radius: '50%',
                 center: ['50%', '50%'],
-                color: ['#EFEFBB', '#D4D3DD', '#999966'],
+                color: [ '#F7C802','#007F00' ,'#FC0001','#FC6401'],//3是a  2是d 4是b 1是c
                 data: data.sort(function(a, b) {
                     return a.value - b.value
                 }),
@@ -989,7 +990,7 @@
             grid: {
                 left: '15%',
                 top: '0%',
-                right: '0%',
+                right: '5%',
                 bottom: '0%',
                 containLabel: true
             },
@@ -1006,7 +1007,7 @@
                         fontSize: '12',
                     }
                 },
-                data: ['防护用品','生命救助','生命支持','救援运载','临时食宿','污染清理','动力燃料',]
+                data: ['防护用品','生命救助','生命支持','救援运载','临时食宿','污染清理','动力燃料']
             }, {
                 axisTick: 'none',
                 axisLine: 'none',
@@ -1016,7 +1017,7 @@
                         fontSize: '12',
                     }
                 },
-                data: [60,50,10,22,15,55,44]
+                data: []
             }, {
                 name: '',
                 nameGap: '50',
@@ -1139,9 +1140,9 @@
         var myChart = echarts.init(document.getElementById('echart8'));
         var option = {
             grid: {
-                left: '15%',
+                left: '20%',
                 top: '0%',
-                right: '0%',
+                right: '5%',
                 bottom: '0%',
                 containLabel: true
             },
@@ -1168,7 +1169,7 @@
                         fontSize: '12',
                     }
                 },
-                data: [50,10,22,15,55,44]
+                data: []
             }, {
                 name: '',
                 nameGap: '50',
