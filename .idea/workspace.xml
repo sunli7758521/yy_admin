@@ -3,212 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="eceee974-eb74-4fa8-8de2-078a15a14e4f" name="Default Changelist" comment="修改页面上的错误">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-admin/src/main/resources/static/ruoyi/js/ry-ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/ruoyi-admin/src/main/resources/static/ruoyi/js/ry-ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/DataScope.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/DataSource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/Excel$ColumnType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/Excel$Type.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/Excel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/Excels.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/Log.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/annotation/RepeatSubmit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/config/Global.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/config/ServerConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/config/datasource/DynamicDataSourceContextHolder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/config/thread/ThreadPoolConfig$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/config/thread/ThreadPoolConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/CoommonConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/GenConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/PermissionConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/RolesConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/ScheduleConstants$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/ScheduleConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/ShiroConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/SystemConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/constant/UserConstants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/controller/BaseController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/controller/BaseController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/domain/AjaxResult$Type.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/domain/AjaxResult.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/domain/BaseEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/domain/TreeEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/domain/Ztree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/page/PageDomain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/page/TableDataInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/page/TableSupport.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/text/CharsetKit.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/text/Convert.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/core/text/StrFormatter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/enums/BusinessStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/enums/BusinessType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/enums/DataSourceType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/enums/OnlineStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/enums/OperatorType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/enums/UserStatus.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/BusinessException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/DemoModeException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/base/BaseException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/file/FileException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/file/FileNameLengthLimitExceededException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/file/FileSizeLimitExceededException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/file/InvalidExtensionException$InvalidFlashExtensionException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/file/InvalidExtensionException$InvalidImageExtensionException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/file/InvalidExtensionException$InvalidMediaExtensionException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/file/InvalidExtensionException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/job/TaskException$Code.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/job/TaskException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/CaptchaException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/RoleBlockedException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/UserBlockedException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/UserDeleteException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/UserException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/UserNotExistsException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/UserPasswordNotMatchException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/UserPasswordRetryLimitCountException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/exception/user/UserPasswordRetryLimitExceedException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/json/JSON.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/json/JSONObject$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/json/JSONObject$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/json/JSONObject$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/json/JSONObject$EndArrayCallback.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/json/JSONObject$JSONArray.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/json/JSONObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/AddressUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/Arith.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/DateUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/ExceptionUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/IpUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/MapDataUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/MessageUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/ServletUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/StringUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/Threads.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/VerificationCodeImgUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/YamlUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/bean/BeanUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/file/FileUploadUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/file/FileUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/file/MimeTypeUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/html/EscapeUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/http/HttpUtils$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/http/HttpUtils$TrustAnyHostnameVerifier.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/http/HttpUtils$TrustAnyTrustManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/http/HttpUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/poi/ExcelUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/reflect/ReflectUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/security/Md5Utils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/security/PermissionUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/spring/SpringUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/utils/sql/SqlUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/xss/XssFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-common/target/classes/com/ruoyi/common/xss/XssHttpServletRequestWrapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/aspectj/DataScopeAspect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/aspectj/DataSourceAspect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/aspectj/LogAspect.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/ApplicationConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/CaptchaConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/DruidConfig$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/DruidConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/FilterConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/I18nConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/KaptchaTextCreator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/MyBatisConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/ResourcesConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/ShiroConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/config/properties/DruidProperties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/datasource/DynamicDataSource.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/interceptor/RepeatSubmitInterceptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/interceptor/impl/SameUrlDataInterceptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/manager/AsyncManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/manager/ShutdownManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/manager/factory/AsyncFactory$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/manager/factory/AsyncFactory$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/manager/factory/AsyncFactory$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/manager/factory/AsyncFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/realm/UserRealm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/service/SysLoginService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/service/SysPasswordService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/service/SysShiroService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/session/OnlineSession.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/session/OnlineSessionDAO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/session/OnlineSessionFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/filter/LogoutFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/filter/captcha/CaptchaValidateFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/filter/kickout/KickoutSessionFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/filter/online/OnlineSessionFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/filter/sync/SyncOnlineSessionFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/session/OnlineWebSessionManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/session/SpringSessionValidationScheduler$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/shiro/web/session/SpringSessionValidationScheduler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/util/LogUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/util/ShiroUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/domain/Server.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/domain/server/Cpu.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/domain/server/Jvm.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/domain/server/Mem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/domain/server/Sys.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/domain/server/SysFile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/exception/GlobalExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/service/ConfigService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/service/DictService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-framework/target/classes/com/ruoyi/framework/web/service/PermissionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/config/GenConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/controller/GenController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/domain/GenTable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/domain/GenTableColumn.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/mapper/GenTableColumnMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/mapper/GenTableMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/service/IGenTableColumnService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/service/IGenTableService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/service/impl/GenTableColumnServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/service/impl/GenTableServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/util/GenUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/util/VelocityInitializer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/com/ruoyi/generator/util/VelocityUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/generator.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/mapper/generator/GenTableColumnMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/mapper/generator/GenTableMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/templates/tool/gen/edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/templates/tool/gen/gen.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/templates/tool/gen/importTable.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/html/add.html.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/html/edit.html.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/html/list-tree.html.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/html/list.html.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/html/tree.html.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/java/controller.java.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/java/domain.java.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/java/mapper.java.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/java/service.java.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/java/serviceImpl.java.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/sql/sql.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-generator/target/classes/vm/xml/mapper.xml.vm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/config/ScheduleConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/controller/SysJobController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/controller/SysJobLogController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/domain/SysJob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/domain/SysJobLog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/mapper/SysJobLogMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/mapper/SysJobMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/service/ISysJobLogService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/service/ISysJobService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/service/impl/SysJobLogServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/service/impl/SysJobServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/task/RyTask.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/util/AbstractQuartzJob.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/util/CronUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/util/JobInvokeUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/util/QuartzDisallowConcurrentExecution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/util/QuartzJobExecution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/com/ruoyi/quartz/util/ScheduleUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/mapper/quartz/SysJobLogMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/mapper/quartz/SysJobMapper.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/templates/monitor/job/add.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/templates/monitor/job/detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/templates/monitor/job/edit.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/templates/monitor/job/job.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ruoyi-quartz/target/classes/templates/monitor/job/jobLog.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,7 +79,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -370,7 +164,8 @@
       <workItem from="1582018422584" duration="7115000" />
       <workItem from="1582025687057" duration="221000" />
       <workItem from="1582030108622" duration="1335000" />
-      <workItem from="1582084922468" duration="668000" />
+      <workItem from="1582084922468" duration="1029000" />
+      <workItem from="1582086294953" duration="49000" />
     </task>
     <task id="LOCAL-00001" summary="修改页面上的错误">
       <created>1581600407172</created>
@@ -433,10 +228,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1582030262189" />
-    <state x="372" y="6" key="CommitChangelistDialog2" timestamp="1582085151976">
+    <state x="372" y="6" key="CommitChangelistDialog2" timestamp="1582086301169">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="372" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582085151976" />
+    <state x="372" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582086301169" />
     <state x="253" y="71" key="DiffContextDialog" timestamp="1582085108199">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -449,22 +244,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="589" y="309" width="382" height="206" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1581515590906" />
-    <state width="1493" height="232" key="GridCell.Tab.0.bottom" timestamp="1582031445341">
+    <state width="1493" height="268" key="GridCell.Tab.0.bottom" timestamp="1582086277130">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582031445341" />
-    <state width="1493" height="232" key="GridCell.Tab.0.center" timestamp="1582031445341">
+    <state width="1493" height="268" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582086277130" />
+    <state width="1493" height="268" key="GridCell.Tab.0.center" timestamp="1582086277130">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582031445341" />
-    <state width="1493" height="232" key="GridCell.Tab.0.left" timestamp="1582031445341">
+    <state width="1493" height="268" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582086277130" />
+    <state width="1493" height="268" key="GridCell.Tab.0.left" timestamp="1582086277130">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582031445341" />
-    <state width="1493" height="232" key="GridCell.Tab.0.right" timestamp="1582031445341">
+    <state width="1493" height="268" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582086277130" />
+    <state width="1493" height="268" key="GridCell.Tab.0.right" timestamp="1582086277130">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582031445341" />
+    <state width="1493" height="268" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582086277130" />
     <state width="1493" height="232" key="GridCell.Tab.1.bottom" timestamp="1582031445341">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -501,10 +296,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="299" y="68" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1581238409989" />
-    <state x="403" y="0" key="SettingsEditor" timestamp="1581440863033">
+    <state x="403" y="0" key="SettingsEditor" timestamp="1582086343101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="403" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581440863033" />
+    <state x="403" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1582086343101" />
     <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1581752930467">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -525,10 +320,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="345" y="24" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1581503354039" />
-    <state x="562" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1582084951886">
+    <state x="562" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1582086348937">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="562" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1582084951886" />
+    <state x="562" y="330" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1582086348937" />
     <state x="447" y="145" width="841" height="534" key="find.popup" timestamp="1582024189582">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
