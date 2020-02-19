@@ -165,7 +165,7 @@
       <workItem from="1582025687057" duration="221000" />
       <workItem from="1582030108622" duration="1335000" />
       <workItem from="1582084922468" duration="1029000" />
-      <workItem from="1582086294953" duration="49000" />
+      <workItem from="1582086294953" duration="472000" />
     </task>
     <task id="LOCAL-00001" summary="修改页面上的错误">
       <created>1581600407172</created>
@@ -228,10 +228,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1582030262189" />
-    <state x="372" y="6" key="CommitChangelistDialog2" timestamp="1582086301169">
+    <state x="372" y="6" key="CommitChangelistDialog2" timestamp="1582086729790">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="372" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582086301169" />
+    <state x="372" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582086729790" />
     <state x="253" y="71" key="DiffContextDialog" timestamp="1582085108199">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -328,10 +328,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="447" y="145" width="841" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1582024189582" />
-    <state x="472" y="204" key="git4idea.merge.GitPullDialog" timestamp="1581602006773">
+    <state x="472" y="204" key="git4idea.merge.GitPullDialog" timestamp="1582086759253">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="472" y="204" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1581602006773" />
+    <state x="472" y="204" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1582086759253" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1582020143152">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
