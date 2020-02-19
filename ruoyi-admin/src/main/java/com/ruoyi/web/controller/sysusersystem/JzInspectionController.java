@@ -79,42 +79,42 @@ public class JzInspectionController extends BaseController
     @ResponseBody
     public TableDataInfo list(JzInspection jzInspection)
     {
-//        startPage();
-//        List<JzInspection> list = jzInspectionService.selectJzInspectionList(jzInspection);
-//        return getDataTable(list);
-        List<JzInspection> list = new ArrayList<>();
-        Long userId = ShiroUtils.getUserId();
-        SysUser user = sysUserService.selectUserById(userId);
-        Set<String> roles = roleService.selectRoleKeys(user.getUserId());
-        String id ="";
-        // 超级管理员
-        if(user.getSearchSystemId()==0){
-            if(user.isAdmin()){
-                list =  jzInspectionService.selectJzInspectionList(jzInspection);
-                // 大班长
-            }else if(roles.contains("dbz")){
-                List<JzSysUserSystem>  systemIds = sysUserSystemService.selectByUserId(user.getUserId());
-                for (JzSysUserSystem systemId : systemIds) {
-                    id+=systemId.getSystemId()+",";
-                }
-                list = jzInspectionService.selectDbInspectionList(id,
-                        jzInspection.getEquipmentState(),jzInspection.getState(),
-                        jzInspection.getJcStartDate(),jzInspection.getJcEndDate(),
-                        jzInspection.getJcPeople(),jzInspection.getInspectionProject(),jzInspection.getContent());
-
-            }else{
-                // 普通角色
-                jzInspection.setSystemId(user.getSystemId());
-                list =  jzInspectionService.selectJzInspectionList(jzInspection);
-            }
-        }else{
-            jzInspection.setSystemId(user.getSearchSystemId());
-            list =  jzInspectionService.selectJzInspectionList(jzInspection);
-        }
-
-
-
+        startPage();
+        List<JzInspection> list = jzInspectionService.selectJzInspectionList(jzInspection);
         return getDataTable(list);
+//        List<JzInspection> list = new ArrayList<>();
+//        Long userId = ShiroUtils.getUserId();
+//        SysUser user = sysUserService.selectUserById(userId);
+//        Set<String> roles = roleService.selectRoleKeys(user.getUserId());
+//        String id ="";
+//        // 超级管理员
+//        if(user.getSearchSystemId()==0){
+//            if(user.isAdmin()){
+//                list =  jzInspectionService.selectJzInspectionList(jzInspection);
+//                // 大班长
+//            }else if(roles.contains("dbz")){
+//                List<JzSysUserSystem>  systemIds = sysUserSystemService.selectByUserId(user.getUserId());
+//                for (JzSysUserSystem systemId : systemIds) {
+//                    id+=systemId.getSystemId()+",";
+//                }
+//                list = jzInspectionService.selectDbInspectionList(id,
+//                        jzInspection.getEquipmentState(),jzInspection.getState(),
+//                        jzInspection.getJcStartDate(),jzInspection.getJcEndDate(),
+//                        jzInspection.getJcPeople(),jzInspection.getInspectionProject(),jzInspection.getContent());
+//
+//            }else{
+//                // 普通角色
+//                jzInspection.setSystemId(user.getSystemId());
+//                list =  jzInspectionService.selectJzInspectionList(jzInspection);
+//            }
+//        }else{
+//            jzInspection.setSystemId(user.getSearchSystemId());
+//            list =  jzInspectionService.selectJzInspectionList(jzInspection);
+//        }
+//
+//
+//
+//        return getDataTable(list);
     }
 
     /**
