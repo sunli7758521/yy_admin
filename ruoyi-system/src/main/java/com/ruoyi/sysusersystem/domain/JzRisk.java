@@ -74,6 +74,28 @@ public class JzRisk extends BaseEntity
     //@Excel(name = "最后修改人id")
     private Long updateId;
 
+    /** 责任部门 */
+    private String  zrDept;
+    /** 责任人 */
+    private String zrName;
+
+    public String getZrDept() {
+        return zrDept;
+    }
+
+    public void setZrDept(String zrDept) {
+        this.zrDept = zrDept;
+    }
+
+    public String getZrName() {
+        return zrName;
+    }
+
+    public void setZrName(String zrName) {
+        this.zrName = zrName;
+    }
+
+
     public void setRiskId(Long riskId) 
     {
         this.riskId = riskId;

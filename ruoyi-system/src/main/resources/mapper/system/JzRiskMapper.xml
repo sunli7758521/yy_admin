@@ -24,6 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="fengXiandian"    column="feng_xianDian"    />
         <result property="huodongNeirong"    column="huoDong_neiRong"    />
         <result property="weixianShigu"    column="weiXian_shiGu"    />
+        <result property="zrDept"    column="zr_dept"    />
+        <result property="zrName"    column="zr_name"    />
     </resultMap>
 
     <resultMap type="JzRiskVo" id="JzRiskResultVo">
@@ -46,6 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="fengXiandian"    column="feng_xianDian"    />
         <result property="huodongNeirong"    column="huoDong_neiRong"    />
         <result property="weixianShigu"    column="weiXian_shiGu"    />
+        <result property="zrDept"    column="zr_dept"    />
+        <result property="zrName"    column="zr_name"    />
         <result property="pingjiaId"    column="pingJia_id"    />
         <result property="biaozhunFen"    column="biaoZhun_fen"    />
         <result property="lZhi"    column="l_zhi"    />
@@ -60,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJzRiskVo">
-        select risk_id, title, system_id, type_id, risk_level, file_url, create_id, update_id, create_time, update_time, remark, feng_xianDian, huoDong_neiRong, weiXian_shiGu from jz_risk
+        select risk_id, title, system_id, type_id, risk_level, file_url, create_id, update_id, create_time, update_time, remark, feng_xianDian, huoDong_neiRong, weiXian_shiGu,zr_dept,zr_name from jz_risk
     </sql>
     <sql id="selectVo">
 select jr.*, jz.`name` type_name,sdd.dict_label level_name,jr.risk_id,jr.title,jr.system_id,jr.risk_level,jr.file_url,jr.create_id,jr.update_id,jr.create_time,jr.update_time,jr.remark from jz_risk jr
@@ -84,6 +88,8 @@ LEFT JOIN sys_dict_data sdd ON sdd.dict_value = jr.risk_level and sdd.dict_type=
             jz.feng_xianDian,
             jz.huoDong_neiRong,
             jz.weiXian_shiGu,
+            jz.zr_dept,
+            jz.zr_name,
             pj.pingJia_id,
             pj.biaoZhun_fen,
             pj.d_zhi ,pj.l_zhi,pj.r_zhi,pj.s_zhi,pj.fengXian_jiBie,pj.pj_time,
@@ -140,7 +146,10 @@ LEFT JOIN sys_dict_data sdd ON sdd.dict_value = jr.risk_level and sdd.dict_type=
             <if test="fengXiandian != null  and fengXiandian != ''">feng_xianDian,</if>
             <if test="huodongNeirong != null  and huodongNeirong != ''">huoDong_neiRong,</if>
             <if test="weixianShigu != null  and weixianShigu != ''">weiXian_shiGu,</if>
-         </trim>
+            <if test="zrName != null  and zrName != ''">zr_name,</if>
+            <if test="zrDept != null  and zrDept != ''">zr_dept,</if>
+
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="title != null  and title != ''">#{title},</if>
             <if test="systemId != null ">#{systemId},</if>
@@ -155,7 +164,9 @@ LEFT JOIN sys_dict_data sdd ON sdd.dict_value = jr.risk_level and sdd.dict_type=
             <if test="fengXiandian != null  and fengXiandian != ''">#{fengXiandian},</if>
             <if test="huodongNeirong != null  and huodongNeirong != ''">#{huodongNeirong},</if>
             <if test="weixianShigu != null  and weixianShigu != ''">#{weixianShigu},</if>
-         </trim>
+            <if test="zrName != null  and zrName != ''">#{zrName},</if>
+            <if test="zrDept != null  and zrDept != ''">#{zrDept},</if>
+        </trim>
     </insert>
 
     <update id="updateJzRisk" parameterType="JzRisk">
@@ -174,6 +185,8 @@ LEFT JOIN sys_dict_data sdd ON sdd.dict_value = jr.risk_level and sdd.dict_type=
             <if test="fengXiandian != null  and fengXiandian != ''">feng_xianDian = #{fengXiandian},</if>
             <if test="huodongNeirong != null  and huodongNeirong != ''">huoDong_neiRong = #{huodongNeirong},</if>
             <if test="weixianShigu != null  and weixianShigu != ''">weiXian_shiGu = #{weixianShigu},</if>
+            <if test="zrName != null  and zrName != ''">zr_name  = #{zrName},</if>
+            <if test="zrDept != null  and zrDept != ''">zr_dept =#{zrDept},</if>
         </trim>
         where risk_id = #{riskId}
     </update>

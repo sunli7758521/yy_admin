@@ -15,6 +15,19 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-sm-3 control-label">责任部门：</label>
+                <div class="col-sm-8">
+                    <input name="zrDept" th:field="*{zrDept}" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">责任人：</label>
+                <div class="col-sm-8">
+                    <input name="zrName" th:field="*{zrName}" class="form-control" type="text" required>
+                </div>
+            </div>
+
             <div class="form-group">    
                 <label class="col-sm-3 control-label">系统名称：</label>
                 <div class="col-sm-8">
@@ -33,22 +46,12 @@
 <!--                        <option value="" th:text="*{typeName}">所有</option>-->
 <!--                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictCode}"></option>-->
 <!--                    </select>-->
-                    <select id="typeId" class="form-control" name="typeId" th:with="type=${@dict.listType(0)}" th:field="*{typeName}">
+                    <select id="typeId" class="form-control" th:field="*{typeId}"  name="typeId" th:with="type=${@dict.listType(0)}" th:field="*{typeName}">
                         <option value="">所有</option>
                         <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}" ></option>
                     </select>
                 </div>
             </div>
-<!--            <div class="form-group">    -->
-<!--                <label class="col-sm-3 control-label">风险等级：</label>-->
-<!--                <div class="col-sm-8">-->
-<!--&lt;!&ndash;                    <input name="riskLevel" th:field="*{riskLevel}" class="form-control" type="text">&ndash;&gt;-->
-<!--                    <select class="form-control" name="riskLevel" th:with="type=${@dict.getType('risk_level')}" th:field="*{riskLevel}">-->
-<!--                        <option value="">所有</option>-->
-<!--                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="form-group">
                 <label class="col-sm-3 control-label">文件上传</label>
                 <input id="lzqkUrl" name="fileUrl" class="form-control" type="hidden">
@@ -71,7 +74,7 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">备注：</label>
                 <div class="col-sm-8">
-                    <input name="title" th:field="*{title}" class="form-control" type="text">
+                    <textarea name="title" th:field="*{title}" class="form-control" type="text"></textarea>
                 </div>
             </div>
         </form>
