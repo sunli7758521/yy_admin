@@ -5,6 +5,9 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.util.Date;
+
+
 /**
  * 风险评价对象 pingjiabiao
  *
@@ -45,6 +48,36 @@ public class Pingjiabiao extends BaseEntity
     /** 风险id */
     @Excel(name = "风险id")
     private Long riskId;
+    /** 评价时间 */
+    private Date pjTime;
+    /** 评价报告 */
+    private String pgBg;
+    /** 风险类型 */
+    private String  typeName;
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public Date getPjTime() {
+        return pjTime;
+    }
+
+    public void setPjTime(Date pjTime) {
+        this.pjTime = pjTime;
+    }
+
+    public String getPgBg() {
+        return pgBg;
+    }
+
+    public void setPgBg(String pgBg) {
+        this.pgBg = pgBg;
+    }
 
     public void setPingjiaId(Long pingjiaId)
     {
@@ -130,6 +163,8 @@ public class Pingjiabiao extends BaseEntity
                 .append("dZhi", getdZhi())
                 .append("fengxianJibie", getFengxianJibie())
                 .append("riskId", getRiskId())
+                .append("pgBg", getPgBg())
+                .append("pjTime", getPjTime())
                 .toString();
     }
 }
