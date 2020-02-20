@@ -13,10 +13,13 @@
         <result property="dZhi"    column="d_zhi"    />
         <result property="fengxianJibie"    column="fengXian_jiBie"    />
         <result property="riskId"    column="risk_id"    />
+        <result property="pjTime"    column="pj_time"    />
+        <result property="pgBg"    column="pg_bg"    />
+
     </resultMap>
 
     <sql id="selectPingjiabiaoVo">
-        select pingJia_id, biaoZhun_fen, l_zhi, s_zhi, r_zhi, d_zhi, fengXian_jiBie, risk_id from pingjiabiao
+        select pingJia_id, biaoZhun_fen, l_zhi, s_zhi, r_zhi, d_zhi, fengXian_jiBie, risk_id,pj_time, pg_bg from pingjiabiao
     </sql>
 
     <select id="selectPingjiabiaoList" parameterType="Pingjiabiao" resultMap="PingjiabiaoResult">
@@ -29,6 +32,8 @@
             <if test="dZhi != null "> and d_zhi = #{dZhi}</if>
             <if test="fengxianJibie != null  and fengxianJibie != ''"> and fengXian_jiBie = #{fengxianJibie}</if>
             <if test="riskId != null "> and risk_id = #{riskId}</if>
+            <if test="pjTime != null "> and pj_time = #{pjTime}</if>
+            <if test="pgBg != null and pgBg !='' "> and pg_bg = #{pgBg}</if>
         </where>
     </select>
 
@@ -48,6 +53,9 @@
             <if test="dZhi != null ">d_zhi,</if>
             <if test="fengxianJibie != null  and fengxianJibie != ''">fengXian_jiBie,</if>
             <if test="riskId != null ">risk_id,</if>
+
+            <if test="pjTime != null "> pj_time ,</if>
+            <if test="pgBg != null and pgBg !='' "> pg_bg,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="pingjiaId != null ">#{pingjiaId},</if>
@@ -58,6 +66,9 @@
             <if test="dZhi != null ">#{dZhi},</if>
             <if test="fengxianJibie != null  and fengxianJibie != ''">#{fengxianJibie},</if>
             <if test="riskId != null ">#{riskId},</if>
+
+            <if test="pjTime != null "> #{pjTime},</if>
+            <if test="pgBg != null and pgBg !='' ">  #{pgBg},</if>
         </trim>
     </insert>
 
@@ -71,6 +82,8 @@
             <if test="dZhi != null ">d_zhi = #{dZhi},</if>
             <if test="fengxianJibie != null  and fengxianJibie != ''">fengXian_jiBie = #{fengxianJibie},</if>
             <if test="riskId != null ">risk_id = #{riskId},</if>
+            <if test="pjTime != null ">  pj_time = #{pjTime},</if>
+            <if test="pgBg != null and pgBg !='' ">  pg_bg = #{pgBg},</if>
         </trim>
         where pingJia_id = #{pingjiaId}
     </update>
