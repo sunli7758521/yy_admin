@@ -26,6 +26,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="weixianShigu"    column="weiXian_shiGu"    />
     </resultMap>
 
+    <resultMap type="JzRiskVo" id="JzRiskResultVo">
+        <result property="riskId"    column="risk_id"    />
+        <result property="title"    column="title"    />
+        <result property="systemId"    column="system_id"    />
+        <result property="systemName"    column="system_name"    />
+        <result property="typeId"    column="type_id"    />
+        <!--<result property="typeName"    column="type_name"    />-->
+        <result property="riskLevel"    column="risk_level"    />
+        <result property="levelName"    column="level_name"    />
+        <result property="fileUrl"    column="file_url"    />
+        <result property="createId"    column="create_id"    />
+        <result property="createName"    column="create_name"    />
+        <result property="updateId"    column="update_id"    />
+        <result property="updateName"    column="update_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="fengXiandian"    column="feng_xianDian"    />
+        <result property="huodongNeirong"    column="huoDong_neiRong"    />
+        <result property="weixianShigu"    column="weiXian_shiGu"    />
+        <result property="pingjiaId"    column="pingJia_id"    />
+        <result property="biaozhunFen"    column="biaoZhun_fen"    />
+        <result property="lZhi"    column="l_zhi"    />
+        <result property="sZhi"    column="s_zhi"    />
+        <result property="rZhi"    column="r_zhi"    />
+        <result property="dZhi"    column="d_zhi"    />
+        <result property="fengxianJibie"    column="fengXian_jiBie"    />
+        <result property="pjTime"    column="pj_time"    />
+        <result property="pgBg"    column="pg_bg"    />
+        <result property="typeName"    column="name"    />
+
+    </resultMap>
+
     <sql id="selectJzRiskVo">
         select risk_id, title, system_id, type_id, risk_level, file_url, create_id, update_id, create_time, update_time, remark, feng_xianDian, huoDong_neiRong, weiXian_shiGu from jz_risk
     </sql>
@@ -35,16 +68,46 @@ LEFT JOIN jz_type jz ON jz.id = jr.type_id
 LEFT JOIN sys_dict_data sdd ON sdd.dict_value = jr.risk_level and sdd.dict_type='risk_level'
     </sql>
 
-    <select id="selectJzRiskList" parameterType="JzRisk" resultMap="JzRiskResult">
-        <include refid="selectVo"/>
+    <sql id="sqlvo">
+        SELECT
+            jz.risk_id,
+            jz.title,
+            jz.system_id,
+            jz.type_id,
+            jz.risk_level,
+            jz.file_url,
+            jz.create_id,
+            jz.update_id,
+            jz.create_time,
+            jz.update_time,
+            jz.remark,
+            jz.feng_xianDian,
+            jz.huoDong_neiRong,
+            jz.weiXian_shiGu,
+            pj.pingJia_id,
+            pj.biaoZhun_fen,
+            pj.d_zhi ,pj.l_zhi,pj.r_zhi,pj.s_zhi,pj.fengXian_jiBie,pj.pj_time,
+            pj.pg_bg,
+            jt.name
+
+        from jz_risk jz LEFT JOIN pingjiabiao pj
+        on
+         jz.risk_id = pj.risk_id
+          join jz_type  jt
+          on jz.type_id = jt.id
+    </sql>
+
+    <select id="selectJzRiskList" parameterType="JzRisk" resultMap="JzRiskResultVo">
+        <include refid="sqlvo"/>
+
         <where>  
-            <if test="fengXiandian != null  and fengXiandian != ''"> and jr.feng_xianDian like concat('%', #{fengXiandian}, '%')</if>
-            <if test="systemId != null "> and jr.system_id = #{systemId}</if>
-            <if test="typeId != null "> and jr.type_id = #{typeId}</if>
-            <if test="riskLevel != null  and riskLevel != ''"> and jr.risk_level = #{riskLevel}</if>
-            <if test="fileUrl != null  and fileUrl != ''"> and jr.file_url = #{fileUrl}</if>
-            <if test="createId != null "> and jr.create_id = #{createId}</if>
-            <if test="updateId != null "> and jr.update_id = #{updateId}</if>
+            <if test="fengXiandian != null  and fengXiandian != ''"> and jz.feng_xianDian like concat('%', #{fengXiandian}, '%')</if>
+            <if test="systemId != null "> and jz.system_id = #{systemId}</if>
+            <if test="typeId != null "> and jz.type_id = #{typeId}</if>
+            <if test="riskLevel != null  and riskLevel != ''"> and jz.risk_level = #{riskLevel}</if>
+            <if test="fileUrl != null  and fileUrl != ''"> and jz.file_url = #{fileUrl}</if>
+            <if test="createId != null "> and jz.create_id = #{createId}</if>
+            <if test="updateId != null "> and jz.update_id = #{updateId}</if>
         </where>
     </select>
     
@@ -55,6 +118,11 @@ LEFT JOIN sys_dict_data sdd ON sdd.dict_value = jr.risk_level and sdd.dict_type=
     <select id="selectFileUrlByRiskId" resultType="java.lang.String">
         select file_url from jz_risk where risk_id =#{riskId}
     </select>
+
+    <select id="selectByRiskId" resultType="java.lang.String">
+        select pg_bg as pgBg from  pingjiabiao where risk_id =#{riskId}
+    </select>
+
 
     <insert id="insertJzRisk" parameterType="JzRisk" useGeneratedKeys="true" keyProperty="riskId">
         insert into jz_risk
