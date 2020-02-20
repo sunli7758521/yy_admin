@@ -65,4 +65,11 @@ public interface IJzRiskService
      * @return
      */
     public String selectFileUrlByRiskId(Long riskId);
+
+    /**
+     * 根据Id获取评估报告地址
+     * @param riskId
+     * @return
+     */
+    String selectByRiskId(Long riskId);
 }

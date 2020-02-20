@@ -8,9 +8,12 @@ import java.util.Map;
 
 import com.ruoyi.common.config.Global;
 import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.sysusersystem.domain.JzRisk;
+import com.ruoyi.sysusersystem.domain.Pingjiabiao;
 import com.ruoyi.sysusersystem.service.IJzRiskService;
+import com.ruoyi.sysusersystem.service.IPingjiabiaoService;
 import com.ruoyi.web.controller.common.CommonController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,9 @@ import sun.util.calendar.BaseCalendar;
 public class JzRiskController extends BaseController
 {
     private String prefix = "sysusersystem/risk";
+
+    @Autowired
+    private IPingjiabiaoService pingjiabiaoService;
 
     @Autowired
     private IJzRiskService jzRiskService;
@@ -233,6 +239,66 @@ public class JzRiskController extends BaseController
         mmap.put("riskId", riskId);
 
         return "sysusersystem/pingjiabiao/pingjiabiao";
+    }
+
+    /**
+     * 新增风险评价
+     */
+    @GetMapping("/fXPG/{riskId}")
+    public String add(@PathVariable("riskId") Long riskId, ModelMap mmap)
+    {
+        mmap.put("riskId", riskId);
+        return prefix + "/fxpg";
+    }
+
+    /**
+     * 新增保存风险评价
+     */
+    @RequiresPermissions("sysusersystem:pingjiabiao:add")
+    @Log(title = "风险评价", businessType = BusinessType.INSERT)
+    @PostMapping("/fXPG")
+    @ResponseBody
+    public AjaxResult fXPG(Pingjiabiao pingjiabiao)
+    {
+        pingjiabiao.setPjTime(DateUtils.getNowDate());
+        return toAjax(pingjiabiaoService.insertPingjiabiao(pingjiabiao));
+    }
+
+    /**
+     * docx,doc 可以转换
+     * pdf 直接显示  方法现未做处理
+     * 更新页面预览文件
+     * @param riskId 接收主键查询fileurl
+     * @param mmap
+     * @return
+     */
+    @RequestMapping(value="/pgWordToPdf/{riskId}",method= RequestMethod.GET)
+    @RequiresPermissions("sysusersystem:risk:search")
+    public String pgWordToPdf(@PathVariable Long riskId,ModelMap mmap)
+    {
+        //String wordfile = jzSystemManagementService.selectFileUrlByManagementByID(managementId);//根据Id获取到文件路径
+        String wordfile = "";
+        wordfile = jzRiskService.selectByRiskId(riskId);//根据Id获取文件路径
+        wordfile= Global.getUploadPath()+wordfile.substring(15);// /profile/upload 所以从第16位开始
+        String fileName = wordfile.substring(wordfile.lastIndexOf("/")+1);//截取到文件名称
+        String path1 =Global.getUploadPath()+fileName;//获取全路径
+        String isDocOrDocx = path1.substring(path1.indexOf("."));
+        String str = null;
+        if(isDocOrDocx.equals(".docx")) {
+            str = path1.substring(0, path1.indexOf(".docx"));
+        }else if(isDocOrDocx.equals(".doc"))
+        {
+            str = path1.substring(0, path1.indexOf(".doc"));
+        }
+        String pdffile = str.concat(".pdf");;
+        int flag = CommonController.wToPdfChange(wordfile,pdffile);
+        String pdfName = fileName.substring(0,fileName.indexOf(".")).concat(".pdf");
+        if(flag==0){
+            mmap.put("pdfUrl", Constants.RESOURCE_PREFIX+"/upload"+pdfName);
+        }else{
+            //文件读取错误
+        }
+        return prefix+"/yu";
     }
 
 }

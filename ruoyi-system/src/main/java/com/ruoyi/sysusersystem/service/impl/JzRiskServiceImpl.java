@@ -105,4 +105,14 @@ public class JzRiskServiceImpl implements IJzRiskService
     public String selectFileUrlByRiskId(Long riskId) {
         return jzRiskMapper.selectFileUrlByRiskId(riskId);
     }
+
+    /**
+     * 根据Id获取评估报告地址
+     * @param riskId
+     * @return
+     */
+    @Override
+    public String selectByRiskId(Long riskId) {
+        return jzRiskMapper.selectByRiskId(riskId);
+    }
 }
