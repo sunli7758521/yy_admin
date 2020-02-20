@@ -26,35 +26,18 @@
                 <div class="form-group">
                     <label class="col-sm-3 control-label">风险类型：</label>
                         <div class="col-sm-8">
-<!--                            <select id="typeName" class="form-control" name="type" th:with="type=${@dict.getType('risk_level')}">-->
-<!--                                <option value="">所有</option>-->
-<!--                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictLabel}"></option>-->
-<!--                            </select>-->
                             <select id="typeId" class="form-control" name="typeId" th:with="type=${@dict.listType(0)}" required>
                                 <option value="">所有</option>
                                 <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}" ></option>
                             </select>
                         </div>
                 </div>
-<!--            <div class="form-group">    -->
-<!--                <label class="col-sm-3 control-label">风险等级：</label>-->
-<!--                <div class="col-sm-8">-->
-<!--&lt;!&ndash;                    <input name="riskLevel" class="form-control" type="text">&ndash;&gt;-->
-<!--                    <select id="riskLevel" class="form-control" name="riskLevel" th:with="type=${@dict.getType('risk_level')}">-->
-<!--                        <option value="">所有</option>-->
-<!--                        <option th:each="dict : ${type}" th:value="${dict.dictValue}" th:text="${dict.dictLabel}">-->
-<!--                        </option>-->
-<!--                    </select>-->
-<!--                </div>-->
-<!--            </div>-->
             <div class="form-group">
                 <label class="col-sm-3 control-label">文件上传</label>
                 <input id="lzqkUrl" name="fileUrl" class="form-control" type="hidden">
                 <button type="button" class="layui-btn" id="test3"><i class="layui-icon"></i>上传文件</button>
                 <div type="button" class="layui-btn" id="test4" onclick="addSystem()">预览</div>
             </div>
-
-
             <div class="form-group">
                 <label class="col-sm-3 control-label">风险活动及内容：</label>
                 <div class="col-sm-8">

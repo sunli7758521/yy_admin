@@ -55,12 +55,15 @@
         var editFlag = [[${@permission.hasPermi('sysusersystem:risk:edit')}]];
         var removeFlag = [[${@permission.hasPermi('sysusersystem:risk:remove')}]];
         var searchFlag = [[${@permission.hasPermi('sysusersystem:risk:search')}]];
+        var datas = [[${@dict.getType('risk_level')}]];
         var prefix = ctx + "sysusersystem/risk";
 
         $(function() {
             var options = {
                 url: prefix + "/list",
+
                 createUrl: prefix + "/add",
+                fXPGUrl: prefix + "/fXPG",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
@@ -78,23 +81,9 @@
                     title : '风险点'
                 },
                 {
-                    field : 'fileUrl',
-                    title : '文件地址',
-                    visible: false
+                    field : 'typeName',
+                    title : '风险类型'
                 },
-                {
-                     field : 'typeName',
-                     title : '风险名称'
-                },
-                // {
-                //     field : 'levelName',
-                //     title : '风险等级'
-                // },
-
-                // {
-                //     field : 'fengXiandian',
-                //     title : '风险点'
-                // },
                 {
                     field : 'huodongNeirong',
                     title : '风险活动及内容'
@@ -102,6 +91,49 @@
                 {
                     field : 'weixianShigu',
                     title : '潜在风险及可能发生的事故'
+                },
+                {
+                    field : 'fileUrl',
+                    title : '文件地址',
+                    visible: false
+                },
+                {
+                    field : 'biaozhunFen',
+                    title : '标准分'
+
+                },
+                {
+                    field : 'lZhi',
+                    title : 'L'
+                },
+                {
+                    field : 'sZhi',
+                    title : 'S'
+                },
+                {
+                    field : 'dZhi',
+                    title : 'D'
+                },
+                {
+                    field : 'rZhi',
+                    title : 'R'
+                },
+                {
+                    field : 'fengxianJibie',
+                    title : '风险级别',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+
+                },
+                {
+                    field : 'pjTime',
+                    title : '评价时间'
+                },
+                {
+                    field : 'pgBg',
+                    title : '评价报告',
+                    visible: false
                 },
                 {
                     field : 'title',
@@ -114,8 +146,15 @@
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.riskId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.riskId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        actions.push('<a class="btn btn-success btn-xs ' + searchFlag + '"  onclick="yunlan(\'' + row.managementId + '\'+\'' + '|' + '\'+\'' + row.fileUrl + '\')"><i class="fa fa-remove"></i>预览</a>');
-                        actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="detail(\'' + row.riskId + '\')"><i class="fa fa-list"></i>风险评估</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + searchFlag + '"  onclick="yunlan(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.fileUrl + '\')"><i class="fa fa-search"></i>预览风险文档</a>');
+                      if(row.pgBg  ==null){
+                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '"  onclick="fXPG(\'' + row.riskId + '\')"><i class="fa fa-list"></i>风险评估</a>');
+                      }else{
+                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '><i class="fa fa-list"></i>风险已评估</a>');
+
+                      }
+
+                        actions.push('<a class="btn btn-warning btn-xs ' + searchFlag + '"  onclick="pgbg(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.pgBg + '\')"><i class="fa fa-search"></i>预览评估报告</a>');
                         return actions.join('');
                     }
                 }]
@@ -138,6 +177,28 @@
             var url = prefix + '/detail/' + riskId;
             $.modal.openTab("风险评估", url);
         }
+
     </script>
+
+<script>
+    //    风险评估
+    function fXPG(rId) {
+        var url = prefix+"/fXPG/"+rId;
+        $.modal.open("风险评估",url);
+    }
+    //    评估报告预览
+    function pgbg(param) {
+        var arr = param.split('|');
+        var riskId =arr[0];
+        var pgBg = arr[1];
+        if(arr[1].length == 4){
+           layer.alert("文件未上传，请先上传在预览！！！");
+            return false;
+        }
+        var url = prefix +"/pgWordToPdf/"+riskId;
+        console.log(url)
+        $.modal.open("上传制度",url);
+    }
+</script>
 </body>
 </html>
