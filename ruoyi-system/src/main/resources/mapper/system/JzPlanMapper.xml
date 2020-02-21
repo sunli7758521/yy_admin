@@ -165,5 +165,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     SELECT * FROM jz_plan WHERE plan_type = 2 AND long_time = 2
     </select>
 
+    <resultMap type="YHTZVo" id="YHTZMap">
+        <result property="planId"    column="plan_id"    />
+        <result property="title"    column="title"    />
+        <result property="longTime"    column="long_time"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="teamId"    column="team_id"    />
+        <result property="content"    column="content"    />
+        <result property="typeName"    column="name"    />
+        <result property="rectificationPeople"    column="rectification_people"    />
+        <result property="rectificationTime"    column="rectification_time"    />
+        <result property="hiddenContent"    column="hidden_content"    />
+        <result property="hiddenWz"    column="hidden_wz"    />
+        <result property="state"    column="state"    />
+        <result property="hiddenJb"    column="hidden_jb"    />
+        <result property="jcDept"    column="jc_dept"    />
+        <result property="jcJb"    column="jc_jb"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+    <select id="selectYHTZList" parameterType="YHTZVo" resultMap="YHTZMap" >
+        select
+        jz_plan.plan_id,
+        jz_plan.title,
+        jz_plan.long_time,
+        sys_dept.dept_name,
+        jz_plan.team_id,
+        jz_plan.content,
+        jz_type.name,
+        jz_hidden_trouble.rectification_people,
+        jz_hidden_trouble.rectification_time,
+        jz_hidden_trouble.hidden_content,
+        jz_hidden_trouble.hidden_wz,
+        jz_hidden_trouble.state,
+        jz_hidden_trouble.hidden_jb,
+        jz_hidden_trouble.jc_dept,
+        jz_hidden_trouble.jc_jb,
+        jz_hidden_trouble.remark
+        from jz_plan,jz_hidden_trouble ,sys_dept,jz_type
+        where jz_plan.plan_id = jz_hidden_trouble.plan_id
+        and jz_plan.system_id = sys_dept.dept_id
+        and jz_hidden_trouble.type_id = jz_type.id
+        and jz_plan.plan_type=2
+    </select>
 
 </mapper>
