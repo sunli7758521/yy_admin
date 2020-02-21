@@ -66,6 +66,25 @@ public class JzHiddenTrouble extends BaseEntity
     @Excel(name = "完成时限")
     private String successTime;
 
+    private String jcDept;
+    private String jcJb;
+
+    public String getJcDept() {
+        return jcDept;
+    }
+
+    public void setJcDept(String jcDept) {
+        this.jcDept = jcDept;
+    }
+
+    public String getJcJb() {
+        return jcJb;
+    }
+
+    public void setJcJb(String jcJb) {
+        this.jcJb = jcJb;
+    }
+
     public String getSuccessTime() {
         return successTime;
     }
