@@ -5,6 +5,8 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.util.Date;
+
 /**
  * 报修对象 jz_warranty
  * 
@@ -15,9 +17,21 @@ public class JzWarranty extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
+//    报修部门，手动输入
+    private String deptName;
+//    报修人电话
+    private String bxPhone;
+//     报修单号，自动生成，根据时间戳
+    private String bxOrder;
+//    审核时间
+    private Date shTime;
     /** 主键 */
     private Long warrantyId;
+//    审核状态
+    private String sHstate;
 
+//    原因
+    private String cause;
     /** 保修内容 */
     @Excel(name = "保修内容")
     private String content;
@@ -204,6 +218,60 @@ public class JzWarranty extends BaseEntity
             .append("updateTime", getUpdateTime())
             .append("systemId", getSystemId())
             .append("remark", getRemark())
+            .append("deptName", getDeptName())
+            .append("bxPhone", getBxPhone())
+            .append("bxOrder", getBxOrder())
+            .append("shTime", getShTime())
+            .append("shState", getsHstate())
+            .append("cause", getCause())
             .toString();
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getBxPhone() {
+        return bxPhone;
+    }
+
+    public void setBxPhone(String bxPhone) {
+        this.bxPhone = bxPhone;
+    }
+
+    public String getBxOrder() {
+        return bxOrder;
+    }
+
+    public void setBxOrder(String bxOrder) {
+        this.bxOrder = bxOrder;
+    }
+
+    public Date getShTime() {
+        return shTime;
+    }
+
+    public void setShTime(Date shTime) {
+        this.shTime = shTime;
+    }
+
+    public String getsHstate() {
+        return sHstate;
+    }
+
+    public void setsHstate(String sHstate) {
+        this.sHstate = sHstate;
+    }
+
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
     }
 }

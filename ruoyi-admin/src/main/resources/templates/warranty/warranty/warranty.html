@@ -19,7 +19,7 @@
 <!--                                <input type="text" name="equipmentId"/>-->
 <!--                            </li>-->
                             <li>
-                                <p>报修人</p>
+                                <p>报修人：</p>
                                 <input type="text" name="equipmentName"/>
                             </li>
 <!--                            <li>-->
@@ -27,11 +27,11 @@
 <!--                                <input type="text" name="equipmentDepartmentId"/>-->
 <!--                            </li>-->
                             <li>
-                                <p>维修人</p>
+                                <p>维修人：</p>
                                 <input type="text" name="maintenancePeopleName"/>
                             </li>
                             <li>
-                                <p>状态 </p>
+                                <p>状态：</p>
 <!--                                (0已修 1.维修 2.超期)：-->
 <!--                                <input type="text" name="state"/>-->
 
@@ -78,7 +78,8 @@
     <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('warranty:warranty:edit')}]];
         var removeFlag = [[${@permission.hasPermi('warranty:warranty:remove')}]];
-        var datas = [[${@dict.getType('jz_equipment_state')}]];
+        var datas = [[${@dict.getType('wx_state')}]];
+        var shdatas =  [[${@dict.getType('wx_sh_state')}]];
         var prefix = ctx + "warranty/warranty";
 
         $(function() {
@@ -97,6 +98,22 @@
                     title : '主键',
                     visible: false
                 },
+                    {
+                        field : 'bxOrder',
+                        title : '报修单号'
+                    },
+                    {
+                        field : 'bxPhone',
+                        title : '报修人电话'
+                    },
+                    {
+                        field : 'deptName',
+                        title : '报修人部门'
+                    },
+                    {
+                        field : 'content',
+                        title : '保修内容'
+                    },
                 {
                     field : 'systemName',
                     title : '系统名称'
@@ -114,10 +131,10 @@
                 //     field : 'equipmentDepartmentId',
                 //     title : '保修科室'
                 // },
-                {
-                    field : 'maintenancePeopleName',
-                    title : '维修人'
-                },
+                // {
+                //     field : 'maintenancePeopleName',
+                //     title : '维修人'
+                // },
                 {
                     field : 'createName',
                     title : '创建人'
@@ -127,29 +144,19 @@
                     title : '创建时间'
                 },
                 // {
-                //     field : 'updateName',
-                //     title : '最后修改人'
+                //     field : 'updateTime',
+                //     title : '最后修改时间'
                 // },
                 {
-                    field : 'updateTime',
-                    title : '最后修改时间'
-                },
-                {
-                    field : 'content',
-                    title : '报修内容'
+                    field : 'sHstate',
+                    title : '审核状态',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(shdatas, value);
+                    }
                 },
                 {
                     field : 'state', 
                     title : '状态',
-                    // formatter: function (value, row, index) {
-                    //     if(row.state == 0){
-                    //         return "已修";
-                    //     }else if(row.state == 1){
-                    //         return "维修";
-                    //     }else{
-                    //         return "超期";
-                    //     }
-                    // }
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(datas, value);
                     }
@@ -166,12 +173,30 @@
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.warrantyId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.warrantyId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="detailId(\'' + row.warrantyId + '\')"><i class="fa fa-remove"></i>查看维修记录</a>');
+                        if(row.sHstate==0){ //未审核
+                            if(row.state==1){ // 己修
+                                actions.push('<a class="btn btn-danger btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="f(\'' + row.warrantyId + '\')"><i class="fa fa-edit"></i>审核</a>');
+                            }
+                        }else if(row.sHstate == 2){//审核未通过
+                            if(row.state==1){
+                                actions.push('<a class="btn btn-danger btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="f(\'' + row.warrantyId + '\')"><i class="fa fa-edit"></i>审核</a>');
+                            }
+                        }
                         return actions.join('');
                     }
                 }]
             };
             $.table.init(options);
         });
+        function detailId(planId){
+            var url = prefix + '/detail/' + planId;
+            $.modal.openTab("查看维修信息", url);
+        }
+        function f(planId){
+            var url = prefix + '/setState/' + planId;
+            $.modal.open("审核报修信息", url);
+        }
     </script>
 </body>
 </html>

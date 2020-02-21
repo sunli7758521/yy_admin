@@ -57,7 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 数据范围过滤 -->
 		${params.dataScope}
 	</select>
-
+	<select id="selectRoleLists" parameterType="SysRole" resultMap="SysRoleResult">
+	select * from sys_role
+	</select>
 	<select id="selectRolesByUserId" parameterType="Long" resultMap="SysRoleResult">
 		<include refid="selectRoleContactVo"/>
 		WHERE r.del_flag = '0' and ur.user_id = #{userId}

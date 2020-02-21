@@ -35,25 +35,34 @@
         <result property="createName"    column="create_name"    />
         <result property="updateId"    column="update_id"    />
         <result property="updateName"    column="update_name"    />
+        <result property="shTime"    column="sh_time"    />
+        <result property="bxPhone"    column="bx_phone"    />
+        <result property="bxOrder"    column="bx_order"    />
+        <result property="deptName"    column="dept_name"    />
+        <result property="sHstate"    column="sh_state"    />
+        <result property="cause"    column="cause"    />
     </resultMap>
 
     <sql id="selectJzWarrantyVo">
 --         select warranty_id, content, equipment_id, equipment_name, equipment_department_id, maintenance_people_id, state, create_time, update_time, system_id, remark, create_id, update_id from jz_warranty
-         SELECT warranty_id,w.system_id,
-        (SELECT dept_name FROM sys_dept WHERE dept_id = w.system_id) system_name, content, equipment_id, equipment_name, equipment_department_id,
-        (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,maintenance_people_id,
-        (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
-        (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
-        w.create_time, w.update_time, w.system_id, w.remark FROM jz_warranty w
+--          SELECT warranty_id,w.system_id,
+--         (SELECT dept_name FROM sys_dept WHERE dept_id = w.system_id) system_name, content, equipment_id, equipment_name, equipment_department_id,
+--         (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,maintenance_people_id,
+--         (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
+--         (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
+--         w.create_time, w.update_time, w.system_id, w.remark,w.sh_time,w.bx_phone,w.bx_order,w.dept_name,w.sh_state FROM jz_warranty w
+        SELECT warranty_id,w.system_id,s.dept_name system_name,w.content, w.equipment_id, w.equipment_name, w.equipment_department_id,u.user_name maintenance_people_name,
+        w.state,w.create_id,maintenance_people_id,su1.user_name create_name,w.update_id,su2.user_name update_name,w.create_time, w.update_time,
+        w.system_id, w.remark,w.sh_time,w.bx_phone,w.bx_order,w.dept_name,w.sh_state,w.cause FROM jz_warranty w
+        left join sys_dept s  on s.dept_id = w.system_id
+        left join jz_user u  on u.user_id = w.maintenance_people_id
+        left join sys_user su2  on su2.user_id = w.update_id
+        left join sys_user su1  on su1.user_id = w.create_id
+
     </sql>
 
     <select id="selectJzWarrantyList" parameterType="JzWarranty" resultMap="JzWarrantyResult">
-        SELECT warranty_id,w.system_id,
-        (SELECT dept_name FROM sys_dept WHERE dept_id = w.system_id) system_name, content, equipment_id, equipment_name, equipment_department_id,
-        (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,
-        (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
-        (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
-        w.create_time, w.update_time, w.system_id, w.remark FROM jz_warranty w LEFT JOIN jz_user ON maintenance_people_id=user_id
+        <include refid="selectJzWarrantyVo"></include>
         <where>
             <if test="equipmentName != null  and equipmentName != ''"> and equipment_name like concat('%', #{equipmentName}, '%')</if>
             <if test="maintenancePeopleName != null  and maintenancePeopleName != ''"> and user_name like concat('%', #{maintenancePeopleName}, '%')</if>
@@ -64,6 +73,9 @@
     <select id="selectJzWarrantyById" parameterType="Long" resultMap="JzWarrantyResult">
         <include refid="selectJzWarrantyVo"/>
         where warranty_id = #{warrantyId}
+    </select>
+    <select id="selectPhone" parameterType="Long" resultType="java.lang.String">
+        select phone from jz_user where user_id=#{Id}
     </select>
 
     <insert id="insertJzWarranty" parameterType="JzWarranty" useGeneratedKeys="true" keyProperty="warrantyId">
@@ -81,6 +93,12 @@
             <if test="remark != null  and remark != ''">remark,</if>
             <if test="createId != null ">create_id,</if>
             <if test="updateId != null ">update_id,</if>
+            <if test="cause != null ">cause,</if>
+            <if test="shTime != null ">sh_time,</if>
+            <if test="bxPhone != null ">bx_phone,</if>
+            <if test="deptName != null ">dept_name,</if>
+            <if test="sHstate != null ">sh_state,</if>
+            <if test="bxOrder != null ">bx_order,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="content != null  and content != ''">#{content},</if>
@@ -95,6 +113,12 @@
             <if test="remark != null  and remark != ''">#{remark},</if>
             <if test="createId != null ">#{createId},</if>
             <if test="updateId != null ">#{updateId},</if>
+            <if test="shTime != null ">#{shTime},</if>
+            <if test="bxPhone != null ">#{bxPhone},</if>
+            <if test="deptName != null ">#{deptName},</if>
+            <if test="sHstate != null ">#{sHstate},</if>
+            <if test="bxOrder != null ">#{bxOrder},</if>
+            <if test="cause != null ">#{cause},</if>
         </trim>
     </insert>
 
@@ -113,6 +137,12 @@
             <if test="remark != null  and remark != ''">remark = #{remark},</if>
             <if test="createId != null ">create_id = #{createId},</if>
             <if test="updateId != null ">update_id = #{updateId},</if>
+            <if test="shTime != null ">sh_time=#{shTime},</if>
+            <if test="bxPhone != null ">bx_phone = #{bxPhone},</if>
+            <if test="deptName != null ">dept_name = #{deptName},</if>
+            <if test="sHstate != null ">sh_state = #{sHstate},</if>
+            <if test="bxOrder != null ">bx_order = #{bxOrder},</if>
+            <if test="cause != null ">cause = #{cause}</if>
         </trim>
         where warranty_id = #{warrantyId}
     </update>

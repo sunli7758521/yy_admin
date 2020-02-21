@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('值班关联用户列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <input type="hidden" id="zbTime" name="zbTime" th:value="${zbTime}"/>
+<!--                            <input type="hidden" id="dictType" name="planId" th:value="${jzPlan.planId}"/>-->
+<!--                            <li>-->
+<!--                                <p>值班人员：</p>-->
+<!--&lt;!&ndash;                                <input type="text" name="userId"/>&ndash;&gt;-->
+<!--                                <select id="jcPeople" class="form-control" name="userId" th:with="type=${@dict.uList()}">-->
+<!--                                    <option value="">所有</option>-->
+<!--                                    <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
+<!--                                </select>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>计划名称</p>-->
+<!--                                <input type="hidden" id="planName" name="planName" th:value="${jzPlan.title}"/>-->
+<!--&lt;!&ndash;                                <input type="text" name="planId"/>&ndash;&gt;-->
+<!--                            </li>-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <p>计划周期：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <select name="state" th:with="type=${@dict.getType('patrol_cycle')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="">所有</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--                            <li>-->
+<!--                                <p>状态：</p>-->
+<!--&lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;-->
+<!--                                <select name="state" th:with="type=${@dict.getType('jz_duty_user_state')}">-->
+<!--                                    <option value="">所有</option>-->
+<!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+<!--                                </select>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <p>值班人员类型：</p>-->
+<!--                                <select name="type" th:with="type=${@dict.getType('jz_zb_type')}">-->
+<!--                                    <option value="">所有</option>-->
+<!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+<!--                                </select>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>-->
+<!--                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>-->
+<!--                            </li>-->
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+<!--                <a class="btn btn-success" onclick="add()" shiro:hasPermission="sysusersystem:user:add">-->
+                <a class="btn btn-success" onclick="$.operate.add()"  shiro:hasPermission="sysusersystem:user:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:user:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:user:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+<!--                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:user:export">-->
+<!--                    <i class="fa fa-download"></i> 导出-->
+<!--                 </a>-->
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('sysusersystem:user:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('sysusersystem:user:remove')}]];
+        var datas = [[${@dict.getType('jz_duty_user_state')}]];
+        var type = [[${@dict.getType('jz_zb_type')}]];
+        var prefix = ctx + "sysusersystem/userl";
+        var prefix1 = ctx + "sysusersystem/user";
+        // var zb =  $("#dictType").val();
+
+        $(function() {
+
+            var zb = $("#zbTime").val();
+            var options = {
+                 url: prefix + "/list/"+zb,
+                createUrl: prefix1 + "/add",
+                updateUrl: prefix1 + "/edit/{id}",
+                removeUrl: prefix1 + "/remove",
+                exportUrl: prefix1 + "/export",
+                modalName: "值班关联用户",
+                queryParams: queryParams,
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field : 'dutyUserId', 
+                    title : '值班关联用户id',
+                    visible: false
+                },
+                {
+                    field : 'userName',
+                    title : '值班人员'
+                },
+                // {
+                //     field : 'planName',
+                //     title : '值班计划'
+                // },
+                {
+                    field : 'beginZBTime',
+                    title : '值班开始时间'
+                },
+                {
+                    field : 'endZBTime',
+                    title : '值班结束时间'
+                },
+                {
+                    field : 'zbTime',
+                    title : '值班日期'
+                },
+                {
+                    title : '状态',
+                    field : 'state',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+                },
+                    {
+                        field : 'typeName',
+                        title : '值班人员类型'
+
+                    },
+                {
+                    field : 'remark', 
+                    title : '备注'
+                },
+                    {
+                        title: '操作',
+                        align: 'center',
+                        formatter: function(value, row, index) {
+                            var actions = [];
+                            actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.dutyUserId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                            actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.dutyUserId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                            return actions.join('');
+                        }
+                    }]
+            };
+            $.table.init(options);
+        });
+        function queryParams(params) {
+            // console.log($("#zbTime").val());
+
+            var search = $.table.queryParams(params);
+            search.dictType = $("#dictType").val();
+            // alert(search.dictType)
+            return search;
+        }
+        // function add(){
+        //     var id = $("#dictType").val();
+        //     var url = prefix + '/add/' + id;
+        //     $.modal.open("添加值班用户", url);
+        // }
+    </script>
+</body>
+</html>

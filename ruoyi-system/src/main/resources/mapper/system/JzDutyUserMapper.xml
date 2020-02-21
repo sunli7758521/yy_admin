@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.sysusersystem.mapper.JzDutyUserMapper">
     <resultMap type="JzDutyUser" id="JzDutyUserResult">
         <result property="dutyUserId"    column="duty_user_id"    />
@@ -9,7 +9,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="userName"    column="user_name"    />
         <result property="planId"    column="plan_id"    />
         <result property="planName"    column="plan_name"    />
+        <result property="beginZBTime"    column="begin_ZB_Time"    />
+        <result property="endZBTime"    column="end_ZB_Time"    />
+        <result property="zbTime"    column="zb_Time"    />
+        <result property="shuLiang"    column="shuzi"    />
         <result property="type"    column="type"    />
+        <result property="typeName"    column="role_name"    />
         <result property="state"    column="state"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
@@ -24,6 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="planId"    column="plan_id"    />
         <result property="planName"    column="plan_name"    />
         <result property="type"    column="type"    />
+        <result property="typeName"    column="role_name"    />
         <result property="state"    column="state"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
@@ -34,63 +40,102 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectJzDutyUserVo">
-        select duty_user_id, user_id, plan_id,type,state, create_time, update_time, remark from jz_duty_user
+        select duty_user_id, user_id, begin_ZB_Time, end_ZB_Time, zb_Time, type, plan_id, state, create_time, update_time, remark from jz_duty_user
     </sql>
+
     <sql id="selectVO">
-        select jdu.duty_user_id, jdu.user_id,ju.user_name user_name,jp.title plan_name, jdu.plan_id,jdu.type,jdu.state, jdu.create_time, jdu.update_time, jdu.remark from jz_duty_user jdu
+        select jdu.duty_user_id, jdu.user_id, jdu.begin_ZB_Time, jdu.end_ZB_Time, jdu.zb_Time,ju.user_name user_name,jp.title plan_name, jdu.plan_id,jdu.type,sr.role_name,jdu.state, jdu.create_time, jdu.update_time, jdu.remark from jz_duty_user jdu
         LEFT JOIN jz_user ju ON ju.user_id = jdu.user_id
         LEFT JOIN jz_plan jp ON jp.plan_id = jdu.plan_id
+        LEFT JOIN sys_role sr ON sr.role_id = jdu.type
     </sql>
     <select id="selectJzDutyUserList" parameterType="JzDutyUser" resultMap="JzDutyUserResult">
         <include refid="selectVO"/>
         <where>
             <if test="userId != null and userId != '' ">  jdu.user_id = #{userId}</if>
-        <if test="planId != null"> and jdu.plan_id = #{planId}</if>
-        <if test="type != null and type != ''"> and jdu.type = #{type}</if>
-        <if test="state !=  null  and state != ''"> and jdu.state = #{state}</if>
-        <if test="userId !=  null  and userId != ''"> and jdu.user_id = #{userId}</if>
+            <if test="planId != null"> and jdu.plan_id = #{planId}</if>
+            <if test="type != null and type != ''"> and jdu.type = #{type}</if>
+            <if test="state !=  null  and state != ''"> and jdu.state = #{state}</if>
+            <if test="zbTime !=  null  and zbTime != ''"> and jdu.zb_Time = #{zbTime}</if>
+            <if test="userId !=  null  and userId != ''"> and jdu.user_id = #{userId}</if>
         </where>
     </select>
-    
+
     <select id="selectJzDutyUserById" parameterType="Long" resultMap="JzDutyUserResult">
         <include refid="selectVO"/>
         where jdu.duty_user_id = #{dutyUserId}
     </select>
-        
+    <select id="selectShuLiang" parameterType="JzDutyUser" resultMap="JzDutyUserResult">
+    SELECT COUNT(*) AS shuzi,zb_Time FROM jz_duty_user GROUP BY zb_Time
+    </select>
+    <!--    <select id="selectList" parameterType="JzDutyUser" resultMap="JzDutyUserResult">-->
+    <!--        <include refid="selectVO"/>-->
+    <!--        <where>-->
+    <!--&#45;&#45;         每次都要传zb_Time-->
+    <!--            <if test="zb_Time != null and zb_Time ！='' "> and jdu.zb_Time = #{zbTime}</if>-->
+    <!--            <if test="userId != null and userId != '' ">  jdu.user_id = #{userId}</if>-->
+    <!--            <if test="planId != null"> and jdu.plan_id = #{planId}</if>-->
+    <!--            <if test="type != null and type != ''"> and jdu.type = #{type}</if>-->
+    <!--            <if test="state !=  null  and state != ''"> and jdu.state = #{state}</if>-->
+    <!--            <if test="userId !=  null  and userId != ''"> and jdu.user_id = #{userId}</if>-->
+    <!--        </where>-->
+    <!--    </select>-->
+    <select id="selectList" parameterType="string"  resultMap="JzDutyUserResult">
+        <include refid="selectVO"/>
+
+        <where>
+            <if test="zbTime !=null and  zbTime !=''"> and jdu.zb_Time =  #{zbTime}</if>
+
+            <!--                <![CDATA[-->
+            <!--				and	(DATE_FORMAT(jdu.zb_Time, '%Y-%m-%d')>= DATE_FORMAT(#{zbTime}, '%Y-%m-%d'))-->
+            <!--			]]>-->
+            <!--            </if>-->
+        </where>
+    </select>
     <insert id="insertJzDutyUser" parameterType="JzDutyUser" useGeneratedKeys="true" keyProperty="dutyUserId">
         insert into jz_duty_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null ">user_id,</if>
+            <if test="beginZBTime != null ">begin_ZB_Time,</if>
+            <if test="endZBTime != null ">end_ZB_Time,</if>
+            <if test="zbTime != null ">zb_Time,</if>
+            <if test="type != null  and type != ''">type,</if>
             <if test="planId != null ">plan_id,</if>
             <if test="state != null  and state != ''">state,</if>
-            <if test="type != null  and type != ''">type,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
             <if test="remark != null  and remark != ''">remark,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null ">#{userId},</if>
+            <if test="beginZBTime != null ">#{beginZBTime},</if>
+            <if test="endZBTime != null ">#{endZBTime},</if>
+            <if test="zbTime != null ">#{zbTime},</if>
+            <if test="type != null  and type != ''">#{type},</if>
             <if test="planId != null ">#{planId},</if>
             <if test="state != null  and state != ''">#{state},</if>
-            <if test="type != null  and type != ''">#{type},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
             <if test="remark != null  and remark != ''">#{remark},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateJzDutyUser" parameterType="JzDutyUser">
         update jz_duty_user
         <trim prefix="SET" suffixOverrides=",">
             <if test="userId != null ">user_id = #{userId},</if>
+            <if test="beginZBTime != null ">begin_ZB_Time = #{beginZBTime},</if>
+            <if test="endZBTime != null ">end_ZB_Time = #{endZBTime},</if>
+            <if test="zbTime != null ">zb_Time = #{zbTime},</if>
+            <if test="type != null  and type != ''">type = #{type},</if>
             <if test="planId != null ">plan_id = #{planId},</if>
             <if test="state != null  and state != ''">state = #{state},</if>
-            <if test="type != null  and type != ''">type = #{type},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
             <if test="remark != null  and remark != ''">remark = #{remark},</if>
         </trim>
         where duty_user_id = #{dutyUserId}
+
     </update>
 
     <delete id="deleteJzDutyUserById" parameterType="Long">
@@ -98,10 +143,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteJzDutyUserByIds" parameterType="String">
-        delete from jz_duty_user where duty_user_id in 
+        delete from jz_duty_user where duty_user_id in
         <foreach item="dutyUserId" collection="array" open="(" separator="," close=")">
             #{dutyUserId}
         </foreach>
     </delete>
-    
+
 </mapper>
