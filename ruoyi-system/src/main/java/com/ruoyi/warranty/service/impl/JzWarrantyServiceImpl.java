@@ -22,17 +22,6 @@ public class JzWarrantyServiceImpl implements IJzWarrantyService
     private JzWarrantyMapper jzWarrantyMapper;
 
     /**
-     * 查询手机号
-     *
-     * @param Id
-     * @return
-     */
-    @Override
-    public String selectPhone(long Id) {
-        return jzWarrantyMapper.selectPhone(Id);
-    }
-
-    /**
      * 查询报修
      * 
      * @param warrantyId 报修ID
