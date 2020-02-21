@@ -8,6 +8,7 @@ import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.mapper.SysDeptMapper;
 import com.ruoyi.sysusersystem.domain.JzPlanLog;
+import com.ruoyi.sysusersystem.domain.YHTZVo;
 import com.ruoyi.sysusersystem.mapper.*;
 import com.ruoyi.sysusersystem.service.IJzPlanLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -347,5 +348,11 @@ public class JzPlanServiceImpl implements IJzPlanService
     @Override
     public List<JzPlan> yueYinHuanList(){
         return jzPlanMapper.yueYinHuanList();
+    }
+
+    // 查询隐患台账
+    @Override
+    public List<YHTZVo> selectYHTZList(YHTZVo vo) {
+        return jzPlanMapper.selectYHTZList(vo);
     }
 }

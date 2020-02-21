@@ -17,26 +17,18 @@
                     </select>
                 </div>
             </div>
-<!--
-<!--            <div class="form-group">    -->
-<!--                <label class="col-sm-3 control-label">制定计划</label>-->
-<!--                <div class="col-sm-8">-->
-<!--                </div>-->
-<!--            </div>-->
-            <!--<div class="form-group">-->
-                <!--<label class="col-sm-3 control-label">盘查组：</label>-->
-                <!--<div class="col-sm-8">-->
-                    <!--&lt;!&ndash;                    <input name="identifyPeople" class="form-control" type="text">&ndash;&gt;-->
-<!--&lt;!&ndash;                    <select id="identifyPeople" th:field="*{identifyPeople}" class="form-control" name="identifyPeople" th:with="type=${@dict.uList()}" required>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <option value="">所有</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </select>&ndash;&gt;-->
-                    <!--<select class="form-control" th:field="*{identifyPeople}" name="identifyPeople" th:with="type=${@dict.getType('ban_zu')}"required>-->
-                        <!--<option value="">所有</option>-->
-                        <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
-                    <!--</select>-->
-                <!--</div>-->
-            <!--</div>-->
+            <div class="form-group">
+                <label class="col-sm-3 control-label">检查级别：</label>
+                <div class="col-sm-8">
+                    <input name="jcJb" th:field="*{jcJb}" class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">检查部门：</label>
+                <div class="col-sm-8">
+                    <input name="jcDept" th:field="*{jcDept}" class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
 
             <div class="form-group">
                 <label class="col-sm-3 control-label">隐患内容：</label>

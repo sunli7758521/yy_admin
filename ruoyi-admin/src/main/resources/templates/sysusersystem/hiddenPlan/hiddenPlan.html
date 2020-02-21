@@ -65,20 +65,20 @@
                 </form>
             </div>
 
-            <!--<div class="btn-group-sm" id="toolbar" role="group">-->
-                <!--<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="sysusersystem:hiddenPlan:add">-->
-                    <!--<i class="fa fa-plus"></i> 添加|添加临时任务-->
-                <!--</a>-->
-                <!--<a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:plan:edit">-->
-                    <!--<i class="fa fa-edit"></i> 修改-->
-                <!--</a>-->
-                <!--<a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:plan:remove">-->
-                    <!--<i class="fa fa-remove"></i> 删除-->
-                <!--</a>-->
-                <!--<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:plan:export">-->
-                    <!--<i class="fa fa-download"></i> 导出-->
-                 <!--</a>-->
-            <!--</div>-->
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="sysusersystem:hiddenPlan:add">
+                    <i class="fa fa-plus"></i>添加临时任务
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:plan:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:plan:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:plan:export">
+                    <i class="fa fa-download"></i> 导出
+                 </a>
+            </div>
 
 
             <div class="col-sm-12 select-table table-striped">
@@ -111,12 +111,12 @@
                     checkbox: true
                 },
                 {
-                    field : 'planId', 
+                    field : 'planId',
                     title : '主键',
                     visible: false
                 },
                 {
-                    field : 'title', 
+                    field : 'title',
                     title : '隐患标题'
                 },
                 {
@@ -124,7 +124,7 @@
                     title : '系统名称'
                 },
                 {
-                    field : 'longTime', 
+                    field : 'longTime',
                     title : '排查周期',
                     formatter: function(value, row, index) {
                         return $.table.selectDictLabel(dats, value);
@@ -144,13 +144,13 @@
                         return $.table.selectDictLabel(banZu, value);
                     }
                 },
-                {
-                    field : 'state',
-                    title : '状态',
-                    formatter: function(value, row, index) {
-                        return $.table.selectDictLabel(datas, value);
-                    }
-                },
+                // {
+                //     field : 'state',
+                //     title : '状态',
+                //     formatter: function(value, row, index) {
+                //         return $.table.selectDictLabel(datas, value);
+                //     }
+                // },
                 {
                     field : 'createTime',
                     title : '创建时间'
@@ -167,7 +167,7 @@
                     }
                 },
                 {
-                    field : 'content', 
+                    field : 'content',
                     title : '计划内容'
                 },
                 {
@@ -181,7 +181,7 @@
                         var actions = [];
                         // actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.planId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         // actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.planId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        actions.push('<a class="btn btn-primary btn-xs ' + yulan + '" href="javascript:void(0)" onclick="detail(\'' + row.planId +  '|'+ row.createTime + '|'+ row.title  +   '\')"><i class="fa fa-list"></i>预览隐患任务</a>');
+                        actions.push('<a class="btn btn-primary btn-xs ' + yulan + '" href="javascript:void(0)" onclick="detail(\'' + row.planId +   '\')"><i class="fa fa-list"></i>制定隐患任务</a>');
                         return actions.join('');
                     }
                 }]
@@ -199,5 +199,13 @@
            $.modal.openTab("预览隐患项", url);
         }
     </script>
+
+<script>
+    var prefix = ctx + "sysusersystem/troubleplan";
+    function detail(planId) {
+        var url = prefix + '/detail/' + planId;
+        $.modal.openTab("制定隐患排查项", url);
+    }
+</script>
 </body>
 </html>

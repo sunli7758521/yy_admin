@@ -1,292 +1,292 @@
-<!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-<head>
-    <th:block th:include="include :: header('巡检列表')" />
-</head>
-<body class="gray-bg">
-<div class="container-div">
-    <div class="row">
-        <div class="col-sm-12 search-collapse">
-            <form id="formId">
-                <div class="select-list">
-                    <ul>
-                        <li>
-                            <!--                                <p>系统id：</p>-->
-                            <input type="hidden" id="dictType" name="jzPlanId" th:value="${dictId}"/>
-                        </li>
-<!--                        <li>-->
-<!--                            <p>巡检计划：</p>-->
-<!--                            <div class="col-sm-8">-->
-<!--                                <select class="form-control" name="content" th:with="type=${@dict.titleList()}">-->
-<!--                                    <option value="">所有</option>-->
-<!--                                    <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <p>巡检项目：</p>-->
-<!--                            <input type="text" name="inspectionProject"/>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <p>巡检地址：</p>-->
-<!--                            <input type="text" name="inspectionAddr"/>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <p>检查人：</p>-->
-<!--                            <select id="jcPeople" class="form-control" name="jcPeople" th:with="type=${@dict.uList()}">-->
-<!--                                <option value="">所有</option>-->
-<!--                                <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
-<!--                            </select>-->
-<!--                        </li>-->
-<!--                        <li class="select-time">-->
-<!--                            <p>检查时间：</p>-->
-<!--                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcDate]"/>-->
-<!--                            <span>-</span>-->
-<!--                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcDate]"/>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <p>状态：</p>-->
-<!--                            &lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;-->
-<!--                            <div class="col-sm-8">-->
-<!--                                <select class="form-control" name="state" th:with="type=${@dict.getType('patrol_check_status')}">-->
-<!--                                    <option value="">所有</option>-->
-<!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                        <li>-->
-<!--                            <p>设备状态：</p>-->
-<!--                            &lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;-->
-<!--                            <div class="col-sm-8">-->
-<!--                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">-->
-<!--                                    <option value="">所有</option>-->
-<!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </li>-->
-                        <li>
-                            <p>隐患类型：</p>
-<!--                            <input type="text" name="typeId"/>-->
-                            <select class="form-control" name="typeId" th:with="type=${@dict.listType(2)}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>
-                            </select>
-                        </li>
+<!--<!DOCTYPE html>-->
+<!--<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">-->
+<!--<head>-->
+    <!--<th:block th:include="include :: header('巡检列表')" />-->
+<!--</head>-->
+<!--<body class="gray-bg">-->
+<!--<div class="container-div">-->
+    <!--<div class="row">-->
+        <!--<div class="col-sm-12 search-collapse">-->
+            <!--<form id="formId">-->
+                <!--<div class="select-list">-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--&lt;!&ndash;                                <p>系统id：</p>&ndash;&gt;-->
+                            <!--<input type="hidden" id="dictType" name="jzPlanId" th:value="${dictId}"/>-->
+                        <!--</li>-->
+<!--&lt;!&ndash;                        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>巡检计划：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="col-sm-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <select class="form-control" name="content" th:with="type=${@dict.titleList()}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="">所有</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>巡检项目：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="text" name="inspectionProject"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>巡检地址：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="text" name="inspectionAddr"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>检查人：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <select id="jcPeople" class="form-control" name="jcPeople" th:with="type=${@dict.uList()}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option value="">所有</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li class="select-time">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>检查时间：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcDate]"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <span>-</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcDate]"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>状态：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="col-sm-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <select class="form-control" name="state" th:with="type=${@dict.getType('patrol_check_status')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="">所有</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>设备状态：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="col-sm-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="">所有</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
+                        <!--<li>-->
+                            <!--<p>隐患类型：</p>-->
+<!--&lt;!&ndash;                            <input type="text" name="typeId"/>&ndash;&gt;-->
+                            <!--<select class="form-control" name="typeId" th:with="type=${@dict.listType(2)}">-->
+                                <!--<option value="">所有</option>-->
+                                <!--<option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}"></option>-->
+                            <!--</select>-->
+                        <!--</li>-->
 
-                        <li>
-                            <p>盘查人：</p>
-<!--                            <input type="text" name="identifyPeople"/>-->
-                            <select id="identifyPeople" class="form-control" name="identifyPeople" th:with="type=${@dict.uList()}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>
-                            </select>
-                        </li>
-                        <li>
-                            <p>整改人：</p>
-<!--                            <input type="text" name="rectificationPeople"/>-->
-                            <select id="rectificationPeople" class="form-control" name="rectificationPeople" th:with="type=${@dict.uList()}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>
-                            </select>
-                        </li>
+                        <!--<li>-->
+                            <!--<p>盘查人：</p>-->
+<!--&lt;!&ndash;                            <input type="text" name="identifyPeople"/>&ndash;&gt;-->
+                            <!--<select id="identifyPeople" class="form-control" name="identifyPeople" th:with="type=${@dict.uList()}">-->
+                                <!--<option value="">所有</option>-->
+                                <!--<option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
+                            <!--</select>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<p>整改人：</p>-->
+<!--&lt;!&ndash;                            <input type="text" name="rectificationPeople"/>&ndash;&gt;-->
+                            <!--<select id="rectificationPeople" class="form-control" name="rectificationPeople" th:with="type=${@dict.uList()}">-->
+                                <!--<option value="">所有</option>-->
+                                <!--<option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
+                            <!--</select>-->
+                        <!--</li>-->
 
-                        <li>
-                            <p>状态：</p>
+                        <!--<li>-->
+                            <!--<p>状态：</p>-->
 
-                            <!--                                <input type="text" name="state"/>-->
-                            <div class="col-sm-8">
-                                <select class="form-control" name="state" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </div>
+                            <!--&lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<select class="form-control" name="state" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">-->
+                                    <!--<option value="">所有</option>-->
+                                    <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                                <!--</select>-->
+                            <!--</div>-->
 
-                            <!--                                <input type="text" name="state"/>-->
-                            <div class="col-sm-8">
-                                <select class="form-control" name="state" th:with="type=${@dict.getType('patrol_check_status')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </div>
+                            <!--&lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<select class="form-control" name="state" th:with="type=${@dict.getType('patrol_check_status')}">-->
+                                    <!--<option value="">所有</option>-->
+                                    <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                                <!--</select>-->
+                            <!--</div>-->
 
-<!--                            <input type="text" name="state"/>-->
-                            <select class="form-control" name="state" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                            </select>
+<!--&lt;!&ndash;                            <input type="text" name="state"/>&ndash;&gt;-->
+                            <!--<select class="form-control" name="state" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">-->
+                                <!--<option value="">所有</option>-->
+                                <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                            <!--</select>-->
 
-                        </li>
+                        <!--</li>-->
 
-<!--                        <li>-->
-<!--                            <p>设备状态：</p>-->
-<!--                            &lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;-->
-<!--                            <div class="col-sm-8">-->
-<!--                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">-->
-<!--                                    <option value="">所有</option>-->
-<!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </li>-->
+<!--&lt;!&ndash;                        <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <p>设备状态：</p>&ndash;&gt;-->
+<!--&lt;!&ndash;                            &lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="col-sm-8">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option value="">所有</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </li>&ndash;&gt;-->
 
-                        <li>
-                            <p>设备状态：</p>
-                            <!--                                <input type="text" name="state"/>-->
-                            <div class="col-sm-8">
-                                <select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">
-                                    <option value="">所有</option>
-                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                                </select>
-                            </div>
-                        </li>
+                        <!--<li>-->
+                            <!--<p>设备状态：</p>-->
+                            <!--&lt;!&ndash;                                <input type="text" name="state"/>&ndash;&gt;-->
+                            <!--<div class="col-sm-8">-->
+                                <!--<select class="form-control" name="equipmentState" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">-->
+                                    <!--<option value="">所有</option>-->
+                                    <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</li>-->
 
 
-                        <li>
-                            <p>隐患级别：</p>
-<!--                            <input type="text" name="hiddenJb"/>-->
-                            <select class="form-control" name="hiddenJb" th:with="type=${@dict.getType('risk_level')}">
-                                <option value="">所有</option>
-                                <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
-                            </select>
-                        </li>
+                        <!--<li>-->
+                            <!--<p>隐患级别：</p>-->
+<!--&lt;!&ndash;                            <input type="text" name="hiddenJb"/>&ndash;&gt;-->
+                            <!--<select class="form-control" name="hiddenJb" th:with="type=${@dict.getType('risk_level')}">-->
+                                <!--<option value="">所有</option>-->
+                                <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
+                            <!--</select>-->
+                        <!--</li>-->
 
-                        <li>
-                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                        </li>
-                    </ul>
-                </div>
-            </form>
-        </div>
+                        <!--<li>-->
+                            <!--<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>-->
+                            <!--<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
 
-<!--        <div class="btn-group-sm" id="toolbar" role="group">-->
-<!--            <a class="btn btn-success" onclick="add()" shiro:hasPermission="sysusersystem:trouble:add">-->
-<!--                <i class="fa fa-plus"></i>添加-->
-<!--            </a>-->
-<!--            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:trouble:edit">-->
-<!--                <i class="fa fa-edit"></i> 修改-->
-<!--            </a>-->
-<!--            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:trouble:remove">-->
-<!--                <i class="fa fa-remove"></i> 删除-->
-<!--            </a>-->
-<!--            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:trouble:export">-->
-<!--                <i class="fa fa-download"></i> 导出-->
-<!--            </a>-->
-<!--        </div>-->
-        <div class="col-sm-12 select-table table-striped">
-            <table id="bootstrap-table"></table>
-        </div>
-    </div>
-</div>
-<th:block th:include="include :: footer" />
-<script th:inline="javascript">
-    var editFlag = [[${@permission.hasPermi('sysusersystem:trouble:edit')}]];
-    var removeFlag = [[${@permission.hasPermi('sysusersystem:trouble:remove')}]];
-    var datas = [[${@dict.getType('jz_hidden_trouble_state')}]];
-    var prefix = ctx + "sysusersystem/trouble";
+<!--&lt;!&ndash;        <div class="btn-group-sm" id="toolbar" role="group">&ndash;&gt;-->
+<!--&lt;!&ndash;            <a class="btn btn-success" onclick="add()" shiro:hasPermission="sysusersystem:trouble:add">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-plus"></i>添加&ndash;&gt;-->
+<!--&lt;!&ndash;            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="sysusersystem:trouble:edit">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-edit"></i> 修改&ndash;&gt;-->
+<!--&lt;!&ndash;            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="sysusersystem:trouble:remove">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-remove"></i> 删除&ndash;&gt;-->
+<!--&lt;!&ndash;            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;            <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="sysusersystem:trouble:export">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-download"></i> 导出&ndash;&gt;-->
+<!--&lt;!&ndash;            </a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+        <!--<div class="col-sm-12 select-table table-striped">-->
+            <!--<table id="bootstrap-table"></table>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<th:block th:include="include :: footer" />-->
+<!--<script th:inline="javascript">-->
+    <!--var editFlag = [[${@permission.hasPermi('sysusersystem:trouble:edit')}]];-->
+    <!--var removeFlag = [[${@permission.hasPermi('sysusersystem:trouble:remove')}]];-->
+    <!--var datas = [[${@dict.getType('jz_hidden_trouble_state')}]];-->
+    <!--var prefix = ctx + "sysusersystem/trouble";-->
 
-    $(function() {
-        var options = {
-            url: prefix + "/list",
-            createUrl: prefix + "/add",
-            updateUrl: prefix + "/edit/{id}",
-            removeUrl: prefix + "/remove",
-            queryParams: queryParams,
-            exportUrl: prefix + "/export",
-            modalName: "巡检",
+    <!--$(function() {-->
+        <!--var options = {-->
+            <!--url: prefix + "/list",-->
+            <!--createUrl: prefix + "/add",-->
+            <!--updateUrl: prefix + "/edit/{id}",-->
+            <!--removeUrl: prefix + "/remove",-->
+            <!--queryParams: queryParams,-->
+            <!--exportUrl: prefix + "/export",-->
+            <!--modalName: "巡检",-->
 
-            loadComplete: function (data) {
-                // console.log(data);
-            },
-            columns: [{
-                checkbox: true
-            },
-                {
-                    field : 'hiddenTroubleId',
-                    title : '主键',
-                    visible: false
-                },
-                {
-                    field : 'typeName',
-                    title : '隐患类型'
-                },
-                // {
-                //     field : 'planId',
-                //     title : '制定计划id'
-                //
-                // },
-                // {
-                //     field : 'systemId',
-                //     title : '系统id'
-                // },
-                // {
-                //     field : 'identifyPeople',
-                //     title : '盘查人'
-                // },
-                // {
-                //     field : 'rectificationPeople',
-                //     title : '整改人'
-                // },
-                {
-                    field : 'rectificationTime',
-                    title : '整改时间'
-                },
-                {
-                    field : 'state',
-                    title : '状态',
-                    formatter: function(value, row, index) {
-                        return $.table.selectDictLabel(datas, value);
-                    }
-                },
-                {
-                    field : 'remark',
-                    title : '备注'
-                },
-                {
-                    field : 'hiddenContent',
-                    title : '隐患内容'
-                },
-                {
-                    field : 'hiddenWz',
-                    title : '隐患位置'
-                },
-                {
-                    field : 'hiddenJb',
-                    title : '隐患级别'
-                },
-                {
-                    title: '操作',
-                    align: 'center',
-                    formatter: function(value, row, index) {
-                        var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        return actions.join('');
-                    }
-                }]
-        };
-        $.table.init(options);
-    });
+            <!--loadComplete: function (data) {-->
+                <!--// console.log(data);-->
+            <!--},-->
+            <!--columns: [{-->
+                <!--checkbox: true-->
+            <!--},-->
+                <!--{-->
+                    <!--field : 'hiddenTroubleId',-->
+                    <!--title : '主键',-->
+                    <!--visible: false-->
+                <!--},-->
+                <!--{-->
+                    <!--field : 'typeName',-->
+                    <!--title : '隐患类型'-->
+                <!--},-->
+                <!--// {-->
+                <!--//     field : 'planId',-->
+                <!--//     title : '制定计划id'-->
+                <!--//-->
+                <!--// },-->
+                <!--// {-->
+                <!--//     field : 'systemId',-->
+                <!--//     title : '系统id'-->
+                <!--// },-->
+                <!--// {-->
+                <!--//     field : 'identifyPeople',-->
+                <!--//     title : '盘查人'-->
+                <!--// },-->
+                <!--// {-->
+                <!--//     field : 'rectificationPeople',-->
+                <!--//     title : '整改人'-->
+                <!--// },-->
+                <!--{-->
+                    <!--field : 'rectificationTime',-->
+                    <!--title : '整改时间'-->
+                <!--},-->
+                <!--{-->
+                    <!--field : 'state',-->
+                    <!--title : '状态',-->
+                    <!--formatter: function(value, row, index) {-->
+                        <!--return $.table.selectDictLabel(datas, value);-->
+                    <!--}-->
+                <!--},-->
+                <!--{-->
+                    <!--field : 'remark',-->
+                    <!--title : '备注'-->
+                <!--},-->
+                <!--{-->
+                    <!--field : 'hiddenContent',-->
+                    <!--title : '隐患内容'-->
+                <!--},-->
+                <!--{-->
+                    <!--field : 'hiddenWz',-->
+                    <!--title : '隐患位置'-->
+                <!--},-->
+                <!--{-->
+                    <!--field : 'hiddenJb',-->
+                    <!--title : '隐患级别'-->
+                <!--},-->
+                <!--{-->
+                    <!--title: '操作',-->
+                    <!--align: 'center',-->
+                    <!--formatter: function(value, row, index) {-->
+                        <!--var actions = [];-->
+                        <!--actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-edit"></i>编辑</a> ');-->
+                        <!--actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-remove"></i>删除</a>');-->
+                        <!--return actions.join('');-->
+                    <!--}-->
+                <!--}]-->
+        <!--};-->
+        <!--$.table.init(options);-->
+    <!--});-->
 
-    // function queryParams(params) {
-    //     var search = $.table.queryParams(params);
-    //     search.dictType = $("#dictType").val();
-    //     return search;
-    // }
-    function queryParams(params){
-        return{
-            dictType:$("#dictType").val(),
-            pageSize: params.limit,
-            pageNum:   params.offset / params.limit +1,
-            searchValue:   params.search,
-            orderByColumn: params.sort,
-            isAsc:  params.order
-        }
-    }
-    function add(){
-        var id = $("#dictType").val();
-        var url = prefix + '/add/' + id;
-        $.modal.open("添加隐患任务", url);
-    }
-</script>
-</body>
-</html>
+    <!--// function queryParams(params) {-->
+    <!--//     var search = $.table.queryParams(params);-->
+    <!--//     search.dictType = $("#dictType").val();-->
+    <!--//     return search;-->
+    <!--// }-->
+    <!--function queryParams(params){-->
+        <!--return{-->
+            <!--dictType:$("#dictType").val(),-->
+            <!--pageSize: params.limit,-->
+            <!--pageNum:   params.offset / params.limit +1,-->
+            <!--searchValue:   params.search,-->
+            <!--orderByColumn: params.sort,-->
+            <!--isAsc:  params.order-->
+        <!--}-->
+    <!--}-->
+    <!--function add(){-->
+        <!--var id = $("#dictType").val();-->
+        <!--var url = prefix + '/add/' + id;-->
+        <!--$.modal.open("添加隐患任务", url);-->
+    <!--}-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
