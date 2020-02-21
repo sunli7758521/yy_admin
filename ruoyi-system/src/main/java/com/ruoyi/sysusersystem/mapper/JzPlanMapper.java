@@ -1,6 +1,8 @@
 package com.ruoyi.sysusersystem.mapper;
 
 import com.ruoyi.sysusersystem.domain.JzPlan;
+import com.ruoyi.sysusersystem.domain.YHTZVo;
+
 import java.util.List;
 
 /**
@@ -82,4 +84,7 @@ public interface JzPlanMapper
     public List<JzPlan> yueXunJianList();
     // 定时器 添加月隐患
     public List<JzPlan> yueYinHuanList();
+
+    // 查询隐患台账
+    List<YHTZVo> selectYHTZList(YHTZVo vo);
 }
