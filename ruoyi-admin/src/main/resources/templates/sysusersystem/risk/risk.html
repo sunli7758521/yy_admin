@@ -162,6 +162,8 @@
 
                       }
 
+
+                        // actions.push('<a class="btn btn-warning btn-xs "  onclick="pgbg('+row.pgBg+')"><i class="fa fa-search"></i>预览评估报告</a>');
                         actions.push('<a class="btn btn-warning btn-xs ' + searchFlag + '"  onclick="pgbg(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.pgBg + '\')"><i class="fa fa-search"></i>预览评估报告</a>');
                         return actions.join('');
                     }
@@ -194,7 +196,7 @@
         var url = prefix+"/fXPG/"+rId;
         $.modal.open("风险评估",url);
     }
-    //    评估报告预览
+
     function pgbg(param) {
         var arr = param.split('|');
         var riskId =arr[0];
@@ -207,6 +209,19 @@
         console.log(url)
         $.modal.open("上传制度",url);
     }
+    // //    评估报告预览
+    // function pgbg(param) {
+    //     var arr = param.split('|');
+    //     var riskId =arr[0];
+    //     var pgBg = arr[1];
+    //     if(arr[1].length == 4){
+    //        layer.alert("文件未上传，请先上传在预览！！！");
+    //         return false;
+    //     }
+    //     var url = prefix +"/pgWordToPdf/"+riskId;
+    //     console.log(url)
+    //     $.modal.open("上传制度",url);
+    // }
 </script>
 </body>
 </html>
