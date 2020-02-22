@@ -21,12 +21,10 @@
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
-                                <p>报修人：</p>
-                                <input type="text" name="equipmentName"/>
+                                <!--<p>报修人：</p>-->
+                                <!--<input type="text" name="equipmentName"/>-->
                             </li>
                             <li>
-                                <p>维修人：</p>
-                                <input type="text" name="maintenancePeopleName"/>
                                 <p>维修组：</p>
                                 <select name="item" th:with="type=${@dict.getType('ban_zu')}">
                                     <option value="">所有</option>
@@ -36,11 +34,6 @@
                             <li>
                                 <p>审核状态：</p>
                                 <select name="state" th:with="type=${@dict.getType('wx_sh_state')}">
-                                <p>状态：</p>
-<!--                                (0已修 1.维修 2.超期)：-->
-<!--                                <input type="text" name="state"/>-->
-
-                                <select name="state" class="form-control">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
