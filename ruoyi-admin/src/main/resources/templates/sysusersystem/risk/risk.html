@@ -154,17 +154,14 @@
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.riskId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.riskId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                        actions.push('<a class="btn btn-success btn-xs ' + searchFlag + '"  onclick="yunlan(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.fileUrl + '\')"><i class="fa fa-search"></i>预览风险文档</a>');
+                        // actions.push('<a class="btn btn-success btn-xs ' + searchFlag + '"  onclick="yunlan(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.fileUrl + '\')"><i class="fa fa-search"></i>预览风险文档</a>');
                       if(row.pgBg  ==null){
-                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '"  onclick="fXPG(\'' + row.riskId + '\')"><i class="fa fa-list"></i>风险评估</a>');
+                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '"  onclick="fXPG(\'' + row.riskId + '\')"><i class="fa fa-check-square-o"></i>风险评估</a>');
                       }else{
-                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '><i class="fa fa-list"></i>风险已评估</a>');
+                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '><i class="fa fa-list"></i>已评估</a>');
 
                       }
-
-
-                        // actions.push('<a class="btn btn-warning btn-xs "  onclick="pgbg('+row.pgBg+')"><i class="fa fa-search"></i>预览评估报告</a>');
-                        actions.push('<a class="btn btn-warning btn-xs ' + searchFlag + '"  onclick="pgbg(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.pgBg + '\')"><i class="fa fa-search"></i>预览评估报告</a>');
+                        actions.push('<a class="btn btn-warning btn-xs ' + searchFlag + '"  onclick="pgbg(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.pgBg + '\')"><i class="fa fa-search"></i>评估报告</a>');
                         return actions.join('');
                     }
                 }]
@@ -196,32 +193,16 @@
         var url = prefix+"/fXPG/"+rId;
         $.modal.open("风险评估",url);
     }
-
+    //预览评估报告
     function pgbg(param) {
-        var arr = param.split('|');
+     var arr = param.split('|');
         var riskId =arr[0];
         var pgBg = arr[1];
-        if(arr[1].length == 4){
-           layer.alert("文件未上传，请先上传在预览！！！");
-            return false;
-        }
-        var url = prefix +"/pgWordToPdf/"+riskId;
-        console.log(url)
-        $.modal.open("上传制度",url);
+        alert(pgBg)
+       window.location.href=pgBg;
+
     }
-    // //    评估报告预览
-    // function pgbg(param) {
-    //     var arr = param.split('|');
-    //     var riskId =arr[0];
-    //     var pgBg = arr[1];
-    //     if(arr[1].length == 4){
-    //        layer.alert("文件未上传，请先上传在预览！！！");
-    //         return false;
-    //     }
-    //     var url = prefix +"/pgWordToPdf/"+riskId;
-    //     console.log(url)
-    //     $.modal.open("上传制度",url);
-    // }
+
 </script>
 </body>
 </html>
