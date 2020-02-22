@@ -8,10 +8,8 @@ import com.ruoyi.sysusersystem.service.IJzPlanService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.core.page.TableDataInfo;
 import java.util.List;
 
@@ -49,5 +47,17 @@ public class YHTZController  extends BaseController {
         List<YHTZVo> list = jzPlanService.selectYHTZList(vo);
         return getDataTable(list);
     }
+
+    /**
+     * 跳转录入隐患项页面
+     */
+    @GetMapping("/lryhx/{id}")
+    public String lryhx(@PathVariable("id") String id, ModelMap map)
+    {
+        map.put("id",id);
+        return "sysusersystem/zg/zg";
+    }
+
+
 
 }
