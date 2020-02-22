@@ -112,6 +112,7 @@
                 AND date_format(w.wx_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
             </if>
         </where>
+        order by create_time desc
     </select>
 
     <select id="selectJzWarrantyById" parameterType="Long" resultMap="JzWarrantyResult">
