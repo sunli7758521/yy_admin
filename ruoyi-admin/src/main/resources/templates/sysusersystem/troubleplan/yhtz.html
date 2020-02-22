@@ -12,14 +12,8 @@
                         <ul>
                             <li>
                                 <p>隐患名称：</p>
-                                <input type="text" name="title"/>
+                                <input type="text" name="title" autocomplete="off"/>
                             </li>
-                            <!--<li class="select-time">-->
-                                <!--<p>计划时间：</p>-->
-                                <!--<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]"/>-->
-                                <!--<span>-</span>-->
-                                <!--<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]"/>-->
-                            <!--</li>-->
                             <li>
                                 <p>巡查周期：</p>
                                 <div class="col-sm-8">
@@ -29,13 +23,13 @@
                                     </select>
                                 </div>
                             </li>
-                            <!--<li>-->
-                                <!--<p>状态：</p>-->
-                                <!--<select name="state" th:with="type=${@dict.getType('jz_plan_state')}">-->
-                                    <!--<option value="">所有</option>-->
-                                    <!--<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
-                                <!--</select>-->
-                            <!--</li>-->
+                            <li>
+                                <p>整改状态：</p>
+                                <select name="state" th:with="type=${@dict.getType('jz_hidden_trouble_state')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
                             <li>
                                 <p>所属班组：</p>
                                 <select name="teamId" th:with="type=${@dict.getType('ban_zu')}">
@@ -43,17 +37,16 @@
                                     <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
-<!--                            <li>-->
-<!--                                <p>计划类型：</p>-->
-<!--                                <select name="planType" th:with="type=${@dict.getType('jz_plan_type')}">-->
-<!--                                    <option value="">所有</option>-->
-<!--                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>-->
-<!--                                </select>-->
-<!--                            </li>-->
-                            <!--<li>-->
-                                <!--<p>计划内容：</p>-->
-                                <!--<input type="text" name="content"/>-->
-                            <!--</li>-->
+                            <li>
+                                <p>系统名称：</p>
+                                <input type="text" name="deptName" autocomplete="off"/>
+                            </li>
+                            <li class="select-time">
+                                <label>隐患录入时间： </label>
+                                <input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginTime]" autocomplete="off"/>
+                                <span>-</span>
+                                <input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endTime]" autocomplete="off"/>
+                            </li>
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -107,7 +100,12 @@
                 },
                 {
                     field : 'planId',
-                    title : '主键',
+                    title : '计划主键',
+                    visible: false
+                },
+                {
+                    field : 'hiddenTroubleId',
+                    title : '隐患主键',
                     visible: false
                 },
                 {
@@ -142,14 +140,14 @@
                     title : '隐患类型'
 
                 },
-                {
-                    field : 'rectificationPeople',
-                    title : '检查人'
-                },
-                {
-                    field : 'rectificationTime',
-                    title : '检查时间'
-                },
+                // {
+                //     field : 'rectificationPeople',
+                //     title : '检查人'
+                // },
+                // {
+                //     field : 'rectificationTime',
+                //     title : '检查时间'
+                // },
                 {
                     field : 'hiddenContent',
                     title : '隐患内容'
@@ -157,6 +155,10 @@
                 {
                     field : 'hiddenWz',
                     title : '隐患位置'
+                },
+                {
+                    field : 'hiddenJb',
+                    title : '隐患级别'
                 },
                 {
                     field : 'state',
@@ -177,22 +179,27 @@
                     field : 'remark',
                     title : '备注'
                 }
-                // ,
-                // {
-                //     title: '操作',
-                //     align: 'center',
-                //     formatter: function(value, row, index) {
-                //         var actions = [];
-                //         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.planId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                //         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.planId + '\')"><i class="fa fa-remove"></i>删除</a>');
-                //         // actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="detail(\'' + row.planId + '\')"><i class="fa fa-list"></i>制定隐患巡项</a>');
-                //         return actions.join('');
-                //     }
-                // }
+                ,
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="lryhx(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-edit"></i>录入整改记录</a> ');
+                        return actions.join('');
+                    }
+                }
                 ]
             };
             $.table.init(options);
         });
     </script>
+<script>
+    function lryhx(yhId) {
+      var url = prefix + '/lryhx/' + yhId;
+      $.modal.openTab("录入整改记录", url);
+    }
+</script>
+
 </body>
 </html>
