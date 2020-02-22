@@ -99,12 +99,6 @@
     </sql>
 
     <select id="selectJzWarrantyList" parameterType="JzWarranty" resultMap="JzWarrantyResult">
-        SELECT warranty_id,w.system_id,
-        (SELECT dept_name FROM sys_dept WHERE dept_id = w.system_id) system_name, content, equipment_id, equipment_name, equipment_department_id,
-        (SELECT user_name FROM jz_user WHERE user_id = maintenance_people_id) maintenance_people_name, w.state,w.create_id,
-        (SELECT user_name FROM sys_user WHERE user_id = w.create_id) create_name,w.update_id,
-        (SELECT user_name FROM sys_user WHERE user_id = w.update_id) update_name,
-        w.create_time, w.update_time, w.system_id, w.remark ,w.wx_time,w.pic_url,w.wx_addr,w.sh_state   FROM jz_warranty w LEFT JOIN jz_user ON maintenance_people_id=user_id
         <include refid="selectJzWarrantyVo"></include>
         <where>
             <if test="equipmentName != null  and equipmentName != ''"> and equipment_name like concat('%', #{equipmentName}, '%')</if>
