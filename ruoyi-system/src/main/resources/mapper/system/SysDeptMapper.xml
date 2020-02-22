@@ -245,5 +245,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		d.dept_id = sy.system_id
 		AND u.user_id = #{userId}
 	</select>
+    <select id="selectDeptByParentId" parameterType="Long" resultMap="SysDeptResult">
+	select * from sys_dept where parent_id = #{parentId}
+	</select>
 
 </mapper>

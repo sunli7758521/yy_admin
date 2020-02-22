@@ -2,7 +2,9 @@ package com.ruoyi.web.controller.warranty;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.ruoyi.common.core.domain.Ztree;
+import com.ruoyi.emergency.domain.JzEmergencyUser;
 import com.ruoyi.framework.util.ShiroUtils;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.service.ISysDeptService;
@@ -42,6 +44,47 @@ public class JzWarrantyController extends BaseController
     @Autowired
     private ISysDeptService deptService;
 
+
+    /**
+     * 跳转到审核页面
+     * @param Id 系统Id
+     * @param mmp
+     * @return
+     */
+    @GetMapping("/setState/{Id}")
+    public String setState(@PathVariable Long Id,ModelMap mmp){
+        JzWarranty jzWarranty = jzWarrantyService.selectJzWarrantyById(Id);
+        mmp.put("jzWarranty",jzWarranty);
+        return "warranty/warranty/audit";
+    }
+
+    @PostMapping("/getWarrantyId/{WarrantyId}/{state}/{cause}")
+    @ResponseBody
+    public AjaxResult getWarrantyId(@PathVariable Long WarrantyId,@PathVariable String state,@PathVariable String cause)
+    {
+
+        JzWarranty jzWarranty = jzWarrantyService.selectJzWarrantyById(WarrantyId);
+        jzWarranty.setsHstate(state);
+        jzWarranty.setCause(cause);
+        return toAjax(jzWarrantyService.updateJzWarranty(jzWarranty));
+    }
+    //获取手机号
+    @PostMapping("/getPhone/{Id}")
+    @ResponseBody
+    public String getPhone(@PathVariable Long Id){
+       String phone  =  jzWarrantyService.selectPhone(Id);
+       return phone;
+    }
+    /**
+     * 获取当前报修单号
+     * @return
+     */
+    @PostMapping("/currentTimeMillis")
+    @ResponseBody
+    public String getCurrentTimeMillis(){
+        Long startTs = System.currentTimeMillis(); // 当前时间戳
+        return startTs.toString();
+    }
 
     @RequiresPermissions("warranty:warranty:view")
     @GetMapping()
@@ -83,6 +126,11 @@ public class JzWarrantyController extends BaseController
     @GetMapping("/add")
     public String add()
     {
+//        SysDept dept =  deptService.selectDeptById(300L);
+//
+//        if(dept !=null){
+//            mmap.put("dept", dept);
+//        }
         return prefix + "/add";
     }
 
@@ -95,6 +143,7 @@ public class JzWarrantyController extends BaseController
     @ResponseBody
     public AjaxResult addSave(JzWarranty jzWarranty)
     {
+
         //jzWarranty.setSystemId(deptService.selectDeptIdByDeptName(treeName));
         jzWarranty.setCreateId(ShiroUtils.getUserId());
         return toAjax(jzWarrantyService.insertJzWarranty(jzWarranty));
@@ -140,5 +189,11 @@ public class JzWarrantyController extends BaseController
     public AjaxResult remove(String ids)
     {
         return toAjax(jzWarrantyService.deleteJzWarrantyByIds(ids));
+    }
+
+    @GetMapping("/detail/{planId}")
+    public String detail(@PathVariable Long planId,ModelMap mmp){
+        mmp.put("planId",planId);
+        return "sysusersystem/wx/wx";
     }
 }

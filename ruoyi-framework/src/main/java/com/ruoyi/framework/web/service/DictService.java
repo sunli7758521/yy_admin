@@ -212,7 +212,7 @@ public class DictService
         return jzTypeService.smallTypeList(100);
     }
 
-    public List<JzEmergencyPlan>emergencySuppliesList(){
+    public List<JzEmergencyPlan> emergencySuppliesList(){
         return jzEmergencyPlanService.emergencySuppliesList();
     }
 //    uList(){

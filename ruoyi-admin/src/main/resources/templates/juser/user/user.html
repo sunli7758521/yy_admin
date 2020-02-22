@@ -27,9 +27,13 @@
                                 <p>手机号：</p>
                                 <input type="tel" name="phone"/>
                             </li>
-                            <li class="select-time">-->
+                            <li class="select-time">
                                 <p>入职时间：</p>
-                                <input type="text" name="createTime" class="time-input" id="createTime" placeholder="开始时间"/>
+<!--                                <input type="text" class="time-input" id="beginOutTime" placeholder="开始时间" name="params[beginOutTime]"/>-->
+                                <input type="text" class="time-input" id="beginOutTime" placeholder="开始时间" name="beginOutTime"/>
+                                <span>-</span>
+<!--                                <input type="text" class="time-input" id="endOutTime" placeholder="结束时间" name="params[endOutTime]"/>-->
+                                <input type="text" class="time-input" id="endOutTime" placeholder="结束时间" name="endOutTime"/>
                             </li>
 <!--                            <li>-->
 <!--                                <p>部门id：</p>-->
@@ -225,7 +229,7 @@
                     field : 'teamId',
                     title : '组',
                     formatter: function(value, item, index) {
-                        return $.table.selectDictLabel(datas, item.teamId);
+                        return $.table.selectDictLabel(datas, value);
                     }
                 },
                 {

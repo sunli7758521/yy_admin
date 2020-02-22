@@ -17,7 +17,7 @@
                             <li>
                                 <p>关联应急预案：</p>
 <!--                                <input type="text" name="emergencyPlanId"/>-->
-                                <select class="form-control" name="content" th:with="type=${@dict.emergencySuppliesList()}">
+                                <select class="form-control" name="emergencyPlanIds" th:with="type=${@dict.emergencySuppliesList()}">
                                     <option value="">所有</option>
                                     <option th:each="dict : ${type}" th:text="${dict.title}" th:value="${dict.planId}"></option>
                                 </select>
@@ -86,7 +86,7 @@
                     field : 'groupLeaderName',
                     title : '组长'
                 }, {
-                    field : 'viceGroupLeaderId',
+                    field : 'viceGroupLeaderName',
                     title : '副组长'
                 },
                 {

@@ -77,10 +77,10 @@
                 <div class="form-group">
                     <label class="col-sm-4 control-label"><span style="color: red; ">*</span>管理系统：</label>
                     <div class="col-sm-8">
-                        <!--<input name="systemIds"  type="hidden" id="treeIds" th:field=*{}/>-->
+<!--                        <input name="systemIds"  type="text" id="systemIds" th:field="*{systemIds}"/>-->
 
                         <select id="systemIds" name="systemIds"   class="form-control select2-multiple" multiple>
-                            <option th:each="system:${systemList}" th:value="${system.deptId}" th:text="${system.deptName}" th:selected="${system.flag}"></option>
+                            <option th:each="system:${systemList}" th:value="${system.deptId}" th:text="${system.deptName}"th:selected="${system.status == '0'}" th:disabled="${system.status == '0'}"></option>
                         </select>
                         <!--<input  onclick="selectSystemTree()" id="treeNames" type="text" placeholder="请选择管理系统" class="form-control"  autocomplete="off">-->
                     </div>

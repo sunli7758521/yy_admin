@@ -85,6 +85,14 @@ public interface ISysDeptService
     public SysDept selectDeptById(Long deptId);
 
     /**
+     * 根据ParentId值查询信息
+     * @param parentId 父Id
+     * @return 相同parenetId的全部信息
+     */
+
+    public List<SysDept> selectDeptByParentId(Long parentId);
+
+    /**
      * 校验部门名称是否唯一
      * 
      * @param dept 部门信息

@@ -61,7 +61,7 @@ LEFT JOIN jz_supplier js ON js.supplier_id = e.supplies_id
     <select id="selectFileUrlByPlanId" resultType="java.lang.String">
         select plan_url from jz_emergency_plan where plan_id=#{managementId}
     </select>
-    <select id="emergencySuppliesList" resultType="com.ruoyi.emergency.domain.JzEmergencyPlan">
+    <select id="emergencySuppliesList" resultMap="JzEmergencyPlanResult">
         select plan_id, supplies_id, supplise_big_type_id, supplise_sm_type_id, type_id, count_num, plan_url, system_id, dept_id, state, title, create_time, update_time, remark from jz_emergency_plan
     </select>
     <select id="selectDbzList" parameterType="JzEmergencyPlan" resultMap="JzEmergencyPlanResult">

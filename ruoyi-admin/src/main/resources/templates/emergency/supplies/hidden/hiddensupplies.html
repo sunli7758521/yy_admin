@@ -9,6 +9,7 @@
             <div class="col-sm-12 search-collapse">
                 <form id="formId">
                     <div class="select-list">
+                        <ul>
                             <li>
                                 <p>应急物资大类型：</p>
 <!--                                <input type="text" name="suppliseBigTypeId"/>-->
@@ -82,7 +83,7 @@
             </div>
 
             <div class="btn-group-sm" id="toolbar" role="group">
-                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="emergency:supplies:add">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="emergency:supplies:hidden">
                     <i class="fa fa-plus"></i> 添加
                 </a>
                 <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="emergency:supplies:edit">
@@ -109,7 +110,7 @@
         $(function() {
             var options = {
                 url: prefix + "/list",
-                createUrl: prefix + "/hidden/add",
+                createUrl: prefix + "/hidden",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",

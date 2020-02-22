@@ -25,7 +25,6 @@ public class JzEmergencyUserServiceImpl implements IJzEmergencyUserService
 
     @Autowired
     private JzUserMapper jzUserMapper;
-
     /**
      * 查询应急方案关联人员
      * 
@@ -59,7 +58,18 @@ public class JzEmergencyUserServiceImpl implements IJzEmergencyUserService
                   }
               }
               user.setGroupUserName(userName);
-
+          }
+          for (JzEmergencyUser userOne : list) {
+              String[] split = userOne.getViceGroupLeaderId().split(",");
+              String userNameOne = "";
+              for (String s : split) {
+//                  JzUser jzUser = jzUserMapper.selectJzUserById(Long.parseLong(s));
+                  JzUser jzUser = jzUserMapper.selectJzUserById(Long.parseLong(s));
+                  if(jzUser !=null){
+                      userNameOne+=jzUser.getUserName()+",";
+                  }
+              }
+              userOne.setViceGroupLeaderName(userNameOne);
           }
       }
         return list;

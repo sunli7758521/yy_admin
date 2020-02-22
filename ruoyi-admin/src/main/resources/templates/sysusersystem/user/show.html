@@ -1,186 +1,188 @@
 <!DOCTYPE html>
-<html  lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
-
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:include="include :: header('值班关联用户列表')" />
+    <link th:href='@{/fullcalendar-4.4.0/packages/core/main.css}' rel='stylesheet' />
+    <link th:href='@{/fullcalendar-4.4.0/packages/daygrid/main.css}' rel='stylesheet' />
+    <link th:href='@{/fullcalendar-4.4.0/packages/timegrid/main.css}' rel='stylesheet' />
+    <link th:href='@{/fullcalendar-4.4.0/packages/list/main.css}' rel='stylesheet' />
+<!--    <link th:href='@{/fullcalendar-1.6.4/fullcalendar/fullcalendar.css}' rel='stylesheet' />-->
+<!--    <link th:href='@{/fullcalendar-1.6.4/fullcalendar/fullcalendar.print.css}' rel='stylesheet' media='print' />-->
 </head>
 <style>
-    html {
-        width: 100%;
-        height: 100%;
-    }
-
     body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
+        margin-top: 40px;
+        text-align: center;
+        font-size: 14px;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
     }
 
-    .container {
-        width: 100%;
-        height: 100%;
+    #calendar {
+        width: 900px;
+        margin: 0 auto;
     }
-
-    .block1 {
-        width: 100%;
-        height: calc(100% / 3);
-        background: #ccc;
-    }
-
-    .block2 {
-        width: 50%;
-        height: 50%;
-        float: left;
-    }
-    .block4 {
-        width: 50%;
-        height: 50%;
-        float: right;
-    }
-
-    .block3 {
-        width: 100%;
-        height: calc(100% / 3);
-        background: #eee;
+    .fc-event-time, .fc-event-title {
+        color: #fff;
     }
 </style>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
 
-<body>
-<script src="/js/echarts.min.js"></script>
-<script src="/js/jquery.min.js"></script>
-<div class="container">
-    <div class="block1">
-        <button id="hello" name="hello" onclick="test()">button</button>
+
+<!--            <div class="col-sm-12 search-collapse">-->
+<!--                <form id="formId">-->
+<!--                    <div class="select-list">-->
+<!--                        <ul>-->
+<!--&lt;!&ndash;                            <input type="hidden" id="dictType" name="planId" th:value="${jzPlan.planId}"/>&ndash;&gt;-->
+<!--                        </ul>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+
+
+
+                <table id="bootstrap-table" ></table>
+            <div id='calendar'></div>
+        </div>
     </div>
-    <div id="main" class="block2"></div>
-    <div id="main1" class="block4"></div>
-    <div class="block3"></div>
-</div>
-<script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-    option = {
-        xAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            name:"访问",
-            data: [120, 200, 150, 80, 70, 110, 130],
-            type: 'bar'
-        }]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-</script>
-<script type="text/javascript">
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main1'));
-    option = {
-        backgroundColor: '#2c343c',
+    <th:block th:include="include :: footer" />
+<!--     <script th:src="@{/layui/layui.js}"></script>-->
 
-        title: {
-            text: 'Customized Pie',
-            left: 'center',
-            top: 20,
-            textStyle: {
-                color: '#ccc'
-            }
-        },
+<!--     <script th:src="@{/fullcalendar-1.6.4/lib/jquery.min.js}"></script>-->
+<!--     <script src='/fullcalendar-1.6.4/lib/jquery.min.js'></script>-->
+<!--     <script th:src="@{/fullcalendar-1.6.4/lib/jquery-ui.custom.min.js}"></script>-->
+<!--     <script src='lib/jquery-ui.custom.min.js'></script>-->
+<!--     <script th:src="@{/fullcalendar-1.6.4/fullcalendar/fullcalendar.min.js}"></script>-->
+<!--     <script src='fullcalendar/fullcalendar.min.js'></script>-->
+     <script th:src='@{/fullcalendar-4.4.0/packages/core/main.js}'></script>
+     <script th:src='@{/fullcalendar-4.4.0/packages/interaction/main.js}'></script>
+     <script th:src='@{/fullcalendar-4.4.0/packages/daygrid/main.js}'></script>
+     <script th:src='@{/fullcalendar-4.4.0/packages/timegrid/main.js}'></script>
+     <script th:src='@{/fullcalendar-4.4.0/packages/list/main.js}'></script>
+     <script th:src='@{/fullcalendar-4.4.0/packages/bundle/locales/zh-cn.js}'></script>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('sysusersystem:user:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('sysusersystem:user:remove')}]];
+        var datas = [[${@dict.getType('jz_duty_user_state')}]];
+        var type = [[${@dict.getType('jz_zb_type')}]];
+        var prefix = ctx + "sysusersystem/userl";
 
-        tooltip: {
-            trigger: 'item',
-            formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
+        $(function() {
+            // var options = {
+            //     url: prefix + "/list",
+            //     modalName: "值班关联用户",
+            //     queryParams: queryParams,
+            //     columns: [{
+            //         checkbox: true
+            //     },
+            //         {
+            //             field : 'shuLiang',
+            //             title : '数量'
+            //
+            //         },
+            //         {
+            //             field : 'zbTime',
+            //             title : '值班日期'
+            //         }
+            //     ],
+            //     onDblClickRow(row){
+            //         showStart(row.zbTime);
+            //     }
+            // };
+            // $.table.init(options);
+            $.ajax({
+                url:prefix + "/list",
+                type:"post",
+                dataType:"json",
+                data:queryParams,
+                success:function(msg){
+                    var data = msg.rows;
+                    var arr = [];
+                    for(var i=0;i<data.length;i++) {
+                        arr.push(
+                            {
+                                title:"今天值班人数："+data[i].shuLiang,
+                                start:data[i].zbTime
+                            }
 
-        visualMap: {
-            show: false,
-            min: 80,
-            max: 600,
-            inRange: {
-                colorLightness: [0, 1]
-            }
-        },
-        series: [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius: '55%',
-                center: ['50%', '50%'],
-                data: [
-                    {value: 335, name: '直接访问'},
-                    {value: 310, name: '邮件营销'},
-                    {value: 274, name: '联盟广告'},
-                    {value: 235, name: '视频广告'},
-                    {value: 400, name: '搜索引擎'}
-                ].sort(function (a, b) { return a.value - b.value; }),
-                roseType: 'radius',
-                label: {
-                    color: 'rgba(255, 255, 255, 0.3)'
-                },
-                labelLine: {
-                    lineStyle: {
-                        color: 'rgba(255, 255, 255, 0.3)'
-                    },
-                    smooth: 0.2,
-                    length: 10,
-                    length2: 20
-                },
-                itemStyle: {
-                    color: '#c23531',
-                    shadowBlur: 200,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                },
+                        )
+                    }
+                    // $('#calendar').fullCalendar({
+                    //     editable: false,
+                    //     events: arr
+                    // });
+                    var calendarEl = document.getElementById('calendar');
 
-                animationType: 'scale',
-                animationEasing: 'elasticOut',
-                animationDelay: function (idx) {
-                    return Math.random() * 200;
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+
+                        locale:'zh-cn',
+                        navLinks: true, // can click day/week names to navigate views
+                        businessHours: true, // display business hours
+                        editable: false,
+                        events: arr,
+                        navLinkDayClick: function(date, jsEvent) {
+                            var year = date.getFullYear();
+                            var month = date.getMonth()+1;
+                            if(month<10) {
+                                month = "0"+month
+                            }
+                            var day = date.getDate();
+                            if(day<10) {
+                                day = "0"+day
+                            }
+                            var str = year+"-"+month+"-"+day;
+                            console.log(str)
+                            showStart(str);
+
+                        },
+                        dayClick: function(date, jsEvent) {
+                            alert('Clicked 222 ');
+
+                        }
+                    });
+
+                    calendar.render();
+
+                    // $("table tbody td").on("dblclick",function () {
+                    //     console.log($(this))
+                    //     var date = $(this).attr("data-date")
+                    //     showStart(date);
+                    //      // console.log($(this).attr("data-date"))
+                    // })
+
                 }
-            }
-        ]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-</script>
-<script  type="text/javascript">
-    // $(document).ready(function(){
-    //     var temp = [];
-    //     var tempArray = [];
-    //     var data;
-    //     //todo
-    //     $.ajax({
-    //         type :"GET",
-    //         url:"/sysusersystem/user/show",
-    //         dataType : "json",
-    //         async:true,
-    //         success : function(re) {
-    //
-    //             console.log($("map"));
-    //             alert("1111"+re)
-    //         },
-    //         error : function(errorMsg) {
-    //             alert("22222")
-    //         }
-    //     })
-    // });
-    $(function () {
-        $.ajax({
-            url:"/sysusersystem/user/show",
-            type:"get",
-            success:function (re) {
-                console.log(re) ;
-            }
-        })
-    })
-</script>
-</body>
+            })
 
+        });
+
+        function queryParams(params) {
+            var search = $.table.queryParams(params);
+            search.dictType = $("#dictType").val();
+            // alert(search.dictType)
+            return search;
+        }
+        /*查看详细信息*/
+        function showStart(zbTime) {
+            // alert(zbTime);
+            // console.log(zbTime);
+            $.modal.open("详细信息", prefix + "/listById/"+zbTime , '' , '' , closemod);
+
+            /*$.news.open("详细信息", prefix + "/listById/"+id , '' , '' , closemod);*/
+        }
+        function closemod() {
+            $.modal.closeAll();
+            window.location.reload();
+        }
+        // function add(){
+        //     var id = $("#dictType").val();
+        //     var url = prefix + '/add/' + id;
+        //     $.modal.open("添加值班用户", url);
+        // }
+
+        //
+
+    </script>
+</body>
 </html>

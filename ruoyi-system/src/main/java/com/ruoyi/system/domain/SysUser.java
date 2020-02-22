@@ -93,6 +93,10 @@ public class SysUser extends BaseEntity
     /** 岗位组 */
     private Long[] postIds;
 
+    /**\
+     * 管理系统组
+     */
+    private Long[] systemList;
     /** 检索系统id */
     private Long searchSystemId;
 
@@ -103,6 +107,10 @@ public class SysUser extends BaseEntity
 
     /** 用户组状态 */
     private String  itemState;
+
+
+
+
 
     public String getItemState() {
         return itemState;
@@ -392,5 +400,13 @@ public class SysUser extends BaseEntity
             .append("searchSystemId", getSearchSystemId())
             .append("itemState", getItemState())
             .toString();
+    }
+
+    public Long[] getSystemList() {
+        return systemList;
+    }
+
+    public void setSystemList(Long[] systemList) {
+        this.systemList = systemList;
     }
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('审核报修')" />
+    <th:block th:include="include :: select2-css" />
+    <th:block th:include="include :: bootstrap-select-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-warranty-edit" th:object="${jzWarranty}">
+            <input name="warrantyId" th:field="*{warrantyId}" type="hidden">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">报修内容：</label>
+                <div class="col-sm-8">
+                    <input name="content" th:field="*{content}" class="form-control" type="text" required>
+                </div>
+            </div>
+				<div class="form-group">
+                <label class="col-sm-3 control-label">审核状态：</label>
+                <div class="col-sm-8">
+<!--                    <input name="content"  class="form-control" type="text" required>-->
+                    <select  class="form-control" name="sHstate" th:with="type=${@dict.getType('wx_sh_state')}" required th:field="*{sHstate}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+			<div class="form-group">
+                <label class="col-sm-3 control-label">原因：</label>
+                <div class="col-sm-8">
+<!--                    <input name="content" th:field="*{cause}" class="form-control" type="text" required>-->
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <textarea class="form-control" name="cause" maxlength="300" required th:field="*{cause}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: select2-js" />
+    <th:block th:include="include :: bootstrap-select-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "warranty/warranty";
+        $("#form-warranty-edit").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            var planId = $("#warrantyId").val();
+            var state = $("#sHstate").val();
+            var cause = $("#cause").val();
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/getWarrantyId/"+planId+"/"+state+"/"+cause, $('#form-warranty-edit').serialize());
+            }
+        }
+
+    </script>
+</body>
+</html>

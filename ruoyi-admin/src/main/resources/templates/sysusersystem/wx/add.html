@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增维修记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-wx-add">
+            <input id="planId" type="hidden" th:value="${planId}"/>
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">报修：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="warrantyId" class="form-control" type="text">-->
+<!--                </div>-->
+<!--            </div>-->
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">维修人：</label>
+                <div class="col-sm-8">
+<!--                    <input name="wxUserId" class="form-control" type="text">-->
+                    <select name="wxUserId" class="form-control select2-multiple" th:with="type=${@dict.uList()}">
+                        <option th:text="所有"></option>
+                        <option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId} "></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">维修时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="wxTime" class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">状态：</label>
+<!--                <div class="col-sm-8">-->
+<!--                    <input name="state" class="form-control" type="text">-->
+<!--                </div>-->
+                <div class="col-sm-8">
+                    <select  class="form-control" name="state" th:with="type=${@dict.getType('wx_record_state')}">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">未完成原因：</label>
+                <div class="col-sm-8">
+                    <input name="wWCYY" class="form-control" type="text">
+                </div>
+            </div>
+<!--            <div class="form-group">    -->
+<!--                <label class="col-sm-3 control-label">创建时间：</label>-->
+<!--                <div class="col-sm-8">-->
+<!--                    <div class="input-group date">-->
+<!--                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>-->
+<!--                        <input name="cteateTime" class="form-control" placeholder="yyyy-MM-dd" type="text">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "sysusersystem/wx"
+        $("#form-wx-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                alert($("#planId").val())
+                $.operate.save(prefix + "/add/"+$("#planId").val(), $('#form-wx-add').serialize());
+            }
+        }
+
+        $("input[name='wxTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("input[name='cteateTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+
+</body>
+</html>

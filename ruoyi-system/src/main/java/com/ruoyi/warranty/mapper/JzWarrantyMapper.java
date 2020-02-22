@@ -60,4 +60,10 @@ public interface JzWarrantyMapper
     public int deleteJzWarrantyByIds(String[] warrantyIds);
 
 
+    /**
+     * 获取手机号
+     * @param id
+     * @return
+     */
+    public String selectPhone(long id);
 }

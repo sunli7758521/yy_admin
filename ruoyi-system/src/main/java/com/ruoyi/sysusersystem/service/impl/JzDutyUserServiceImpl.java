@@ -13,12 +13,12 @@ import com.ruoyi.common.core.text.Convert;
 
 /**
  * 值班关联用户Service业务层处理
- * 
+ *
  * @author sunli
  * @date 2020-01-13
  */
 @Service
-public class JzDutyUserServiceImpl implements IJzDutyUserService 
+public class JzDutyUserServiceImpl implements IJzDutyUserService
 {
     @Autowired
     private JzDutyUserMapper jzDutyUserMapper;
@@ -31,7 +31,7 @@ public class JzDutyUserServiceImpl implements IJzDutyUserService
 
     /**
      * 查询值班关联用户
-     * 
+     *
      * @param dutyUserId 值班关联用户ID
      * @return 值班关联用户
      */
@@ -42,8 +42,22 @@ public class JzDutyUserServiceImpl implements IJzDutyUserService
     }
 
     /**
+     * 那个日期有多少人值班
+     * @return
+     */
+    @Override
+    public List<JzDutyUser> selectShuLiang() {
+        return jzDutyUserMapper.selectShuLiang();
+    }
+
+    @Override
+    public List<JzDutyUser> selectList(String zbTime) {
+        return jzDutyUserMapper.selectList(zbTime);
+    }
+
+    /**
      * 查询值班关联用户列表
-     * 
+     *
      * @param jzDutyUser 值班关联用户
      * @return 值班关联用户
      */
@@ -55,7 +69,7 @@ public class JzDutyUserServiceImpl implements IJzDutyUserService
 
     /**
      * 新增值班关联用户
-     * 
+     *
      * @param jzDutyUser 值班关联用户
      * @return 结果
      */
@@ -81,7 +95,7 @@ public class JzDutyUserServiceImpl implements IJzDutyUserService
 
     /**
      * 修改值班关联用户
-     * 
+     *
      * @param jzDutyUser 值班关联用户
      * @return 结果
      */
@@ -116,7 +130,7 @@ public class JzDutyUserServiceImpl implements IJzDutyUserService
 
     /**
      * 删除值班关联用户对象
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -128,7 +142,7 @@ public class JzDutyUserServiceImpl implements IJzDutyUserService
 
     /**
      * 删除值班关联用户信息
-     * 
+     *
      * @param dutyUserId 值班关联用户ID
      * @return 结果
      */
