@@ -1,30 +1,77 @@
 package com.ruoyi.sysusersystem.domain;
 
+import java.util.Map;
+
 /**
  * @Author sunli
  * @Date 2020/2/20
  */
 public class YHTZVo {
-
+//    计划主键
     private String planId;
+//    隐患名称
     private String title;
+
     private String time;
+//    系统名称
     private String deptName;
+//    排查班组
     private String teamId;
+//    任务内容
     private String content;
-
+//隐患类型
     private String typeName;
+//    检查人
     private String rectificationPeople;
+//    检查时间
     private String rectificationTime;
+//    隐患内容
     private String hiddenContent;
+//    隐患位置
     private String hiddenWz;
+//    隐患状态
     private String state;
-
+// 隐患级别
     private String hiddenJb;
+//   检查部门
     private String jcDept;
+//    检查级别
     private String jcJb;
+//    备注
     private String remark;
+//    巡查周期
     private String longTime;
+    //    隐患排查时间
+    private String createTime;
+    //    隐患主键id
+    private String hiddenTroubleId;
+
+    /** 请求参数 */
+    private Map<String, Object> params;
+
+    public String getHiddenTroubleId() {
+        return hiddenTroubleId;
+    }
+
+    public void setHiddenTroubleId(String hiddenTroubleId) {
+        this.hiddenTroubleId = hiddenTroubleId;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.params = params;
+    }
 
     public String getLongTime() {
         return longTime;

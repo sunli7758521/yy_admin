@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.YhZgMapper">
+    
+    <resultMap type="YhZg" id="YhZgResult">
+        <result property="id"    column="id"    />
+        <result property="yhId"    column="yh_id"    />
+        <result property="zgTime"    column="zg_time"    />
+        <result property="zgName"    column="zg_name"    />
+        <result property="zgCs"    column="zg_cs"    />
+        <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectYhZgVo">
+        select id, yh_id, zg_time, zg_name, zg_cs, remark, create_time, update_time from yh_zg
+    </sql>
+
+    <select id="selectYhZgList" parameterType="YhZg" resultMap="YhZgResult">
+        <include refid="selectYhZgVo"/>
+        <where>  
+            <if test="yhId != null "> and yh_id = #{yhId}</if>
+            <if test="zgTime != null  and zgTime != ''"> and zg_time = #{zgTime}</if>
+            <if test="zgName != null  and zgName != ''"> and zg_name like concat('%', #{zgName}, '%')</if>
+            <if test="zgCs != null  and zgCs != ''"> and zg_cs = #{zgCs}</if>
+            <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+                AND date_format(zg_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+            </if>
+            <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+                AND date_format(zg_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectYhZgById" parameterType="Long" resultMap="YhZgResult">
+        <include refid="selectYhZgVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertYhZg" parameterType="YhZg" useGeneratedKeys="true" keyProperty="id">
+        insert into yh_zg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="yhId != null ">yh_id,</if>
+            <if test="zgTime != null  and zgTime != ''">zg_time,</if>
+            <if test="zgName != null  and zgName != ''">zg_name,</if>
+            <if test="zgCs != null  and zgCs != ''">zg_cs,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="yhId != null ">#{yhId},</if>
+            <if test="zgTime != null  and zgTime != ''">#{zgTime},</if>
+            <if test="zgName != null  and zgName != ''">#{zgName},</if>
+            <if test="zgCs != null  and zgCs != ''">#{zgCs},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYhZg" parameterType="YhZg">
+        update yh_zg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="yhId != null ">yh_id = #{yhId},</if>
+            <if test="zgTime != null  and zgTime != ''">zg_time = #{zgTime},</if>
+            <if test="zgName != null  and zgName != ''">zg_name = #{zgName},</if>
+            <if test="zgCs != null  and zgCs != ''">zg_cs = #{zgCs},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteYhZgById" parameterType="Long">
+        delete from yh_zg where id = #{id}
+    </delete>
+
+    <delete id="deleteYhZgByIds" parameterType="String">
+        delete from yh_zg where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

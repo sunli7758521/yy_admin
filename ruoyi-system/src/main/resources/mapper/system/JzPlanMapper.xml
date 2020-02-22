@@ -182,6 +182,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="jcDept"    column="jc_dept"    />
         <result property="jcJb"    column="jc_jb"    />
         <result property="remark"    column="remark"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="hiddenTroubleId"    column="hidden_trouble_id"    />
     </resultMap>
     <select id="selectYHTZList" parameterType="YHTZVo" resultMap="YHTZMap" >
         select
@@ -200,12 +202,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         jz_hidden_trouble.hidden_jb,
         jz_hidden_trouble.jc_dept,
         jz_hidden_trouble.jc_jb,
-        jz_hidden_trouble.remark
+        jz_hidden_trouble.remark,
+        jz_hidden_trouble.create_time,
+        jz_hidden_trouble.hidden_trouble_id
         from jz_plan,jz_hidden_trouble ,sys_dept,jz_type
         where jz_plan.plan_id = jz_hidden_trouble.plan_id
         and jz_plan.system_id = sys_dept.dept_id
         and jz_hidden_trouble.type_id = jz_type.id
         and jz_plan.plan_type=2
+        <if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+            AND date_format(jz_hidden_trouble.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+        </if>
+        <if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+            AND date_format(jz_hidden_trouble.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+        </if>
+        <if test="title !=null and title !=''" >
+            AND  jz_plan.title like (concat('%', #{title}, '%'))
+        </if>
+        <if test="deptName !=null and deptName !=''" >
+            AND  sys_dept.dept_name like (concat('%', #{deptName}, '%'))
+        </if>
+        <if test="teamId !=null and teamId !=''" >
+            AND  jz_plan.team_id = #{teamId}
+        </if>
+        <if test="longTime !=null and longTime !=''" >
+            AND  jz_plan.long_time = #{longTime}
+        </if>
+        <if test="state !=null and state !=''" >
+            AND  jz_hidden_trouble.state = #{state}
+        </if>
+        order by jz_plan.create_time desc
     </select>
 
 </mapper>
