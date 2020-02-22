@@ -20,7 +20,7 @@
 <!--                            </li>-->
                             <li>
                                 <p>报修人：</p>
-                                <input type="text" name="equipmentName"/>
+                                <input type="text" name="equipmentName" autocomplete="off" />
                             </li>
 <!--                            <li>-->
 <!--                                <p>保修科室</p>-->
@@ -28,18 +28,22 @@
 <!--                            </li>-->
                             <li>
                                 <p>维修人：</p>
-                                <input type="text" name="maintenancePeopleName"/>
+                                <input type="text" name="maintenancePeopleName" autocomplete="off" />
                             </li>
                             <li>
                                 <p>状态：</p>
 <!--                                (0已修 1.维修 2.超期)：-->
 <!--                                <input type="text" name="state"/>-->
 
-                                <select name="state" class="form-control">
+<!--                                <select name="state" class="form-control">-->
+<!--                                    <option value="">所有</option>-->
+<!--                                    <option  th:value="0">已修</option>-->
+<!--                                    <option  th:value="1">维修</option>-->
+<!--                                    <option  th:value="2">超期</option>-->
+<!--                                </select>-->
+                                <select  class="form-control" name="state" th:with="type=${@dict.getType('wx_state')}">
                                     <option value="">所有</option>
-                                    <option  th:value="0">已修</option>
-                                    <option  th:value="1">维修</option>
-                                    <option  th:value="2">超期</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                                 </select>
                             </li>
 <!--                            <li>-->
@@ -174,8 +178,8 @@
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.warrantyId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.warrantyId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         actions.push('<a class="btn btn-success btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="detailId(\'' + row.warrantyId + '\')"><i class="fa fa-remove"></i>查看维修记录</a>');
-                        if(row.sHstate==0){ //未审核
-                            if(row.state==1){ // 己修
+                        if(row.sHstate == 0){ //未审核
+                            if(row.state == 1){ // 己修
                                 actions.push('<a class="btn btn-danger btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="f(\'' + row.warrantyId + '\')"><i class="fa fa-edit"></i>审核</a>');
                             }
                         }else if(row.sHstate == 2){//审核未通过

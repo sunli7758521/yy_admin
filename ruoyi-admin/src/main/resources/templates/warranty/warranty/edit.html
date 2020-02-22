@@ -35,7 +35,7 @@
             <div class="form-group">    
                 <label class="col-sm-3 control-label">报修人员姓名：</label>
                 <div class="col-sm-8">
-                    <input name="equipmentName" th:field="*{equipmentName}" class="form-control" type="text" required>
+                    <input name="equipmentName" th:field="*{equipmentName}" class="form-control" type="text" required autocomplete="off" >
                 </div>
             </div>
 <!--            <div class="form-group">    -->
@@ -70,7 +70,7 @@
 <!--                        <option  th:value="1">维修</option>-->
 <!--                        <option  th:value="2">超期</option>-->
 <!--                    </select>-->
-                    <select  class="form-control" name="state" th:with="type=${@dict.getType('jz_equipment_state')}" required th:field="*{state}">
+                    <select  class="form-control" name="state" th:with="type=${@dict.getType('wx_state')}" required th:field="*{state}">
                         <option value="">所有</option>
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                     </select>
@@ -79,37 +79,37 @@
             <div class="form-group">
                 <label class="col-sm-3 control-label">保修内容：</label>
                 <div class="col-sm-8">
-                    <input name="content" th:field="*{content}" class="form-control" type="text" required>
+                    <input name="content" th:field="*{content}" class="form-control" type="text" required autocomplete="off" >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">报修部门：</label>
                 <div class="col-sm-8">
-                    <input name="deptName" th:field="*{deptName}" class="form-control" type="text">
+                    <input name="deptName" th:field="*{deptName}" class="form-control" type="text" autocomplete="off" >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">报修人电话：</label>
                 <div class="col-sm-8">
-                    <input name="bxPhone" th:field="*{bxPhone}" class="form-control" type="text">
+                    <input name="bxPhone" th:field="*{bxPhone}" class="form-control" type="text" autocomplete="off" >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">报修单号：</label>
                 <div class="col-sm-8">
-                    <input name="bxOrder" th:field="*{bxOrder}" class="form-control" type="text">
+                    <input name="bxOrder" th:field="*{bxOrder}" class="form-control" type="text" autocomplete="off" >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">审核时间：</label>
                 <div class="col-sm-8">
-                    <input name="shTime" th:field="*{shTime}" class="form-control" type="text">
+                    <input name="shTime" th:field="*{shTime}" class="form-control" type="text" autocomplete="off" >
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label">备注：</label>
                 <div class="col-sm-8">
-                    <input name="remark" th:field="*{remark}" class="form-control" type="text">
+                    <input name="remark" th:field="*{remark}" class="form-control" type="text" autocomplete="off" >
                 </div>
             </div>
 <!--            <div class="form-group">    -->
