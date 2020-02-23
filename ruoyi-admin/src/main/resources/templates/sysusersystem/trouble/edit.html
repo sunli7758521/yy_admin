@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <th:block th:include="include :: header('修改隐患')" />
+    <th:block th:include="include :: datetimepicker-css" />
 </head>
 <body class="white-bg">
     <div class="wrapper wrapper-content animated fadeInRight ibox-content">
@@ -29,26 +30,49 @@
                     <input name="jcDept" th:field="*{jcDept}" class="form-control" type="text" required autocomplete="off">
                 </div>
             </div>
-
             <div class="form-group">
-                <label class="col-sm-3 control-label">隐患内容：</label>
-                <div class="col-sm-8">
-                    <textarea name="hiddenContent" class="form-control" >[[*{hiddenContent}]]</textarea>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">隐患位置：</label>
-                <div class="col-sm-8">
-                    <input name="hiddenWz" th:field="*{hiddenWz}" class="form-control" type="text" required>
-                </div>
-            </div>
-            <div class="form-group">    
                 <label class="col-sm-3 control-label">隐患级别：</label>
                 <div class="col-sm-8">
                     <select  class="form-control" th:field="*{hiddenJb}" name="hiddenJb" th:with="type=${@dict.getType('risk_level')}" required>
                         <option value="">所有</option>
                         <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
                     </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">检查人：</label>
+                <div class="col-sm-8">
+                    <input name="identifyPeople" th:field="*{identifyPeople}"  class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">责任人：</label>
+                <div class="col-sm-8">
+                    <input name="jcName" th:field="*{jcName}"  class="form-control" ></input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">责任部门：</label>
+                <div class="col-sm-8">
+                    <input name="zrDept" th:field="*{zrDept}"  class="form-control" ></input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">整改时间：</label>
+                <div class="col-sm-8">
+                    <input id="zgQx1" class="layui-timeline form-control" name="zgQx" th:field="*{zgQx}"   placeholder="yyyy-MM-dd HH:mm:ss">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">隐患描述：</label>
+                <div class="col-sm-8">
+                    <textarea name="hiddenContent" class="form-control" >[[*{hiddenContent}]]</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">隐患位置：</label>
+                <div class="col-sm-8">
+                    <textarea name="hiddenWz" th:field="*{hiddenWz}" class="form-control" type="text" required></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -60,6 +84,7 @@
         </form>
     </div>
     <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
     <script type="text/javascript">
         var prefix = ctx + "sysusersystem/hiddentrouble";
         $("#form-hiddent-trouble-edit").validate({
@@ -72,6 +97,23 @@
                 $.operate.save(prefix + "/edit", $('#form-hiddent-trouble-edit').serialize());
             }
         }
+
+        $("input[name='zgQx']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+    </script>
+    <script>
+        // //日期时间选择器
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#zgQx1'
+                ,type: 'datetime'
+            });
+        });
     </script>
 </body>
 </html>

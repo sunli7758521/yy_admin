@@ -23,6 +23,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="successTime"    column="success_time"    />
         <result property="jcDept"    column="jc_dept"    />
         <result property="jcJb"    column="jc_jb"    />
+
+        <result property="jcName"    column="jc_name"    />
+        <result property="zrDept"    column="zr_dept"    />
+        <result property="zgQx"    column="zg_qx"    />
     </resultMap>
 
     <resultMap type="JzHiddenTroubleVO" id="JzHiddenTroubleResultMap">
@@ -39,17 +43,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="successTime"    column="success_time"    />
         <result property="jcDept"    column="jc_dept"    />
         <result property="jcJb"    column="jc_jb"    />
+
+        <result property="jcName"    column="jc_name"    />
+        <result property="zrDept"    column="zr_dept"    />
+        <result property="zgQx"    column="zg_qx"    />
     </resultMap>
 
     <sql id="selectJzHiddenTroubleVo">
         select hidden_trouble_id, type_id, plan_id, system_id, identify_people, rectification_people,
          rectification_time, state, remark, create_time, hidden_content,
-          hidden_wz, hidden_jb, update_time,success_time,jc_dept,jc_jb   from jz_hidden_trouble
+          hidden_wz, hidden_jb, update_time,success_time,jc_dept,jc_jb,jc_name,zr_dept,zg_qx    from jz_hidden_trouble
     </sql>
     <sql id="selectVo">
     SELECT h.hidden_trouble_id,k.dept_name system_name,t.name type_name,h.type_id, h.plan_id, h.system_id, h.identify_people, h.rectification_people, h.rectification_time, h.state, h.remark, h.create_time,
      h.hidden_content, h.hidden_wz, h.hidden_jb, h.update_time,
-     h.success_time,h.jc_dept,h.jc_jb   from jz_hidden_trouble h
+     h.success_time,h.jc_dept,h.jc_jb,h.jc_name,h.zr_dept,h.zg_qx    from jz_hidden_trouble h
 LEFT JOIN sys_dept k ON k.dept_id = h.system_id
 LEFT JOIN jz_type t ON t.id = h.type_id
     </sql>
@@ -68,7 +76,10 @@ LEFT JOIN jz_type t ON t.id = h.type_id
             <if test="hiddenJb != null  and hiddenJb != ''"> and h.hidden_jb = #{hiddenJb}</if>
             <if test="successTime != null "> and h.success_time = #{successTime}</if>
             <if test="jcDept != null and jcDept != ''"> and h.jc_dept = #{jcDept}</if>
-            <if test="jcJb != null and jcJb != ''"> and h.jc_jb = #{jcJb}</if>
+            <if test="jcName != null and jcName != ''"> and h.jc_name = #{jcName}</if>
+            <if test="zrDept != null and zrDept != ''"> and h.zr_dept = #{zrDept}</if>
+            <if test="zgQx != null and zgQx != ''"> and h.zg_qx = #{zgQx}</if>
+
         </where>
         order by create_time desc
     </select>
@@ -95,9 +106,13 @@ LEFT JOIN jz_type t ON t.id = h.type_id
             <if test="hiddenJb != null  and hiddenJb != ''">hidden_jb,</if>
             <if test="updateTime != null ">update_time,</if>
             <if test="successTime != null ">success_time,</if>
-
             <if test="jcDept != null and jcDept != ''">  jc_dept ,</if>
             <if test="jcJb != null and jcJb != ''"> jc_jb,</if>
+
+            <if test="jcName != null and jcName != ''"> jc_name,</if>
+            <if test="zrDept != null and zrDept != ''">zr_dept,</if>
+            <if test="zgQx != null and zgQx != ''">zg_qx,</if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="typeId != null ">#{typeId},</if>
@@ -116,6 +131,11 @@ LEFT JOIN jz_type t ON t.id = h.type_id
             <if test="successTime != null "> #{successTime},</if>
             <if test="jcDept != null and jcDept != ''">  #{jcDept},</if>
             <if test="jcJb != null and jcJb != ''">  #{jcJb},</if>
+
+            <if test="jcName != null and jcName != ''"> #{jcName},</if>
+            <if test="zrDept != null and zrDept != ''"> #{zrDept},</if>
+            <if test="zgQx != null and zgQx != ''"> #{zgQx},</if>
+
         </trim>
     </insert>
 
@@ -138,6 +158,11 @@ LEFT JOIN jz_type t ON t.id = h.type_id
             <if test="successTime != null ">success_time = #{successTime},</if>
             <if test="jcDept != null and jcDept != ''"> jc_dept = #{jcDept},</if>
             <if test="jcJb != null and jcJb != ''"> jc_jb = #{jcJb},</if>
+
+            <if test="jcName != null and jcName != ''"> jc_name = #{jcName},</if>
+            <if test="zrDept != null and zrDept != ''"> zr_dept = #{zrDept},</if>
+            <if test="zgQx != null and zgQx != ''">zg_qx = #{zgQx},</if>
+
         </trim>
         where hidden_trouble_id = #{hiddenTroubleId}
     </update>

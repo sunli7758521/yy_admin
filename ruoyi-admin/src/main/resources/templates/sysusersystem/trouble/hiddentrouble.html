@@ -13,30 +13,9 @@
                         <li>
                             <input type="hidden" id="dictType" name="planId" th:value="${dictId}"/>
                         </li>
-                        <!--<li>-->
-                            <!--<p>巡检项目：</p>-->
-                            <!--<input type="text" name="inspectionProject"/>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<p>巡检地址：</p>-->
-                            <!--<input type="text" name="inspectionAddr"/>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                            <!--<p>检查人：</p>-->
-                            <!--<select id="jcPeople" class="form-control" name="jcPeople" th:with="type=${@dict.uList()}">-->
-                                <!--<option value="">所有</option>-->
-                                <!--<option th:each="dict : ${type}" th:text="${dict.userName}" th:value="${dict.userId}"></option>-->
-                            <!--</select>-->
-                        <!--</li>-->
-                        <!--<li class="select-time">-->
-                            <!--<p>检查时间：</p>-->
-                            <!--<input type="text" class="time-input" id="startTime" placeholder="开始时间" name="params[beginJcDate]"/>-->
-                            <!--<span>-</span>-->
-                            <!--<input type="text" class="time-input" id="endTime" placeholder="结束时间" name="params[endJcDate]"/>-->
-                        <!--</li>-->
+
                         <li>
                             <p>隐患类型：</p>
-                            <!--                                <input type="text" name="state"/>-->
                             <div class="col-sm-8">
                                 <select class="form-control" name="typeId" th:with="type=${@dict.listType(2)}" required>
                                     <option value="">所有</option>
@@ -115,23 +94,31 @@
                     field : 'typeName',
                     title : '隐患类型'
                 },
-                // {
-                //     field : 'planId',
-                //     title : '制定计划id'
-                //
-                // },
-                // {
-                //     field : 'systemId',
-                //     title : '系统id'
-                // },
-                // {
-                //     field : 'identifyPeople',
-                //     title : '盘查人'
-                // },
-                // {
-                //     field : 'rectificationPeople',
-                //     title : '整改人'
-                // },
+                {
+                    field : 'jcDept',
+                    title : '检查部门'
+
+                },
+                {
+                    field : 'jcJb',
+                    title : '检查级别'
+                },
+                {
+                    field : 'identifyPeople',
+                    title : '检查人'
+                },
+                {
+                    field : 'jcName',
+                    title : '责任人'
+                },
+                {
+                    field : 'zrDept',
+                    title : '责任部门'
+                },
+                {
+                    field : 'zgQx',
+                    title : '整改期限'
+                },
                 {
                     field : 'state',
                     title : '状态',

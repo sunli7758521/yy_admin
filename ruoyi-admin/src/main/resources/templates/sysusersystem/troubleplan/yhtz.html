@@ -185,7 +185,8 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="lryhx(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-edit"></i>录入整改记录</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="lryhx(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-edit"></i>整改</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="lryhx(\'' + row.hiddenTroubleId + '\')"><i class="fa fa-edit"></i>验收</a> ');
                         return actions.join('');
                     }
                 }

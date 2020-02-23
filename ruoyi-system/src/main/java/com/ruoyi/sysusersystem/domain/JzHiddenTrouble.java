@@ -35,7 +35,7 @@ public class JzHiddenTrouble extends BaseEntity
     private Long systemId;
 
     /** 盘查人 */
-    @Excel(name = "盘查人")
+    @Excel(name = "检查人")
     private String identifyPeople;
 
     /** 整改人 */
@@ -65,9 +65,40 @@ public class JzHiddenTrouble extends BaseEntity
     /** 完成时限 */
     @Excel(name = "完成时限")
     private String successTime;
-
+    // 检查部门
     private String jcDept;
+    // 检查级别
     private String jcJb;
+    // 检查人 多人
+    private String jcName;
+    // 责任部门
+    private String zrDept;
+    // 整改期限
+    private String zgQx;
+
+    public String getJcName() {
+        return jcName;
+    }
+
+    public void setJcName(String jcName) {
+        this.jcName = jcName;
+    }
+
+    public String getZrDept() {
+        return zrDept;
+    }
+
+    public void setZrDept(String zrDept) {
+        this.zrDept = zrDept;
+    }
+
+    public String getZgQx() {
+        return zgQx;
+    }
+
+    public void setZgQx(String zgQx) {
+        this.zgQx = zgQx;
+    }
 
     public String getJcDept() {
         return jcDept;
