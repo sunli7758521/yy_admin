@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('新增隐患验收记录')" />
+    <th:block th:include="include :: datetimepicker-css" />
+</head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-jl-add">
+                    <input name="yhId" th:value="${yhId}" class="form-control" type="hidden">
+            <div class="form-group">
+                <label class="col-sm-3 control-label">验收人姓名：</label>
+                <div class="col-sm-8">
+                    <input name="yName" class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">    
+                <label class="col-sm-3 control-label">验收时间：</label>
+                <div class="col-sm-8">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <input name="yTime" class="form-control" placeholder="yyyy-MM-dd" type="text" required autocomplete="off">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">验收状态：</label>
+                <div class="col-sm-8">
+                    <select onchange="changState(this.value)" name="state" class="form-control" th:with="type=${@dict.getType('ys_state')}" required autocomplete="off">
+                        <option value="">所有</option>
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                    </select>
+                </div>
+            </div>
+            <div id="tzSxDiv" class="form-group">
+                <label class="col-sm-3 control-label">调整时限：</label>
+                <div class="col-sm-8">
+                    <input name="tzSx" class="form-control" type="text"  placeholder="yyyy-MM-dd" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">描述：</label>
+                <div class="col-sm-8">
+                    <input name="describes" class="form-control" type="text" required autocomplete="off">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">备注：</label>
+                <div class="col-sm-8">
+                    <textarea name="remark" class="form-control" type="text"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <th:block th:include="include :: footer" />
+    <th:block th:include="include :: datetimepicker-js" />
+    <script type="text/javascript">
+        var prefix = ctx + "sysusersystem/jl"
+        $("#form-jl-add").validate({
+            focusCleanup: true
+        });
+
+        function submitHandler() {
+            if ($.validate.form()) {
+                $.operate.save(prefix + "/add", $('#form-jl-add').serialize());
+            }
+        }
+
+        $("input[name='yTime']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        $("input[name='tzSx']").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+        function changState(state) {
+
+            if(state=="0"){
+              $("#tzSxDiv").hide();
+            }else{
+                $("#tzSxDiv").show();
+            }
+        }
+    </script>
+</body>
+</html>

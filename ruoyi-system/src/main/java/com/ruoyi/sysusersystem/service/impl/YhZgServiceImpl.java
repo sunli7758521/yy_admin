@@ -60,7 +60,7 @@ public class YhZgServiceImpl implements IYhZgService
     public int insertYhZg(YhZg yhZg)
     {
         yhZg.setCreateTime(DateUtils.getNowDate());
-        String state= "3";
+        String state= "1";
 
         updateYHXState(yhZg.getYhId(),state);
         return yhZgMapper.insertYhZg(yhZg);
@@ -69,9 +69,9 @@ public class YhZgServiceImpl implements IYhZgService
     private void updateYHXState(Long yhId,String state) {
         JzHiddenTrouble hiddenTrouble = new JzHiddenTrouble();
         hiddenTrouble.setHiddenTroubleId(yhId);
-        if(state.equals("3")){
+        if(state.equals("1")){
             // 修改整改项状态 把已排查未整改  改为已整改未审核
-            hiddenTrouble.setState("3");
+            hiddenTrouble.setState("1");
         }else if(state.equals("1")){
             //  未删除 修改状态 改成已排查未整改
             hiddenTrouble.setState("1");

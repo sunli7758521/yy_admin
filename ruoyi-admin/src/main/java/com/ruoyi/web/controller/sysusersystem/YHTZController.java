@@ -58,6 +58,16 @@ public class YHTZController  extends BaseController {
         return "sysusersystem/zg/zg";
     }
 
+    /**
+     * 隐患验收页面
+     */
+    @GetMapping("/yhys/{id}")
+    public String yhys(@PathVariable("id") String id, ModelMap map)
+    {
+        map.put("id",id);
+        return "sysusersystem/jl/jl";
+    }
+
 
 
 }

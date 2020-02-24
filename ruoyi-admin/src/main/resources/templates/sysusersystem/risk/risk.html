@@ -198,7 +198,10 @@
      var arr = param.split('|');
         var riskId =arr[0];
         var pgBg = arr[1];
-        alert(pgBg)
+        if(arr[1].length == 4){
+            layer.alert("文件未上传，请先上传在预览！！！");
+            return ;
+        }
        window.location.href=pgBg;
 
     }

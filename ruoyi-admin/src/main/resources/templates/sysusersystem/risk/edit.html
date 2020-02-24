@@ -46,7 +46,7 @@
 <!--                        <option value="" th:text="*{typeName}">所有</option>-->
 <!--                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictCode}"></option>-->
 <!--                    </select>-->
-                    <select id="typeId" class="form-control" th:field="*{typeId}"  name="typeId" th:with="type=${@dict.listType(0)}" th:field="*{typeName}">
+                    <select id="typeId" class="form-control" th:field="*{typeId}"  name="typeId" th:with="type=${@dict.listType(0)}" >
                         <option value="">所有</option>
                         <option th:each="dict : ${type}" th:text="${dict.name}" th:value="${dict.id}" ></option>
                     </select>

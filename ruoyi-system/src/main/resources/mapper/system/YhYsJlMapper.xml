@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.YhYsJlMapper">
+    
+    <resultMap type="YhYsJl" id="YhYsJlResult">
+        <result property="yId"    column="y_id"    />
+        <result property="yhId"    column="yh_id"    />
+        <result property="yName"    column="y_name"    />
+        <result property="yTime"    column="y_time"    />
+        <result property="describes"    column="describes"    />
+        <result property="tzSx"    column="tz_sx"    />
+        <result property="state"    column="state"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectYhYsJlVo">
+        select y_id, yh_id, y_name, y_time, describes, tz_sx, state, create_time, update_time, remark from yh_ys_jl
+    </sql>
+
+    <select id="selectYhYsJlList" parameterType="YhYsJl" resultMap="YhYsJlResult">
+        <include refid="selectYhYsJlVo"/>
+        <where>  
+            <if test="yhId != null "> and yh_id = #{yhId}</if>
+            <if test="yName != null  and yName != ''"> and y_name like concat('%', #{yName}, '%')</if>
+            <if test="yTime != null "> and y_time = #{yTime}</if>
+            <if test="describes != null  and describes != ''"> and describes = #{describes}</if>
+            <if test="tzSx != null  and tzSx != ''"> and tz_sx = #{tzSx}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectYhYsJlById" parameterType="Long" resultMap="YhYsJlResult">
+        <include refid="selectYhYsJlVo"/>
+        where y_id = #{yId}
+    </select>
+        
+    <insert id="insertYhYsJl" parameterType="YhYsJl" useGeneratedKeys="true" keyProperty="yId">
+        insert into yh_ys_jl
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="yhId != null ">yh_id,</if>
+            <if test="yName != null  and yName != ''">y_name,</if>
+            <if test="yTime != null ">y_time,</if>
+            <if test="describes != null  and describes != ''">describes,</if>
+            <if test="tzSx != null  and tzSx != ''">tz_sx,</if>
+            <if test="state != null  and state != ''">state,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="yhId != null ">#{yhId},</if>
+            <if test="yName != null  and yName != ''">#{yName},</if>
+            <if test="yTime != null ">#{yTime},</if>
+            <if test="describes != null  and describes != ''">#{describes},</if>
+            <if test="tzSx != null  and tzSx != ''">#{tzSx},</if>
+            <if test="state != null  and state != ''">#{state},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateYhYsJl" parameterType="YhYsJl">
+        update yh_ys_jl
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="yhId != null ">yh_id = #{yhId},</if>
+            <if test="yName != null  and yName != ''">y_name = #{yName},</if>
+            <if test="yTime != null ">y_time = #{yTime},</if>
+            <if test="describes != null  and describes != ''">describes = #{describes},</if>
+            <if test="tzSx != null  and tzSx != ''">tz_sx = #{tzSx},</if>
+            <if test="state != null  and state != ''">state = #{state},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where y_id = #{yId}
+    </update>
+
+    <delete id="deleteYhYsJlById" parameterType="Long">
+        delete from yh_ys_jl where y_id = #{yId}
+    </delete>
+
+    <delete id="deleteYhYsJlByIds" parameterType="String">
+        delete from yh_ys_jl where y_id in 
+        <foreach item="yId" collection="array" open="(" separator="," close=")">
+            #{yId}
+        </foreach>
+    </delete>
+    
+</mapper>
