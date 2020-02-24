@@ -28,7 +28,7 @@ public class JzSecurityTeam extends BaseEntity
 
     /** 描述 */
     @Excel(name = "描述")
-    private String describe;
+    private String describes;
 
     public void setId(Long id)
     {
@@ -59,12 +59,12 @@ public class JzSecurityTeam extends BaseEntity
     }
     public void setDescribe(String describe) 
     {
-        this.describe = describe;
+        this.describes = describe;
     }
 
     public String getDescribe() 
     {
-        return describe;
+        return describes;
     }
 
     @Override
@@ -75,7 +75,7 @@ public class JzSecurityTeam extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .append("createId", getCreateId())
-            .append("describe", getDescribe())
+            .append("describes", getDescribe())
             .append("remark", getRemark())
             .toString();
     }

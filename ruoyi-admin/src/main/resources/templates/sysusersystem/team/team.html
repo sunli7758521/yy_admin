@@ -109,7 +109,20 @@
                 },
                 {
                     field : 'describe', 
-                    title : '描述'
+                    title : '描述',
+                    editable : {
+                        type : 'text',
+                        title : '名称',
+                        emptytext : "【名称】为空",
+                        validate : function(value) {
+                            if (value.length > 30) {
+                                return '名称不能超过30个字符';
+                            }
+                            if (value.length == 0) {
+                                return '名称不能为空';
+                            }
+                        }
+                    }
                 },
                 {
                     field : 'remark', 
