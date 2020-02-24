@@ -28,6 +28,11 @@ public class SysUser extends BaseEntity
     @Excel(name = "部门编号", type = Type.IMPORT)
     private Long deptId;
 
+    /**
+     * 安全组类型 0 组员 1 组员 2 副副长
+     */
+    private String postType;
+
     /** 部门父ID */
     private Long parentId;
 
@@ -399,6 +404,7 @@ public class SysUser extends BaseEntity
             .append("dept", getDept())
             .append("searchSystemId", getSearchSystemId())
             .append("itemState", getItemState())
+            .append("postType", getPostType())
             .toString();
     }
 
@@ -408,5 +414,13 @@ public class SysUser extends BaseEntity
 
     public void setSystemList(Long[] systemList) {
         this.systemList = systemList;
+    }
+
+    public String getPostType() {
+        return postType;
+    }
+
+    public void setPostType(String postType) {
+        this.postType = postType;
     }
 }

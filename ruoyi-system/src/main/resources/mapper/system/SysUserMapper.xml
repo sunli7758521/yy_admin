@@ -28,6 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="searchSystemId"       column="search_system_id"       />
 		<result property="systemId"       column="system_id"       />
 		<result property="systemIds"       column="system_id_s"       />
+		<result property="postType"       column="post_type"       />
 		<association property="dept"    column="dept_id" javaType="SysDept" resultMap="deptResult" />
 		<collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" />
 	</resultMap>
@@ -54,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select u.system_id_s,u.user_id, u.dept_id, u.login_name, u.user_name,
          u.email, u.avatar, u.phonenumber, u.sex, u.password,
          u.salt, u.status, u.del_flag, u.login_ip, u.login_date,
-          u.create_time, u.remark,u.search_system_id,u.system_id,
+          u.create_time, u.remark,u.search_system_id,u.system_id,u.post_type,
           u.item_state,
        		    d.dept_id, d.parent_id, d.dept_name, d.order_num, d.leader, d.status as dept_status,
        		    r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
@@ -73,7 +74,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select u.user_id, u.dept_id, u.login_name, u.user_name,
 		u.email, u.avatar, u.phonenumber, u.password, u.sex, u.salt,
 		u.status, u.del_flag, u.login_ip, u.login_date, u.create_by,
-		u.item_state,
+		u.item_state,u.post_type,
 		u.create_time, u.remark,u.search_system_id,u.system_id,
 		d.dept_name, d.leader from sys_user u
 		left join sys_dept d on u.dept_id = d.dept_id
@@ -102,7 +103,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectAllocatedList" parameterType="SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.login_name,
-		u.user_name, u.email, u.avatar, u.phonenumber,
+		u.user_name, u.email, u.avatar, u.phonenumber,u.post_type,
 		u.status, u.create_time,u.search_system_id,u.system_id,u.item_state
 	    from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
@@ -122,7 +123,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectUnallocatedList" parameterType="SysUser" resultMap="SysUserResult">
 	    select distinct u.user_id, u.dept_id, u.login_name,
 		u.user_name, u.email, u.avatar, u.phonenumber, u.status,
-		u.create_time,u.search_system_id,u.system_id,u.item_state
+		u.create_time,u.search_system_id,u.system_id,u.item_state,u.post_type
 	    from sys_user u
 			 left join sys_dept d on u.dept_id = d.dept_id
 			 left join sys_user_role ur on u.user_id = ur.user_id
@@ -201,6 +202,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="searchSystemId != null">search_system_id = #{searchSystemId},</if>
  			<if test="systemId != null">system_id = #{systemId},</if>
  			<if test="itemState != null and itemState !=''">item_state = #{itemState},</if>
+ 			<if test="postType != null and postType !=''">post_type = #{postType},</if>
  			update_time = sysdate()
  		</set>
  		where user_id = #{userId}
@@ -224,7 +226,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    <if test="searchSystemId != null">search_system_id,</if>
 		    <if test="systemId != null">system_id ,</if>
 		    <if test="itemState != null and itemState !=''">item_state,</if>
-			create_time
+			<if test="postType != null and postType !=''">post_type,</if>
+
+		create_time
  		)values(
  			<if test="userId != null and userId != ''">#{userId},</if>
  			<if test="deptId != null and deptId != ''">#{deptId},</if>
@@ -241,7 +245,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="remark != null and remark != ''">#{remark},</if>
 		    <if test="searchSystemId != null">#{searchSystemId},</if>
 		    <if test="systemId != null">#{systemId},</if>
-		<if test="itemState != null and itemState !=''">#{itemState},</if>
+			<if test="postType != null and postType !=''">post_type = #{postType},</if>
+			<if test="itemState != null and itemState !=''">#{itemState},</if>
  			sysdate()
  		)
 	</insert>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.JzSecurityTeamMapper">
+    
+    <resultMap type="JzSecurityTeam" id="JzSecurityTeamResult">
+        <result property="id"    column="id"    />
+        <result property="xzName"    column="xz_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="createId"    column="create_id"    />
+        <result property="describe"    column="describe"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectJzSecurityTeamVo">
+       SELECT
+	id,
+	xz_name,
+	create_time,
+	update_time,
+	create_id,
+	`describe`,
+	remark
+FROM
+	jz_security_team
+    </sql>
+
+    <select id="selectJzSecurityTeamList" parameterType="JzSecurityTeam" resultMap="JzSecurityTeamResult">
+        <include refid="selectJzSecurityTeamVo"/>
+        <where>  
+            <if test="xzName != null  and xzName != ''"> and xz_name like concat('%', #{xzName}, '%')</if>
+            <if test="createId != null "> and create_id = #{createId}</if>
+            <if test="describe != null  and describe != ''"> and describe = #{describe}</if>
+        </where>
+    </select>
+    
+    <select id="selectJzSecurityTeamById" parameterType="String" resultMap="JzSecurityTeamResult">
+        <include refid="selectJzSecurityTeamVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJzSecurityTeam" parameterType="JzSecurityTeam">
+        insert into jz_security_team
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">id,</if>
+            <if test="xzName != null  and xzName != ''">xz_name,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="updateTime != null ">update_time,</if>
+            <if test="createId != null ">create_id,</if>
+            <if test="describe != null  and describe != ''">describe,</if>
+            <if test="remark != null  and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null  and id != ''">#{id},</if>
+            <if test="xzName != null  and xzName != ''">#{xzName},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="updateTime != null ">#{updateTime},</if>
+            <if test="createId != null ">#{createId},</if>
+            <if test="describe != null  and describe != ''">#{describe},</if>
+            <if test="remark != null  and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzSecurityTeam" parameterType="JzSecurityTeam">
+        update jz_security_team
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="xzName != null  and xzName != ''">xz_name = #{xzName},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="updateTime != null ">update_time = #{updateTime},</if>
+            <if test="createId != null ">create_id = #{createId},</if>
+            <if test="describe != null  and describe != ''">describe = #{describe},</if>
+            <if test="remark != null  and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzSecurityTeamById" parameterType="String">
+        delete from jz_security_team where id = #{id}
+    </delete>
+
+    <delete id="deleteJzSecurityTeamByIds" parameterType="String">
+        delete from jz_security_team where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
