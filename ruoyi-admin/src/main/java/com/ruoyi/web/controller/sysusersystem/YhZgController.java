@@ -1,6 +1,8 @@
 package com.ruoyi.web.controller.sysusersystem;
 
 import java.util.List;
+
+import com.ruoyi.sysusersystem.domain.YhZgYsVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,10 +49,11 @@ public class YhZgController extends BaseController
     @RequiresPermissions("sysusersystem:zg:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(YhZg yhZg)
+    public TableDataInfo list(YhZgYsVo yhZg)
     {
         startPage();
-        List<YhZg> list = yhZgService.selectYhZgList(yhZg);
+//        List<YhZg> list = yhZgService.selectYhZgList(yhZg);
+        List<YhZgYsVo> list = yhZgService.selectYhZgYsList(yhZg);
         return getDataTable(list);
     }
 
@@ -123,5 +126,16 @@ public class YhZgController extends BaseController
     public AjaxResult remove(String ids)
     {
         return toAjax(yhZgService.deleteYhZgByIds(ids));
+    }
+
+
+    /**
+     * 新增隐患整改
+     */
+    @GetMapping("/yS/{id}")
+    public String yS(@PathVariable("id") String id,ModelMap map)
+    {
+        map.put("yhId",id);
+        return prefix + "/ysAdd";
     }
 }

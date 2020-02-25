@@ -15,6 +15,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
     </resultMap>
 
+    <resultMap type="YhZgYsVo" id="YhZgResultVo">
+        <result property="id"    column="id"    />
+        <result property="yhId"    column="yh_id"    />
+        <result property="zgTime"    column="zg_time"    />
+        <result property="zgName"    column="zg_name"    />
+        <result property="zgCs"    column="zg_cs"    />
+        <result property="yId"    column="y_id"    />
+        <result property="yhZgId"    column="yh_zg_id"    />
+        <result property="yName"    column="y_name"    />
+        <result property="yTime"    column="y_time"    />
+        <result property="describes"    column="describes"    />
+        <result property="tzSx"    column="tz_sx"    />
+        <result property="state"    column="state"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
     <sql id="selectYhZgVo">
         select id, yh_id, zg_time, zg_name, zg_cs, remark, create_time, update_time from yh_zg
     </sql>
@@ -87,5 +105,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{id}
         </foreach>
     </delete>
-    
+    <select id="selectYhZgYsList" parameterType="YhZgYsVo" resultMap="YhZgResultVo">
+        SELECT
+            yh_zg.id,
+            yh_zg.yh_id,
+            yh_zg.zg_time,
+            yh_zg.zg_name,
+            yh_zg.zg_cs,
+            yh_zg.remark,
+            yh_zg.create_time,
+            yh_zg.update_time ,
+            yh_ys_jl.y_id,
+            yh_ys_jl.yh_zg_id,
+            yh_ys_jl.y_name,
+            yh_ys_jl.y_time,
+            yh_ys_jl.describes,
+            yh_ys_jl.tz_sx,
+            yh_ys_jl.state
+        FROM
+            yh_zg
+            LEFT JOIN yh_ys_jl ON yh_zg.id = yh_ys_jl.yh_zg_id
+            <where>
+                <if test="yhId !=null">
+                    and yh_zg.yh_id =#{yhId}
+                </if>
+            </where>
+            order by yh_zg.create_time desc
+    </select>
+
+    <select id="selectByYhZgId" resultMap="YhZgResult">
+        <include refid="selectYhZgVo"/>
+        where id = #{id}
+    </select>
 </mapper>

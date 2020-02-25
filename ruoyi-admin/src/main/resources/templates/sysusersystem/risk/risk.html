@@ -64,6 +64,7 @@
 
                 createUrl: prefix + "/add",
                 fXPGUrl: prefix + "/fXPG",
+                updateBgUrl: prefix + "/updateBg",
                 updateUrl: prefix + "/edit/{id}",
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
@@ -111,6 +112,12 @@
 
                 },
                 {
+                    field : 'pingjiaId',
+                    title : '评价id',
+                    visible: false
+
+                },
+                {
                     field : 'lZhi',
                     title : 'L'
                 },
@@ -152,16 +159,22 @@
                     align: 'center',
                     formatter: function(value, row, index) {
                         var actions = [];
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.riskId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.riskId + '\')"><i class="fa fa-edit"></i>编辑风险</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.riskId + '\')"><i class="fa fa-remove"></i>删除</a>');
                         // actions.push('<a class="btn btn-success btn-xs ' + searchFlag + '"  onclick="yunlan(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.fileUrl + '\')"><i class="fa fa-search"></i>预览风险文档</a>');
-                      if(row.pgBg  ==null){
-                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '"  onclick="fXPG(\'' + row.riskId + '\')"><i class="fa fa-check-square-o"></i>风险评估</a>');
+                        if(row.pingjiaId ==null){
+                            actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '"  onclick="fXPG(\'' + row.riskId + '\')"><i class="fa fa-check-square-o"></i>风险评估</a>');
+                        }
+
+                      if(row.pgBg  ==null ){
+                          actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '><i class="fa fa-list"></i>已评估无报告</a>');
+                          actions.push('<a class="btn btn-warning btn-xs ' + searchFlag + '"  onclick="updateBg(\'' + row.pingjiaId + '\')"><i class="fa fa-search"></i>上传评估报告</a>');
                       }else{
                           actions.push('<a class="btn btn-primary btn-xs ' + removeFlag + '><i class="fa fa-list"></i>已评估</a>');
+                          actions.push('<a class="btn btn-warning btn-xs ' + searchFlag + '"  onclick="pgbg(\'' + row.pgBg + '\')"><i class="fa fa-search"></i>评估报告</a>');
 
                       }
-                        actions.push('<a class="btn btn-warning btn-xs ' + searchFlag + '"  onclick="pgbg(\'' + row.riskId + '\'+\'' + '|' + '\'+\'' + row.pgBg + '\')"><i class="fa fa-search"></i>评估报告</a>');
+
                         return actions.join('');
                     }
                 }]
@@ -203,7 +216,11 @@
             return ;
         }
        window.location.href=pgBg;
-
+    }
+    // 上传评估报告
+    function updateBg(id) {
+        var url = prefix+"/updateBg/"+id;
+        $.modal.open("上传评估报告",url);
     }
 
 </script>

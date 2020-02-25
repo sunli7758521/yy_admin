@@ -263,6 +263,27 @@ public class JzRiskController extends BaseController
         pingjiabiao.setPjTime(DateUtils.getNowDate());
         return toAjax(pingjiabiaoService.insertPingjiabiao(pingjiabiao));
     }
+    /**
+     * 新增风险评价
+     */
+    @GetMapping("/updateBg/{id}")
+    public String updateBg(@PathVariable("id") Long id, ModelMap mmap)
+    {
+        mmap.put("Pingjiabiao",  pingjiabiaoService.selectPingjiabiaoById(id));
+        return prefix + "/editBG";
+    }
+    /**
+     * 上传评估报告
+     */
+    @RequiresPermissions("sysusersystem:pingjiabiao:edit")
+    @Log(title = "风险评价", businessType = BusinessType.INSERT)
+    @PostMapping("/updateBg")
+    @ResponseBody
+    public AjaxResult updateBg(Pingjiabiao pingjiabiao)
+    {
+        pingjiabiao.setPjTime(DateUtils.getNowDate());
+        return toAjax(pingjiabiaoService.insertPingjiabiao(pingjiabiao));
+    }
 
     /**
      * docx,doc 可以转换

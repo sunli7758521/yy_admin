@@ -1,6 +1,8 @@
 package com.ruoyi.sysusersystem.service;
 
 import com.ruoyi.sysusersystem.domain.YhZg;
+import com.ruoyi.sysusersystem.domain.YhZgYsVo;
+
 import java.util.List;
 
 /**
@@ -58,4 +60,12 @@ public interface IYhZgService
      * @return 结果
      */
     public int deleteYhZgById(Long id);
+
+    /**
+     * 查询隐患整改验收
+     *
+     * @param yhZg 隐患整改验收
+     * @return 结果
+     */
+    List<YhZgYsVo> selectYhZgYsList(YhZgYsVo yhZg);
 }

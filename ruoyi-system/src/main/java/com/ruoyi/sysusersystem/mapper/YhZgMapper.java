@@ -1,6 +1,8 @@
 package com.ruoyi.sysusersystem.mapper;
 
 import com.ruoyi.sysusersystem.domain.YhZg;
+import com.ruoyi.sysusersystem.domain.YhZgYsVo;
+
 import java.util.List;
 
 /**
@@ -58,4 +60,20 @@ public interface YhZgMapper
      * @return 结果
      */
     public int deleteYhZgByIds(String[] ids);
+
+    /**
+     * 查询隐患整改验收
+     *
+     * @param yhZg 隐患整改验收
+     * @return 结果
+     */
+    List<YhZgYsVo> selectYhZgYsList(YhZgYsVo yhZg);
+
+    /**
+     * 通过隐患整改id 查询整改表里的隐患id
+     *
+     * @param yhZgId
+     * @return 结果
+     */
+    YhZg selectByYhZgId(Long id);
 }

@@ -3,7 +3,9 @@ package com.ruoyi.sysusersystem.service.impl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.sysusersystem.domain.JzHiddenTrouble;
+import com.ruoyi.sysusersystem.domain.YhZg;
 import com.ruoyi.sysusersystem.mapper.JzHiddenTroubleMapper;
+import com.ruoyi.sysusersystem.mapper.YhZgMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.sysusersystem.mapper.YhYsJlMapper;
@@ -26,6 +28,9 @@ public class YhYsJlServiceImpl implements IYhYsJlService
 
     @Autowired
     private JzHiddenTroubleMapper jzHiddenTroubleMapper;
+
+    @Autowired
+    private YhZgMapper yhZgMapper;
 
     /**
      * 查询隐患验收记录
@@ -68,8 +73,10 @@ public class YhYsJlServiceImpl implements IYhYsJlService
     }
     // 修改隐患表隐患项状态
     private void changYhState(YhYsJl yhYsJl) {
+       // 查询 整改表里的隐患id
+        YhZg zg =  yhZgMapper.selectByYhZgId(yhYsJl.getYhZgId());
         JzHiddenTrouble  jzHiddenTrouble= new JzHiddenTrouble();
-        jzHiddenTrouble.setHiddenTroubleId(yhYsJl.getYhId());
+        jzHiddenTrouble.setHiddenTroubleId(zg.getYhId());
         // 审核通过
         if(yhYsJl.getState().equals("0")){
             // 验收通过

@@ -19,9 +19,9 @@ public class YhYsJl extends BaseEntity
     /** 验收记录id */
     private Long yId;
 
-    /** 隐患主键 */
-    @Excel(name = "隐患主键")
-    private Long yhId;
+    /** 隐患整改记录id */
+    @Excel(name = "隐患整改记录id")
+    private Long yhZgId;
 
     /** 验收人姓名 */
     @Excel(name = "验收人姓名")
@@ -52,16 +52,16 @@ public class YhYsJl extends BaseEntity
     {
         return yId;
     }
-    public void setYhId(Long yhId) 
-    {
-        this.yhId = yhId;
+
+    public Long getYhZgId() {
+        return yhZgId;
     }
 
-    public Long getYhId() 
-    {
-        return yhId;
+    public void setYhZgId(Long yhZgId) {
+        this.yhZgId = yhZgId;
     }
-    public void setyName(String yName) 
+
+    public void setyName(String yName)
     {
         this.yName = yName;
     }
@@ -111,7 +111,7 @@ public class YhYsJl extends BaseEntity
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
             .append("yId", getyId())
-            .append("yhId", getYhId())
+            .append("yhZgId", getYhZgId())
             .append("yName", getyName())
             .append("yTime", getyTime())
             .append("describes", getDescribes())

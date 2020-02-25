@@ -3,6 +3,7 @@ package com.ruoyi.sysusersystem.service.impl;
 import java.util.List;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.sysusersystem.domain.JzHiddenTrouble;
+import com.ruoyi.sysusersystem.domain.YhZgYsVo;
 import com.ruoyi.sysusersystem.mapper.JzHiddenTroubleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,5 +131,15 @@ public class YhZgServiceImpl implements IYhZgService
         String state= "1";
         updateYHXState(yhZg.getYhId(),state);
         return yhZgMapper.deleteYhZgById(id);
+    }
+    /**
+     * 查询隐患整改验收
+     *
+     * @param yhZg 隐患整改验收
+     * @return 结果
+     */
+    @Override
+    public List<YhZgYsVo> selectYhZgYsList(YhZgYsVo yhZg) {
+        return yhZgMapper.selectYhZgYsList(yhZg);
     }
 }
