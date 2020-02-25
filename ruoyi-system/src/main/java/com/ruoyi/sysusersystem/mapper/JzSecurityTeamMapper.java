@@ -17,7 +17,7 @@ public interface JzSecurityTeamMapper
      * @param id 安全小组ID
      * @return 安全小组
      */
-    public JzSecurityTeam selectJzSecurityTeamById(String id);
+    public JzSecurityTeam selectJzSecurityTeamById(Long id);
 
     /**
      * 查询安全小组列表

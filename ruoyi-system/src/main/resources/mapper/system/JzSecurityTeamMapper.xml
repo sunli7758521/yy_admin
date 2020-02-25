@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="create_time"    />
         <result property="updateTime"    column="update_time"    />
         <result property="createId"    column="create_id"    />
+<!--        <result property="createName"    column="user_name"    />-->
         <result property="describes"    column="describes"    />
         <result property="remark"    column="remark"    />
     </resultMap>
@@ -27,19 +28,20 @@ FROM
 	jz_security_team
     </sql>
     <sql id="selectVo">
-        select id,xz_name,create_time,update_time,create_id,describes,remark
+        select su.user_name,jst.id,jst.xz_name,jst.create_time,jst.update_time,jst.create_id,jst.describes,jst.remark FROM jz_security_team jst
+        LEfT JOIN sys_user su ON jst.create_id=su.user_id
     </sql>
 
     <select id="selectJzSecurityTeamList" parameterType="JzSecurityTeam" resultMap="JzSecurityTeamResult">
-        <include refid="selectJzSecurityTeamVo"/>
+        <include refid="selectVo"/>
         <where>  
-            <if test="xzName != null  and xzName != ''"> and xz_name like concat('%', #{xzName}, '%')</if>
-            <if test="createId != null "> and create_id = #{createId}</if>
-            <if test="describes != null  and describes != ''"> and describes = #{describes}</if>
+            <if test="xzName != null  and xzName != ''"> and jst.xz_name like concat('%', #{xzName}, '%')</if>
+            <if test="createId != null "> and jst.create_id = #{createId}</if>
+            <if test="describes != null  and describes != ''"> and jst.describes = #{describes}</if>
         </where>
     </select>
     
-    <select id="selectJzSecurityTeamById" parameterType="String" resultMap="JzSecurityTeamResult">
+    <select id="selectJzSecurityTeamById" parameterType="Long" resultMap="JzSecurityTeamResult">
         <include refid="selectJzSecurityTeamVo"/>
         where id = #{id}
     </select>
@@ -79,11 +81,11 @@ FROM
         where id = #{id}
     </update>
 
-    <delete id="deleteJzSecurityTeamById" parameterType="String">
+    <delete id="deleteJzSecurityTeamById" parameterType="Long">
         delete from jz_security_team where id = #{id}
     </delete>
 
-    <delete id="deleteJzSecurityTeamByIds" parameterType="String">
+    <delete id="deleteJzSecurityTeamByIds" parameterType="Long">
         delete from jz_security_team where id in 
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}

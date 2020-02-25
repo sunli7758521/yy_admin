@@ -13,6 +13,8 @@ import com.ruoyi.common.core.domain.BaseEntity;
  */
 public class JzSecurityTeam extends BaseEntity
 {
+    JzSecurityTeam(){
+    }
     private static final long serialVersionUID = 1L;
 
     /** 主键 */
@@ -25,6 +27,10 @@ public class JzSecurityTeam extends BaseEntity
     /** 创建人Id */
     @Excel(name = "创建人Id")
     private Long createId;
+    /**
+     * 创建人名称
+     */
+    private Long createName;
 
     /** 描述 */
     @Excel(name = "描述")
@@ -75,8 +81,17 @@ public class JzSecurityTeam extends BaseEntity
             .append("createTime", getCreateTime())
             .append("updateTime", getUpdateTime())
             .append("createId", getCreateId())
+            .append("createName", getCreateName())
             .append("describes", getDescribe())
             .append("remark", getRemark())
             .toString();
+    }
+
+    public Long getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(Long createName) {
+        this.createName = createName;
     }
 }

@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.framework.util.ShiroUtils;
+import com.ruoyi.guanlisystem.domain.JzSysUserSystem;
+import com.ruoyi.guanlisystem.service.IJzSysUserSystemService;
+import com.ruoyi.system.domain.SysUser;
+import com.ruoyi.system.service.ISysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,6 +48,25 @@ public class JzSecurityTeamController extends BaseController
         return prefix + "/team";
     }
 
+    /**
+     * 添加小组安全人员
+     */
+    @GetMapping("/addPerson")
+    public String addPerson(){
+        return prefix+"/user";
+    }
+
+    /**
+     * 页面编辑更新操作
+     * @return
+     */
+    @PostMapping("/change/{id}/{value}")
+    @ResponseBody
+    public AjaxResult change(@PathVariable Long id,@PathVariable String value){
+        JzSecurityTeam jzSecurityTeam = jzSecurityTeamService.selectJzSecurityTeamById(id);
+        jzSecurityTeam.setDescribe(value);
+        return toAjax(jzSecurityTeamService.updateJzSecurityTeam(jzSecurityTeam));
+    }
     /**
      * 查询安全小组列表
      */
@@ -98,7 +121,7 @@ public class JzSecurityTeamController extends BaseController
      * 修改安全小组
      */
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable("id") String id, ModelMap mmap)
+    public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
         JzSecurityTeam jzSecurityTeam = jzSecurityTeamService.selectJzSecurityTeamById(id);
         mmap.put("jzSecurityTeam", jzSecurityTeam);

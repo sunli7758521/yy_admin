@@ -19,10 +19,10 @@
                                 <p>小组名称：</p>
                                 <input type="text" name="xzName"/>
                             </li>
-                            <li>
-                                <p>创建人：</p>
-                                <input type="text" name="createId"/>
-                            </li>
+<!--                            <li>-->
+<!--                                <p>创建人：</p>-->
+<!--                                <input type="text" name="createId"/>-->
+<!--                            </li>-->
                             <li>
                                 <p>描述：</p>
                                 <input type="text" name="describe"/>
@@ -87,33 +87,20 @@
                     visible: false
                 },
                 {
-                    field : 'xzName', 
+                    field : 'xzName',
                     title : '小组名称',
-                    editable : {
-                        type : 'text',
-                        title : '名称',
-                        emptytext : "【名称】为空",
-                        validate : function(value) {
-                            if (value.length > 30) {
-                                return '名称不能超过30个字符';
-                            }
-                            if (value.length == 0) {
-                                return '名称不能为空';
-                            }
-                        }
-                    }
                 },
+                // {
+                //     field : 'createId',
+                //     title : '创建人'
+                // },
                 {
-                    field : 'createId',
-                    title : '创建人'
-                },
-                {
-                    field : 'describe', 
+                    field : 'describes',
                     title : '描述',
                     editable : {
                         type : 'text',
-                        title : '名称',
-                        emptytext : "【名称】为空",
+                        title : '描述',
+                        emptytext : "【描述】为空",
                         validate : function(value) {
                             if (value.length > 30) {
                                 return '名称不能超过30个字符';
@@ -134,8 +121,10 @@
                     formatter: function(value, row, index) {
                         var actions = [];
                         actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
-                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>添加小组关联人员职位</a> ');
+                        // actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>添加小组关联人员职位</a> ');
                         actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="addPerson(\'' + row.id + '\')"><i class="fa fa-edit"></i>添加小组关联人员职位</a> ');
+
                         return actions.join('');
                     }
                 }]
@@ -143,7 +132,21 @@
             $.table.init(options);
         });
         function onEditableSave (field, row, oldValue, $el) {
-            alert("字段名：" + field + "，当前值：" + row[field]  + "，旧值：" + oldValue);
+            // alert("字段名：" + field + "，当前值：" + row[field]  + "，旧值：" + oldValue);
+            var id = row["id"];
+            var value = row[field];
+            $.ajax({
+                url:prefix+"/change/"+id+"/"+value,
+                type:"post",
+                success:function(msg){
+                    alert(msg)
+                }
+            })
+        }
+        function addPerson(id){
+            // $.modal.open("添加小组关联人员值位", prefix + "/addPerson/" + id);
+            $.modal.open("添加小组关联人员值位", prefix + "/addPerson");
+
         }
     </script>
 </body>

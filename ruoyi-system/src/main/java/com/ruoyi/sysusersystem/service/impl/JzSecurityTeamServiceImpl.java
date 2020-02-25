@@ -8,6 +8,8 @@ import com.ruoyi.sysusersystem.mapper.JzSecurityTeamMapper;
 import com.ruoyi.sysusersystem.domain.JzSecurityTeam;
 import com.ruoyi.sysusersystem.service.IJzSecurityTeamService;
 import com.ruoyi.common.core.text.Convert;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * 安全小组Service业务层处理
@@ -20,7 +22,6 @@ public class JzSecurityTeamServiceImpl implements IJzSecurityTeamService
 {
     @Autowired
     private JzSecurityTeamMapper jzSecurityTeamMapper;
-
     /**
      * 查询安全小组
      * 
@@ -28,7 +29,7 @@ public class JzSecurityTeamServiceImpl implements IJzSecurityTeamService
      * @return 安全小组
      */
     @Override
-    public JzSecurityTeam selectJzSecurityTeamById(String id)
+    public JzSecurityTeam selectJzSecurityTeamById(Long id)
     {
         return jzSecurityTeamMapper.selectJzSecurityTeamById(id);
     }

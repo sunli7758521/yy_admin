@@ -60,6 +60,17 @@ public class SysUserController extends BaseController
         return prefix + "/user";
     }
 
+    /**
+     * 页面编辑更新操作
+     * @return
+     */
+    @PostMapping("/change/{id}/{value}")
+    @ResponseBody
+    public AjaxResult change(@PathVariable Long id,@PathVariable String value){
+        SysUser sysUser = userService.selectUserById(id);
+        sysUser.setPostType(value);
+        return toAjax(userService.updateUser(sysUser));
+    }
     @RequiresPermissions("system:user:list")
     @PostMapping("/list")
     @ResponseBody
