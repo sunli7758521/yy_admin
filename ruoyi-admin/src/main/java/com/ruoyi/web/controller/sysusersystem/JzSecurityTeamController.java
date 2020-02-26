@@ -10,6 +10,7 @@ import com.ruoyi.system.domain.SysUser;
 import com.ruoyi.system.service.ISysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,8 +52,9 @@ public class JzSecurityTeamController extends BaseController
     /**
      * 添加小组安全人员
      */
-    @GetMapping("/addPerson")
-    public String addPerson(){
+    @GetMapping("/addPerson/{id}")
+    public String addPerson(@PathVariable Long id,ModelMap mmp){
+        mmp.put("Security",id);
         return prefix+"/user";
     }
 

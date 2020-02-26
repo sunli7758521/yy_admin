@@ -2,11 +2,6 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <th:block th:include="include :: header('安全小组列表')" />
-    <link href="/ajax/libs/bootstrap-table/bootstrap-table.min.css" rel="stylesheet"/>
-    <link href="/css/animate.css" rel="stylesheet"/>
-    <link href="/css/style.css" rel="stylesheet"/>
-    <link href="/ruoyi/css/ry-ui.css" rel="stylesheet"/>
-    <link href="/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.css" rel="stylesheet"/>
 </head>
 <body class="gray-bg">
      <div class="container-div">
@@ -56,9 +51,6 @@
         </div>
     </div>
     <th:block th:include="include :: footer" />
-     <script src="/ajax/libs/bootstrap-table/extensions/editable/bootstrap-editable.min.js"></script>
-     <script src="/ajax/libs/bootstrap-table/extensions/editable/bootstrap-table-editable.js"></script>
-
      <script th:inline="javascript">
         var editFlag = [[${@permission.hasPermi('sysusersystem:team:edit')}]];
         var removeFlag = [[${@permission.hasPermi('sysusersystem:team:remove')}]];
@@ -72,12 +64,6 @@
                 removeUrl: prefix + "/remove",
                 exportUrl: prefix + "/export",
                 modalName: "安全小组",
-                showSearch: false,
-                showRefresh: false,
-                showToggle: false,
-                showColumns: false,
-                showPageGo: true,
-                onEditableSave: onEditableSave,
                 columns: [{
                     checkbox: true
                 },
@@ -96,20 +82,7 @@
                 // },
                 {
                     field : 'describes',
-                    title : '描述',
-                    editable : {
-                        type : 'text',
-                        title : '描述',
-                        emptytext : "【描述】为空",
-                        validate : function(value) {
-                            if (value.length > 30) {
-                                return '名称不能超过30个字符';
-                            }
-                            if (value.length == 0) {
-                                return '名称不能为空';
-                            }
-                        }
-                    }
+                    title : '描述'
                 },
                 {
                     field : 'remark', 
@@ -145,7 +118,7 @@
         }
         function addPerson(id){
             // $.modal.open("添加小组关联人员值位", prefix + "/addPerson/" + id);
-            $.modal.open("添加小组关联人员值位", prefix + "/addPerson");
+            $.modal.open("添加小组关联人员职位", prefix + "/addPerson/"+id);
 
         }
     </script>

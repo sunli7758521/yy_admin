@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.sysusersystem.mapper.JzSecurityTeamCorrelatesMapper">
+    
+    <resultMap type="JzSecurityTeamCorrelates" id="JzSecurityTeamCorrelatesResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="securityTeamId"    column="security_team_id"    />
+    </resultMap>
+
+    <sql id="selectJzSecurityTeamCorrelatesVo">
+        select id, user_id, security_team_id from jz_security_team_correlates
+    </sql>
+
+    <select id="selectJzSecurityTeamCorrelatesList" parameterType="JzSecurityTeamCorrelates" resultMap="JzSecurityTeamCorrelatesResult">
+        <include refid="selectJzSecurityTeamCorrelatesVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="securityTeamId != null "> and security_team_id = #{securityTeamId}</if>
+        </where>
+    </select>
+    
+    <select id="selectJzSecurityTeamCorrelatesById" parameterType="Long" resultMap="JzSecurityTeamCorrelatesResult">
+        <include refid="selectJzSecurityTeamCorrelatesVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertJzSecurityTeamCorrelates" parameterType="JzSecurityTeamCorrelates" useGeneratedKeys="true" keyProperty="id">
+        insert into jz_security_team_correlates
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">user_id,</if>
+            <if test="securityTeamId != null ">security_team_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null ">#{userId},</if>
+            <if test="securityTeamId != null ">#{securityTeamId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateJzSecurityTeamCorrelates" parameterType="JzSecurityTeamCorrelates">
+        update jz_security_team_correlates
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null ">user_id = #{userId},</if>
+            <if test="securityTeamId != null ">security_team_id = #{securityTeamId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteJzSecurityTeamCorrelatesById" parameterType="Long">
+        delete from jz_security_team_correlates where id = #{id}
+    </delete>
+
+    <delete id="deleteJzSecurityTeamCorrelatesByIds" parameterType="String">
+        delete from jz_security_team_correlates where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

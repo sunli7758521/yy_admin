@@ -1,20 +1,20 @@
 package com.ruoyi.web.controller.system;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ruoyi.common.core.domain.Ztree;
+import com.ruoyi.framework.web.domain.server.Sys;
 import com.ruoyi.system.domain.SysDept;
 import com.ruoyi.system.service.*;
+import com.ruoyi.sysusersystem.domain.JzSecurityTeamCorrelates;
+import com.ruoyi.sysusersystem.service.IJzSecurityTeamCorrelatesService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.constant.UserConstants;
@@ -53,6 +53,9 @@ public class SysUserController extends BaseController
     @Autowired
     private ISysDeptService deptService;
 
+    @Autowired
+    private IJzSecurityTeamCorrelatesService securityTeamCorrelatesService;
+
     @RequiresPermissions("system:user:view")
     @GetMapping()
     public String user()
@@ -60,6 +63,66 @@ public class SysUserController extends BaseController
         return prefix + "/user";
     }
 
+    @PostMapping("/changeSelect/{xzId}")
+    @ResponseBody
+    public String changeSelect(@PathVariable Long xzId, String obj){
+        String str = obj+=" ";
+        char []first = str.toCharArray();
+        char []result=new char[100];
+        int j=0,k=0;
+        String re="";
+        Integer []su=new Integer[1000];
+        SysUser sysUser = null;
+        JzSecurityTeamCorrelates jzSecurityTeamCorrelates = new JzSecurityTeamCorrelates();
+        /**
+         * 取出UserId,postType值放到字符串result数组中
+         */
+        for(int i=11;first[i]!=' ';i++){
+            if(first[i]>='0' && first[i]<='9'){
+                result[j]=first[i];
+                j=j+1;
+                for(int s =i+1;result[s]!='\"';s++){
+                    if(first[s]>='0' && first[s]<='9'){
+                        result[j]=first[s];
+                        j=j+1;
+                    }else{
+                        i=s;
+                        break;
+                    }
+                }
+                result[j]=' ';//加标志 空格
+                j=j+1;
+            }
+        }
+        /**
+         * 从result数组变换类型放到su数组中
+         */
+        for(int i =0;i<result.length;i++){
+            if(result[i]>='0' && result[i]<='9'){
+                re+=String.valueOf(result[i]);
+            }else if(result[i]==' '){
+                su[k] = Integer.parseInt(re);
+                k++;
+                re="";
+                continue;
+            }
+        }
+
+        //更新sys_user，插入
+        for(int i=0;i<k;i++){
+            if(i%2==0){//偶数位为id，奇数位posttype
+                sysUser = userService.selectUserById(su[i].longValue());
+            }else{
+                sysUser.setPostType(su[i].toString());
+                userService.updateUser(sysUser);
+                jzSecurityTeamCorrelates.setSecurityTeamId(xzId);
+                jzSecurityTeamCorrelates.setUserId(sysUser.getUserId());
+                securityTeamCorrelatesService.insertJzSecurityTeamCorrelates(jzSecurityTeamCorrelates);
+                sysUser=null;
+            }
+        }
+        return "hello";
+    }
     /**
      * 页面编辑更新操作
      * @return
