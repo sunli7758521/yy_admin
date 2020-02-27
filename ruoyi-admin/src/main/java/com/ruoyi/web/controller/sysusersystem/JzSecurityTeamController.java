@@ -66,7 +66,7 @@ public class JzSecurityTeamController extends BaseController
     @ResponseBody
     public AjaxResult change(@PathVariable Long id,@PathVariable String value){
         JzSecurityTeam jzSecurityTeam = jzSecurityTeamService.selectJzSecurityTeamById(id);
-        jzSecurityTeam.setDescribe(value);
+        jzSecurityTeam.setMiaoShu(value);
         return toAjax(jzSecurityTeamService.updateJzSecurityTeam(jzSecurityTeam));
     }
     /**

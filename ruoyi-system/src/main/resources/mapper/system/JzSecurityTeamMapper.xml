@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="createId"    column="create_id"    />
 <!--        <result property="createName"    column="user_name"    />-->
-        <result property="describes"    column="describes"    />
+        <result property="miaoShu"    column="describes"    />
         <result property="remark"    column="remark"    />
     </resultMap>
 
@@ -37,7 +37,7 @@ FROM
         <where>  
             <if test="xzName != null  and xzName != ''"> and jst.xz_name like concat('%', #{xzName}, '%')</if>
             <if test="createId != null "> and jst.create_id = #{createId}</if>
-            <if test="describes != null  and describes != ''"> and jst.describes = #{describes}</if>
+            <if test="miaoShu != null  and miaoShu != ''"> and jst.describes = #{miaoShu}</if>
         </where>
     </select>
     
@@ -54,7 +54,7 @@ FROM
             <if test="createTime != null ">create_time,</if>
             <if test="updateTime != null ">update_time,</if>
             <if test="createId != null ">create_id,</if>
-            <if test="describes != null  and describe != ''">describes,</if>
+            <if test="miaoShu != null  and miaoShu != ''">describes,</if>
             <if test="remark != null  and remark != ''">remark,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -63,7 +63,7 @@ FROM
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateTime != null ">#{updateTime},</if>
             <if test="createId != null ">#{createId},</if>
-            <if test="describes != null  and describes != ''">#{describes},</if>
+            <if test="miaoShu != null  and miaoShu != ''">#{miaoShu},</if>
             <if test="remark != null  and remark != ''">#{remark},</if>
          </trim>
     </insert>
@@ -75,7 +75,7 @@ FROM
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateTime != null ">update_time = #{updateTime},</if>
             <if test="createId != null ">create_id = #{createId},</if>
-            <if test="describes != null  and describe != ''">describes = #{describes},</if>
+            <if test="miaoShu != null  and miaoShu != ''">describes = #{miaoShu},</if>
             <if test="remark != null  and remark != ''">remark = #{remark},</if>
         </trim>
         where id = #{id}
