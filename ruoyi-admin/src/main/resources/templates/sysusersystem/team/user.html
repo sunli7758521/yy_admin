@@ -14,6 +14,26 @@
 	<div class="ui-layout-center">
 		<div class="container-div">
 			<div class="row">
+				<div class="col-sm-12 search-collapse">
+					<form id="user-form">
+						<input type="hidden" id="deptId" name="deptId">
+						<input type="hidden" id="parentId" name="parentId">
+						<div class="select-list">
+							<ul>
+								<li>
+									登录名称：<input type="text" name="loginName" autocomplete="off"/>
+								</li>
+								<li>
+									用户名称：<input type="text" name="userName" autocomplete="off"/>
+								</li>
+								<li>
+									<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+									<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+								</li>
+							</ul>
+						</div>
+					</form>
+				</div>
 				<input id="Security" th:value="${Security}" type="hidden"/>
 <!--		        <div class="btn-group-sm" id="toolbar" role="group">-->
 <!--&lt;!&ndash;		        	<a class="btn btn-success" onclick="$.operate.addTab()" shiro:hasPermission="system:user:add">&ndash;&gt;-->
@@ -221,15 +241,18 @@
 					postType:row[i].postType
 				})
 			}
+
 			$.ajax({
 				url:prefix+"/changeSelect/"+seu,
 				type:"POST",
 				data:{"obj":JSON.stringify(result)},
 				success:function(msg){
+					console.log(msg)
 					var index = parent.layer.getFrameIndex(window.name);
 					parent.layer.close(index);
 				},
 				error:function(msg){
+					console.log(msg)
 				},
 			})
 			console.log(result)
